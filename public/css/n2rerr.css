@@ -1,0 +1,55 @@
+.showError{
+
+    color: red;
+    animation-iteration-count:infinite;
+    animation-duration: 1s;
+    font-size: 30px;
+    animation-name: flash;
+    display: none;
+
+
+}
+.errorfont{
+    font-size:15px;
+}
+
+
+.showOk{
+    font-size: 30px;
+    animation:timer-spin 2s linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+  color: green;
+  display: flex;
+  
+}
+
+.showOkfont{
+    font-size: 8px;
+
+    
+  }
+
+
+  .showno{
+  }
+  
+  @keyframes timer-spin{
+    /* from{
+      transform: rotate(0deg);
+    }to{
+      transform: rotate(360deg);
+    } */
+/* 
+    0%{
+        transform: translateX(0px);
+      }
+      50%{
+        transform: translateX(10px);
+      }
+      100%{
+        transform: translateX(20px);
+
+      } */
+
+  }

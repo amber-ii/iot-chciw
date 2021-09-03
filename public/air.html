@@ -1,0 +1,2472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>冷氣控制</title>
+  <link rel="stylesheet" href="./css/air.css">
+  <link rel="stylesheet" href="./css/animate.min.css">
+  <link rel="stylesheet" href="./css/pattern.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <!-- 
+   <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet"> -->
+  <!-- <link href="https://unpkg.com/pattern.css" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" /> -->
+
+
+</head>
+
+<body onload="subTopic='Ch2Air';MQTTConnect()">
+
+  <section class="text-gray-200 bg-gray-900">
+
+    <div class=" mr-5 flex justify-end pt-2">
+      <a href="/logout"><button
+        class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出 <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon></button></a>
+      </div>
+
+    <div class="max-w-full md:min-w-0 mx-auto py-10 px-5">
+      <div class="include " file="menu.html"></div>
+      <div class="pageBar sticky top-1 -mt-10">冷氣</div>
+  
+      <div class="flex flex-wrap justify-center  sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
+
+        <!-- F1A -->
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
+                  101
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左樓梯旁會議室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Afc0" class="snow">
+                  <!-- <ion-icon name="snow-outline"></ion-icon> -->
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F1At0"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span class="fon">風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Afe0-text" class="feTextValue"></span>
+                        <span id="F1Afe0" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Awc0" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Awe0" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
+                  102
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左樓梯旁儲藏室</span>
+              </div>
+              <div>
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Afc1" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1At1" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+
+                        <span id="F1Afe1-text" class="feTextValue"></span>
+                        <span id="F1Afe1" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Awc1" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Awe1" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-yellow-100 text-yellow-500 mb-5 flex-shrink-0 font-bold">
+                  103
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左休憩室A</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F1Afc2" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1At2" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Afe2-text" class="feTextValue"></span>
+                        <span id="F1Afe2" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Awc2" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Awe2" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-green-100 text-green-500 mb-5 flex-shrink-0 font-bold">
+                  104
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左休憩室B</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Afc3" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F1At3"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Afe3-text" class="feTextValue"></span>
+                        <span id="F1Afe3" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Awc3" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Awe3" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-purple-100 text-purple-500 mb-5 flex-shrink-0 font-bold">
+                  105
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">1F左走道</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Afc4" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1At4" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Afe4-text" class="feTextValue"></span>
+                        <span id="F1Afe4" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Awc4" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Awe4" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-gray-100 text-gray-500 mb-5 flex-shrink-0 font-bold">
+                  106
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">大會議室A</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F1Afc5" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1At5" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Afe5-text" class="feTextValue"></span>
+                        <span id="F1Afe5" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Awc5" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Awe5" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0 font-bold">
+                  107
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">大會議室B</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F1Afc6" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1At6" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <span class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Afe6-text" class="feTextValue"></span>
+                        <span id="F1Afe6" class="feValue"></span>
+                      </div>
+                    </span>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Awc6" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Awe6" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <!-- F1B -->
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
+                  111
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左會議室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Bfc0" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F1Bt0"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Bfe0-text" class="feTextValue"></span>
+                        <span id="F1Bfe0" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Bwc0" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Bwe0" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
+                  112
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左大廳</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Bfc1" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1Bt1" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Bfe1-text" class="feTextValue"></span>
+                        <span id="F1Bfe1" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Bwc1" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Bwe1" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-yellow-100 text-yellow-500 mb-5 flex-shrink-0 font-bold">
+                  113
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">右大廳</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F1Bfc2" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1Bt2" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Bfe2-text" class="feTextValue"></span>
+                        <span id="F1Bfe2" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Bwc2" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Bwe2" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-green-100 text-green-500 mb-5 flex-shrink-0 font-bold">
+                  114
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">右會議室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Bfc3" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F1Bt3"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Bfe3-text" class="feTextValue"></span>
+                        <span id="F1Bfe3" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Bwc3" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Bwe3" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-purple-100 text-purple-500 mb-5 flex-shrink-0 font-bold">
+                  115
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">右會議室旁儲藏室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Bfc4" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1Bt4" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Bfe4-text" class="feTextValue"></span>
+                        <span id="F1Bfe4" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Bwc4" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Bwe4" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-gray-100 text-gray-500 mb-5 flex-shrink-0 font-bold">
+                  116
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">人資A</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F1Bfc5" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1Bt5" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Bfe5-text" class="feTextValue"></span>
+                        <span id="F1Bfe5" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Bwc5" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Bwe5" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0 font-bold">
+                  117
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">人資B</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F1Bfc6" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1Bt6" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <span class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Bfe6-text" class="feTextValue"></span>
+                        <span id="F1Bfe6" class="feValue"></span>
+                      </div>
+                    </span>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Bwc6" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Bwe6" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- F1C -->
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
+                  121
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">人資C</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Cfc0" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F1Ct0"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Cfe0-text" class="feTextValue"></span>
+                        <span id="F1Cfe0" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Cwc0" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Cwe0" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
+                  122
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">資訊室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F1Cfc1" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1Ct1" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Cfe1-text" class="feTextValue"></span>
+                        <span id="F1Cfe1" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Cwc1" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Cwe1" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-yellow-100 text-yellow-500 mb-5 flex-shrink-0 font-bold">
+                  123
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">1F廁所</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F1Cfc2" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F1Ct2" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F1Cfe2-text" class="feTextValue"></span>
+                        <span id="F1Cfe2" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F1Cwc2" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F1Cwe2" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <!-- F2A -->
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
+                  231
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">2F廁所</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F2Afc0" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F2At0"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Afe0-text" class="feTextValue"></span>
+                        <span id="F2Afe0" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Awc0" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Awe0" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
+                  232
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">2F副總辦公室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F2Afc1" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2At1" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Afe1-text" class="feTextValue"></span>
+                        <span id="F2Afe1" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Awc1" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Awe1" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-yellow-100 text-yellow-500 mb-5 flex-shrink-0 font-bold">
+                  233
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">貴賓接洽室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F2Afc2" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2At2" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Afe2-text" class="feTextValue"></span>
+                        <span id="F2Afe2" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Awc2" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Awe2" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-green-100 text-green-500 mb-5 flex-shrink-0 font-bold">
+                  234
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">右討論室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F2Afc3" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F2At3"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Afe3-text" class="feTextValue"></span>
+                        <span id="F2Afe3" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Awc3" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Awe3" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-purple-100 text-purple-500 mb-5 flex-shrink-0 font-bold">
+                  235
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">右辦公室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F2Afc4" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2At4" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Afe4-text" class="feTextValue"></span>
+                        <span id="F2Afe4" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Awc4" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Awe4" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-gray-100 text-gray-500 mb-5 flex-shrink-0 font-bold">
+                  236
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">營業部辦公室A</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F2Afc5" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2At5" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Afe5-text" class="feTextValue"></span>
+                        <span id="F2Afe5" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Awc5" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Awe5" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0 font-bold">
+                  237
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">營業部辦公室B</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F2Afc6" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2At6" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <span class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Afe6-text" class="feTextValue"></span>
+                        <span id="F2Afe6" class="feValue"></span>
+                      </div>
+                    </span>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Awc6" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Awe6" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <!-- F2B -->
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
+                  241
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">營業部辦公室C</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F2Bfc0" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F2Bt0"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Bfe0-text" class="feTextValue"></span>
+                        <span id="F2Bfe0" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Bwc0" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Bwe0" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
+                  242
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">影印間</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F2Bfc1" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2Bt1" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Bfe1-text" class="feTextValue"></span>
+                        <span id="F2Bfe1" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Bwc1" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Bwe1" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-yellow-100 text-yellow-500 mb-5 flex-shrink-0 font-bold">
+                  243
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左討論室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F2Bfc2" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2Bt2" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Bfe2-text" class="feTextValue"></span>
+                        <span id="F2Bfe2" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Bwc2" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Bwe2" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-green-100 text-green-500 mb-5 flex-shrink-0 font-bold">
+                  244
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左辦公室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F2Bfc3" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F2Bt3"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Bfe3-text" class="feTextValue"></span>
+                        <span id="F2Bfe3" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Bwc3" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Bwe3" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-purple-100 text-purple-500 mb-5 flex-shrink-0 font-bold">
+                  245
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左檔案室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F2Bfc4" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2Bt4" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Bfe4-text" class="feTextValue"></span>
+                        <span id="F2Bfe4" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Bwc4" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Bwe4" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                    bg-gray-100 text-gray-500 mb-5 flex-shrink-0 font-bold">
+                  246
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">左內辦公室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F2Bfc5" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F2Bt5" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F2Bfe5-text" class="feTextValue"></span>
+                        <span id="F2Bfe5" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F2Bwc5" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F2Bwe5" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+
+
+
+        <!-- F3A -->
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
+                  351
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">空地A</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F3Afc0" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F3At0"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Afe0-text" class="feTextValue"></span>
+                        <span id="F3Afe0" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Awc0" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Awe0" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
+                  352
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">空地B</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F3Afc1" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3At1" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Afe1-text" class="feTextValue"></span>
+                        <span id="F3Afe1" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Awc1" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Awe1" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-yellow-100 text-yellow-500 mb-5 flex-shrink-0 font-bold">
+                  353
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">空地C</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F3Afc2" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3At2" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Afe2-text" class="feTextValue"></span>
+                        <span id="F3Afe2" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Awc2" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Awe2" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-green-100 text-green-500 mb-5 flex-shrink-0 font-bold">
+                  354
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">3F廁所</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F3Afc3" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F3At3"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Afe3-text" class="feTextValue"></span>
+                        <span id="F3Afe3" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Awc3" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Awe3" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-purple-100 text-purple-500 mb-5 flex-shrink-0 font-bold">
+                  355
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">主管會議室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F3Afc4" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3At4" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Afe4-text" class="feTextValue"></span>
+                        <span id="F3Afe4" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Awc4" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Awe4" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-gray-100 text-gray-500 mb-5 flex-shrink-0 font-bold">
+                  356
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">財會室A</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F3Afc5" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3At5" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Afe5-text" class="feTextValue"></span>
+                        <span id="F3Afe5" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Awc5" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Awe5" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0 font-bold">
+                  357
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">財會室B</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F3Afc6" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3At6" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <span class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Afe6-text" class="feTextValue"></span>
+                        <span id="F3Afe6" class="feValue"></span>
+                      </div>
+                    </span>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Awc6" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Awe6" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <!-- F3B -->
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
+                  361
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">3F副總辦公室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F3Bfc0" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F3Bt0"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Bfe0-text" class="feTextValue"></span>
+                        <span id="F3Bfe0" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Bwc0" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Bwe0" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
+                  362
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">財會室C</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F3Bfc1" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3Bt1" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Bfe1-text" class="feTextValue"></span>
+                        <span id="F3Bfe1" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Bwc1" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Bwe1" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-yellow-100 text-yellow-500 mb-5 flex-shrink-0 font-bold">
+                  363
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">3F走道</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F3Bfc2" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3Bt2" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Bfe2-text" class="feTextValue"></span>
+                        <span id="F3Bfe2" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Bwc2" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Bwe2" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-green-100 text-green-500 mb-5 flex-shrink-0 font-bold">
+                  364
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">副董事長室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F3Bfc3" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 class="text-4xl text-center" id="F3Bt3"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Bfe3-text" class="feTextValue"></span>
+                        <span id="F3Bfe3" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Bwc3" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Bwe3" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-purple-100 text-purple-500 mb-5 flex-shrink-0 font-bold">
+                  365
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">休息室</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div onclick="send_message(this.id)" id="F3Bfc4" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3Bt4" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Bfe4-text" class="feTextValue"></span>
+                        <span id="F3Bfe4" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Bwc4" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Bwe4" class="weValue"></span>
+                    </span>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-gray-100 text-gray-500 mb-5 flex-shrink-0 font-bold">
+                  366
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">董事長室A</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F3Bfc5" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3Bt5" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <div class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Bfe5-text" class="feTextValue"></span>
+                        <span id="F3Bfe5" class="feValue"></span>
+                      </div>
+                    </div>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Bwc5" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Bwe5" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-8 md:w-80 md:mb-0 mb-6 flex flex-col flex-shrink-0 flex-grow-0">
+          <div class="pattern-dots-md gray-light">
+            <div class="rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                      bg-indigo-100 text-indigo-500 mb-5 flex-shrink-0 font-bold">
+                  367
+                </div>
+                <span class="text-lg tracking-wide font-semibold text-white mt-1">董事長室B</span>
+              </div>
+              <div>
+
+                <!-- fc -->
+                <div id="F3Bfc6" onclick="send_message(this.id)" class="snow">
+                  <img src="./img/snow-cion5.png" alt="" width="73">
+                </div>
+
+                <!-- t -->
+                <h1 id="F3Bt6" class="text-4xl text-center"></h1>
+
+
+                <div class="text-md py-3 px-2">
+                  <div class="space-y-3">
+                    <span class="flex items-center space-x-2 "><svg height="20" width="20" viewBox="0 0 32 32"
+                        class="fill-current">
+                        <path d="M13,30a5.0057,5.0057,0,0,1-5-5h2a3,3,0,1,0,3-3H4V20h9a5,5,0,0,1,0,10Z"></path>
+                        <path
+                          d="M25 25a5.0057 5.0057 0 01-5-5h2a3 3 0 103-3H2V15H25a5 5 0 010 10zM21 12H6V10H21a3 3 0 10-3-3H16a5 5 0 115 5z">
+                        </path>
+                      </svg>
+                      <div>
+                        <span>風機電流</span>
+                        <!-- fe -->
+                        <span id="F3Bfe6-text" class="feTextValue"></span>
+                        <span id="F3Bfe6" class="feValue"></span>
+                      </div>
+                    </span>
+                    <span class="flex space-x-2 items-center">
+                      <ion-icon name="snow-outline" size="small"></ion-icon>
+                      <span>冰水閥</span>
+                      <!-- wc -->
+                      <span id="F3Bwc6" onclick="send_message(this.id)" class="wc-toggle"></span>
+                      <!-- we -->
+                      <span id="F3Bwe6" class="weValue"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+     
+      </section>
+    </div>
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
+
+
+<script type="text/javascript" src="./air.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+<script type="text/javascript" src="./mqttws31.js"></script>
+<script type="text/javascript" src="./mqtt.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+</html>

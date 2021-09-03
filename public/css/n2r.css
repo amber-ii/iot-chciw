@@ -1,0 +1,231 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css);
+
+  .table {
+		border-spacing: 0 10px;
+    font-family:Noto Mono;
+   
+	}
+  .dateOption{
+    font-family:Noto Mono;
+  }
+
+
+
+  @media (min-width: 1300px) {
+    .table {
+      border-spacing: 0 16px
+    }
+}
+
+@media only screen and (max-width: 1299px) {
+  .table {
+		border-spacing: 0 10px;
+	}
+
+}
+
+
+
+	table td {
+		font-size: 16px;
+	}
+
+  table th {
+		font-size: 16px;
+    width: 180px;
+	}
+
+
+
+	.table tr {
+		border-radius: 20px;
+	}
+
+	tr td:nth-child(n+6),
+	tr th:nth-child(n+6) {
+		border-radius: 0 .625rem .625rem 0;
+	}
+
+	tr td:nth-child(1),
+	tr th:nth-child(1) {
+		border-radius: .625rem 0 0 .625rem;
+	}
+
+/* .cardSize{
+    padding:6px;
+    width:10rem;
+    border: 1px solid #01A8B5;
+}
+@media (min-width: 1536px) {
+    .cardSize {
+        padding:12px;
+        width:20rem;
+ 
+   }
+}
+.dot {
+    height: 80px;
+    width: 80px;
+    opacity:0.7;
+    background-color: #8DA9C4;
+    border-radius: 50%;
+    display: inline-block;
+    padding-top:22px;
+    background-size:80px 80px;
+}
+.dot span{
+    font-size:25px;
+    color:#134074;
+}
+.dot-value{
+    height: 130px;
+    width: 130px;
+    background-color: #134074;
+   /* background-color:#4682B4;
+    */
+    /* border-radius: 50%;
+    display: inline-block;
+    padding-top:40px;
+    opacity:0.8; */
+/* } */
+/* .value{
+    font-size:35px;
+    color:#eef4ed;
+}
+ion-icon{
+    color: #EEF4ED;
+}  */
+
+/* 以下為新的 */
+
+.pageBar3{
+  text-align: left;
+  width: 5rem;
+  height: 2rem;
+  font-weight: bold;
+  padding-top: 4px;
+  padding-left: 15px;
+  background: Mediumblue;
+  background: linear-gradient(135deg, transparent 0px, Mediumblue 0) top left, linear-gradient(-135deg, transparent 15px, Mediumblue 0) top right, linear-gradient(-45deg, transparent 15px, Mediumblue 0) bottom right, linear-gradient(45deg, transparent 0px, Mediumblue 0) bottom left;
+  background-size: 50% 50%;
+  background-repeat: no-repeat;
+  transform: translateY(40px);
+}
+.fvalue{
+  font-size: 27px;
+  border-radius: 0.3rem;
+  width: 120px;
+  height: 50px;
+  padding-top: 4px;
+  box-shadow: 0px 0px 1px;
+  border: black double;
+  /* border: 4mm ridge rgba(170, 50, 220, .6); */
+  color: #134074;
+}
+.tvalue{
+
+  width: 120px;
+  height: 50px;
+  padding-top: 4px;
+  border: black double ;
+  font-size: 27px;
+  border-radius: 0.3rem;
+  box-shadow: 0px 0px 1px;
+  color: #134074;
+}
+.ft{
+  font-size: 22px;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: darkslateblue;
+  border-radius: 0.7rem;
+  text-align: center;
+  color: white;
+  opacity: 90%;
+}
+.ft1{
+  font-size: 22px;
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: rgb(75, 85, 99);
+  border-radius: 0.7rem;
+  text-align: center;
+  color: white;
+  /* opacity: 90%; */
+
+}
+body{
+  background-color: rgb(17, 24, 39);
+}
+.trending{
+  font-size: 23px;
+
+  color: Dimgrey;
+}
+.timer{
+  font-size: 23px;
+  animation:timer-spin 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  color: darkslateblue;
+
+}
+.timer-no{
+  font-size: 23px;
+  color: #134074;
+}
+@keyframes timer-spin{
+  from{
+      transform: rotate(20deg);
+ }
+ to{
+      transform: rotate(200deg);
+ }
+}
+.title{
+  font-size: 23px;
+  padding-left: 2px;
+ 
+  padding-right: 2px;
+  border-radius: 10%;
+
+  color: rgba(229, 231, 235);
+  margin-left: 7px;
+  margin-right: 5px;
+
+}
+.color1{
+  background-color:Darkslateblue 
+}
+.color2{
+  background-color: rgb(133, 126, 126);
+
+}
+.cardMain{
+  width: 19rem;
+  height: 10rem;
+}
+.search{
+  font-size:45px;
+  color: Gold;
+}
+
+.download{
+  font-size:45px;
+  color: Gold;
+}
+
+.search:hover{
+  transform: translate(-2px,3px);
+  cursor: pointer;
+  /* box-shadow:-3px 3px rgb(228, 169, 169); */
+}
+.download:hover{
+  transform: translate(-2px,3px);
+  cursor: pointer;
+  /* box-shadow:-3px 3px rgb(228, 169, 169); */
+}
+
+
+

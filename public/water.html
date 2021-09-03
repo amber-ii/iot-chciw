@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>自來水</title>
+    <link rel="stylesheet" type="text/css" href="./css/water.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
+    <link rel="stylesheet" type="text/css" href="./css/progress.css">
+
+    <link rel="stylesheet" href="./css/style.css">
+
+
+</head>
+<!-- 自來水 -->
+
+<body onload="subTopic='WaterProj';MQTTConnect();">
+
+    <div class="mb-5 mr-5 flex justify-end pt-2">
+        <a href="/logout"><button
+                class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出 <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon></button></a>
+    </div>
+
+
+
+
+    <div class="demo">
+        <div class="demo__colored-blocks">
+            <div class="demo__colored-blocks-rotater">
+                <div class="demo__colored-block"></div>
+                <div class="demo__colored-block"></div>
+                <div class="demo__colored-block"></div>
+            </div>
+            <div class="demo__colored-blocks-inner"></div>
+            <div class="demo__text">載入中</div>
+        </div>
+        <div class="demo__inner">
+            <svg class="demo__numbers" viewBox="0 0 100 100">
+                <defs>
+                    <path class="demo__num-path-1" d="M40,28 55,22 55,78" />
+                    <path class="demo__num-join-1-2" d="M55,78 55,83 a17,17 0 1,0 34,0 a20,10 0 0,0 -20,-10" />
+                    <path class="demo__num-path-2" d="M69,73 l-35,0 l30,-30 a16,16 0 0,0 -22.6,-22.6 l-7,7" />
+                    <path class="demo__num-join-2-3" d="M28,69 Q25,44 34.4,27.4" />
+                    <path class="demo__num-path-3" d="M30,20 60,20 40,50 a18,15 0 1,1 -12,19" />
+                </defs>
+                <path class="demo__numbers-path" d="M-10,20 60,20 40,50 a18,15 0 1,1 -12,19 
+                     Q25,44 34.4,27.4
+                     l7,-7 a16,16 0 0,1 22.6,22.6 l-30,30 l35,0 L69,73 
+                     a20,10 0 0,1 20,10 a17,17 0 0,1 -34,0 L55,83 
+                     l0,-61 L40,28" />
+            </svg>
+        </div>
+    </div>
+
+
+
+
+    <section class="text-gray-200">
+        <div class="max-w-full md:min-w-0 mx-auto py-10 px-5 max-w-screen-xl">
+
+            <!-- 引入 -->
+            <div class="include" file="menu.html"></div>
+            <div class="pageBar2 sticky top-1 -mt-10">自來水</div>
+
+
+            <div class="flex flex-wrap justify-center  sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
+
+                <div class="flex justify-center mb-20">
+                    <div class="flex items-center pl-20 mt-10">
+                        <div class="line1"></div>
+                        <div class="startdot "></div>
+                        <div class="line2 "></div>
+                        <div class="flex flex-col">
+                            <div class="inv1">
+                                <div class="grid grid-cols-3 fqCard">
+                                    <div class="space-y-3 flex  items-center flex-col">
+                                        <div class="flex space-x-2 items-center">
+                                            <ion-icon name="barcode-outline" class="icon-item"></ion-icon>
+                                            <span class="text-xl ">ST1</span>
+                                        </div>
+                                        <span id="St1" class="fqvalue">0</span>
+                                    </div>
+
+                                    <div class="space-y-3 flex  items-center flex-col">
+                                        <div class="flex space-x-2 items-center">
+                                            <ion-icon name="toggle" class="icon-item"></ion-icon>
+                                            <span class="text-xl ">SW1</span>
+                                        </div>
+                                        <span id="Sw1" class="fqvalue">0</span>
+                                    </div>
+
+
+                                    <div class="space-y-3 flex items-center flex-col">
+                                        <div class="flex space-x-2 items-center">
+                                            <ion-icon name="timer-outline" id="timer1" class="icon-item"></ion-icon>
+                                            <span class="text-xl ">FQ1</span>
+                                        </div>
+                                        <span id="Fq1" class="fqvalue">0</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="line3 relative">
+
+                                <div class="absolute">
+                                    <iframe src="./watererr.html" scroll="none" width="1000px" height="300px"
+                                        id="iframe"></iframe>
+                                </div>
+                            </div>
+
+                            <div class="block1 text-center text-2xl  pt-2">
+                                <div id="motor1" class="motor-none">
+                                    <ion-icon name="settings" size="large"></ion-icon>
+                                </div>
+                            </div>
+
+                            <div class="line4 "></div>
+                            <div class="block2 text-center text-2xl  pt-2">
+                                <div id="motor2" class="motor-none">
+                                    <ion-icon name="settings" size="large"></ion-icon>
+                                </div>
+                            </div>
+
+
+                            <div class="inv2">
+                                <div class="grid grid-cols-3 fqCard">
+                                    <div class="space-y-3 flex  items-center flex-col">
+                                        <div class="flex space-x-2 items-center">
+                                            <ion-icon name="barcode-outline" class="icon-item"></ion-icon>
+                                            <span class="text-xl ">ST2</span>
+                                        </div>
+                                        <span id="St2" class="fqvalue">0</span>
+                                    </div>
+
+                                    <div class="space-y-3 flex  items-center flex-col">
+                                        <div class="flex space-x-2 items-center">
+                                            <ion-icon name="toggle" class="icon-item"></ion-icon>
+                                            <span class="text-xl ">SW2</span>
+                                        </div>
+                                        <span id="Sw2" class="fqvalue">0</span>
+                                    </div>
+
+
+                                    <div class="space-y-3 flex  items-center flex-col">
+                                        <div class="flex space-x-2 items-center">
+                                            <ion-icon name="timer-outline" id="timer2" class="icon-item"></ion-icon>
+                                            <span class="text-xl ">FQ2</span>
+                                        </div>
+                                        <span id="Fq2" class="fqvalue">0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="line5"></div>
+                        <div class="line6"></div>
+                        <div class="pand7 flex flex-col justify-center items-center">
+                            <div>
+                                <div class="name pb-1">
+                                    <h5>Press</h5>
+                                </div>
+                                <div class="press-dot1">
+                                    <div class="press-dot2 text-center">
+                                        <span id="Press" class="pressvalue">1.79</span>
+                                    </div>
+                                    <div class="flex ml-28">
+                                        <div class="w-auto h-auto minusPress">
+                                            <div class="flex-1 h-full">
+                                                <div
+                                                    class="flex items-center justify-center flex-1 h-full p-2 border border-gray-400 rounded-full">
+                                                    <div class="relative">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                            viewBox="0 0 20 20" fill="currentColor">
+                                                            <path
+                                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <input type="text" name="sv" id="sv" placeholder="調整壓力" class="w-16  text-sm text-center text-gray-700">
+                                        </div>
+                                        <div class="w-auto h-auto plusPress">
+                                            <div class="flex-1 h-full">
+                                                <div
+                                                    class="flex items-center justify-center flex-1 h-full p-2 border border-gray-400 rounded-full">
+                                                    <div class="relative">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5"
+                                                            viewBox="0 0 20 20" fill="currentColor">
+                                                            <path
+                                                                d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
+                                                        </svg>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="line7">
+                            </div>
+                        </div>
+                        <div class="line8"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+  
+    </section>
+</body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+<script type="text/javascript" src="./index.js"></script>
+<script type="text/javascript" src="./water.js"></script>
+<script type="text/javascript" src="./mqtt.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+
+</html>
+
+<!--                                         
+                                        <div class="ml-28 pt-9 flex">
+                                            <input type="text" name="sv" id="sv" placeholder="調整壓力" class="w-16  text-sm text-center text-gray-700">
+                                        </div> -->

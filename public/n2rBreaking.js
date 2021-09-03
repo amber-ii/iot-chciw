@@ -1,0 +1,15 @@
+function onMessageArrived(r_message) {
+    // 聽全部的訊息
+    var rcmsg = JSON.parse(r_message.payloadString);
+    console.log(rcmsg);
+    for (var key in rcmsg) {
+        var Id = key;
+        var value = rcmsg[key];
+        if (document.getElementById(Id) != null) {
+            if (value == 0 || value == "") {
+                document.getElementById(Id).style.display = "flex";
+                document.getElementById(`${Id}ok`).style.display = "none";
+            }
+        }
+    }
+}
