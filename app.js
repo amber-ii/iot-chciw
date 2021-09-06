@@ -13,6 +13,7 @@ const User = require('./models/Post')
 var router = express.Router()
 const sacidRoutes = require('./routes/sacidRoutes');
 const n2rRoutes = require('./routes/n2rRoutes');
+const tocRoutes = require('./routes/tocRoutes');
 const users = require('./controllers/userController');
 
 
@@ -85,6 +86,9 @@ app.use('/sacid', users.isLoggedIn, sacidRoutes.routes)
 
 
 app.use('/n2r', users.isLoggedIn, n2rRoutes.routes)
+
+
+app.use('/toc', users.isLoggedIn, tocRoutes.routes)
 
 app.get('/login', users.isLoggedOut, (req, res) => {
     const response = {
