@@ -1,12 +1,11 @@
 'use strict';
 const n2rData = require('../data/n2r');
 
-
 const getAllN2R = async (req, res, next) => {
     if (req.user.permission == 1 || req.user.permission == 5) {
         try {
             const rows = await n2rData.getN2R();
-            res.render('n2r', { rows,title:"氮氣" });
+            res.render('n2r', { rows, title: "氮氣" });
             // console.log('The data from CH1ACI table: \n', rows);
         } catch (error) {
             res.status(400).send(error.message);
@@ -16,75 +15,44 @@ const getAllN2R = async (req, res, next) => {
     }
 }
 
-// 8/23
+
+function getTrendLoop(rows) {
+
+    let newData = [], newA3t1 = [], newA3t2 = [], newA4t1 = [], newA8t1 = [], newA16t1 = [];
+
+    for (let i = 0; i < rows.length; i++) {
+        // let newRows = rows[i].Date;
+        newData.push(rows[i].Date);
+        newA3t1.push(rows[i].a3t1);
+        newA3t2.push(rows[i].a3t2);
+        newA4t1.push(rows[i].a4t1);
+        newA8t1.push(rows[i].a8t1);
+        newA16t1.push(rows[i].a16t1);
+    }
+
+    let date = {
+        label: newData,
+        a3t1: newA3t1,
+        a3t2: newA3t2,
+        a4t1: newA4t1,
+        a8t1: newA8t1,
+        a16t1: newA16t1,
+    }
+    return date;
+
+}
+
+
+
 const getAllN2RJSON = async (req, res, next) => {
     try {
         // 7天
-        let rows = await n2rData.getN2RJSONSeven();
-
+        let rows0 = await n2rData.getN2RJSONSeven();
         // 30天
-        let rows30 = await n2rData.getN2RJSONThirty();
-
-        let newData = [];
-        let newA3t1 = [];
-        let newA3t2 = [];
-        let newA4t1 = [];
-        let newA8t1 = [];
-        let newA16t1 = [];
-
-
-        for (let i = 0; i < rows.length; i++) {
-            // let newRows = rows[i].Date;
-            newData.push(rows[i].Date);
-            newA3t1.push(rows[i].a3t1);
-            newA3t2.push(rows[i].a3t2);
-            newA4t1.push(rows[i].a4t1);
-            newA8t1.push(rows[i].a8t1);
-            newA16t1.push(rows[i].a16t1);
-            // console.log(newData[i]);
-        }
-
-        let date = {
-            label: newData,
-            a3t1: newA3t1,
-            a3t2: newA3t2,
-            a4t1: newA4t1,
-            a8t1: newA8t1,
-            a16t1: newA16t1,
-        }
-
-        let newData_th = [];
-        let newA3t1_th = [];
-        let newA3t2_th = [];
-        let newA4t1_th = [];
-        let newA8t1_th = [];
-        let newA16t1_th = [];
-
-
-
-        for (let i = 0; i < rows30.length; i++) {
-            // let newRows = rows[i].Date;
-            newData_th.push(rows30[i].Date);
-            newA3t1_th.push(rows30[i].a3t1);
-            newA3t2_th.push(rows30[i].a3t2);
-            newA4t1_th.push(rows30[i].a4t1);
-            newA8t1_th.push(rows30[i].a8t1);
-            newA16t1_th.push(rows30[i].a16t1);
-            // console.log(newData[i]);
-        }
-
-        let date_th = {
-            label: newData_th,
-            a3t1: newA3t1_th,
-            a3t2: newA3t2_th,
-            a4t1: newA4t1_th,
-            a8t1: newA8t1_th,
-            a16t1: newA16t1_th,
-        }
-
-
-        res.send({ "dates": { "7days": { "data": date }, "30days": { "data": date_th } } });
-
+        let rows1 = await n2rData.getN2RJSONThirty();
+        let date7 = getTrendLoop(rows0);
+        let date30 = getTrendLoop(rows1);
+        res.send({ "dates": { "7days": { "data": date7 }, "30days": { "data": date30 } } });
     } catch (error) {
         res.status(400).send(error.message);
     }

@@ -65,7 +65,7 @@ table th{
     height:12em;
     background-color :rgba(31, 41, 55);
     margin-bottom: 20px;
-    background: linear-gradient(-135deg, transparent 15px,rgba(31, 41, 55) 0),linear-gradient(135deg, transparent 15px, #655 0);
+    background: linear-gradient(-135deg, transparent 15px,rgba(31, 41, 55) 0),linear-gradient(135deg, transparent 15px, #40E0D0 0);
   }
 
 
@@ -130,9 +130,9 @@ table th{
 
 
 .nvalue{
-  font-size: 25px;
+  font-size: 40px;
   border-radius: 0.3rem;
-  width: 100px;
+  width: 130px;
   /* background-color: Darkslategray; */
   /* background-color: teal; */
   background-color: rgb(41,51,68);
@@ -188,11 +188,11 @@ table th{
   font-weight: bold;
   padding-top: 4px;
   padding-left: 15px;
-  background: #58a; 
-  background: linear-gradient(135deg, transparent 0px, #58a 0) top left, 
-  linear-gradient(-135deg, transparent 15px, #58a 0) top right, 
-  linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, 
-  linear-gradient(45deg, transparent 0px, #58a 0) bottom left; 
+  background: #6495ED; 
+  background: linear-gradient(135deg, transparent 0px, #6495ED 0) top left, 
+  linear-gradient(-135deg, transparent 15px, #6495ED 0) top right, 
+  linear-gradient(-45deg, transparent 15px, #6495ED 0) bottom right, 
+  linear-gradient(45deg, transparent 0px, #6495ED 0) bottom left; 
   background-size: 50% 50%; 
   background-repeat: no-repeat;
   transform: translateY(-7px);

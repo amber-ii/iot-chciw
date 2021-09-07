@@ -184,7 +184,7 @@ $("#search").click(function () {
                 $(document).ready(function () {
                     $('.demo').fadeOut();
                 });
-            }, 2000)
+            }, 1500)
             t2.innerHTML = "";
         },
         type: "POST",

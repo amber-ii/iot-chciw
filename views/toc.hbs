@@ -18,7 +18,6 @@
 
 
 </head>
-<!-- CH1ACI -->
 
 <body onload="subTopic='A25TOC';MQTTConnect();">
   <a href="/logout" class="flex justify-end mt-3 mr-5">
@@ -27,8 +26,8 @@
       <i class="mdi mdi-logout -m-1"></i>
     </button>
   </a>
-
-  <!-- <div class="demo">
+{{!-- 
+   <div class="demo">
     <div class="demo__colored-blocks">
       <div class="demo__colored-blocks-rotater">
         <div class="demo__colored-block"></div>
@@ -54,7 +53,7 @@
                l0,-61 L40,28" />
       </svg>
     </div>
-  </div> -->
+  </div> --}}
 
 
 
@@ -73,7 +72,7 @@
         <div class="px-6 pb-6">
           <div class="pattern-dots-md gray-light">
 
-            <div class="outSize rounded bg-gray-800  transform translate-x-6 -translate-y-6">
+            <div class="outSize rounded bg-gray-800 transform translate-x-6 -translate-y-6">
               <div class="flex justify-center text-center">
                 <div class="inSize">
                   <div class="flex items-center justify-center">
@@ -84,12 +83,11 @@
                   <div class="divide"> </div>
                   <div class="grid  grid-cols-3  p-5">
                     <div class="space-y-5 justify-items-center mt-1">
-                      <div class="flex space-x-1 items-center">
-                        <ion-icon name="timer-outline" id="A9F1ntimer" class="timer"></ion-icon>
-                        <span class="np">Value</span>
+                      <div class="flex space-x-1 items-center pt-8">
+                        <ion-icon name="timer-outline" id="A9F1ntimer" class="timer" size="large"></ion-icon>
                       </div>
                     </div>
-                    <div class="space-y-2 flex flex-col text-center items-center ml-10">
+                    <div class="space-y-2 flex flex-col text-center items-center pt-5">
                       <div class="nvalue" id="A25TOC"></div>
                     </div>
                   </div>
@@ -160,19 +158,18 @@
               {{!-- download button --}}
               <div class="flex items-center">
                 <span class="inline-block  border-2 rounded-md border-gray-600 px-3 pb-2 -mb-1">
-                  {{!-- <form id="Form1" action="/sacid" method="post"> --}}
                     <div class="flex inline-block">
                       <form id="form1" name="dateSearch">
                         <div class="flex flex-nowrap">
-                          <span class="space-x-1 mr-6 pl-2 inline-block pt-3 ">
+                          <div class="space-x-1 mr-6 pl-2 inline-block pt-3 ">
                             <label for="startDate">起始日</label>
                             <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center"
                               min="2020-07-01" required>
-                          </span>
-                          <span class="space-x-1 mr-6 pt-3 ">
+                          </div>
+                          <div class="space-x-1 mr-6 pt-3 ">
                             <label for="startDate">結束日</label>
                             <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center" required>
-                          </span>
+                          </div>
                           <div title="查詢">
                             <type class="pt-3 hover:text-gray-100 search" id="search" type="button">
                               <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"

@@ -19,87 +19,43 @@ const getAllSacid = async (req, res, next) => {
 }
 
 
+function getTrendLoop(rows) {
+    let newData = [], newA9Diff = [], newA10Diff1 = [], newA10Diff4 = [], newTotal = [], newA10Diff2 = [], newA10Diff3 = [], newDiff32 = [];
+    for (var i = 0; i < rows.length; i++) {
+        newData.push(`${rows[i].preDate}-${rows[i].Date}`);
+        newA9Diff.push(rows[i].A9Diff);
+        newA10Diff1.push(rows[i].A10Diff1);
+        newA10Diff4.push(rows[i].A10Diff4);
+        newTotal.push(rows[i].total);
+        newA10Diff2.push(rows[i].A10Diff2);
+        newA10Diff3.push(rows[i].A10Diff3);
+        newDiff32.push(rows[i].diff32);
+    }
 
-// 8/23
+    let date = {
+        label: newData,
+        A9Diff: newA9Diff,
+        A10Diff1: newA10Diff1,
+        A10Diff4: newA10Diff4,
+        total: newTotal,
+        A10Diff2: newA10Diff2,
+        A10Diff3: newA10Diff3,
+        diff32: newDiff32
+    }
+    return date;
+
+}
+
+
 const getAllSacidJSON = async (req, res, next) => {
     try {
         // 7天
-        let rows = await sacidData.getSacidJSONSeven();
-
+        let rows0 = await sacidData.getSacidJSONSeven();
         // 30天
-        let rows30 = await sacidData.getSacidSONThirty();
-
-        let newData = [];
-        let newA9Diff = [];
-        let newA10Diff1 = [];
-        let newA10Diff4 = [];
-        let newTotal = [];
-        let newA10Diff2 = [];
-        let newA10Diff3 = [];
-        let newDiff32 = [];
-
-
-        for (let i = 0; i < rows.length; i++) {
-            // let newRows = rows[i].Date;
-            newData.push(`${rows[i].preDate}-${rows[i].Date}`);
-            newA9Diff.push(rows[i].A9Diff);
-            newA10Diff1.push(rows[i].A10Diff1);
-            newA10Diff4.push(rows[i].A10Diff4);
-            newTotal.push(rows[i].total);
-            newA10Diff2.push(rows[i].A10Diff2);
-            newA10Diff3.push(rows[i].A10Diff3);
-            newDiff32.push(rows[i].diff32);
-            // console.log(newData[i]);
-        }
-
-        let date = {
-            label: newData,
-            A9Diff: newA9Diff,
-            A10Diff1: newA10Diff1,
-            A10Diff4: newA10Diff4,
-            total: newTotal,
-            A10Diff2: newA10Diff2,
-            A10Diff3: newA10Diff3,
-            diff32: newDiff32
-        }
-
-        let newData_th = [];
-        let newA9Diff_th = [];
-        let newA10Diff1_th = [];
-        let newA10Diff4_th = [];
-        let newTotal_th = [];
-        let newA10Diff2_th = [];
-        let newA10Diff3_th = [];
-        let newDiff32_th = [];
-
-
-        for (let i = 0; i < rows30.length; i++) {
-            // let newRows = rows[i].Date;
-            newData_th.push(`${rows30[i].preDate}-${rows30[i].Date}`);
-            newA9Diff_th.push(rows30[i].A9Diff);
-            newA10Diff1_th.push(rows30[i].A10Diff1);
-            newA10Diff4_th.push(rows30[i].A10Diff4);
-            newTotal_th.push(rows30[i].total);
-            newA10Diff2_th.push(rows30[i].A10Diff2);
-            newA10Diff3_th.push(rows30[i].A10Diff3);
-            newDiff32_th.push(rows30[i].diff32);
-            // console.log(newData_th);
-        }
-
-        let date_th = {
-            label: newData_th,
-            A9Diff: newA9Diff_th,
-            A10Diff1: newA10Diff1_th,
-            A10Diff4: newA10Diff4_th,
-            total: newTotal_th,
-            A10Diff2: newA10Diff2_th,
-            A10Diff3: newA10Diff3_th,
-            diff32: newDiff32_th
-        }
-
-
-        res.send({ "dates": { "7days": { "data": date }, "30days": { "data": date_th } } });
-
+        let rows1 = await sacidData.getSacidSONThirty();
+        let date7 = getTrendLoop(rows0);
+        let date30 = getTrendLoop(rows1);
+        res.send({ "dates": { "7days": { "data": date7 }, "30days": { "data": date30 } } });
     } catch (error) {
         res.status(400).send(error.message);
     }
@@ -279,8 +235,7 @@ module.exports = {
     getAllSacidJSON,
     getSacid,
     getSacidByDate,
-    // exportSacid,
     addEvent,
     updateEvent,
-    deleteEvent
+    deleteEvent,
 }

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A10VPC蒸氣壓閥</title>
-    <link rel="stylesheet" type="text/css" href="./css/water.css">
+    <link rel="stylesheet" type="text/css" href="./css/vpc.css">
     <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="./css/pattern.css">
     <link rel="stylesheet" type="text/css" href="./css/progress.css">
@@ -14,16 +14,19 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 
+
 <body onload="subTopic='A10VPC';MQTTConnect();">
-    <div class="mb-5 mr-5 flex justify-end pt-2">
-        <a href="/logout"><button
-                class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出
-                <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon>
-            </button></a>
-    </div>
+    <section class="text-gray-100 ">
+        <div class="max-w-full md:min-w-0 mx-auto pb-10 px-5  max-w-screen-xl">
+            <div class="mb-5 mr-5 flex justify-end pt-2">
+                <a href="/logout"><button
+                        class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出
+                        <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon>
+                    </button></a>
+            </div>
 
 
-    <!-- 
+            <!-- 
     <div class="demo">
         <div class="demo__colored-blocks">
             <div class="demo__colored-blocks-rotater">
@@ -52,79 +55,92 @@
         </div>
     </div> -->
 
-    <section class="text-gray-200">
-        <div class="max-w-full md:min-w-0 mx-auto px-5 max-w-screen-xl">
-            <div class="include" file="menu.html"></div>
-            <div class="pageBar2 sticky top-1 -mt-10 pl-3">蒸氣</div>
+            <section class="text-gray-200">
+                <div class="max-w-full md:min-w-0 mx-auto px-5 max-w-screen-xl">
+                    <div class="include" file="menu.html"></div>
+                    <div class="pageBar2 sticky top-1 -mt-10 pl-3">蒸氣</div>
 
-            <div
-                class="flex space-x-8 justify-center mt-10 pt-5 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
+                    <div
+                        class="flex space-x-8 justify-center mt-10 pt-5 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
 
-                <div class="text-center space-y-8 border-2 border-blue-500 px-8 py-5 pb-12 rounded-xl">
-                    <div class="flex">
-                        <div class="text-blue-500">_________</div>
-                        <div class="px-2 font-semibold text-3xl">VP</div>
-                        <div class="text-blue-500">_________</div>
-
-                    </div>
-                    <div id="VP" class="text-5xl text-center"></div>
-                    <div class="transform translate-x-28 translate-y-5">
-                        <iframe src="./vpcerr.html" scrolling="no" class="-m-10 -mb-14 h-16" ></iframe>
-                    </div>
-                </div>
+                        <div class="text-center space-y-8 border-2 border-blue-500 px-8 py-5 pb-12 rounded-xl">
+                            <div class="flex">
+                                <div class="text-blue-500">_________</div>
+                                <div class="px-2 font-semibold text-3xl">VP</div>
+                                <div class="text-blue-500">_________</div>
 
 
-
-<!-- border-2 border-green-500 px-8 py-5 pb-12 rounded-xl -->
-                <div class="text-center space-y-8 border-2 border-green-500 px-8 py-5 pb-12 rounded-xl">
-                    <div class="flex">
-                        <div class="text-green-500">_________</div>
-
-                        <div class="px-2 font-semibold text-3xl">CV</div>
-                        <div class="text-green-500">_________</div>
-
-                    </div>
-                    <div id="CV" class="text-5xl"></div>
-                </div>
-
-
-
-                <div class="text-center space-y-8 border-2 border-yellow-500 px-8 py-5 pb-12 rounded-xl">
-                    <div class="flex">
-                        <div class="text-yellow-500">_________</div>
-
-                        <div class="px-2 font-semibold text-3xl">SV</div>
-                        <div class="text-yellow-500">_________</div>
-
-                    </div>
-                    <div class="transform translate-x-16">
-                        <div class="flex flex-row border h-10 w-32 rounded-lg border-gray-400 relative">
-                            <div
-                                class="absolute flex flex-col p-2 w-32 md:w-full mt-6 md:mt-8 mt-10 flex items-start justify-center transform -translate-x-5 hover:scale-110">
-                                <svg width="10" height="10" class="fill-current ml-5 md:mx-auto">
-                                    <polygon points="0 10, 10 10, 5 0" />
-                                </svg>
-                                <span
-                                    class="text-sm block w-24 flex flex-wrap justify-center bg-black p-1 h-auto rounded-lg text-white">調整SV</span>
                             </div>
-                            <input type="text" id="modSV"
-                                class="text-center text-gray-800 font-semibold border-r border-gray-400 h-full w-20 flex rounded-l" />
+                            <div class="flex text-center space-x-8">
+                                <ion-icon name="timer-outline" id="A9F1ntimer" class="timer mt-3" size="large">
+                                </ion-icon>
+                                <div id="VP" class="text-5xl text-center"></div>
+                            </div>
+                            <div class="transform translate-x-28 translate-y-5">
+                                <iframe src="./vpcerr.html" scrolling="no" class="-m-10 -mb-14 h-16"></iframe>
+                            </div>
+                        </div>
 
-                            <button id="submitPressBtn" onclick="modSV()" title="提交修改"
-                                class="font-semibold border-l hover:bg-green-500  border-gray-400 h-full w-20 flex rounded-r focus:outline-none cursor-pointer">
-                                <span class="m-auto font-light  text-yellow-500 hover:text-white">提交</span>
-                            </button>
+
+
+                        <!-- border-2 border-green-500 px-8 py-5 pb-12 rounded-xl -->
+                        <div class="text-center space-y-8 border-2 border-green-500 px-8 py-5 pb-12 rounded-xl">
+                            <div class="flex">
+                                <div class="text-green-500">_________</div>
+
+                                <div class="px-2 font-semibold text-3xl">CV</div>
+                                <div class="text-green-500">_________</div>
+
+                            </div>
+                            <div class="flex text-center space-x-8">
+                                <ion-icon name="timer-outline" id="A9F1ntimer" class="timer mt-3" size="large">
+                                </ion-icon>
+                                <div id="CV" class="text-5xl text-center"></div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="text-center space-y-8 border-2 border-yellow-500 px-8 py-5 pb-12 rounded-xl">
+                            <div class="flex">
+                                <div class="text-yellow-500">_________</div>
+
+                                <div class="px-2 font-semibold text-3xl">SV</div>
+                                <div class="text-yellow-500">_________</div>
+
+                            </div>
+                            <div class="flex">
+                                <ion-icon name="pencil" class="mt-2" size="large">
+                                </ion-icon>
+                            <div class="transform translate-x-10">
+                                <div class="flex flex-row border h-10 w-32 rounded-lg border-gray-400 relative">
+                                    <div
+                                        class="absolute flex flex-col p-2 w-32 md:w-full mt-6 md:mt-8 mt-10 flex items-start justify-center transform -translate-x-5 hover:scale-110">
+                                        <svg width="10" height="10" class="fill-current ml-5 md:mx-auto">
+                                            <polygon points="0 10, 10 10, 5 0" />
+                                        </svg>
+                                        <span
+                                            class="text-sm block w-24 flex flex-wrap justify-center bg-black p-1 h-auto rounded-lg text-white">調整SV</span>
+                                    </div>
+                                    <input type="text" id="modSV"
+                                        class="text-center text-gray-800 font-semibold border-r border-gray-400 h-full w-20 flex rounded-l" />
+
+                                    <button id="submitPressBtn" onclick="modSV()" title="提交修改"
+                                        class="font-semibold border-l hover:bg-green-500  border-gray-400 h-full w-20 flex rounded-r focus:outline-none cursor-pointer">
+                                        <span class="m-auto font-light  text-yellow-500 hover:text-white">提交</span>
+                                    </button>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
 
-            <!-- <div class="transform translate-x-1/4 -translate-y-20 ml-14 mt-1">
+                    <!-- <div class="transform translate-x-1/4 -translate-y-20 ml-14 mt-1">
                 <iframe src="./vpcerr.html" scrolling="no"></iframe>
             </div> -->
-        </div>
-    </section>
+                </div>
+            </section>
 </body>
 
 
