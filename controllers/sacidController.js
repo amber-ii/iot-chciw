@@ -7,16 +7,16 @@ const getAllSacid = async (req, res, next) => {
     if (req.user.permission == 1 || req.user.permission == 3) {
         try {
             const rows = await sacidData.getSacid();
-            res.render('sacid', { rows,title:"硫酸" });
+            res.render('sacid', { rows,title:'硫酸' });
             // console.log('The data from CH1ACI table: \n', rows);
         } catch (error) {
             res.status(400).send(error.message);
         }
     } else {
-        res.sendFile(`${process.cwd()}/public/404.html`)
+        res.sendFile(`${process.cwd()}/public/404.html`);
         // res.send(`權限不足`)
     }
-}
+};
 
 
 function getTrendLoop(rows) {
@@ -41,7 +41,7 @@ function getTrendLoop(rows) {
         A10Diff2: newA10Diff2,
         A10Diff3: newA10Diff3,
         diff32: newDiff32
-    }
+    };
     return date;
 
 }
@@ -55,11 +55,11 @@ const getAllSacidJSON = async (req, res, next) => {
         let rows1 = await sacidData.getSacidSONThirty();
         let date7 = getTrendLoop(rows0);
         let date30 = getTrendLoop(rows1);
-        res.send({ "dates": { "7days": { "data": date7 }, "30days": { "data": date30 } } });
+        res.send({ 'dates': { '7days': { 'data': date7 }, '30days': { 'data': date30 } } });
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 
 const getSacid = async (req, res, next) => {
@@ -67,11 +67,11 @@ const getSacid = async (req, res, next) => {
         const BID = req.params.BID;
         const rows = await sacidData.getById(BID);
         // res.render('sacid', { rows });
-        res.send(rows)
+        res.send(rows);
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 
 
@@ -89,7 +89,7 @@ const getSacidByDate = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 
 // 報表印出功能
@@ -207,7 +207,7 @@ const addEvent = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 const updateEvent = async (req, res, next) => {
     try {
@@ -218,7 +218,7 @@ const updateEvent = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 const deleteEvent = async (req, res, next) => {
     try {
@@ -228,7 +228,7 @@ const deleteEvent = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 module.exports = {
     getAllSacid,
@@ -238,4 +238,4 @@ module.exports = {
     addEvent,
     updateEvent,
     deleteEvent,
-}
+};

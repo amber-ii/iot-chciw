@@ -1,39 +1,37 @@
-var subTopic = "";
-var clientName = "WebClient" + parseInt(Math.random() * 100000000).toString();
+var subTopic = '';
+var clientName = 'WebClient' + parseInt(Math.random() * 100000000).toString();
 var connected_flag = 0;
 var mqtt;
 var reconnectTimeout = 2000;
-var host = "web.chciw.com.tw";
-// var host = "";
+var host = 'web.chciw.com.tw';
 var port = 1884;
 
 
 function onConnectionLost() {
-	console.log("connection lost");
+	console.log('connection lost');
 	connected_flag = 0;
 }
 function onFailure(message) {
-	console.log("Failed");
+	console.log('Failed' + message);
 	setTimeout(MQTTConnect, reconnectTimeout);
 }
 function onConnected(recon, url) {
-	// console.log(" in onConnected " +reconn);
+	console.log(' in onConnected ' + recon + url);
 }
 function onConnect() {
 	// Once a connection has been made, make a subscription and send a message.
-	//document.getElementById("messages").innerHTML ="Connected to "+host +"on port "+port;
+	//document.getElementById('messages').innerHTML ='Connected to '+host +'on port '+port;
 	connected_flag = 1;
-	console.log("Connect to mqtt");
+	console.log('Connect to mqtt');
 	sub_topics();
-	
+
 }
 function MQTTConnect() {
 	mqtt = new Paho.MQTT.Client(host, port, clientName);
-	var options = {
+	options = {
 		timeout: 3,
 		onSuccess: onConnect,
 		onFailure: onFailure,
-
 	};
 
 	mqtt.onConnectionLost = onConnectionLost;
@@ -46,7 +44,7 @@ function MQTTConnect() {
 
 function sub_topics() {
 	if (connected_flag == 0) {
-		out_msg = "Not Connected so can't subscribe";
+		var out_msg = 'Not Connected so cannot subscribe';
 		console.log(out_msg);
 		return false;
 	}

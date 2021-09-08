@@ -5,15 +5,15 @@ const getAllN2R = async (req, res, next) => {
     if (req.user.permission == 1 || req.user.permission == 5) {
         try {
             const rows = await n2rData.getN2R();
-            res.render('n2r', { rows, title: "氮氣" });
+            res.render('n2r', { rows, title: '氮氣' });
             // console.log('The data from CH1ACI table: \n', rows);
         } catch (error) {
             res.status(400).send(error.message);
         }
     } else {
-        res.sendFile(`${process.cwd()}/public/404.html`)
+        res.sendFile(`${process.cwd()}/public/404.html`);
     }
-}
+};
 
 
 function getTrendLoop(rows) {
@@ -37,7 +37,7 @@ function getTrendLoop(rows) {
         a4t1: newA4t1,
         a8t1: newA8t1,
         a16t1: newA16t1,
-    }
+    };
     return date;
 
 }
@@ -52,11 +52,12 @@ const getAllN2RJSON = async (req, res, next) => {
         let rows1 = await n2rData.getN2RJSONThirty();
         let date7 = getTrendLoop(rows0);
         let date30 = getTrendLoop(rows1);
-        res.send({ "dates": { "7days": { "data": date7 }, "30days": { "data": date30 } } });
+        // res.send({ "dates": { "7days": { "data": date7 }, "30days": { "data": date30 } } }); 
+        res.send({ 'dates': { '7days': { 'data': date7 }, '30days': { 'data': date30 } } }); 
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 
 // const getN2R = async (req, res, next) => {
@@ -86,7 +87,7 @@ const getN2RByDate = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 
 // 報表印出功能
@@ -236,4 +237,4 @@ module.exports = {
     // addEvent,
     // updateEvent,
     // deleteEvent
-}
+};

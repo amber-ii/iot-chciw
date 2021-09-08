@@ -16,7 +16,7 @@ const getN2R = async () => {
     } finally {
         pool.close();
     }
-}
+};
 
 
 const getN2RJSONSeven = async () => {
@@ -30,7 +30,7 @@ const getN2RJSONSeven = async () => {
     } finally {
         pool.close();
     }
-}
+};
 
 const getN2RJSONThirty = async () => {
     try {
@@ -43,7 +43,7 @@ const getN2RJSONThirty = async () => {
     } finally {
         pool.close();
     }
-}
+};
 
 
 
@@ -51,16 +51,14 @@ const getById = async (BID) => {
     try {
         pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('n2r');
-        const list = await pool.request()
-        .input('BID',sql.Int, BID)
-        .query(sqlQueries.n2rbyId);
+        const list = await pool.request().input('BID',sql.Int, BID).query(sqlQueries.n2rbyId);
         return list.recordset;
     } catch (error) {
         return error.message;
     } finally {
         pool.close();
     }
-}
+};
 
 
 
@@ -79,7 +77,7 @@ const getByDate = async (startDate, endDate) => {
     } finally {
         pool.close();
     }
-}
+};
 
 
 const getByDateReport = async (startDate, endDate) => {
@@ -96,7 +94,7 @@ const getByDateReport = async (startDate, endDate) => {
     } finally {
         pool.close();
     }
-}
+};
 
 
 
@@ -110,4 +108,4 @@ module.exports = {
     getByDateReport,
     getById,
 
-}
+};

@@ -15,9 +15,9 @@ const getSacid = async () => {
         console.log(error.message);
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 
 const getSacidJSONSeven = async () => {
@@ -30,9 +30,9 @@ const getSacidJSONSeven = async () => {
         console.log(error.message);
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 const getSacidSONThirty = async () => {
     try {
@@ -44,9 +44,9 @@ const getSacidSONThirty = async () => {
         console.log(error.message);
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 
 const getSacidJSONSixty = async () => {
@@ -59,25 +59,23 @@ const getSacidJSONSixty = async () => {
         console.log(error.message);
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 const getById = async (BID) => {
     try {
         pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('sacid');
-        const list = await pool.request()
-        .input('BID',sql.Int, BID)
-        .query(sqlQueries.sacidbyId);
+        const list = await pool.request().input('BID',sql.Int, BID).query(sqlQueries.sacidbyId);
         return list.recordset;
     } catch (error) {
         return error.message;
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 
 
@@ -95,9 +93,9 @@ const getByDate = async (startDate, endDate) => {
         return error.message;
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 
 const getByDateReport = async (startDate, endDate) => {
@@ -113,9 +111,9 @@ const getByDateReport = async (startDate, endDate) => {
         return error.message;
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 const creatEvent = async (eventdata) => {
     try {
@@ -134,9 +132,9 @@ const creatEvent = async (eventdata) => {
         return error.message;
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 const updateEvent = async (eventId, data) => {
     try {
@@ -156,9 +154,9 @@ const updateEvent = async (eventId, data) => {
         return error.message;
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 const deleteEvent = async (eventId) => {
     try {
@@ -172,9 +170,9 @@ const deleteEvent = async (eventId) => {
         return error.message;
     } finally {
         pool.close();
-        console.log(`connection close`);
+        console.log('connection close');
     }
-}
+};
 
 module.exports = {
     getSacid,
@@ -187,4 +185,4 @@ module.exports = {
     creatEvent,
     updateEvent,
     deleteEvent
-}
+};

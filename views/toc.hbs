@@ -15,7 +15,7 @@
   <link
     href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
     rel="stylesheet">
-
+ <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico"  width="32px" type="image/x-icon">
 
 </head>
 
@@ -26,8 +26,8 @@
       <i class="mdi mdi-logout -m-1"></i>
     </button>
   </a>
-{{!-- 
-   <div class="demo">
+  {{!--
+  <div class="demo">
     <div class="demo__colored-blocks">
       <div class="demo__colored-blocks-rotater">
         <div class="demo__colored-block"></div>
@@ -104,7 +104,7 @@
 
       <!-- 趨勢圖 -->
       <div class="bg-gray-900 flex items-center justify-center mb-6">
-        <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 w-full lg:w-10/12"
+        <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 w-full lg:w-full"
           x-data="{chartData:chartData()}" x-init="chartData.fetch()">
           <div class="flex flex-wrap items-end">
             <div class="flex-1 mb-5 flex inline-block">
@@ -158,45 +158,46 @@
               {{!-- download button --}}
               <div class="flex items-center">
                 <span class="inline-block  border-2 rounded-md border-gray-600 px-3 pb-2 -mb-1">
-                    <div class="flex inline-block">
-                      <form id="form1" name="dateSearch">
-                        <div class="flex flex-nowrap">
-                          <div class="space-x-1 mr-6 pl-2 inline-block pt-3 ">
-                            <label for="startDate">起始日</label>
-                            <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center"
-                              min="2020-07-01" required>
-                          </div>
-                          <div class="space-x-1 mr-6 pt-3 ">
-                            <label for="startDate">結束日</label>
-                            <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center" required>
-                          </div>
-                          <div title="查詢">
-                            <type class="pt-3 hover:text-gray-100 search" id="search" type="button">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
-                                class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                              </svg>
-                            </type>
-                          </div>
+                  <div class="flex inline-block">
+                    <form id="form1" name="dateSearch">
+                      <div class="flex flex-nowrap">
+                        <div class="space-x-1 mr-6 pl-2 inline-block pt-3 ">
+                          <label for="startDate">起始日</label>
+
+                          <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center"
+                            min="2020-07-01">
                         </div>
-                      </form>
+                        <div class="space-x-1 mr-6 pt-3 ">
+                          <label for="startDate">結束日</label>
+                          <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center">
+                        </div>
+                        <div title="查詢">
+                          <type class="pt-3 hover:text-gray-100 search" id="search" type="button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                              class="bi bi-search" viewBox="0 0 16 16">
+                              <path
+                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                            </svg>
+                          </type>
+                        </div>
+                      </div>
+                    </form>
 
 
-                      {{!-- Download Report --}}
-                      <span title="導出報表">
-                        <button id="btnExport" class="download pt-3 pr-2 ml-6 hover:text-gray-100"
-                          onclick="exportTable()">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor"
-                            class="bi bi-download" viewBox="0 0 16 16">
-                            <path
-                              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                            <path
-                              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                          </svg>
-                        </button>
-                      </span>
-                    </div>
+                    {{!-- Download Report --}}
+                    <span title="導出報表">
+                      <button id="btnExport" class="download pt-3 pr-2 ml-6 hover:text-gray-100"
+                        onclick="exportTable()">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor"
+                          class="bi bi-download" viewBox="0 0 16 16">
+                          <path
+                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                          <path
+                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+                        </svg>
+                      </button>
+                    </span>
+                  </div>
 
 
 
@@ -218,7 +219,7 @@
                   <tr class="bg-gray-800 text-md 2xl:text-xl">
                     <th class="p-3 text-center dateTh">{{this.Date}}</th>
                     <th class="p-3 text-center">{{this.A25TOC}}</th>
-    
+
                   </tr>
                 </tbody>
 

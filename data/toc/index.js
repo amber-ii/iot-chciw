@@ -16,7 +16,7 @@ const getToc = async () => {
     } finally {
         pool.close();
     }
-}
+};
 
 
 const getTocJSONSeven = async () => {
@@ -30,7 +30,7 @@ const getTocJSONSeven = async () => {
     } finally {
         pool.close();
     }
-}
+};
 
 const getTocJSONThirty = async () => {
     try {
@@ -43,7 +43,37 @@ const getTocJSONThirty = async () => {
     } finally {
         pool.close();
     }
-}
+};
+
+
+const getTocJSONperHour = async () => {
+    try {
+        pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('toc');
+        var list = await pool.request().query(sqlQueries.tocChart24);
+        return list.recordset;
+    } catch (error) {
+        console.log(error.message);
+    } finally {
+        pool.close();
+    }
+};
+
+
+const getTocJSONperMinute = async () => {
+    try {
+        pool = await sql.connect(config.sql);
+        const sqlQueries = await utils.loadSqlQueries('toc');
+        var list = await pool.request().query(sqlQueries.tocChart1440);
+        return list.recordset;
+    } catch (error) {
+        console.log(error.message);
+    } finally {
+        pool.close();
+    }
+};
+
+
 
 
 
@@ -79,7 +109,7 @@ const getByDate = async (startDate, endDate) => {
     } finally {
         pool.close();
     }
-}
+};
 
 
 const getByDateReport = async (startDate, endDate) => {
@@ -96,7 +126,7 @@ const getByDateReport = async (startDate, endDate) => {
     } finally {
         pool.close();
     }
-}
+};
 
 
 
@@ -108,6 +138,8 @@ module.exports = {
     getTocJSONThirty,
     getByDate,
     getByDateReport,
+    getTocJSONperHour,
+    getTocJSONperMinute
     // getById,
 
-}
+};

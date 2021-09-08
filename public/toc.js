@@ -1,12 +1,12 @@
 // MQTT
 function onMessageArrived(r_message) {
-    var rcmsg = JSON.parse(r_message.payloadString);
-    console.log(rcmsg);
-    for (var key in rcmsg) {
+    var rcMsg = JSON.parse(r_message.payloadString);
+    console.log(rcMsg);
+    for (var key in rcMsg) {
         var id = key;
-        var value = rcmsg[key];
+        var value = rcMsg[key];
         if (document.getElementById(id) != null) {
-            document.getElementById(id).innerHTML = value
+            document.getElementById(id).innerHTML = value;
         }
     }
 }
@@ -23,9 +23,16 @@ function onMessageArrived(r_message) {
 // 趨勢圖
 let chartData = function () {
     return {
-        date: '7days',
+        date: 'perMins',
         options: [
-
+            {
+                label: 'per Minutes',
+                value: 'perMins',
+            },
+            {
+                label: 'Last 24 Hours',
+                value: '24hours',
+            },
             {
                 label: 'Last 7 Days',
                 value: '7days',
@@ -33,7 +40,9 @@ let chartData = function () {
             {
                 label: 'Last 30 Days',
                 value: '30days',
-            }
+            },
+
+
             // {
             //     label: 'Last 6 Months',
             //     value: '6months',
@@ -53,17 +62,29 @@ let chartData = function () {
         data: null,
         fetch: function () {
             fetch('http://web.chciw.com.tw:8080/toc/tocJson')
-            // fetch('http://localhost:8888/toc/tocJson')
                 .then(res => res.json())
                 .then(res => {
                     this.data = res.dates;
                     this.renderChart();
-                })
+                    this.refresh();
+                });
         },
+
+        refresh: function () {
+            setInterval(() => {
+                fetch('http://web.chciw.com.tw:8080/toc/tocJson')
+                    .then(res => res.json())
+                    .then(res => {
+                        this.data = res.dates;
+                        this.renderChart();
+                    });
+            }, 60000);
+        },
+
+
         renderChart: function () {
             let c = false;
-
-            Chart.helpers.each(Chart.instances, function (instance) {
+            Chart.helpers.each(Chart.instances, function (instance) { //eslint-disable-line
                 if (instance.chart.canvas.id == 'chart') {
                     c = instance;
                 }
@@ -75,18 +96,18 @@ let chartData = function () {
 
             let ctx = document.getElementById('chart').getContext('2d');
 
-            let chart = new Chart(ctx, {
-                type: "line",
+            let chart = new Chart(ctx, { //eslint-disable-line
+                type: 'line', 
                 data: {
                     labels: this.data[this.date].data.label,
                     datasets: [
                         {
-                            label: "A25TOC",
-                            borderColor: "rgba( 240,230,140, 1)",
-                            pointBackgroundColor: "rgba( 240,230,140, 1)",
-                            data: this.data[this.date].data.A25TOC ,
+                            label: 'A25TOC',
+                            borderColor: 'rgba( 240,230,140, 1)',
+                            pointBackgroundColor: 'rgba( 240,230,140, 1)',
+                            data: this.data[this.date].data.A25TOC,
                         },
-                       
+
                     ],
                 },
                 layout: {
@@ -128,8 +149,8 @@ let chartData = function () {
                 }
             });
         }
-    }
-}
+    };
+};
 
 
 
@@ -144,38 +165,38 @@ var DateDiff = function (a, b) { // sDate1 和 sDate2 是 2016-06-18 格式
 
 
 // 依照日期搜尋
-$("#search").click(function () {
+$('#search').click(function () {
 
     var t2 = document.getElementById('table2');
     var now = new Date();
     var year = now.getFullYear();
     var month = now.getMonth() + 1;
     var date = now.getDate();
-    var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2');
+    var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
 
 
     $.ajax({
         beforeSend: function () {
-            var startDate = dateSearch.startDate.value
-            var endDate = dateSearch.endDate.value
+            var startDate = dateSearch.startDate.value; //eslint-disable-line
+            var endDate = dateSearch.endDate.value; //eslint-disable-line
 
             if (startDate > endDate) {
-                alert("無效日期，起始日不得大於結束日")
+                alert('無效日期，起始日不得大於結束日');
                 return false;
             }
-            if (startDate == "" || endDate == "") {
-                alert("請輸入起始&結束日")
+            if (startDate == '' || endDate == '') {
+                alert('請輸入起始&結束日');
                 return false;
             }
             if (DateDiff(startDate, endDate) >= 360) {
-                alert("搜尋日期區間360天")
+                alert('搜尋日期區間360天');
                 return false;
             }
-            if (startDate < "2020-11-11") {
-                alert("最早的資料為2020-11-11，請重新搜尋")
+            if (startDate < '2020-11-11') {
+                alert('最早的資料為2020-11-11，請重新搜尋');
                 return false;
             } if (endDate > today || startDate > today) {
-                alert("日期不得超過今日，請重新搜尋")
+                alert('日期不得超過今日，請重新搜尋');
                 return false;
             }
             // 搜尋click倒數兩秒
@@ -184,16 +205,16 @@ $("#search").click(function () {
                 $(document).ready(function () {
                     $('.demo').fadeOut();
                 });
-            }, 1500)
-            t2.innerHTML = "";
+            }, 1500);
+            t2.innerHTML = '';
         },
-        type: "POST",
-        url: "/toc",
+        type: 'POST',
+        url: '/toc',
         data: $('#form1').serialize(), //序列化表單的值
         async: true,
         success: function (data) {
 
-            var renderString = "";
+            var renderString = '';
             for (let index = 0; index < data.length; index++) {
                 renderString =
                     ' <tr class="bg-gray-800 text-md 2xl:text-xl">'
@@ -209,17 +230,17 @@ $("#search").click(function () {
             }
 
         }, error: function (request) {
-            alert("Connection error");
+            alert('Connection error');
         },
     });
-})
+});
 
 
 
 // 導出報表
 function exportTable() {
-    var startDate = form1.startDate.value;
-    var endDate = form1.endDate.value;
+    var startDate = form1.startDate.value; //eslint-disable-line
+    var endDate = form1.endDate.value; //eslint-disable-line
     console.log(startDate, endDate);
 
     var now = new Date();
@@ -235,7 +256,7 @@ function exportTable() {
     var last7 = year7 + '-' + month7 + '-' + date7;
 
 
-    if (startDate == "" && endDate == "") {
+    if (startDate == '' && endDate == '') {
         if (new Date().getHours() > 7) {
             endDate = today;
             startDate = last7;
@@ -254,8 +275,8 @@ function exportTable() {
             startDate = last7;
         }
     }
-    $("#headerTable").table2excel({
-        name: "Excel Document Name",
+    $('#headerTable').table2excel({
+        name: 'Excel Document Name',
         filename: `A25水質檢測[${startDate}]-[${endDate}].xls`,
     });
 }
@@ -267,7 +288,7 @@ setTimeout(() => {
     $(document).ready(function () {
         $('.demo').fadeOut(1000);
     });
-}, 3000)
+}, 3000);
 
 
 

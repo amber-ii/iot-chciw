@@ -2,15 +2,15 @@ const { config } = require('dotenv');
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const cors = require('cors')
-const session = require('express-session')
-const hbs = require('express-handlebars')
-const passport = require('passport')
-const LocalStrategy = require('passport-local').Strategy
+const cors = require('cors');
+const session = require('express-session');
+const hbs = require('express-handlebars');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 require('dotenv/config');
 const configs = require('./config');
-const User = require('./models/Post')
-var router = express.Router()
+const User = require('./models/Post');
+var router = express.Router();
 const sacidRoutes = require('./routes/sacidRoutes');
 const n2rRoutes = require('./routes/n2rRoutes');
 const tocRoutes = require('./routes/tocRoutes');
@@ -25,15 +25,15 @@ mongoose.connect(
         useUnifiedTopology: true
     }, () => {
         console.log('connect to MongoDB');
-    })
+    });
 
 // MiddleWares
 app.engine('hbs', hbs({ extname: '.hbs' }));
 app.set('view engine', 'hbs');
 app.use(express.static(__dirname + '/public'));
 app.use(cors());
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(session({
     secret: 'secretok',
     saveUninitialized: true,
@@ -42,30 +42,30 @@ app.use(session({
     cookie: {
         maxAge: 86400 * 1000
     },
-}))
+}));
 
-app.use(passport.initialize())
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // 只將用戶 id 序列化存到 session 中
 passport.serializeUser(function (user, done) {
-    done(null, user.id)
-})
+    done(null, user.id);
+});
 
 passport.deserializeUser(function (id, done) {
     // 透過使用者 id 到 MongoDB 資料庫尋找用戶完整資訊
     User.findById(id, function (err, user) {
-        done(err, user)
-    })
-})
+        done(err, user);
+    });
+});
 
 
 
 passport.use(new LocalStrategy(
     function (username, password, done) {
         User.findOne({ username: username }, function (err, user) {
-            console.log(user)
+            console.log(user);
             if (err) { return done(err); }
             if (!user) {
                 return done(null, false, { message: 'Incorrect username.' });
@@ -80,28 +80,27 @@ passport.use(new LocalStrategy(
 
 
 // Routes
-app.use('/iot-chciw/views', router) //指定根路徑
-app.use('/sacid', users.isLoggedIn, sacidRoutes.routes)
+app.use('/iot-chciw/views', router); //指定根路徑
+app.use('/sacid', users.isLoggedIn, sacidRoutes.routes);
 // app.use('/sacid', sacidRoutes.routes)
 
 
-app.use('/n2r', users.isLoggedIn, n2rRoutes.routes)
+app.use('/n2r', users.isLoggedIn, n2rRoutes.routes);
 
 
-app.use('/toc', users.isLoggedIn, tocRoutes.routes)
+app.use('/toc', users.isLoggedIn, tocRoutes.routes);
 
 app.get('/login', users.isLoggedOut, (req, res) => {
     const response = {
-        title: "CHCIW_IOT",
+        title: 'CHCIW_IOT',
         error: req.query.error
-    }
-    res.render('login', response)
-})
-
+    };
+    res.render('login', response);
+});
 app.get('/logout', function (req, res) {
     req.logout();
-    res.redirect('/')
-})
+    res.redirect('/');
+});
 
 
 app.post(
@@ -142,19 +141,19 @@ app.post(
 
 app.get('/', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1) {
-        res.render('index', { title:"首頁" })
+        res.render('index', { title:'首頁' });
     } else {
-        res.sendFile(`${__dirname}/public/404.html`)
+        res.sendFile(`${__dirname}/public/404.html`);
     }
-})
+});
 
 app.get('/air', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 2) {
-        res.sendFile(`${__dirname}/public/air.html`)
+        res.sendFile(`${__dirname}/public/air.html`);
     } else {
-        res.sendFile(`${__dirname}/public/404.html`)
+        res.sendFile(`${__dirname}/public/404.html`);
     }
-})
+});
 
 
 // app.get('/water', users.isLoggedIn, (req, res) => {
@@ -167,9 +166,9 @@ app.get('/air', users.isLoggedIn, (req, res) => {
 
 app.get('/water', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 4) {
-        res.sendFile(`${__dirname}/public/water.html`)
+        res.sendFile(`${__dirname}/public/water.html`);
     } else {
-        res.sendFile(`${__dirname}/public/404.html`)
+        res.sendFile(`${__dirname}/public/404.html`);
     }
 });
 
@@ -182,21 +181,21 @@ app.get('/water', users.isLoggedIn, (req, res) => {
 // })
 app.get('/plc', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 6) {
-        res.sendFile(`${__dirname}/public/plc.html`)
+        res.sendFile(`${__dirname}/public/plc.html`);
     } else {
-        res.sendFile(`${__dirname}/public/404.html`)
+        res.sendFile(`${__dirname}/public/404.html`);
     }
-})
+});
 
 
 
 app.get('/vpc', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 7) {
-        res.sendFile(`${__dirname}/public/vpc.html`)
+        res.sendFile(`${__dirname}/public/vpc.html`);
     } else {
-        res.sendFile(`${__dirname}/public/404.html`)
+        res.sendFile(`${__dirname}/public/404.html`);
     }
-})
+});
 
 
 // PORT

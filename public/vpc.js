@@ -1,12 +1,12 @@
 function onMessageArrived(r_message) {
-    
-    // 聽全部的訊息
-    var rcmsg = JSON.parse(r_message.payloadString);
-    console.log(rcmsg);
 
-    for (var key in rcmsg) {
+    // 聽全部的訊息
+    var rcMsg = JSON.parse(r_message.payloadString);
+    console.log(rcMsg);
+
+    for (var key in rcMsg) {
         var vpcId = key;
-        var vpcValue = rcmsg[key];
+        var vpcValue = rcMsg[key];
         if (document.getElementById(vpcId) != null) {
             document.getElementById(vpcId).innerHTML = vpcValue;
         }
@@ -17,24 +17,24 @@ function onMessageArrived(r_message) {
 
 function modSV() {
 
-    if (connected_flag == 0) {
-        out_msg = "斷線中無法修改"
+    if (connected_flag == 0) {    //eslint-disable-line
+        let out_msg = '斷線中無法修改';
         console.log(out_msg);
         alert(out_msg);
         return false;
     }
 
-    var SV_result = confirm(`確定要修改SV?`);
+    var SV_result = confirm('確定要修改SV?');
     if (SV_result) {
         let value = document.getElementById('modSV').value;
-        var msg = `{"sv":` + value + "}";
+        var msg = `{"sv":` + value + '}';    //eslint-disable-line
         console.log(msg);
-        message = new Paho.MQTT.Message(msg);
-        message.destinationName = "A10VPCconf";
-        mqtt.send(message);
-        document.getElementById('modSV').value = ""; //清空輸入框
+        let message = new Paho.MQTT.Message(msg);  //eslint-disable-line
+        message.destinationName = 'A10VPCconf';
+        mqtt.send(message); //eslint-disable-line
+        document.getElementById('modSV').value = ''; //清空輸入框
     } else {
-        document.getElementById('modSV').value = ""; //清空輸入框
+        document.getElementById('modSV').value = ''; //清空輸入框
         return;
     }
     return false;
@@ -47,4 +47,4 @@ setTimeout(() => {
     $(document).ready(function () {
         $('.demo').fadeOut();
     });
-}, 3500)
+}, 3500);

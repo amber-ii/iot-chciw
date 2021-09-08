@@ -6,15 +6,35 @@ const getAllToc = async (req, res, next) => {
     if (req.user.permission == 1 || req.user.permission == 6) {
         try {
             const rows = await tocData.getToc();
-            res.render('toc', { rows,title:"A25水質" });
+            res.render('toc', { rows, title: 'A25水質' });
             // console.log('The data from CH1ACI table: \n', rows);
         } catch (error) {
             res.status(400).send(error.message);
         }
     } else {
-        res.sendFile(`${process.cwd()}/public/404.html`)
+        res.sendFile(`${process.cwd()}/public/404.html`);
     }
+};
+
+
+
+
+function getTrendLoop(rows) {
+    let newData = [], newA25TOC = [];
+    for (var i = 0; i < rows.length; i++) {
+        newData.push(rows[i].Date);
+        newA25TOC.push(rows[i].A25TOC);
+
+    }
+
+    let date = {
+        label: newData,
+        A25TOC: newA25TOC,
+    };
+    return date;
+
 }
+
 
 
 const getAllTocJSON = async (req, res, next) => {
@@ -25,49 +45,29 @@ const getAllTocJSON = async (req, res, next) => {
         // 30天
         let rows30 = await tocData.getTocJSONThirty();
 
-        let newData = [];
-        let newA25Toc = [];
-       
+        // perHour
+        let rows24 = await tocData.getTocJSONperHour();
+        // perMinute
+        let rows1440 = await tocData.getTocJSONperMinute();
 
+        let date7 = getTrendLoop(rows);
+        let date30 = getTrendLoop(rows30);
+        let date24 = getTrendLoop(rows24);
+        let date1440 = getTrendLoop(rows1440);
 
-        for (let i = 0; i < rows.length; i++) {
-            // let newRows = rows[i].Date;
-            newData.push(rows[i].Date);
-            newA25Toc.push(rows[i].A25TOC);
-           
-        }
-
-        let date = {
-            label: newData,
-            A25TOC: newA25Toc,
-          
-        }
-
-        let newData_th = [];
-        let newA25Toc_th = [];
-      
-
-
-        for (let i = 0; i < rows30.length; i++) {
-            // let newRows = rows[i].Date;
-            newData_th.push(rows30[i].Date);
-            newA25Toc_th.push(rows30[i].A25TOC);
-         
-        }
-
-        let date_th = {
-            label: newData_th,
-            A25TOC: newA25Toc_th,
-           
-        }
-
-
-        res.send({ "dates": { "7days": { "data": date }, "30days": { "data": date_th } } });
+        res.send({
+            'dates': {
+                '7days': { 'data': date7 },
+                '30days': { 'data': date30 },
+                '24hours': { 'data': date24 },
+                'perMins': { 'data': date1440 }
+            }
+        });
 
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 
 // const getN2R = async (req, res, next) => {
@@ -97,7 +97,7 @@ const getTocByDate = async (req, res, next) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
-}
+};
 
 
 // 報表印出功能
@@ -247,4 +247,4 @@ module.exports = {
     // addEvent,
     // updateEvent,
     // deleteEvent
-}
+};

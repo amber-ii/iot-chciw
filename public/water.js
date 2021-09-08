@@ -1,12 +1,12 @@
 function onMessageArrived(r_message) {
 
     // 聽全部的訊息
-    var rcmsg = JSON.parse(r_message.payloadString);
-    // console.log(rcmsg);
+    var rcMsg = JSON.parse(r_message.payloadString);
+    // console.log(rcMsg);
 
-    for (var key in rcmsg) {
+    for (var key in rcMsg) {
         var waterId = key;
-        var waterValue = rcmsg[key];
+        var waterValue = rcMsg[key];
         if (document.getElementById(waterId) != null) {
             document.getElementById(waterId).innerHTML = waterValue;
 
@@ -27,24 +27,24 @@ function onMessageArrived(r_message) {
 
 function modPress() {
 
-    if (connected_flag == 0) {
-        out_msg = "Not Connected so can't send"
+    if (connected_flag == 0) { //eslint-disable-line
+        let out_msg = 'Not Connected so cannot send';
         console.log(out_msg);
         // alert(out_msg);
         return false;
     }
 
-    var press_result = confirm(`確定要修改壓力?`);
+    var press_result = confirm('確定要修改壓力?');
     if (press_result) {
         let value = document.getElementById('modPress').value;
-        var msg = `{"sv":` + value + "}";
+        var msg = `{"sv":` + value + '}'; //eslint-disable-line
         console.log(msg);
-        message = new Paho.MQTT.Message(msg);
-        message.destinationName = "WPconf";
-        mqtt.send(message);
-        document.getElementById('modPress').value = ""; //清空輸入框
+        let message = new Paho.MQTT.Message(msg); //eslint-disable-line
+        message.destinationName = 'WPconf';
+        mqtt.send(message); //eslint-disable-line
+        document.getElementById('modPress').value = ''; //清空輸入框
     } else {
-        document.getElementById('modPress').value = ""; //清空輸入框
+        document.getElementById('modPress').value = ''; //清空輸入框
         return;
     }
     return false;
@@ -57,4 +57,4 @@ setTimeout(() => {
     $(document).ready(function () {
         $('.demo').fadeOut();
     });
-}, 3500)
+}, 3500);

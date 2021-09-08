@@ -6,9 +6,12 @@ function onMessageArrived(r_message) {
         var Id = key;
         var value = rcmsg[key];
         if (document.getElementById(Id) != null) {
-            if (value == 0 || value == "") {
-                document.getElementById(Id).style.display = "flex";
-                document.getElementById(`${Id}ok`).style.display = "none";
+            if (value == 0 || value == '' || value == undefined || value == null) {
+                document.getElementById(Id).style.display = 'flex';
+                document.getElementById(`${Id}ok`).style.display = 'none';
+            }if(value == 1){
+                document.getElementById(Id).style.display = 'none';
+                document.getElementById(`${Id}ok`).style.display = 'flex';
             }
         }
     }

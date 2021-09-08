@@ -7,13 +7,13 @@ function onMessageArrived(r_message) {
         if (document.getElementById(id) != null) {
             if (id.includes('n')) {
                 if (value == 0) {
-                    document.getElementById(`${id}timer`).style.animationPlayState = "paused"
-                    document.getElementById(id).innerHTML = value
+                    document.getElementById(`${id}timer`).style.animationPlayState = 'paused';
+                    document.getElementById(id).innerHTML = value;
                 } else {
-                    document.getElementById(`${id}timer`).style.animationPlayState = "running"
+                    document.getElementById(`${id}timer`).style.animationPlayState = 'running';
                 }
             }
-            document.getElementById(id).innerHTML = value
+            document.getElementById(id).innerHTML = value;
         }
     }
 }
@@ -22,8 +22,8 @@ function onMessageArrived(r_message) {
 
 // 千分位轉換
 Number.prototype.comma_formatter = function () {
-    return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-}
+    return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+};
 
 
 
@@ -64,11 +64,11 @@ let chartData = function () {
                 .then(res => {
                     this.data = res.dates;
                     this.renderChart();
-                })
+                });
         },
         renderChart: function () {
             let c = false;
-
+            // eslint-disable-next-line
             Chart.helpers.each(Chart.instances, function (instance) {
                 if (instance.chart.canvas.id == 'chart') {
                     c = instance;
@@ -80,53 +80,53 @@ let chartData = function () {
             }
 
             let ctx = document.getElementById('chart').getContext('2d');
-
+            // eslint-disable-next-line
             let chart = new Chart(ctx, {
-                type: "line",
+                type: 'line',
                 data: {
                     labels: this.data[this.date].data.label,
                     datasets: [
                         {
-                            label: "A9每日產能-進6/7號坦克",
-                            borderColor: "rgba( 240,230,140, 1)",
-                            pointBackgroundColor: "rgba( 240,230,140, 1)",
+                            label: 'A9每日產能-進6/7號坦克',
+                            borderColor: 'rgba( 240,230,140, 1)',
+                            pointBackgroundColor: 'rgba( 240,230,140, 1)',
                             data: this.data[this.date].data.A9Diff,
                         },
                         {
-                            label: "A10每日產能-進6/7號坦克",
-                            borderColor: "rgba(237, 100, 166, 1)",
-                            pointBackgroundColor: "rgba(237, 100, 166, 1)",
+                            label: 'A10每日產能-進6/7號坦克',
+                            borderColor: 'rgba(237, 100, 166, 1)',
+                            pointBackgroundColor: 'rgba(237, 100, 166, 1)',
                             data: this.data[this.date].data.A10Diff1,
                         },
                         {
-                            label: "A9A10每日產能-進5/9號坦克",
-                            borderColor: "rgba(160, 82, 45, 1)",
-                            pointBackgroundColor: "rgba(160, 82, 45, 1)",
+                            label: 'A9A10每日產能-進5/9號坦克',
+                            borderColor: 'rgba(160, 82, 45, 1)',
+                            pointBackgroundColor: 'rgba(160, 82, 45, 1)',
                             data: this.data[this.date].data.A10Diff4,
                         },
                         {
-                            label: "A9+A10總量(進5679號坦克加總)",
-                            borderColor: "rgba(147, 112, 219, 1)",
-                            pointBackgroundColor: "rgba(147, 112, 219, 1)",
+                            label: 'A9+A10總量(進5679號坦克加總)',
+                            borderColor: 'rgba(147, 112, 219, 1)',
+                            pointBackgroundColor: 'rgba(147, 112, 219, 1)',
                             data: this.data[this.date].data.total,
                         },
                         {
-                            label: "配酸出口流量計",
-                            borderColor: "rgba(0,0,205, 1)",
-                            pointBackgroundColor: "rgba(0,0,205, 1)",
+                            label: '配酸出口流量計',
+                            borderColor: 'rgba(0,0,205, 1)',
+                            pointBackgroundColor: 'rgba(0,0,205, 1)',
                             data: this.data[this.date].data.A10Diff2,
                         },
                         {
-                            label: "配酸回流流量計",
-                            borderColor: "rgba(0,128,0, 1)",
+                            label: '配酸回流流量計',
+                            borderColor: 'rgba(0,128,0, 1)',
                             // 255,99,71218,165,3 255,127,80 
-                            pointBackgroundColor: "rgba(0,128,0, 1)",
+                            pointBackgroundColor: 'rgba(0,128,0, 1)',
                             data: this.data[this.date].data.A10Diff3,
                         },
                         {
-                            label: "配酸使用量(配酸回流-配酸出口)",
-                            borderColor: "rgba( 32,178,170, 1)",
-                            pointBackgroundColor: "rgba( 32,178,170, 1)",
+                            label: '配酸使用量(配酸回流-配酸出口)',
+                            borderColor: 'rgba( 32,178,170, 1)',
+                            pointBackgroundColor: 'rgba( 32,178,170, 1)',
                             data: this.data[this.date].data.diff32,
                         },
                     ],
@@ -170,8 +170,8 @@ let chartData = function () {
                 }
             });
         }
-    }
-}
+    };
+};
 
 
 
@@ -186,38 +186,38 @@ var DateDiff = function (a, b) { // sDate1 和 sDate2 是 2016-06-18 格式
 
 
 // 依照日期搜尋
-$("#search").click(function () {
+$('#search').click(function () {
 
     var t2 = document.getElementById('table2');
     var now = new Date();
     var year = now.getFullYear();
     var month = now.getMonth() + 1;
     var date = now.getDate();
-    var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2');
+    var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
 
 
     $.ajax({
         beforeSend: function () {
-            var startDate = dateSearch.startDate.value
-            var endDate = dateSearch.endDate.value
+            var startDate = dateSearch.startDate.value;  // eslint-disable-line
+            var endDate = dateSearch.endDate.value;  // eslint-disable-line
 
             if (startDate > endDate) {
-                alert("無效日期，起始日不得大於結束日")
+                alert('無效日期，起始日不得大於結束日');
                 return false;
             }
-            if (startDate == "" || endDate == "") {
-                alert("請輸入起始&結束日")
+            if (startDate == '' || endDate == '') {
+                alert('請輸入起始&結束日');
                 return false;
             }
             if (DateDiff(startDate, endDate) >= 360) {
-                alert("搜尋日期區間360天")
+                alert('搜尋日期區間360天');
                 return false;
             }
-            if (startDate < "2020-11-11") {
-                alert("最早的資料為2020-11-11，請重新搜尋")
+            if (startDate < '2020-11-11') {
+                alert('最早的資料為2020-11-11，請重新搜尋');
                 return false;
             } if (endDate > today || startDate > today) {
-                alert("日期不得超過今日，請重新搜尋")
+                alert('日期不得超過今日，請重新搜尋');
                 return false;
             }
             // 搜尋click倒數兩秒
@@ -226,22 +226,22 @@ $("#search").click(function () {
                 $(document).ready(function () {
                     $('.demo').fadeOut();
                 });
-            }, 2000)
-            t2.innerHTML = "";
+            }, 2000);
+            t2.innerHTML = '';
         },
-        type: "POST",
-        url: "/sacid",
+        type: 'POST',
+        url: '/sacid',
         data: $('#form1').serialize(), //序列化表單的值
         async: true,
         success: function (data) {
 
-            var renderString = "";
+            var renderString = '';
             for (let index = 0; index < data.length; index++) {
                 renderString =
                     ' <tr class="bg-gray-800 text-md 2xl:text-xl">'
                     + '<th class="p-3 text-center">'
                     + data[index].preDate
-                    + "-"
+                    + '-'
                     + data[index].Date
                     + '</th>'
                     + '<th class="p-3  text-center">'
@@ -271,17 +271,18 @@ $("#search").click(function () {
             }
 
         }, error: function (request) {
-            alert("Connection error");
+            alert('Connection error');
         },
     });
-})
+});
 
 
 
 // 導出報表
 function exportTable() {
-    var startDate = form1.startDate.value;
-    var endDate = form1.endDate.value;
+    // eslint
+    var startDate = form1.startDate.value; // eslint-disable-line
+    var endDate = form1.endDate.value; // eslint-disable-line
     console.log(startDate, endDate);
 
     var now = new Date();
@@ -297,7 +298,7 @@ function exportTable() {
     var last7 = year7 + '-' + month7 + '-' + date7;
 
 
-    if (startDate == "" && endDate == "") {
+    if (startDate == '' && endDate == '') {
         if (new Date().getHours() > 7) {
             endDate = today;
             startDate = last7;
@@ -316,8 +317,8 @@ function exportTable() {
             startDate = last7;
         }
     }
-    $("#headerTable").table2excel({
-        name: "Excel Document Name",
+    $('#headerTable').table2excel({
+        name: 'Excel Document Name',
         filename: `A9A10硫酸累計報表[${startDate}]-[${endDate}].xls`,
     });
 }
@@ -329,7 +330,7 @@ setTimeout(() => {
     $(document).ready(function () {
         $('.demo').fadeOut(1000);
     });
-}, 3000)
+}, 3000);
 
 
 
