@@ -15,7 +15,8 @@ const sacidRoutes = require('./routes/sacidRoutes');
 const n2rRoutes = require('./routes/n2rRoutes');
 const tocRoutes = require('./routes/tocRoutes');
 const users = require('./controllers/userController');
-
+const bcrypt = require('bcryptjs');
+// const { db } = require('./models/User');
 
 // Connect to DB
 mongoose.connect(
@@ -70,9 +71,12 @@ passport.use(new LocalStrategy(
             if (!user) {
                 return done(null, false, { message: 'Incorrect username.' });
             }
-            if (user.password != password) {
+            bcrypt.compare(password, user.password, (err, isMatch) => {
+                if (isMatch) {
+                    return done(null, user);
+                }
                 return done(null, false, { message: 'Incorrect password.' });
-            }
+            });
             return done(null, user);
         });
     }
@@ -97,6 +101,35 @@ app.get('/login', users.isLoggedOut, (req, res) => {
     };
     res.render('login', response);
 });
+
+
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+
+app.post('/register', async (req, res) => {
+    try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const username = req.body.username;
+        const permission = req.body.permission;
+        console.log(req.body);
+        const postUser = new User({
+            username: username,
+            password: hashedPassword,
+            permission: permission
+        });
+        const saveUser = await postUser.save();
+        res.json(saveUser);
+    } catch {
+        res.render('register');
+    }
+});
+
+
+
+
+
 app.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
@@ -141,7 +174,7 @@ app.post(
 
 app.get('/', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1) {
-        res.render('index', { title:'首頁' });
+        res.render('index', { title: '首頁' });
     } else {
         res.sendFile(`${__dirname}/public/404.html`);
     }
