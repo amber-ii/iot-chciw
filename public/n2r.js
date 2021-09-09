@@ -63,7 +63,7 @@ let chartData = function () {
         },
         data: null,
         fetch: function () {
-            fetch('http://web.chciw.com.tw:8080/n2r/n2rJson') 
+            fetch('http://web.chciw.com.tw:8080/n2r/n2rJson')
                 .then(res => res.json())
                 .then(res => {
                     this.data = res.dates;
@@ -200,7 +200,7 @@ $('#search').click(function () {
                 alert('無效日期，起始日不得大於結束日');
                 return false;
             }
-            if (startDate == '' || endDate == '') {
+            if (!startDate || !endDate) {
                 alert('請輸入起始&結束日');
                 return false;
             }
@@ -273,7 +273,7 @@ function exportTable() {
     var endDate = form1.endDate.value;
     console.log(startDate, endDate);
     var now = new Date();
-    if (startDate == '' && endDate == '') {
+    if (!startDate && !endDate) {
         now = new Date((now / 1000 - 86400) * 1000);
         var year = now.getFullYear();
         var month = now.getMonth() + 1;

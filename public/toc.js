@@ -97,7 +97,7 @@ let chartData = function () {
             let ctx = document.getElementById('chart').getContext('2d');
 
             let chart = new Chart(ctx, { //eslint-disable-line
-                type: 'line', 
+                type: 'line',
                 data: {
                     labels: this.data[this.date].data.label,
                     datasets: [
@@ -184,7 +184,7 @@ $('#search').click(function () {
                 alert('無效日期，起始日不得大於結束日');
                 return false;
             }
-            if (startDate == '' || endDate == '') {
+            if (!startDate || !endDate) {
                 alert('請輸入起始&結束日');
                 return false;
             }
@@ -256,7 +256,7 @@ function exportTable() {
     var last7 = year7 + '-' + month7 + '-' + date7;
 
 
-    if (startDate == '' && endDate == '') {
+    if (!startDate && !endDate) {
         if (new Date().getHours() > 7) {
             endDate = today;
             startDate = last7;

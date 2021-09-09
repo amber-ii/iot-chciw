@@ -1,9 +1,9 @@
 // MQTT
 function onMessageArrived(r_message) {
-    var rcmsg = JSON.parse(r_message.payloadString);
-    for (var key in rcmsg) {
+    var rcMsg = JSON.parse(r_message.payloadString);
+    for (var key in rcMsg) {
         var id = key;
-        var value = rcmsg[key];
+        var value = rcMsg[key];
         if (document.getElementById(id) != null) {
             if (id.includes('n')) {
                 if (value == 0) {
@@ -205,7 +205,7 @@ $('#search').click(function () {
                 alert('無效日期，起始日不得大於結束日');
                 return false;
             }
-            if (startDate == '' || endDate == '') {
+            if (!startDate || !endDate) {
                 alert('請輸入起始&結束日');
                 return false;
             }
@@ -298,7 +298,7 @@ function exportTable() {
     var last7 = year7 + '-' + month7 + '-' + date7;
 
 
-    if (startDate == '' && endDate == '') {
+    if (!startDate && !endDate) {
         if (new Date().getHours() > 7) {
             endDate = today;
             startDate = last7;
