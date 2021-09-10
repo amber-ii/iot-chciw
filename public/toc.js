@@ -162,17 +162,24 @@ var DateDiff = function (a, b) { // sDate1 和 sDate2 是 2016-06-18 格式
     return iDays;
 };
 
+// 格式化日期
+var formatDate = function (now) {
+    var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    return date;
+};
+
 
 
 // 依照日期搜尋
 $('#search').click(function () {
 
     var t2 = document.getElementById('table2');
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var date = now.getDate();
-    var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
+    var today = new Date();
+    today = formatDate(today).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
+    // var year = now.getFullYear();
+    // var month = now.getMonth() + 1;
+    // var date = now.getDate();
+    // var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
 
 
     $.ajax({
@@ -241,38 +248,26 @@ $('#search').click(function () {
 function exportTable() {
     var startDate = form1.startDate.value; //eslint-disable-line
     var endDate = form1.endDate.value; //eslint-disable-line
-    console.log(startDate, endDate);
 
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var date = now.getDate();
-    var today = year + '-' + month + '-' + date;
+    var today = new Date();
+    var todayFormat = formatDate(today);
 
-    var day7 = new Date((now / 1000 - 518400) * 1000);
-    var year7 = day7.getFullYear();
-    var month7 = day7.getMonth() + 1;
-    var date7 = day7.getDate();
-    var last7 = year7 + '-' + month7 + '-' + date7;
+    var day7 = new Date((today / 1000 - 518400) * 1000);
+
+    day7 = formatDate(day7);
 
 
     if (!startDate && !endDate) {
         if (new Date().getHours() > 7) {
-            endDate = today;
-            startDate = last7;
+            endDate = todayFormat;
+            startDate = day7;
         } else {
-            now = new Date((now / 1000 - 86400) * 1000);
-            year = now.getFullYear();
-            month = now.getMonth() + 1;
-            date = now.getDate();
-            today = year + '-' + month + '-' + date;
-            day7 = new Date((now / 1000 - 518400) * 1000);
-            year7 = day7.getFullYear();
-            month7 = day7.getMonth() + 1;
-            date7 = day7.getDate();
-            last7 = year7 + '-' + month7 + '-' + date7;
-            endDate = today;
-            startDate = last7;
+            var yesterday = new Date((today / 1000 - 86400) * 1000);
+            var yesterdayFormat = formatDate(yesterday);
+            day7 = new Date((yesterday / 1000 - 518400) * 1000);
+            day7 = formatDate(day7);
+            endDate = yesterdayFormat;
+            startDate = day7;
         }
     }
     $('#headerTable').table2excel({
