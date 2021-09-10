@@ -183,19 +183,17 @@ var DateDiff = function (a, b) { // sDate1 和 sDate2 是 2016-06-18 格式
     return iDays;
 };
 
-function countDate(now){
+function formatDate(now) {
     let date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
     return date;
 }
-let now = new Date();
 
 
 // 依照日期搜尋
 $('#search').click(function () {
 
     var t2 = document.getElementById('table2');
-    // var now = new Date();
-    var today = countDate(now).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
+    var today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
 
 
     $.ajax({
@@ -285,20 +283,16 @@ function exportTable() {
     // eslint
     var startDate = form1.startDate.value; // eslint-disable-line
     var endDate = form1.endDate.value; // eslint-disable-line
-    var today = countDate(now);
-    var day_after_7 = new Date((now / 1000 - 518400) * 1000);
-    var last7 = countDate(day_after_7);
+    var today = new Date();
+    var yesterday = new Date((today / 1000 - 86400) * 1000);
+  
     if (!startDate && !endDate) {
-        if (now.getHours() > 7) {
-            endDate = today;
-            startDate = last7;
+        if (today.getHours() > 7) {
+            endDate = formatDate(today);
+            startDate = formatDate(new Date((today / 1000 - 518400) * 1000));
         } else {
-            now = new Date((now / 1000 - 86400) * 1000);
-            today = countDate(now);
-            day_after_7 = new Date((now / 1000 - 518400) * 1000);
-            last7 = countDate(day_after_7);
-            endDate = today;
-            startDate = last7;
+            endDate = formatDate(yesterday);
+            startDate = formatDate(new Date((yesterday / 1000 - 518400) * 1000));
         }
     }
     $('#headerTable').table2excel({

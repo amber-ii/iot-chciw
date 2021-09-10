@@ -273,13 +273,11 @@ function exportTable() {
     var startDate = form1.startDate.value;
     // eslint-disable-next-line
     var endDate = form1.endDate.value;
+    var today = new Date();
+    var yesterday = new Date((today / 1000 - 86400) * 1000);
     if (!startDate && !endDate) {
-        var yesterday = new Date((new Date() / 1000 - 86400) * 1000);
-        var yesterdayFormat = formatDate(yesterday);
-        var day7ago = new Date((yesterday / 1000 - 518400) * 1000);
-        day7ago = formatDate(day7ago);
-        endDate = yesterdayFormat;
-        startDate = day7ago;
+        endDate = formatDate(yesterday);
+        startDate = formatDate(new Date((yesterday / 1000 - 518400) * 1000));
     }
     $('#headerTable').table2excel({
         name: 'Excel Document Name',

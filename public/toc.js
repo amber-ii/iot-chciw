@@ -174,12 +174,8 @@ var formatDate = function (now) {
 $('#search').click(function () {
 
     var t2 = document.getElementById('table2');
-    var today = new Date();
-    today = formatDate(today).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
-    // var year = now.getFullYear();
-    // var month = now.getMonth() + 1;
-    // var date = now.getDate();
-    // var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
+    var today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
+
 
 
     $.ajax({
@@ -246,28 +242,19 @@ $('#search').click(function () {
 
 // 導出報表
 function exportTable() {
-    var startDate = form1.startDate.value; //eslint-disable-line
-    var endDate = form1.endDate.value; //eslint-disable-line
-
+    // eslint
+    var startDate = form1.startDate.value; // eslint-disable-line
+    var endDate = form1.endDate.value; // eslint-disable-line
     var today = new Date();
-    var todayFormat = formatDate(today);
-
-    var day7 = new Date((today / 1000 - 518400) * 1000);
-
-    day7 = formatDate(day7);
-
+    var yesterday = new Date((today / 1000 - 86400) * 1000);
 
     if (!startDate && !endDate) {
-        if (new Date().getHours() > 7) {
-            endDate = todayFormat;
-            startDate = day7;
+        if (today.getHours() > 7) {
+            endDate = formatDate(today);
+            startDate = formatDate(new Date((today / 1000 - 518400) * 1000));
         } else {
-            var yesterday = new Date((today / 1000 - 86400) * 1000);
-            var yesterdayFormat = formatDate(yesterday);
-            day7 = new Date((yesterday / 1000 - 518400) * 1000);
-            day7 = formatDate(day7);
-            endDate = yesterdayFormat;
-            startDate = day7;
+            endDate = formatDate(yesterday);
+            startDate = formatDate(new Date((yesterday / 1000 - 518400) * 1000));
         }
     }
     $('#headerTable').table2excel({
