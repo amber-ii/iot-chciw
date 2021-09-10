@@ -183,17 +183,19 @@ var DateDiff = function (a, b) { // sDate1 和 sDate2 是 2016-06-18 格式
     return iDays;
 };
 
+function countDate(now){
+    let date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    return date;
+}
+let now = new Date();
 
 
 // 依照日期搜尋
 $('#search').click(function () {
 
     var t2 = document.getElementById('table2');
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var date = now.getDate();
-    var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
+    // var now = new Date();
+    var today = countDate(now).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
 
 
     $.ajax({
@@ -283,36 +285,18 @@ function exportTable() {
     // eslint
     var startDate = form1.startDate.value; // eslint-disable-line
     var endDate = form1.endDate.value; // eslint-disable-line
-    console.log(startDate, endDate);
-
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var date = now.getDate();
-    var today = year + '-' + month + '-' + date;
-
-    var day7 = new Date((now / 1000 - 518400) * 1000);
-    var year7 = day7.getFullYear();
-    var month7 = day7.getMonth() + 1;
-    var date7 = day7.getDate();
-    var last7 = year7 + '-' + month7 + '-' + date7;
-
-
+    var today = countDate(now);
+    var day_after_7 = new Date((now / 1000 - 518400) * 1000);
+    var last7 = countDate(day_after_7);
     if (!startDate && !endDate) {
-        if (new Date().getHours() > 7) {
+        if (now.getHours() > 7) {
             endDate = today;
             startDate = last7;
         } else {
             now = new Date((now / 1000 - 86400) * 1000);
-            year = now.getFullYear();
-            month = now.getMonth() + 1;
-            date = now.getDate();
-            today = year + '-' + month + '-' + date;
-            day7 = new Date((now / 1000 - 518400) * 1000);
-            year7 = day7.getFullYear();
-            month7 = day7.getMonth() + 1;
-            date7 = day7.getDate();
-            last7 = year7 + '-' + month7 + '-' + date7;
+            today = countDate(now);
+            day_after_7 = new Date((now / 1000 - 518400) * 1000);
+            last7 = countDate(day_after_7);
             endDate = today;
             startDate = last7;
         }

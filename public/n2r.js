@@ -176,17 +176,20 @@ var DateDiff = function (a, b) {
 };
 
 
+// 格式化日期
+var formatDate = function (now) {
+    var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    return date;
+};
+
+
 
 // 依照日期搜尋
 $('#search').click(function () {
     var t2 = document.getElementById('table2');
-    var now = new Date();
-    now = new Date((now / 1000 - 86400) * 1000);
-    var year = now.getFullYear();
-    var month = now.getMonth() + 1;
-    var date = now.getDate();
-    // eslint-disable-next-line
-    var today = (year + '-' + month + '-' + date).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2');
+    var yesterday = new Date((new Date() / 1000 - 86400) * 1000);
+    yesterday = formatDate(yesterday).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
+
 
     $.ajax({
         beforeSend: function () {
@@ -194,7 +197,6 @@ $('#search').click(function () {
             var startDate = dateSearch.startDate.value;
             // eslint-disable-next-line
             var endDate = dateSearch.endDate.value;
-            console.log(startDate);
 
             if (startDate > endDate) {
                 alert('無效日期，起始日不得大於結束日');
@@ -211,7 +213,7 @@ $('#search').click(function () {
             if (startDate < '2021-03-05') {
                 alert('最早的資料為2021-03-05，請重新搜尋');
                 return false;
-            } if (endDate > today || startDate > today) {
+            } if (endDate > yesterday || startDate > yesterday) {
                 alert('日期不得超過昨日，請重新搜尋');
                 return false;
             }
@@ -230,7 +232,7 @@ $('#search').click(function () {
         async: true,
         success: function (data) {
             var renderString = '';
-            for (let index = 0; index < data.length; index++) {
+            for (var index = 0; index < data.length; index++) {
                 renderString =
                     ' <tr class="bg-gray-800 text-md 2xl:text-xl">'
                     + '<th class="p-3 text-center">'
@@ -271,21 +273,13 @@ function exportTable() {
     var startDate = form1.startDate.value;
     // eslint-disable-next-line
     var endDate = form1.endDate.value;
-    console.log(startDate, endDate);
-    var now = new Date();
     if (!startDate && !endDate) {
-        now = new Date((now / 1000 - 86400) * 1000);
-        var year = now.getFullYear();
-        var month = now.getMonth() + 1;
-        var date = now.getDate();
-        var today = year + '-' + month + '-' + date;
-        var day7 = new Date((now / 1000 - 518400) * 1000);
-        var year7 = day7.getFullYear();
-        var month7 = day7.getMonth() + 1;
-        var date7 = day7.getDate();
-        var last7 = year7 + '-' + month7 + '-' + date7;
-        endDate = today;
-        startDate = last7;
+        var yesterday = new Date((new Date() / 1000 - 86400) * 1000);
+        var yesterdayFormat = formatDate(yesterday);
+        var day7ago = new Date((yesterday / 1000 - 518400) * 1000);
+        day7ago = formatDate(day7ago);
+        endDate = yesterdayFormat;
+        startDate = day7ago;
     }
     $('#headerTable').table2excel({
         name: 'Excel Document Name',
