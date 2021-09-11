@@ -16,9 +16,10 @@ const n2rRoutes = require('./routes/n2rRoutes');
 const tocRoutes = require('./routes/tocRoutes');
 const users = require('./controllers/userController');
 const bcrypt = require('bcryptjs');
-// const { db } = require('./models/User');
+const acl = require('express-acl');
 
-// Connect to DB
+
+
 mongoose.connect(
     process.env.DB_CONNECTION
     , {
@@ -72,12 +73,11 @@ passport.use(new LocalStrategy(
                 return done(null, false, { message: 'Incorrect username.' });
             }
             bcrypt.compare(password, user.password, (err, isMatch) => {
-                if (isMatch) {
-                    return done(null, user);
+                if (!isMatch) {
+                    return done(null, false, { message: 'Incorrect password.' });
                 }
-                return done(null, false, { message: 'Incorrect password.' });
+                return done(null, user);
             });
-            // return done(null, user);
         });
     }
 ));
@@ -85,13 +85,14 @@ passport.use(new LocalStrategy(
 
 // Routes
 app.use('/iot-chciw/views', router); //指定根路徑
+
+// 硫酸per3
 app.use('/sacid', users.isLoggedIn, sacidRoutes.routes);
-// app.use('/sacid', sacidRoutes.routes)
 
-
+// 氮氣per5
 app.use('/n2r', users.isLoggedIn, n2rRoutes.routes);
 
-
+// 水質檢測per6
 app.use('/toc', users.isLoggedIn, tocRoutes.routes);
 
 app.get('/login', users.isLoggedOut, (req, res) => {
@@ -127,15 +128,13 @@ app.post('/register', async (req, res) => {
 });
 
 
-
-
-
 app.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
 });
 
 
+// 登入驗證+權限設定
 app.post(
     '/login',
     passport.authenticate('local', {
@@ -145,60 +144,66 @@ app.post(
             res.redirect('/');
         }
         if (req.user.permission == 2) {
-            res.redirect('/air');
+            res.redirect('/home?per2=true');
         }
         if (req.user.permission == 3) {
-            res.redirect('/sacid');
+            res.redirect('/home?per3=true&per4=true&per6=true&per7=true&per11=true');
         }
-        if (req.user.permission == 4) {
-            res.redirect('/water');
-        }
+       
         if (req.user.permission == 5) {
-            res.redirect('/n2r');
+            res.redirect('/home?per5=true&per10=true');
         }
-        if (req.user.permission == 6) {
-            res.redirect('/plc');
+        if (req.user.permission == 8) {
+            res.redirect('/home?per2=true&per8=true');
         }
-        if (req.user.permission == 7) {
-            res.redirect('/vpc');
+        if (req.user.permission == 9) {
+            res.redirect('/home?per9=true');
         }
     });
 
 
-// app.post('/login',
-//     passport.authenticate('local', {
-//         successRedirect: '/',
-//         failureRedirect: '/login?error=true'
-//     }),
-// )
-
+// 管理員的首頁
 app.get('/', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1) {
-        res.render('index', { title: '首頁' });
+        res.render('index', { title: '首頁', name: req.user.name });
     } else {
         res.sendFile(`${__dirname}/public/404.html`);
     }
 });
 
+
+// 各單位的首頁
+app.get('/home', users.isLoggedIn, (req, res) => {
+    const response = {
+        title: 'CHCIW-IOT',
+        name: req.user.name, 
+        per2: req.query.per2,
+        per3: req.query.per3,
+        per4: req.query.per4,
+        per5: req.query.per5,
+        per6: req.query.per6,
+        per7: req.query.per7,
+        per8: req.query.per8,
+        per9: req.query.per9,
+        per10: req.query.per10,
+        per11: req.query.per11,
+    };
+    res.render('index2', response);
+});
+
+
+// 冷氣per2
 app.get('/air', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 2) {
+    if (req.user.permission == 1 || req.user.permission == 2 || req.user.permission == 8) {
         res.sendFile(`${__dirname}/public/air.html`);
     } else {
         res.sendFile(`${__dirname}/public/404.html`);
     }
 });
 
-
-// app.get('/water', users.isLoggedIn, (req, res) => {
-
-//     res.sendFile(`${__dirname}/public/water.html`)
-// })
-
-
-
-
+// 自來水per4
 app.get('/water', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 4) {
+    if (req.user.permission == 1 || req.user.permission == 3) {
         res.sendFile(`${__dirname}/public/water.html`);
     } else {
         res.sendFile(`${__dirname}/public/404.html`);
@@ -206,29 +211,59 @@ app.get('/water', users.isLoggedIn, (req, res) => {
 });
 
 
-
-
-
-// app.get('/n2r',  users.isLoggedIn, (req, res) => {
-//     res.sendFile(`${__dirname}/public/n2r.html`)
-// })
-app.get('/plc', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 6) {
-        res.sendFile(`${__dirname}/public/plc.html`);
-    } else {
-        res.sendFile(`${__dirname}/public/404.html`);
-    }
-});
-
-
-
+// A10蒸氣per7
 app.get('/vpc', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 7) {
+    if (req.user.permission == 1 || req.user.permission == 3) {
         res.sendFile(`${__dirname}/public/vpc.html`);
     } else {
         res.sendFile(`${__dirname}/public/404.html`);
     }
 });
+
+
+// A22A23溫度 per8
+app.get('/a22temp', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 8) {
+        res.sendFile(`${__dirname}/public/a22temp.html`);
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
+
+
+
+
+
+// 廢水池per9
+app.get('/trash', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 9) {
+        res.sendFile(`${__dirname}/public/trash.html`);
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
+
+
+// a2a3water per10
+app.get('/a2a3water', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 5) {
+        res.sendFile(`${__dirname}/public/a2a3water.html`);
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
+
+
+// A11數據per11
+app.get('/a11', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 11) {
+        res.sendFile(`${__dirname}/public/a11.html`);
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
+
+
 
 
 // PORT

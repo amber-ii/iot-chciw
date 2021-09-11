@@ -30,23 +30,29 @@
                 </button>
             </a>
         </div>
-
-
         <h1
             class="title-font mb-10 text-4xl font-extrabold leading-10 tracking-tight sm:text-4xl sm:leading-none md:text-5xl animate__animated animate__slideInLeft  text-center">
             CHCIW ELECTRICAL CONTROL</h1>
-
-
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+
+
+            {{!-- per2 --}}
             <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-                <a href="./air" target="_blank"><img src="https://images.unsplash.com/photo-1627751476653-e954179b174a"
-                        alt="" class="rounded-t-lg w-full"> </a>
+                {{#if per2}}
                 <a href="./air" target="_blank">
+                    {{/if}}
+                    <img src="https://images.unsplash.com/photo-1627751476653-e954179b174a" alt=""
+                        class="rounded-t-lg w-full">
+                    {{#if per2}} </a> {{/if}}
+                {{#if per2}}
+                <a href="./air" target="_blank">
+                    {{/if}}
                     <div class="p-6">
                         <h1
                             class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                             冷氣控制系統</h1>
-                </a>
+                        {{#if per2}}
+                </a> {{/if}}
                 <ul>
                     <ol>冷氣開關狀態</ol>
                     <ol>溫度顯示</ol>
@@ -57,15 +63,21 @@
                 </ul>
             </div>
         </div>
+
+
+
+        {{!-- per3 --}}
         <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-            <a href="/sacid" target="_blank"> <img src="https://images.unsplash.com/photo-1572431447238-425af66a273b"
-                    alt="" class="rounded-t-lg w-full"></a>
-            <a href="/sacid" target="_blank">
+            {{#if per3}} <a href="/sacid" target="_blank">{{/if}} <img
+                    src="https://images.unsplash.com/photo-1572431447238-425af66a273b" alt=""
+                    class="rounded-t-lg w-full">{{#if per3}} </a> {{/if}}
+            {{#if per3}} <a href="/sacid" target="_blank">{{/if}}
                 <div class="p-6">
                     <h1
                         class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                         硫酸數據</h1>
-            </a>
+                    {{#if per3}}
+            </a> {{/if}}
             <div>
                 <ul>
                     <ol>即時量</ol>
@@ -78,14 +90,20 @@
             </div>
         </div>
     </div>
+
+
+
+    {{!-- per4 --}}
     <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-        <a href="/water" target="_blank"> <img src="https://images.unsplash.com/photo-1540202404-1b927e27fa8b" alt=""
-                class="rounded-t-lg w-full"></a>
+        {{#if per4}} <a href="/water" target="_blank"> {{/if}} <img
+                src="https://images.unsplash.com/photo-1540202404-1b927e27fa8b" alt="" class="rounded-t-lg w-full">{{#if
+            per4}} </a> {{/if}}
         <div class="p-6">
-            <a href="/water" target="_blank">
+            {{#if per4}} <a href="/water" target="_blank"> {{/if}}
                 <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                     自來水數據</h1>
-            </a>
+                {{#if per4}}
+            </a> {{/if}}
             <ul>
                 <ol>自來水數據</ol>
                 <ol>馬達運轉</ol>
@@ -94,14 +112,21 @@
             </ul>
         </div>
     </div>
+
+
+
+
+    {{!-- per5 --}}
     <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-        <a href="/n2r" target="_blank"> <img src="https://images.unsplash.com/photo-1506790409786-287062b21cfe" alt=""
-                class="rounded-t-lg w-full"></a>
+        {{#if per5}} <a href="/n2r" target="_blank"> {{/if}}<img
+                src="https://images.unsplash.com/photo-1506790409786-287062b21cfe" alt=""
+                class="rounded-t-lg w-full">{{#if per5}} </a> {{/if}}
         <div class="p-6">
-            <a href="/n2r" target="_blank">
+            {{#if per5}} <a href="/n2r" target="_blank">{{/if}}
                 <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                     氮氣數據</h1>
-            </a>
+                {{#if per5}}
+            </a> {{/if}}
             <ul>
                 <ol>即時量</ol>
                 <ol>累積量</ol>
@@ -112,14 +137,21 @@
             </ul>
         </div>
     </div>
+
+
+
+
+    {{!-- per6 --}}
     <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-        <a href="/toc" target="_blank"> <img src="https://images.unsplash.com/photo-1505881502353-a1986add3762" alt=""
-                class="rounded-t-lg w-full"></a>
+        {{#if per6}} <a href="/toc" target="_blank">{{/if}} <img
+                src="https://images.unsplash.com/photo-1505881502353-a1986add3762" alt=""
+                class="rounded-t-lg w-full">{{#if per6}} </a> {{/if}}
         <div class="p-6">
-            <a href="/toc" target="_blank">
+            {{#if per6}} <a href="/toc" target="_blank">{{/if}}
                 <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900">
                     A25水質檢測</h1>
-            </a>
+                {{#if per6}}
+            </a> {{/if}}
             <ul>
                 <ol>即時數據</ol>
                 <ol>7天/30天數據圖表</ol>
@@ -128,14 +160,20 @@
             </ul>
         </div>
     </div>
+
+
+
+    {{!-- per7 --}}
     <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-        <a href="/vpc" target="_blank">
-            <img src="https://images.unsplash.com/photo-1544473244-f6895e69ad8b" alt="" class="rounded-t-lg w-full"></a>
+        {{#if per7}}<a href="/vpc" target="_blank"> {{/if}}
+            <img src="https://images.unsplash.com/photo-1544473244-f6895e69ad8b" alt=""
+                class="rounded-t-lg w-full">{{#if per7}} </a> {{/if}}
         <div class="p-6">
-            <a href="/vpc" target="_blank">
+            {{#if per7}}<a href="/vpc" target="_blank"> {{/if}}
                 <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                     A10蒸氣數據</h1>
-            </a>
+                {{#if per7}}
+            </a> {{/if}}
             <ul>
                 <ol>A10蒸氣數據</ol>
                 <ol>Modbus斷線警示</ol>
@@ -144,17 +182,18 @@
         </div>
     </div>
 
-   
 
+    {{!-- per8 --}}
     <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-        <a href="#" target="_blank">
-           <img src="https://images.unsplash.com/photo-1572431447238-425af66a273b"
-                    alt="" class="rounded-t-lg w-full"></a>
+       {{#if per8}} <a href="" target="_blank"> {{/if}}
+            <img src="https://images.unsplash.com/photo-1572431447238-425af66a273b" alt=""
+                class="rounded-t-lg w-full">{{#if per8}} </a> {{/if}}
         <div class="p-6">
-            <a href="#" target="_blank">
+            {{#if per8}}<a href="" target="_blank"> {{/if}}
                 <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                     A22A23溫度</h1>
-            </a>
+                {{#if per8}}
+            </a> {{/if}}
             <ul>
                 <ol>...</ol>
                 <ol>...</ol>
@@ -163,15 +202,19 @@
         </div>
     </div>
 
-        <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-        <a href="#" target="_blank">
+
+
+    {{!-- per9 --}}
+    <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+       {{#if per9}} <a href="#" target="_blank"> {{/if}}
             <img src="https://images.unsplash.com/photo-1540202404-1b927e27fa8b" alt=""
-                class="rounded-t-lg w-full"></a>
+                class="rounded-t-lg w-full">{{#if per9}} </a> {{/if}}
         <div class="p-6">
-            <a href="#" target="_blank">
+           {{#if per9}} <a href="#" target="_blank"> {{/if}}
                 <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                     廢水池監控</h1>
-            </a>
+                {{#if per9}}
+            </a> {{/if}}
             <ul>
                 <ol>...</ol>
                 <ol>...</ol>
@@ -181,16 +224,17 @@
     </div>
 
 
-
-        <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-        <a href="#" target="_blank">
+    {{!-- per10 --}}
+    <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+       {{#if per10}} <a href="#" target="_blank"> {{/if}}
             <img src="https://images.unsplash.com/photo-1505881502353-a1986add3762" alt=""
-                class="rounded-t-lg w-full"></a>
+                class="rounded-t-lg w-full">{{#if per10}} </a> {{/if}}
         <div class="p-6">
-            <a href="#" target="_blank">
+           {{#if per10}} <a href="#" target="_blank"> {{/if}}
                 <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                     A2-3號水池監控</h1>
-            </a>
+               {{#if per10}}
+            </a> {{/if}}
             <ul>
                 <ol>...</ol>
                 <ol>...</ol>
@@ -200,15 +244,18 @@
     </div>
 
 
-    
-        <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
-        <a href="#" target="_blank">
-            <img src="https://images.unsplash.com/photo-1544473244-f6895e69ad8b" alt="" class="rounded-t-lg w-full"></a>
+
+    {{!-- per11 --}}
+    <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+        {{#if per11}} <a href="#" target="_blank"> {{/if}}
+            <img src="https://images.unsplash.com/photo-1544473244-f6895e69ad8b" alt=""
+                class="rounded-t-lg w-full">{{#if per11}} </a> {{/if}}
         <div class="p-6">
-            <a href="#" target="_blank">
+           {{#if per11}}  <a href="#" target="_blank"> {{/if}}
                 <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
                     A11數據</h1>
-            </a>
+               {{#if per11}} 
+            </a> {{/if}}
             <ul>
                 <ol>...</ol>
                 <ol>...</ol>

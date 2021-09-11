@@ -10,8 +10,12 @@ const PostSchema = mongoose.Schema({
         required: true,
     },
     permission: {
-        type: String,
+        type: Number,
         required: true
+    },
+    name: {
+        type: String,
+        required: false
     }
-})
-module.exports = mongoose.model('Posts', PostSchema)
+});
+module.exports = mongoose.model('Posts', PostSchema);
