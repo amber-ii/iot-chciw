@@ -306,3 +306,14 @@ border-radius:  0.25rem;
   transform: translate(-2px,3px);
   cursor: pointer;
 }
+
+th{
+  padding-left: 2px;
+  background-color: cornflowerblue;
+  color: black;
+  font-family: monospace;
+}
+th span{
+  padding-right: 4px;
+  color: blue;
+}

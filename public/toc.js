@@ -26,7 +26,7 @@ let chartData = function () {
         date: 'perMins',
         options: [
             {
-                label: 'per Minutes',
+                label: 'Last 40 Mins',
                 value: 'perMins',
             },
             {

@@ -16,4 +16,4 @@ router.post('/', n2rController.getN2RByDate);
 
 module.exports = {
     routes: router
-}
+};

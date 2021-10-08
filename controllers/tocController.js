@@ -3,10 +3,11 @@ const tocData = require('../data/toc');
 
 
 const getAllToc = async (req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3|| req.user.permission == 6) {
+    if (req.user.permission == 1 || req.user.permission == 6) {
         try {
             const rows = await tocData.getToc();
             res.render('toc', { rows, title: 'A25水質' });
+            // res.send(rows);
             // console.log('The data from CH1ACI table: \n', rows);
         } catch (error) {
             res.status(400).send(error.message);
@@ -86,13 +87,11 @@ const getAllTocJSON = async (req, res, next) => {
 const getTocByDate = async (req, res, next) => {
     try {
         // const sacidStartDate = req.params.startDate;
-        const TocStartDate = req.body.startDate;
-        console.log(TocStartDate + new Date());
-        const TocEndDate = req.body.endDate;
+        let TocStartDate = req.body.startDate;
+        console.log(TocStartDate);
+        let TocEndDate = req.body.endDate;
         console.log(TocEndDate);
-
         const rows = await tocData.getByDate(TocStartDate, TocEndDate);
-        // res.render('sacid', { rows });
         res.send(rows);
     } catch (error) {
         res.status(400).send(error.message);

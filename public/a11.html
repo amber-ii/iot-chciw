@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A11儀表</title>
+    <link rel="stylesheet" type="text/css" href="./css/a11.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
+    <link rel="stylesheet" type="text/css" href="./css/progress.css">
+    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+
+<body onload="subTopic='A11Tmp';MQTTConnect();">
+    <section class="text-gray-100">
+        <div class="mb-5 mr-5 flex justify-end pt-2">
+            <a href="/logout"><button
+                    class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出
+                    <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon>
+                </button></a>
+        </div>
+        <div class="max-w-full mx-auto pb-10 px-20">
+
+            <div class="include" file="menu.html"></div>
+            <div class="pageBar2 -mt-20 mb-4 -ml-3">A11儀表</div>
+
+            <div
+                class="flex flex-wrap grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-x-8 gap-y-10 gap-x-6 grid-flow-row justify-center pt-12 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
+
+                <div class="text-center space-y-10 border-b-2 border-r-2 border-gray-400 bg-gray-800 px-6 py-5 pb-12 rounded-xl">
+                    <div class="flex justify-center inline-block bg-indigo-100 rounded-lg py-0.5">
+                        <div class="px-2 font-semibold text-xl text-indigo-500">36%煙酸濃度計</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-start">
+                            <!-- <ion-icon name="timer-outline" class="timer">
+                            </ion-icon> -->
+                            <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                        </div>
+                        <div id="aci36p" class="text-5xl text-center -mt-10">00.00  </div>
+                        <p class="text-right  -mt-10">%</p>
+                    </div>
+                </div>
+
+
+                <div class="text-center space-y-10 border-b-2 border-r-2 border-gray-400 bg-gray-800 px-6 py-5 pb-12 rounded-xl">
+                    <div class="flex justify-center inline-block bg-pink-100 rounded-lg py-0.5">
+                        <div class="px-2 font-semibold text-xl text-pink-500">蒸發器出口溫度</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-start">
+                            <!-- <ion-icon name="timer-outline" class="timer">
+                            </ion-icon> -->
+                            <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                        </div>
+                        <div id="pt1003" class="text-5xl text-center -mt-10">00.00  </div>
+                        <p class="text-right  -mt-10 ">°C</p>
+                    </div>
+                </div>
+
+
+                <div class="text-center space-y-10 border-b-2 border-r-2 border-gray-400 bg-gray-800 px-6 py-5 pb-12 rounded-xl">
+                    <div class="flex justify-center inline-block bg-blue-100 rounded-lg py-0.5">
+                        <div class="px-2 font-semibold text-xl text-blue-500">除霧器1出口溫度</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-start">
+                            <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                        </div>
+                        <div id="pt1002" class="text-5xl text-center -mt-10">00.00 </div>
+                        <p class="text-right  -mt-10 ">°C</p>
+                    </div>
+                </div>
+
+
+                <div class="text-center space-y-10 border-b-2 border-r-2 border-gray-400 bg-gray-800 px-6 py-5 pb-12 rounded-xl">
+                    <div class="flex justify-center inline-block bg-green-100 rounded-lg py-0.5">
+                        <div class="px-2 font-semibold text-xl text-green-500">除霧器2出口溫度</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-start">
+                            <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                        </div>
+                        <div id="pt1001" class="text-5xl text-center -mt-10">00.00</div>
+                        <p class="text-right  -mt-10 ">°C</p>
+                    </div>
+                </div>
+
+
+                <div class="text-center space-y-10 border-b-2 border-r-2 border-gray-400 bg-gray-800 px-6 py-5 pb-12 rounded-xl">
+                    <div class="flex justify-center inline-block bg-purple-100 rounded-lg py-0.5">
+                        <div class="px-2 font-semibold text-xl text-purple-600">A11蒸發器壓力</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-start">
+                            <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                        </div>
+                        <div id="EVA" class="text-5xl text-center -mt-10">00.00 </div>
+                        <p class="text-right  -mt-10 ">°C</p>
+                    </div>
+                </div>
+
+
+                <div class="text-center space-y-10 border-b-2 border-r-2 border-gray-400 bg-gray-800 px-6 py-5 pb-12 rounded-xl">
+                    <div class="flex justify-center inline-block bg-yellow-100 rounded-lg py-0.5">
+                        <div class="px-2 font-semibold text-xl text-yellow-500 ">A11除霧器1壓力</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-start">
+                            <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                        </div>
+                        <div id="DP1" class="text-5xl text-center -mt-10">00.00  </div>
+                        <p class="text-right  -mt-10 ">°C</p>
+                    </div>
+                </div>
+
+
+                <div class="text-center space-y-10 border-b-2 border-r-2 border-gray-400 bg-gray-800 px-6 py-5 pb-12 rounded-xl">
+                    <div class="flex justify-center inline-block bg-red-100 rounded-lg py-0.5">
+                        <div class="px-2 font-semibold text-xl text-red-500">A11除霧器2壓力</div>
+                    </div>
+                    <div>
+                        <div class="flex justify-start">
+                            <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                        </div>
+                        <div id="DP2" class="text-5xl text-center -mt-10">00.00 </div>
+                        <p class="text-right  -mt-10 ">°C</p>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+
+            <!-- <div class="transform translate-x-1/4 -translate-y-20 ml-14 mt-1">
+                <iframe src="./vpcerr.html" scrolling="no"></iframe>
+            </div> -->
+        </div>
+    </section>
+</body>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+<script type="text/javascript" src="./index.js"></script>
+<script type="text/javascript" src="./a11.js"></script>
+<script type="text/javascript" src="./mqtt.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</html>
+
+<!-- A10VPC蒸氣壓閥 ERR  回寫pub:tagname:sv 現在是9   test不要低於8 A10蒸氣自動洩壓:A10VPC,斷訊:A10VPCerr,回控:A10VPCconf->{"sv":9}
+ -->

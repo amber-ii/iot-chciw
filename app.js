@@ -15,6 +15,7 @@ const sacidRoutes = require('./routes/sacidRoutes');
 const n2rRoutes = require('./routes/n2rRoutes');
 const tocRoutes = require('./routes/tocRoutes');
 const users = require('./controllers/userController');
+const a25Routes = require('./routes/a25Routes');
 const bcrypt = require('bcryptjs');
 const acl = require('express-acl');
 
@@ -67,8 +68,11 @@ passport.deserializeUser(function (id, done) {
 passport.use(new LocalStrategy(
     function (username, password, done) {
         User.findOne({ username: username }, function (err, user) {
+            var flag = new
+                RegExp("[`~!#$^&*()=|{}':;',\\[\\].<>《》/?~！#￥……&*（）——|{}【】‘；：”“'。，、？ ]"); //eslint-disable-line
+
             console.log(user);
-            if (err) { return done(err); }
+            if (err || username.length > 11 || flag.test(username)) { return done(err); }
             if (!user) {
                 return done(null, false, { message: 'Incorrect username.' });
             }
@@ -94,6 +98,11 @@ app.use('/n2r', users.isLoggedIn, n2rRoutes.routes);
 
 // 水質檢測per6
 app.use('/toc', users.isLoggedIn, tocRoutes.routes);
+
+
+// A25-DATA per12
+app.use('/a25data', users.isLoggedIn, a25Routes.routes);
+
 
 app.get('/login', users.isLoggedOut, (req, res) => {
     const response = {
@@ -149,7 +158,7 @@ app.post(
         if (req.user.permission == 3) {
             res.redirect('/home?per3=true&per4=true&per6=true&per7=true&per11=true');
         }
-       
+
         if (req.user.permission == 5) {
             res.redirect('/home?per5=true&per10=true');
         }
@@ -176,7 +185,7 @@ app.get('/', users.isLoggedIn, (req, res) => {
 app.get('/home', users.isLoggedIn, (req, res) => {
     const response = {
         title: 'CHCIW-IOT',
-        name: req.user.name, 
+        name: req.user.name,
         per2: req.query.per2,
         per3: req.query.per3,
         per4: req.query.per4,
@@ -187,6 +196,7 @@ app.get('/home', users.isLoggedIn, (req, res) => {
         per9: req.query.per9,
         per10: req.query.per10,
         per11: req.query.per11,
+        per12: req.query.per12,
     };
     res.render('index2', response);
 });
@@ -211,6 +221,17 @@ app.get('/water', users.isLoggedIn, (req, res) => {
 });
 
 
+
+// A25水質 per6
+// app.get('/toc', users.isLoggedIn, (req, res) => {
+//     if (req.user.permission == 1 || req.user.permission == 6) {
+//         res.sendFile(`${__dirname}/public/toc.html`);
+//     } else {
+//         res.sendFile(`${__dirname}/public/404.html`);
+//     }
+// });
+
+
 // A10蒸氣per7
 app.get('/vpc', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 3) {
@@ -222,9 +243,9 @@ app.get('/vpc', users.isLoggedIn, (req, res) => {
 
 
 // A22A23溫度 per8
-app.get('/a22temp', users.isLoggedIn, (req, res) => {
+app.get('/elctair', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 8) {
-        res.sendFile(`${__dirname}/public/a22temp.html`);
+        res.sendFile(`${__dirname}/public/elctair.html`);
     } else {
         res.sendFile(`${__dirname}/public/404.html`);
     }
@@ -235,9 +256,9 @@ app.get('/a22temp', users.isLoggedIn, (req, res) => {
 
 
 // 廢水池per9
-app.get('/trash', users.isLoggedIn, (req, res) => {
+app.get('/ah2ph', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 9) {
-        res.sendFile(`${__dirname}/public/trash.html`);
+        res.sendFile(`${__dirname}/public/ah2ph.html`);
     } else {
         res.sendFile(`${__dirname}/public/404.html`);
     }
@@ -262,6 +283,22 @@ app.get('/a11', users.isLoggedIn, (req, res) => {
         res.sendFile(`${__dirname}/public/404.html`);
     }
 });
+
+
+// A25DATA per12
+app.get('/a25datas', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 11) {
+        res.sendFile(`${__dirname}/public/a25.html`);
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
+
+
+
+
+
+
 
 
 

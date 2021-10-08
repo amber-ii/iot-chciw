@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/animate.min.css">
+    <link rel="stylesheet" href="./css/pattern.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="bg-gray-100 min-h-screen py-6 px-10">
+        <a href="/logout" class="flex justify-end ">
+            <button
+                class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10 "><span
+                    class="text-yellow-500">登出</span>
+                <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon>
+            </button>
+        </a>
+
+        <h1
+            class="title-font mb-10 text-4xl font-extrabold leading-10 tracking-tight sm:text-4xl sm:leading-none md:text-5xl animate__animated animate__slideInLeft  text-center">
+            CHCIW ELECTRICAL CONTROL</h1>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+            {{#if per3}}
+            <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+                <a href="/sacid" target="_blank"> <img
+                        src="https://images.unsplash.com/photo-1572431447238-425af66a273b" alt=""
+                        class="rounded-t-lg w-full"></a>
+                <a href="/sacid" target="_blank">
+                    <div class="p-6">
+                        <h1
+                            class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                            硫酸數據</h1>
+                </a>
+                <div>
+                    <ul>
+                        <ol>即時量</ol>
+                        <ol>累積量</ol>
+                        <ol>Modbus斷線警示</ol>
+                        <ol>7天/30天數據圖表</ol>
+                        <ol>依日期查詢數據</ol>
+                        <ol>依日期導出報表</ol>
+                    </ul>
+                </div>
+            </div>
+            {{/if }}
+        </div>
+
+
+        {{#if per4}}
+        <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+            <a href="/water" target="_blank"> <img src="https://images.unsplash.com/photo-1540202404-1b927e27fa8b"
+                    alt="" class="rounded-t-lg w-full"></a>
+            <div class="p-6">
+                <a href="/water" target="_blank">
+                    <h1
+                        class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                        自來水數據</h1>
+                </a>
+                <ul>
+                    <ol>自來水數據</ol>
+                    <ol>馬達運轉</ol>
+                    <ol>Modbus斷線警示</ol>
+                    <ol>水壓數據回控</ol>
+                </ul>
+            </div>
+        </div>
+        {{/if }}
+
+        {{#if per6}}
+        <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+            <a href="/toc" target="_blank"> <img src="https://images.unsplash.com/photo-1505881502353-a1986add3762"
+                    alt="" class="rounded-t-lg w-full"></a>
+            <div class="p-6">
+                <a href="/toc" target="_blank">
+                    <h1
+                        class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900">
+                        A25水質檢測</h1>
+                </a>
+                <ul>
+                    <ol>即時數據</ol>
+                    <ol>7天/30天數據圖表</ol>
+                    <ol>依日期查詢數據</ol>
+                    <ol>依日期導出報表</ol>
+                </ul>
+            </div>
+        </div>
+        {{/if }}
+
+
+        {{#if per5}}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+        <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+            <a href="/n2r" target="_blank"> <img src="https://images.unsplash.com/photo-1506790409786-287062b21cfe"
+                    alt="" class="rounded-t-lg w-full"></a>
+            <div class="p-6">
+                <a href="/n2r" target="_blank">
+                    <h1
+                        class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                        氮氣數據</h1>
+                </a>
+                <ul>
+                    <ol>即時量</ol>
+                    <ol>累積量</ol>
+                    <ol>Modbus斷線警示</ol>
+                    <ol>7天/30天數據圖表</ol>
+                    <ol>依日期查詢數據</ol>
+                    <ol>依日期導出報表</ol>
+                </ul>
+            </div>
+        </div>
+        </div>
+        {{/if }}
+
+        {{#if per7}}
+        <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+            <a href="/vpc" target="_blank">
+                <img src="https://images.unsplash.com/photo-1544473244-f6895e69ad8b" alt=""
+                    class="rounded-t-lg w-full"></a>
+            <div class="p-6">
+                <a href="/vpc" target="_blank">
+                    <h1
+                        class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                        A10蒸氣數據</h1>
+                </a>
+                <ul>
+                    <ol>A10蒸氣數據</ol>
+                    <ol>Modbus斷線警示</ol>
+                    <ol>SV數據回控</ol>
+                </ul>
+            </div>
+        </div>
+        {{/if }}
+
+
+        {{#if per2}}
+        {{!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+            --}}
+            <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+                <a href="./air" target="_blank"><img src="https://images.unsplash.com/photo-1627751476653-e954179b174a"
+                        alt="" class="rounded-t-lg w-full"> </a>
+                <a href="./air" target="_blank">
+                    <div class="p-6">
+                        <h1
+                            class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                            冷氣控制系統</h1>
+                </a>
+                <ul>
+                    <ol>冷氣開關狀態</ol>
+                    <ol>溫度顯示</ol>
+                    <ol>風速大小數據</ol>
+                    <ol>冰水閥數據</ol>
+                    <ol>控制風扇開/關</ol>
+                    <ol>控制冰水閥開/關</ol>
+                </ul>
+            </div>
+            {{!--
+        </div> --}}
+        {{/if }}
+
+
+
+        {{#if per8}}
+        {{!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+            --}}
+            <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+                <a href="./air" target="_blank"><img src="https://images.unsplash.com/photo-1627751476653-e954179b174a"
+                        alt="" class="rounded-t-lg w-full"> </a>
+                <a href="./air" target="_blank">
+                    <div class="p-6">
+                        <h1
+                            class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                            A22A23溫度</h1>
+                </a>
+                {{!-- <ul>
+                    <ol>冷氣開關狀態</ol>
+                    <ol>溫度顯示</ol>
+                    <ol>風速大小數據</ol>
+                    <ol>冰水閥數據</ol>
+                    <ol>控制風扇開/關</ol>
+                    <ol>控制冰水閥開/關</ol>
+                </ul> --}}
+            </div>
+            {{!--
+        </div> --}}
+        {{/if }}
+
+
+
+        {{#if per9}}
+        {{!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+            --}}
+            <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+                <a href="./air" target="_blank"><img src="https://images.unsplash.com/photo-1627751476653-e954179b174a"
+                        alt="" class="rounded-t-lg w-full"> </a>
+                <a href="./air" target="_blank">
+                    <div class="p-6">
+                        <h1
+                            class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                            廢水池監控</h1>
+                </a>
+                {{!-- <ul>
+                    <ol>冷氣開關狀態</ol>
+                    <ol>溫度顯示</ol>
+                    <ol>風速大小數據</ol>
+                    <ol>冰水閥數據</ol>
+                    <ol>控制風扇開/關</ol>
+                    <ol>控制冰水閥開/關</ol>
+                </ul> --}}
+            </div>
+            {{!--
+        </div> --}}
+        {{/if }}
+
+
+        {{!-- {{#if per10}} --}}
+         {{!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 "> --}}
+            <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+                  {{#if per10}} <a href="./air" target="_blank"></a>
+                   {{/if }}
+                   <img src="https://images.unsplash.com/photo-1627751476653-e954179b174a"
+                        alt="" class="rounded-t-lg w-full"> 
+                <a href="./air" target="_blank">
+                    <div class="p-6">
+                        <h1
+                            class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                            A2-3號水池監控</h1>
+                </a>
+                <ul>
+                    <ol>冷氣開關狀態</ol>
+                    <ol>溫度顯示</ol>
+                    <ol>風速大小數據</ol>
+                    <ol>冰水閥數據</ol>
+                    <ol>控制風扇開/關</ol>
+                    <ol>控制冰水閥開/關</ol>
+                </ul>
+            </div>
+            {{!-- </div> --}}
+           
+        {{!-- {{/if }} --}}
+
+        {{#if per11}}
+        {{!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6 ">
+            --}}
+            <div class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300">
+                <a href="./air" target="_blank"><img src="https://images.unsplash.com/photo-1627751476653-e954179b174a"
+                        alt="" class="rounded-t-lg w-full"> </a>
+                <a href="./air" target="_blank">
+                    <div class="p-6">
+                        <h1
+                            class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">
+                            A11數據</h1>
+                </a>
+                <ul>
+                    <ol>...</ol>
+                    <ol>...</ol>
+                    <ol>...</ol>
+                    <ol>...</ol>
+
+                </ul>
+            </div>
+            {{!--
+        </div> --}}
+        {{/if }}
+
+
+
+
+    </div>
+
+
+
+
+    </div>
+    </div>
+
+    </div>
+
+</body>
+
+
+<script type="text/javascript" src="./index.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+<script type="module" src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+
+</html>

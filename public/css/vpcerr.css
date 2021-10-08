@@ -1,0 +1,26 @@
+.showError{
+    /* height: 30px; */
+    /* width: 30px; */
+    /* border-radius: 50%; */
+    /* background-color: rgb(255, 0, 0); */
+    color: red;
+    animation-iteration-count:infinite;
+    animation-duration: 1.5s;
+    animation-name: flash;
+    font-size: 30px;
+    display: none;
+}
+.showOk{
+    /* 流量的樣式 */
+    color: green;
+    font-size: 60px;
+    display: flex;
+
+}
+.errorfont{
+    font-size:15px;
+}
+.showOkfont{
+    font-size: 7px;
+   
+  }

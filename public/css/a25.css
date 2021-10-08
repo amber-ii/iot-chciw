@@ -1,0 +1,119 @@
+@import url(https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.min.css);
+@import url(https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css);
+.pageBar1{
+    text-align: left;
+    width: 5rem;
+    height: 2rem;
+    font-weight: bold;
+    padding-top: 4px;
+    padding-left: 15px;
+    background: #58a; 
+    background: linear-gradient(135deg, transparent 0px, #58a 0) top left, 
+    linear-gradient(-135deg, transparent 15px, #58a 0) top right, 
+    linear-gradient(-45deg, transparent 15px, #58a 0) bottom right, 
+    linear-gradient(45deg, transparent 0px, #58a 0) bottom left; 
+    background-size: 50% 50%; 
+    background-repeat: no-repeat;
+    transform: translateY(-7px);
+  }
+   .search{
+    font-size:16px;
+    color: Gold;
+  } 
+  
+  .download{
+    font-size:45px;
+    color: Gold;
+  }
+  
+  .search:hover{
+    transform: translate(-2px,3px);
+    cursor: pointer;
+  }
+  .download:hover{
+    transform: translate(-2px,3px);
+    cursor: pointer;
+  }
+
+
+
+  .table {
+		border-spacing: 0 10px;
+    font-family:Noto Mono;
+   
+	}
+  .dateOption{
+    font-family:Noto Mono;
+  }
+
+
+
+  @media (min-width: 1300px) {
+    .table {
+      border-spacing: 0 11px;
+
+    }
+}
+
+@media only screen and (max-width: 1299px) {
+  .table {
+		border-spacing: 0 10px;
+	}
+
+}
+
+.dateFormate{
+
+ padding-left: 20px;
+ padding-right: 20px;
+}
+table th{
+  height: 35px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+	table td {
+		font-size: 16px;
+	}
+
+	.table tr {
+		border-radius: 20px;
+	}
+
+	tr td:nth-child(n+400),
+	tr th:nth-child(n+400) {
+		border-radius: 0 .625rem .625rem 0;
+	}
+
+	tr td:nth-child(1),
+	tr th:nth-child(1) {
+		border-radius: .625rem 0 0 .625rem;
+	}
+
+  body{
+    background-color: rgb(17, 24, 39);
+  
+  }
+
+  .tableScreen{
+    max-width: 1200px;
+    max-height: 400px;
+  }
+
+
+  @media (min-width: 1300px) {
+    .tableScreen {
+      max-width: 1750px;
+      max-height: 750px;
+    }
+}
+
+input[type=checkbox] {
+  width: 22px;
+  height: 22px;
+  text-align: center;
+  transform: translateY(7px);
+  margin-left: 10px;
+  margin-right: 10px;
+  }

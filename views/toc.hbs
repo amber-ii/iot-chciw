@@ -15,7 +15,7 @@
   <link
     href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
     rel="stylesheet">
- <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico"  width="32px" type="image/x-icon">
+  <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
 
 </head>
 
@@ -64,7 +64,7 @@
       <div class="include" file="menu.html"></div>
       <!-- <div class="pageBar1 transform -translate-y-2 2xl:-translate-y-12 sticky top-1 -mt-5 2xl:mt-2">硫酸</div> -->
 
-      <div class="pageBar1  sticky top-1 -mt-5 ">水質</div>
+      <div class="pageBar1 -mt-5">水質</div>
 
 
       <div class="flex flex-wrap flex-row justify-center sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn ">
@@ -96,10 +96,7 @@
             </div>
           </div>
         </div>
-
-
       </div>
-
 
 
       <!-- 趨勢圖 -->
@@ -151,7 +148,7 @@
 
       <!-- table -->
       <div class="bg-gray-900 flex items-center justify-center mb-6">
-        <div class="flex items-center w-full lg:w-10/12">
+        <div class="flex items-center w-full lg:w-11/12">
           <div class="col-span-12">
             <div class="overflow-auto lg:overflow-visible ">
 
@@ -204,32 +201,38 @@
               </div>
 
               {{!-- download button --}}
+              <div class="flex">
+                <table class="table text-gray-200 border-separate space-y-5" id="headerTable">
+                  <thead class="text-gray-100 text-sm sticky top-0" style="background-color:Mediumblue">
+                    <tr>
+                      <th class=" text-center py-4">日期</th>
+                      <th class="text-center py-4">A25TOC</th>
 
-              <table class="table text-gray-200 border-separate space-y-5" id="headerTable">
-                <thead class="text-gray-100 text-sm sticky top-0" style="background-color:Mediumblue">
-                  <tr>
-                    <th class=" text-center py-4">日期</th>
-                    <th class="text-center py-4">A25TOC</th>
+                  </thead>
+                  {{#each rows}}
+                  <tbody id="table2">
+                  </tbody>
+                  <tbody id="table1">
+                    <tr class="bg-gray-800 text-md 2xl:text-xl">
+                      <th class="p-3 text-center dateTh">{{this.Date}}</th>
+                      <th class="p-3 text-center">{{this.A25TOC}}</th>
 
-                </thead>
-                {{#each rows}}
-                <tbody id="table2">
-                </tbody>
-                <tbody id="table1">
-                  <tr class="bg-gray-800 text-md 2xl:text-xl">
-                    <th class="p-3 text-center dateTh">{{this.Date}}</th>
-                    <th class="p-3 text-center">{{this.A25TOC}}</th>
-
-                  </tr>
-                </tbody>
-
-
-
-                {{/each}}
+                    </tr>
+                  </tbody>
 
 
-              </table>
 
+                  {{/each}}
+
+
+                </table>
+                <div class="m-10 pt-8 text-gray-200">備註:
+                  <ul>
+                    <ol class="pl-10">數據為每分鐘一筆，一天共1440筆，避免數據過大請以一天為查詢上限。</ol>
+                    <ol class="pl-10">預設結果為過去七天的00:00</ol>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>

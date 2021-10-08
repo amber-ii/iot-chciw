@@ -60,23 +60,26 @@
 
     <!-- <section class="text-gray-200 bg-gray-900 h-full 2xl:h-screen"> -->
     <section class="text-gray-200 bg-gray-900 ">
-        <div class=" md:min-w-0 mx-auto pb-10 px-5 max-w-screen-xl">
+        {{!-- <div class=" md:min-w-0 mx-auto pb-10 px-5 max-w-screen-xl"> --}}
+            <div class="max-w-full mx-auto pb-10 px-20">
             <!-- 引入 -->
             <div class="include" file="menu.html"></div>
 
-            <div class="pageBar3 sticky top-1 -mt-14">氮氣</div>
+            <div class="pageBar3 -mt-24 mb-4 ml-3">氮氣</div>
 
 
             <!-- 卡片開始 -->
-            <div
-                class="flex flex-wrap flex-row justify-center sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn ">
-                <div class="font-sans p-5">
-                    <div class="relative  sm:max-w-sm w-full">
-                        <div class="card color1 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6">
+            {{!-- <div
+                class="flex flex-wrap flex-row justify-center sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn "> --}}
+                  <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 md:gap-x-8 xl-grid-cols-4 gap-y-4 gap-x-8 pt-10 animate__animated animate__fadeIn">
+                <div class="font-sans py-5 container mx-auto max-w-md">
+                    <div class="relative">
+                        <div class="card color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6">
                         </div>
-                        <div class="card color2 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6">
+                        <div class="card color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6">
                         </div>
-                        <div class="relative cardMain rounded-3xl px-4 py-4 bg-gray-100 shadow-md ">
+                        <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md ">
 
 
                             <div class="grid  grid-cols-2">
@@ -108,13 +111,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="font-sans p-5">
-                    <div class="relative  sm:max-w-sm w-full">
+                <div class="font-sans py-5 container mx-auto max-w-md">
+                    <div class="relative">
                         <div class="card color1 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6">
                         </div>
                         <div class="card color2 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6">
                         </div>
-                        <div class="relative cardMain rounded-3xl px-4 py-4 bg-gray-100 shadow-md ">
+                        <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md ">
 
 
                             <div class="grid  grid-cols-2">
@@ -146,13 +149,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="font-sans p-5">
-                    <div class="relative  sm:max-w-sm w-full">
+                <div class="font-sans py-5 container mx-auto max-w-md">
+                    <div class="relative">
                         <div class="card color1 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6">
                         </div>
                         <div class="card color2 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6">
                         </div>
-                        <div class="relative cardMain rounded-3xl px-4 py-4 bg-gray-100 shadow-md ">
+                        <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md ">
 
                             <div class="grid  grid-cols-2">
                                 <div class="flex items-center flex-col  text-center space-y-2 ">
@@ -183,13 +186,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="font-sans p-5">
-                    <div class="relative  sm:max-w-sm w-full">
+                <div class="font-sans py-5 container mx-auto max-w-md">
+                    <div class="relative">
                         <div class="card color1 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6">
                         </div>
                         <div class="card color2 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6">
                         </div>
-                        <div class="relative cardMain rounded-3xl px-4 py-4 bg-gray-100 shadow-md ">
+                        <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md ">
 
 
                             <div class="grid  grid-cols-2">
@@ -221,13 +224,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="font-sans p-5">
-                    <div class="relative  sm:max-w-sm w-full">
+                <div class="font-sans py-5 container mx-auto max-w-md">
+                    <div class="relative">
                         <div class="card color1 shadow-lg  w-full h-full rounded-3xl absolute  transform -rotate-6">
                         </div>
                         <div class="card color2 shadow-lg  w-full h-full rounded-3xl absolute  transform rotate-6">
                         </div>
-                        <div class="relative cardMain rounded-3xl px-4 py-4 bg-gray-100 shadow-md ">
+                        <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md ">
 
 
                             <div class="grid  grid-cols-2">
@@ -264,7 +267,7 @@
 
             {{!-- 趨勢圖 --}}
             <div class="bg-gray-900 flex items-center justify-center mb-6 mt-10">
-                <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 w-full lg:w-10/12"
+                <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 w-full lg:w-11/12"
                     x-data="{chartData:chartData()}" x-init="chartData.fetch()">
                     <div class="flex flex-wrap items-end">
                         <div class="flex-1 mb-5 flex inline-block">
@@ -313,7 +316,7 @@
 
             {{!-- 報表 --}}
             <div class="bg-gray-900 flex items-center justify-center mb-6">
-                <div class="flex items-center w-full lg:w-10/12">
+                <div class="flex items-center w-full lg:w-11/12">
                     <div class="col-span-12">
                         <div class="overflow-auto lg:overflow-visible ">
 

@@ -19,7 +19,7 @@ display: none;
 
 
 ion-icon{
-  font-size: 30px;
+  font-size: 20px;
   color:Deepskyblue;
   }
   .water1{
@@ -31,7 +31,7 @@ ion-icon{
   }
   
   .water2{
-  animation: water-pin2 4s 0.6s linear;
+  animation: water-pin2 4s 0.2s linear;
   animation-iteration-count: infinite;
   animation-direction: normal;
   display: flex;
@@ -40,7 +40,7 @@ ion-icon{
   }
   
   .water3{
-  animation: water-pin3 4s 1.2s linear;
+  animation: water-pin3 4s 0.4s linear;
   animation-iteration-count: infinite;
   animation-direction: normal;
   display: flex;
@@ -49,7 +49,7 @@ ion-icon{
   }
 
   .water4{
-    animation: water-pin4 4s 2s linear;
+    animation: water-pin4 4s 0.6s linear;
     animation-iteration-count:infinite;
     animation-direction: normal;
     display: flex;
@@ -58,7 +58,7 @@ ion-icon{
     }
     
     .water5{
-    animation: water-pin5 4s 3s linear;
+    animation: water-pin5 4s 0.8s linear;
     animation-iteration-count: infinite;
     animation-direction: normal;
   display: flex;
@@ -67,7 +67,7 @@ ion-icon{
     }
     
     .water6{
-    animation: water-pin6 4s 4s linear;
+    animation: water-pin6 4s 1s linear;
     animation-iteration-count: infinite;
     animation-direction: normal;
   display: flex;
@@ -76,46 +76,33 @@ ion-icon{
     }
 
     .water7{
-        animation: water-pin7 4s 4.4s linear;
+        animation: water-pin7 4s 1.2s linear;
         animation-iteration-count: infinite;
         animation-direction: normal;
-  display: flex;
-
-
+        display: flex;
         }
 
-
-
-
-
-
-
-
-
-
-   
   
-
 
     @keyframes water-pin1{
         0%{
-            transform: translate(0px, 20px);
+            transform: translate(0px, 55px);
             /* border-radius: 50%; */
         /* border:1px double Palegoldenrod; */
 
        }
         25%{
-            transform: translate(150px, 20px);
+            transform: translate(200px, 60px);
             /* border-radius: 50%; */
        }
         50%{
-            transform: translate(300px,80px);
+            transform: translate(400px,65px);
             /* border-radius: 50%; */
         /* border:1px double Paleturquoise; */
 
        }
         75%{
-            transform: translate(495px, 65px);
+            transform: translate(600px, 60px);
        }
         100%{
             transform: translate(800px, 65px);

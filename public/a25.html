@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>A25 DATA</title>
+	<link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="./css/pattern.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<link rel="stylesheet" type="text/css" href="./css/a25.css">
+	<!-- <link rel="stylesheet" type="text/css" href="./css/sacid.css"> -->
+	<!-- <link rel="stylesheet" type="text/css" href="./css/progress.css"> -->
+	<link href="./css/multiselect.css" rel="stylesheet" />
+	<script src="./multiselect.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+	<style>
+		select {
+			width: 200px;
+		}
+
+		h1 {
+			color: aliceblue;
+		}
+	</style>
+
+</head>
+
+<body>
+	<a href="/logout" class="flex justify-end mt-3 mr-5">
+		<button
+			class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ">登出
+			<i class="mdi mdi-logout -m-1"></i>
+		</button>
+	</a>
+
+
+	<div class="demo">
+		<div class="demo__colored-blocks">
+		  <div class="demo__colored-blocks-rotater">
+			<div class="demo__colored-block"></div>
+			<div class="demo__colored-block"></div>
+			<div class="demo__colored-block"></div>
+		  </div>
+		  <div class="demo__colored-blocks-inner"></div>
+		  <div class="demo__text">GO</div>
+		</div>
+		<div class="demo__inner">
+		  <svg class="demo__numbers" viewBox="0 0 100 100">
+			<defs>
+			  <path class="demo__num-path-1" d="M40,28 55,22 55,78" />
+			  <path class="demo__num-join-1-2" d="M55,78 55,83 a17,17 0 1,0 34,0 a20,10 0 0,0 -20,-10" />
+			  <path class="demo__num-path-2" d="M69,73 l-35,0 l30,-30 a16,16 0 0,0 -22.6,-22.6 l-7,7" />
+			  <path class="demo__num-join-2-3" d="M28,69 Q25,44 34.4,27.4" />
+			  <path class="demo__num-path-3" d="M30,20 60,20 40,50 a18,15 0 1,1 -12,19" />
+			  
+			</defs>
+			<path class="demo__numbers-path" d="M-10,20 60,20 40,50 a18,15 0 1,1 -12,19 
+				   Q25,44 34.4,27.4
+				   l7,-7 a16,16 0 0,1 22.6,22.6 l-30,30 l35,0 L69,73 
+				   a20,10 0 0,1 20,10 a17,17 0 0,1 -34,0 L55,83 
+				   l0,-61 L40,28" />
+		  </svg>
+		</div>
+	  </div>
+
+
+
+	  
+	<!-- <div class="demo">
+		<div class="demo__colored-blocks">
+		  <div class="demo__colored-blocks-rotater">
+			<div class="demo__colored-block"></div>
+			<div class="demo__colored-block"></div>
+			<div class="demo__colored-block"></div>
+		  </div>
+		  <div class="demo__colored-blocks-inner"></div>
+		  <div class="demo__text">載入中</div>
+		</div>
+		<div class="demo__inner">
+		  <svg class="demo__numbers" viewBox="0 0 100 100">
+			<defs>
+			  <path class="demo__num-path-1" d="M40,28 55,22 55,78" />
+			  <path class="demo__num-join-1-2" d="M55,78 55,83 a17,17 0 1,0 34,0 a20,10 0 0,0 -20,-10" />
+			  <path class="demo__num-path-2" d="M69,73 l-35,0 l30,-30 a16,16 0 0,0 -22.6,-22.6 l-7,7" />
+			  <path class="demo__num-join-2-3" d="M28,69 Q25,44 34.4,27.4" />
+			  <path class="demo__num-path-3" d="M30,20 60,20 40,50 a18,15 0 1,1 -12,19" />
+			  
+			</defs>
+			<path class="demo__numbers-path" d="M-10,20 60,20 40,50 a18,15 0 1,1 -12,19 
+				   Q25,44 34.4,27.4
+				   l7,-7 a16,16 0 0,1 22.6,22.6 l-30,30 l35,0 L69,73 
+				   a20,10 0 0,1 20,10 a17,17 0 0,1 -34,0 L55,83 
+				   l0,-61 L40,28" />
+		  </svg>
+		</div>
+	  </div> -->
+
+
+
+	<section class="text-gray-100">
+		<div class="max-w-full mx-auto pb-10 px-8">
+			<div class="include" file="menu.html"></div>
+			<!-- <div class="pageBar1 sticky top-1 -mt-10 ml-12">A25</div> -->
+
+			<!-- <div class="flex text-gray-800">
+				<div class="p-10">
+					<h1>A25_DCS</h1>
+					<select id='sel0' multiple="multiple" size="10">
+					</select>
+				</div>
+				<div class="p-10">
+					<h1>A25_DCS03</h1>
+					<select id='sel1' multiple="multiple" size="10">
+					</select>
+				</div>
+				<div class="p-10">
+					<h1>A25_DCS03_Filter</h1>
+					<select id='sel2' multiple="multiple" size="10">
+					</select>
+				</div>
+				<div class="p-10">
+					<h1>A25_PLC</h1>
+					<select id='sel3' multiple="multiple" size="10">
+					</select>
+				</div>
+			</div> -->
+
+
+
+			<div class="bg-gray-900 flex items-center justify-center mb-6 -mt-10">
+				<div class="flex items-center">
+					<div class="col-span-12">
+						<div class="">
+							<div class="flex items-center">
+								<span class="border-2 rounded-md border-gray-600 px-3 pb-2 -mb-1 w-full">
+									<div class="flex">
+										<form id="form1" name="dateSearch">
+											<div class="flex flex-nowrap pt-4">
+
+												
+
+												<span class="space-x-1 mr-6 pl-2 inline-block">
+													<label for="startDate">起始日</label>
+													<input type="date" name="startDate" id="startDate"
+														class="text-gray-700 text-center" required>
+												</span>
+												<span class="space-x-1 mr-6">
+													<label for="startDate">結束日</label>
+													<input type="date" name="endDate" id="endDate"
+														class="text-gray-700 text-center" required>
+												</span>
+												<!-- <span title="查詢">
+													<type class="hover:text-gray-100 search" id="search" type="button">
+														<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+															fill="currentColor" class="bi bi-search"
+															viewBox="0 0 16 16">
+															<path
+																d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+														</svg>
+													</type>
+												</span> -->
+												<span class="space-x-1">
+													<input type="button" class="bg-red-800 shadow-inner search px-2 py-0.5" id="dcs" value="A25_DCS" title="查詢A25_DCS">
+													<input type="button" class="bg-blue-800 shadow-inner search px-2 py-0.5" id="dcs03" value="A25_DCS03" title="查詢A25_DCS03">
+													<input type="button" class="bg-green-800 shadow-inner search px-2 py-0.5" id="dcs03filter" value="A25_DCS03_Filter" title="查詢A25_DCS03_Filter">
+													<input type="button" class="bg-purple-800 shadow-inner search px-2 py-0.5" id="plc" value="A25_PLC" title="查詢A25_PLC">
+												</span>
+												
+											</div>
+										</form>
+										<span title="導出報表">
+											<button id="btnExport"
+												class="download pr-2 ml-6 hover:text-gray-100 pt-4"
+												onclick="exportTable()">
+												<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
+													fill="currentColor" class="bi bi-download"
+													viewBox="0 0 16 16">
+													<path
+														d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+													<path
+														d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+												</svg>
+											</button>
+										</span>
+									</div>
+							</div>
+						
+						</div>
+
+						<div class="tableScreen overflow-auto">
+							<table class="table text-gray-200 border-separate space-y-5" id="headerTable">
+								<thead class="text-gray-100 text-sm sticky top-0" style="background-color:Mediumblue" id="colname">
+									<!-- <tr> -->
+										<!-- <th class=" text-center py-4">日期</th>
+										<th class="text-center py-4">item</th>
+										<th class="text-center py-4">item</th>
+										<th class="text-center py-4">item</th>
+										<th class=" text-center">item</th>
+										<th class="text-center pr-3">item</th> -->
+									<!-- </tr> -->
+								</thead>
+								<tbody id="table2">
+								</tbody>
+								<!-- <tbody id="table1">
+									<tr class="bg-gray-800 text-md">
+										<th class="p-3 text-center dateTh">2021/09/11</th>
+										<th class="p-3 text-center">888</th>
+										<th class="p-3 text-center">888</th>
+										<th class="p-3 text-center">888</th>
+										<th class="p-3 text-center">888</th>
+										<th class="p-3 text-center">888</th>
+									</tr>
+								</tbody> -->
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<!-- <div>
+<button onclick="enable()">Enable</button>
+<button onclick="disable()">Disable</button>
+</div> -->
+
+	<script>
+		$(document).ready(function () {
+
+			var dataUrl = ["http://localhost:8888/a25data/dcs", "http://localhost:8888/a25data/dcs03", "http://localhost:8888/a25data/dcs03filter", "http://localhost:8888/a25data/plc"];
+			$.each(dataUrl, function (k, val) {
+				fetch(dataUrl[k])
+					.then((response) => {
+						return response.json();
+					})
+					.then((dataList) => {
+						let data = dataList.result;
+						console.log(data);
+						$.each(data, function (i, val) {
+							$("#sel" + k).append("<option value='" + data[i].id + "'>" + data[i].location + "</option>")
+						});
+						document.multiselect("#sel" + k)
+							.setCheckBoxClick("checkboxAll", function (target, args) {
+								console.log("Checkbox 'Select All' was clicked and got value ", args.checked);
+							})
+							.setCheckBoxClick("1", function (target, args) {
+								console.log("Checkbox for item with value '1' was clicked and got value ", args.checked);
+							});
+					});
+			})
+		});
+
+
+
+
+
+
+		// $("#sel").load(function () {
+		// 	var dataUrl;
+		// 	switch (parseInt($(this).val())) {
+		// 		case 0:
+		// 			$("#sel2").empty();
+		// 			break;
+		// 		case 1:
+		// 			$("#sel2").empty();
+		// 			dataUrl = "http://localhost:8888/a25data/dcs";
+		// 			break;
+		// 		case 2:
+		// 			$("#sel2").empty();
+		// 			dataUrl = "http://localhost:8888/a25data/dcs03";
+		// 			break;
+		// 	}
+		// 	fetch(dataUrl)
+		// 		.then((response) => {
+		// 			return response.json();
+		// 		})
+		// 		.then((dataList) => {
+		// 			let data = dataList.result;
+		// 			console.log(data);
+		// 			$.each(data, function (i, val) {
+		// 				$("#sel1").append("<option value='" + data[i].id + "'>" + data[i].location + "</option>")
+		// 			});
+		// 			getMul();
+		// 		});
+		// });
+
+
+
+		// function getMul(sel) {
+		// 	document.multiselect(sel)
+		// 		.setCheckBoxClick("checkboxAll", function (target, args) {
+		// 			console.log("Checkbox 'Select All' was clicked and got value ", args.checked);
+		// 		})
+		// 		.setCheckBoxClick("1", function (target, args) {
+		// 			console.log("Checkbox for item with value '1' was clicked and got value ", args.checked);
+		// 		});
+		// }
+
+
+		function enable() {
+			document.multiselect('#sel2').setIsEnabled(true);
+		}
+
+		function disable() {
+			document.multiselect('#sel2').setIsEnabled(false);
+		}
+	</script>
+</body>
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="module" src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+<!-- <script type="text/javascript" src="./sacid.js"></script> -->
+<script type="text/javascript" src="./a25.js"></script>
+
+</html>
