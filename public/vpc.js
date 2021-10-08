@@ -13,6 +13,22 @@ function onMessageArrived(r_message) {
     }
 }
 
+var arr = new Array();
+for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    if (key.includes('vpc')) {
+        arr.push(key + ' -> ' + '<span class="text-white pr-4 text-xl">' + localStorage.getItem(key) + '</span>' + '<br>');
+    }
+    if (arr.length > 5) {
+        arr.sort();
+        localStorage.removeItem(arr[0].substring(0, arr[0].indexOf(' -> ')));
+        arr.shift();
+    }
+}
+
+document.getElementById('modTable').innerHTML =
+arr.sort().map(item => item.toString().replace('GMT+0800 (台北標準時間)', '').replace('vpc', '')).join(' ');
+
 
 
 function modSV() {
@@ -29,9 +45,11 @@ function modSV() {
         let value = document.getElementById('modSV').value;
         var msg = `{"sv":` + value + '}';    //eslint-disable-line
         console.log(msg);
+        window.localStorage.setItem('vpc' + new Date(), value);
         let message = new Paho.MQTT.Message(msg);  //eslint-disable-line
         message.destinationName = 'A10VPCconf';
         mqtt.send(message); //eslint-disable-line
+        location.reload();
         document.getElementById('modSV').value = ''; //清空輸入框
     } else {
         document.getElementById('modSV').value = ''; //清空輸入框

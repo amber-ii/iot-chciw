@@ -26,8 +26,9 @@ function onMessageArrived(r_message) {
 var arr = new Array();
 for (let i = 0; i < localStorage.length; i++) {
     let key = localStorage.key(i);
-    arr.push('<tr><th class="pl-2 bg-gray-200 text-black font-mono">' + key + ' -> ' + '<span class="text-blue-700 pr-4">' + localStorage.getItem(key) + '</span>' + '</th></tr>');
-      
+    if(key.includes('water')){
+        arr.push(key + ' -> ' + '<span class="text-white pr-4  text-xl">' + localStorage.getItem(key) + '</span>' + '<br>');
+    }
     if (arr.length > 5) {
         arr.sort();
         localStorage.removeItem(arr[0].substring(0, arr[0].indexOf(' -> ')));
@@ -35,7 +36,7 @@ for (let i = 0; i < localStorage.length; i++) {
     }
 }
 document.getElementById('modTable').innerHTML =
-arr.sort().map(item => item.toString().replace('GMT+0800 (台北標準時間)', '')).join(' ');
+        arr.sort().map(item => item.toString().replace('GMT+0800 (台北標準時間)', '').replace('water','')).join(' ');
 
 function modPress() {
 
@@ -52,7 +53,7 @@ function modPress() {
    
         var msg = `{"sv":` + value + '}'; //eslint-disable-line
         console.log(msg);
-        window.localStorage.setItem(new Date(), value);
+        window.localStorage.setItem('water' + new Date(), value);
         let message = new Paho.MQTT.Message(msg); //eslint-disable-line
         message.destinationName = 'WPconf';
         mqtt.send(message); //eslint-disable-line
