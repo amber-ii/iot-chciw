@@ -1,3 +1,5 @@
 /node_modules
 .env
 web.config
+.eslintrc.json
+.eslintignore
