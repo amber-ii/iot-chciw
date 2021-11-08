@@ -8,8 +8,6 @@ router.get('/sacidJson', sacidController.getAllSacidJSON);
 router.post('/', sacidController.getSacidByDate);
 
 
-
-
 module.exports = {
     routes: router
 };
