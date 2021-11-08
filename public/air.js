@@ -1,6 +1,5 @@
 // eslint-disable-next-line
 function onMessageArrived(r_message) {
-
     // 聽全部的訊息
     var rcmsg = JSON.parse(r_message.payloadString);
     // console.log(rcmsg);
@@ -62,27 +61,27 @@ function onMessageArrived(r_message) {
 
 
 // eslint-disable-next-line
-function send_message(airId) {
+const send_message = (airId) => {
     // eslint-disable-next-line
     if (connected_flag == 0) {
         // eslint-disable-next-line
         out_msg = 'Not Connected so can not send'
         return false;
     }
-    var msg = `{'${airId}':` + changeState(airId) + '}';
+    let msg = `{'${airId}':` + changeState(airId) + '}';
     console.log(msg);
     // eslint-disable-next-line
-    var message = new Paho.MQTT.Message(msg);
+    let message = new Paho.MQTT.Message(msg);
     // eslint-disable-next-line
     message.destinationName = subTopic + 'Conf';
     // eslint-disable-next-line
     mqtt.send(message);
     return false;
-}
+};
 
 
 
-function changeState(airId) {
+const changeState = (airId) => {
 
     if (airId.includes('fc')) {
 
@@ -110,10 +109,9 @@ function changeState(airId) {
             } else {
                 return 1;
             }
-
         } else {
             document.getElementById(airId).innerHTML = 'on';
             return 1;
         }
     }
-}
+};

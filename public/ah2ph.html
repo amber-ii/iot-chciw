@@ -19,142 +19,81 @@
 
 
 </head>
-<!-- CH1ACI -->
 
 <body onload="subTopic='AH2PH';MQTTConnect();">
   <section class="text-gray-100">
-      <div class="mb-5 mr-5 flex justify-end pt-2">
-          <a href="/logout"><button
-                  class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出
-                  <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon>
-              </button></a>
-      </div>
-      <div class="max-w-full mx-auto pb-20 ">
-          <!-- 
-  <div class="demo">
-      <div class="demo__colored-blocks">
-          <div class="demo__colored-blocks-rotater">
-              <div class="demo__colored-block"></div>
-              <div class="demo__colored-block"></div>
-              <div class="demo__colored-block"></div>
-          </div>
-          <div class="demo__colored-blocks-inner"></div>
-          <div class="demo__text">載入中</div>
-      </div>
-      <div class="demo__inner">
-          <svg class="demo__numbers" viewBox="0 0 100 100">
-              <defs>
-                  <path class="demo__num-path-1" d="M40,28 55,22 55,78" />
-                  <path class="demo__num-join-1-2" d="M55,78 55,83 a17,17 0 1,0 34,0 a20,10 0 0,0 -20,-10" />
-                  <path class="demo__num-path-2" d="M69,73 l-35,0 l30,-30 a16,16 0 0,0 -22.6,-22.6 l-7,7" />
-                  <path class="demo__num-join-2-3" d="M28,69 Q25,44 34.4,27.4" />
-                  <path class="demo__num-path-3" d="M30,20 60,20 40,50 a18,15 0 1,1 -12,19" />
-              </defs>
-              <path class="demo__numbers-path" d="M-10,20 60,20 40,50 a18,15 0 1,1 -12,19 
-                   Q25,44 34.4,27.4
-                   l7,-7 a16,16 0 0,1 22.6,22.6 l-30,30 l35,0 L69,73 
-                   a20,10 0 0,1 20,10 a17,17 0 0,1 -34,0 L55,83 
-                   l0,-61 L40,28" />
-          </svg>
-      </div>
-  </div> -->
-          <div class="include" file="menu.html"></div>
-          <div class="pageBar2 sticky top-1 -mt-14 mb-4 ml-12 2xl:ml-20">廢水池</div>
+    <div class="mb-5 mr-5 flex justify-end pt-2">
+      <a href="/logout"><button
+          class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出
+          <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon>
+        </button></a>
+    </div>
+    <div class="max-w-full mx-auto pb-20 ">
 
-          <div
-              class="flex flex-wrap justify-center py-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
-              <!-- PH -->
-              <div class="container w-80 p-8">
-                  <div class="pattern-dots-md gray-light">
-                      <div class="h-full rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
-                          <div class="flex space-x-2 md:space-x-3">
-                              <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+      <div class="include" file="menu.html"></div>
+      <div class="pageBar2 sticky top-1 -mt-14 mb-4 ml-12 2xl:ml-20">廢水池</div>
+
+      <div class="flex flex-wrap justify-center py-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
+        <!-- PH -->
+        <div class="container w-80 p-8">
+          <div class="pattern-dots-md gray-light">
+            <div class="h-full rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
                           bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
-                                  <ion-icon name="thermometer-outline" class="timer"></ion-icon>
-                              </div>
-                              <span class="text-xl tracking-wide font-semibold text-white mt-1 font-sans">PH</span>
-                          </div>
-                          <h1 class="text-5xl text-center pb-4" id="ph"></h1>
-
-                      </div>
-                  </div>
+                  <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                </div>
+                <span class="text-xl tracking-wide font-semibold text-white mt-1 font-sans">PH</span>
               </div>
+              <h1 class="text-5xl text-center pb-4" id="ph"></h1>
 
-
-              <div class="container w-80 p-8">
-                  <div class="pattern-dots-md gray-light">
-                      <div class="h-full rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
-                          <div class="flex space-x-2 md:space-x-3">
-                              <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
-                  bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
-                                  <ion-icon name="thermometer-outline" class="timer"></ion-icon>
-                              </div>
-                              <span class="text-xl tracking-wide font-semibold text-white mt-1 font-sans">Flow</span>
-                          </div>
-                          <h1 class="text-5xl text-center pb-4" id="Flow">00.0</h1>
-                          <iframe src="./ah2pherr-flow.html" scrolling="no" class="h-10"></iframe>
-                      </div>
-                  </div>
-              </div>
+            </div>
           </div>
+        </div>
 
 
-
-
-
-          <!-- <div class="bg-gray-900 flex items-center justify-center mb-6">
-              <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 w-full lg:w-11/12"
-                x-data="{chartData:chartData()}" x-init="chartData.fetch()">
-                <div class="flex flex-wrap items-end">
-                  <div class="flex-1 mb-5 flex inline-block">
-                    <h3 class="text-lg font-semibold leading-tight">變電站溫度</h3>
-                    <span class="text-sm leading-tight text-gray-400 ml-2 pt-1">單位:攝氏</span>
-                  </div>
-                  <div class="relative mb-5 " @click.away="chartData.showDropdown=false">
-                    <button class="text-md hover:text-gray-300 h-6 focus:outline-none"
-                      @click="chartData.showDropdown=!chartData.showDropdown">
-                      <span x-text="chartData.options[chartData.selectedOption].label"></span><i
-                        class="ml-1 mdi mdi-chevron-down"></i>
-                    </button>
-                    <div
-                      class="bg-gray-700  shadow-lg rounded text-sm absolute top-auto right-0 min-w-full w-32 z-30 mt-1 -mr-3"
-                      x-show="chartData.showDropdown" style="display: none;"
-                      x-transition:enter="transition ease duration-300 transform"
-                      x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-                      x-transition:leave="transition ease duration-300 transform"
-                      x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4">
-                      <span class="absolute top-0 right-0 w-3 h-3 bg-gray-700 transform rotate-45 -mt-1 mr-3"></span>
-                      <div class="bg-gray-700 rounded w-full relative z-10 py-1 ">
-                        <ul class="list-reset text-xs ">
-      
-                          <template x-for="(item,index) in chartData.options">
-                            <li
-                              class="px-4 py-2 hover:bg-gray-600 hover:text-white transition-colors duration-100 cursor-pointer "
-                              :class="{'text-white':index==chartData.selectedOption}"
-                              @click="chartData.selectOption(index);chartData.showDropdown=false">
-                              <span x-text="item.label"></span>
-                            </li>
-                          </template>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+        <div class="container w-80 p-8">
+          <div class="pattern-dots-md gray-light">
+            <div class="h-full rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+              <div class="flex space-x-2 md:space-x-3">
+                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                  bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
+                  <ion-icon name="thermometer-outline" class="timer"></ion-icon>
                 </div>
-                <div>
-                  <canvas id="chart" class="w-full"></canvas>
-                </div>
+                <span class="text-xl tracking-wide font-semibold text-white mt-1 font-sans">Flow</span>
               </div>
-            </div> -->
-
-            
-
-
-
-
+              <h1 class="text-5xl text-center pb-4" id="Flow">00.0</h1>
+              <iframe src="./ah2pherr-flow.html" scrolling="no" class="h-10"></iframe>
+            </div>
+          </div>
+        </div>
       </div>
+    </div>
   </section>
 </body>
 
+<script>
+  // MQTT
+  function onMessageArrived(r_message) {
+    var rcMsg = JSON.parse(r_message.payloadString);
+    console.log(rcMsg);
+    for (var key in rcMsg) {
+      var id = key;
+      var value = rcMsg[key];
+      if (document.getElementById(id) != null) {
+        if (id.includes('n')) {
+          if (value == 0) {
+            document.getElementById(`${id}timer`).style.animationPlayState = 'paused';
+            document.getElementById(id).innerHTML = value;
+          } else {
+            document.getElementById(`${id}timer`).style.animationPlayState = 'running';
+          }
+        }
+        document.getElementById(id).innerHTML = value;
+      }
+    }
+  }
+</script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 <script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
@@ -164,7 +103,6 @@
 <script type="module" src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 <script type="text/javascript" src="./index.js"></script>
-<script type="text/javascript" src="./ah2ph.js"></script>
 <script type="text/javascript" src="./mqtt.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>

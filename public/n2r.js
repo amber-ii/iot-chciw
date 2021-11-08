@@ -168,35 +168,27 @@ let chartData = function () {
 
 
 // 計算兩日期差異天數
-var DateDiff = function (a, b) {
-    var oDate1 = new Date(a);
-    var oDate2 = new Date(b);
-    var iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24); // 把相差的毫秒數轉換為天數
-    return iDays;
-};
-
+const dateDiff = (a, b) => parseInt(Math.abs(new Date(a) - new Date(b)) / 1000 / 60 / 60 / 24);
 
 // 格式化日期
-var formatDate = function (now) {
-    var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-    return date;
-};
+const formatDate = (now) => now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+
 
 
 
 // 依照日期搜尋
 $('#search').click(function () {
-    var t2 = document.getElementById('table2');
-    var yesterday = new Date((new Date() / 1000 - 86400) * 1000);
+    let t2 = document.getElementById('table2');
+    let yesterday = new Date((new Date() / 1000 - 86400) * 1000);
     yesterday = formatDate(yesterday).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
 
 
     $.ajax({
         beforeSend: function () {
             // eslint-disable-next-line
-            var startDate = dateSearch.startDate.value;
+            let startDate = dateSearch.startDate.value;
             // eslint-disable-next-line
-            var endDate = dateSearch.endDate.value;
+            let endDate = dateSearch.endDate.value;
 
             if (startDate > endDate) {
                 alert('無效日期，起始日不得大於結束日');
@@ -206,7 +198,7 @@ $('#search').click(function () {
                 alert('請輸入起始&結束日');
                 return false;
             }
-            if (DateDiff(startDate, endDate) >= 360) {
+            if (dateDiff(startDate, endDate) >= 360) {
                 alert('搜尋日期區間360天');
                 return false;
             }
@@ -268,13 +260,13 @@ $('#search').click(function () {
 
 // 導出報表
 // eslint-disable-next-line
-function exportTable() {
+const exportTable = () => {
     // eslint-disable-next-line
-    var startDate = form1.startDate.value;
+    let startDate = form1.startDate.value;
     // eslint-disable-next-line
-    var endDate = form1.endDate.value;
-    var today = new Date();
-    var yesterday = new Date((today / 1000 - 86400) * 1000);
+    let endDate = form1.endDate.value;
+    let today = new Date();
+    let yesterday = new Date((today / 1000 - 86400) * 1000);
     if (!startDate && !endDate) {
         endDate = formatDate(yesterday);
         startDate = formatDate(new Date((yesterday / 1000 - 518400) * 1000));
@@ -283,7 +275,7 @@ function exportTable() {
         name: 'Excel Document Name',
         filename: `氮氣報表[${startDate}]-[${endDate}].xls`,
     });
-}
+};
 
 
 
@@ -293,14 +285,3 @@ setTimeout(() => {
         $('.demo').fadeOut();
     });
 }, 3500);
-
-
-
-
-// todo del
-// 下載報表
-// document.getElementById('btnExport').addEventListener('click', function () {
-//     var table2excel = new Table2Excel();
-//     table2excel.export(document.querySelector('#headerTable'));
-
-// })

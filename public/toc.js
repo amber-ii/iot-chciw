@@ -11,15 +11,6 @@ function onMessageArrived(r_message) {
     }
 }
 
-
-
-// 千分位轉換
-// Number.prototype.comma_formatter = function () {
-//     return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-// }
-
-
-
 // 趨勢圖
 let chartData = function () {
     return {
@@ -154,35 +145,24 @@ let chartData = function () {
 
 
 
-// 計算兩日期差異天數
-var DateDiff = function (a, b) { // sDate1 和 sDate2 是 2016-06-18 格式
-    var oDate1 = new Date(a);
-    var oDate2 = new Date(b);
-    var iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24); // 把相差的毫秒數轉換為天數
-    return iDays;
-};
+// 兩個日期的間距
+const dateDiff = (a, b) => parseInt(Math.abs(new Date(a) - new Date(b)) / 1000 / 60 / 60 / 24);
+
 
 // 格式化日期
-var formatDate = function (now) {
-    var date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
-    return date;
-};
+const formatDate = (now) => now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+
 
 
 
 // 依照日期搜尋
 $('#search').click(function () {
-
-    var t2 = document.getElementById('table2');
-    var today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
-
-
-
+    let t2 = document.getElementById('table2');
+    let today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
     $.ajax({
         beforeSend: function () {
-            var startDate = dateSearch.startDate.value; //eslint-disable-line
-            var endDate = dateSearch.endDate.value; //eslint-disable-line
-
+            let startDate = dateSearch.startDate.value; //eslint-disable-line
+            let endDate = dateSearch.endDate.value; //eslint-disable-line
             if (startDate > endDate) {
                 alert('無效日期，起始日不得大於結束日');
                 return false;
@@ -191,12 +171,12 @@ $('#search').click(function () {
                 alert('請輸入起始&結束日');
                 return false;
             }
-            if (DateDiff(startDate, endDate) >= 360) {
-                alert('搜尋日期區間360天');
+            if (dateDiff(startDate, endDate) > 1) {
+                alert('一天一天的查，避免數據過大');
                 return false;
             }
-            if (startDate < '2020-11-11') {
-                alert('最早的資料為2020-11-11，請重新搜尋');
+            if (startDate < '2021-09-01') {
+                alert('最早的資料為2021-09-01，請重新搜尋');
                 return false;
             } if (endDate > today || startDate > today) {
                 alert('日期不得超過今日，請重新搜尋');
@@ -213,7 +193,7 @@ $('#search').click(function () {
         },
         type: 'POST',
         url: '/toc',
-        data: $('#form1').serialize(), //序列化表單的值
+        data: $('#form1').serialize(),
         async: true,
         success: function (data) {
 
@@ -240,13 +220,15 @@ $('#search').click(function () {
 
 
 
+
+
 // 導出報表
-function exportTable() {
+const exportTable = () => {
     // eslint
-    var startDate = form1.startDate.value; // eslint-disable-line
-    var endDate = form1.endDate.value; // eslint-disable-line
-    var today = new Date();
-    var yesterday = new Date((today / 1000 - 86400) * 1000);
+    let startDate = form1.startDate.value; // eslint-disable-line
+    let endDate = form1.endDate.value; // eslint-disable-line
+    let today = new Date();
+    let yesterday = new Date((today / 1000 - 86400) * 1000);
 
     if (!startDate && !endDate) {
         if (today.getHours() > 7) {
@@ -261,7 +243,7 @@ function exportTable() {
         name: 'Excel Document Name',
         filename: `A25水質檢測[${startDate}]-[${endDate}].xls`,
     });
-}
+};
 
 
 
@@ -274,14 +256,21 @@ setTimeout(() => {
 
 
 
-
-
-// todo del
-// JS寫法，導出報表
-// document.getElementById('btnExport').addEventListener('click', function () {
-//     var table2excel = new Table2Excel();
-//     var ex = table2excel.export(document.querySelector("#headerTable"));
-//     ex.table2excel({
-
-//     })
-// })
+let list = document.getElementById('table2');
+fetch('http://web.chciw.com.tw:8080/tocJson')
+    .then(res => res.json())
+    .then(res => {
+        let tableContent = '';
+        for (let index = 0; index < res.length; index++) {
+            tableContent +=
+                ' <tr class="bg-gray-800 text-md 2xl:text-xl">'
+                + '<th class="p-3 text-center">'
+                + res[index].Date
+                + '</th>'
+                + '<th class="p-3 text-center">'
+                + res[index].A25TOC
+                + '</th>'
+                + '</tr>';
+        }
+        list.innerHTML = tableContent;
+    });
