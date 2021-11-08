@@ -153,20 +153,20 @@ app.post(
             res.redirect('/');
         }
         if (req.user.permission == 2) {
-            res.redirect('/home?per2=true');
+            res.redirect('/air');
         }
         if (req.user.permission == 3) {
-            res.redirect('/home?per3=true&per4=true&per6=true&per7=true&per11=true');
+            res.redirect('/permission3');
         }
 
         if (req.user.permission == 5) {
-            res.redirect('/home?per5=true&per10=true');
+            res.redirect('/permission5');
         }
         if (req.user.permission == 8) {
-            res.redirect('/home?per2=true&per8=true');
+            res.redirect('/permission8');
         }
         if (req.user.permission == 9) {
-            res.redirect('/home?per9=true');
+            res.redirect('/ah2ph');
         }
     });
 
@@ -179,27 +179,49 @@ app.get('/', users.isLoggedIn, (req, res) => {
         res.sendFile(`${__dirname}/public/404.html`);
     }
 });
+app.get('/permission3', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 3) {
+        res.render('permission3', { title: '首頁', name: req.user.name });
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
+app.get('/permission5', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 5) {
+        res.render('permission5', { title: '首頁', name: req.user.name });
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
 
+
+app.get('/permission8', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 8) {
+        res.render('permission8', { title: '首頁', name: req.user.name });
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
 
 // 各單位的首頁
-app.get('/home', users.isLoggedIn, (req, res) => {
-    const response = {
-        title: 'CHCIW-IOT',
-        name: req.user.name,
-        per2: req.query.per2,
-        per3: req.query.per3,
-        per4: req.query.per4,
-        per5: req.query.per5,
-        per6: req.query.per6,
-        per7: req.query.per7,
-        per8: req.query.per8,
-        per9: req.query.per9,
-        per10: req.query.per10,
-        per11: req.query.per11,
-        per12: req.query.per12,
-    };
-    res.render('index2', response);
-});
+// app.get('/home', users.isLoggedIn, (req, res) => {
+//     const response = {
+//         title: 'CHCIW-IOT',
+//         name: req.user.name,
+//         per2: req.query.per2,
+//         per3: req.query.per3,
+//         per4: req.query.per4,
+//         per5: req.query.per5,
+//         per6: req.query.per6,
+//         per7: req.query.per7,
+//         per8: req.query.per8,
+//         per9: req.query.per9,
+//         per10: req.query.per10,
+//         per11: req.query.per11,
+//         per12: req.query.per12,
+//     };
+//     res.render('index2', response);
+// });
 
 
 // 冷氣per2
@@ -287,7 +309,7 @@ app.get('/a11', users.isLoggedIn, (req, res) => {
 
 // A25DATA per12
 app.get('/a25datas', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 11) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 12) {
         res.sendFile(`${__dirname}/public/a25.html`);
     } else {
         res.sendFile(`${__dirname}/public/404.html`);
