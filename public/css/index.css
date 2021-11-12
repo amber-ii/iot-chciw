@@ -6,25 +6,28 @@
     background-image:url(https://tailwindadmin.netlify.app/dist/images/login-new.jpeg)
 } */
 
-
-span{
-    font-family: Comic Sans MS, MS Gothic;
-  }
-  div{
-    font-family: Comic Sans MS, Yu Gothic;
-  }
-
-
-.err-msg{
-  padding: 10px 15px;
-  background: fff;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  color: red;
-  box-shadow: 0px 6px 12px rgb(0, 0, 0, 0.2);
+span {
+  font-family: Comic Sans MS, MS Gothic;
+}
+div {
+  font-family: Comic Sans MS, Yu Gothic;
 }
 
-ol{
+.err-msg {
+margin-bottom: 15px;
+
+  padding: 10px 15px;
+
+border-radius: 8px;
+
+background: fff;
+
+box-shadow: 0px 6px 12px rgb(0, 0, 0, 0.2);
+
+color: red;
+  }
+
+ol {
   color: gray;
 }
 ol:hover {
