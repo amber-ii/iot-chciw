@@ -319,14 +319,14 @@ app.get('/a25datas', users.isLoggedIn, (req, res) => {
 
 
 // A10加熱器 per13
-// app.get('/a10heat', users.isLoggedIn, (req, res) => {
-//     if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 13) {
-//         res.sendFile(`${__dirname}/public/a10heat.html`);
-//     } else {
-//         res.sendFile(`${__dirname}/public/404.html`);
-//     }
-// });
 
+app.get('/a10heat', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 13) {
+        res.sendFile(`${__dirname}/public/a10heat.html`);
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`);
+    }
+});
 
 
 
