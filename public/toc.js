@@ -12,11 +12,10 @@ function onMessageArrived(r_message) {
 }
 
 // 趨勢圖
-let chartData = function () {
+let chartData = function() {
     return {
         date: 'perMins',
-        options: [
-            {
+        options: [{
                 label: 'Last 40 Mins',
                 value: 'perMins',
             },
@@ -45,13 +44,13 @@ let chartData = function () {
         ],
         showDropdown: false,
         selectedOption: 0,
-        selectOption: function (index) {
+        selectOption: function(index) {
             this.selectedOption = index;
             this.date = this.options[index].value;
             this.renderChart();
         },
         data: null,
-        fetch: function () {
+        fetch: function() {
             fetch('http://web.chciw.com.tw:8080/toc/tocJson')
                 .then(res => res.json())
                 .then(res => {
@@ -61,7 +60,7 @@ let chartData = function () {
                 });
         },
 
-        refresh: function () {
+        refresh: function() {
             setInterval(() => {
                 fetch('http://web.chciw.com.tw:8080/toc/tocJson')
                     .then(res => res.json())
@@ -73,9 +72,9 @@ let chartData = function () {
         },
 
 
-        renderChart: function () {
+        renderChart: function() {
             let c = false;
-            Chart.helpers.each(Chart.instances, function (instance) { //eslint-disable-line
+            Chart.helpers.each(Chart.instances, function(instance) { //eslint-disable-line
                 if (instance.chart.canvas.id == 'chart') {
                     c = instance;
                 }
@@ -91,8 +90,7 @@ let chartData = function () {
                 type: 'line',
                 data: {
                     labels: this.data[this.date].data.label,
-                    datasets: [
-                        {
+                    datasets: [{
                             label: 'A25TOC',
                             borderColor: 'rgba( 240,230,140, 1)',
                             pointBackgroundColor: 'rgba( 240,230,140, 1)',
@@ -122,7 +120,7 @@ let chartData = function () {
                             },
                             ticks: {
                                 fontSize: 16,
-                                callback: function (value, index, array) {
+                                callback: function(value, index, array) {
                                     return value > 1000 ? ((value < 1000000) ? value / 1000 + 'K' : value / 1000000 + 'M') : value;
                                 }
                             }
@@ -156,11 +154,11 @@ const formatDate = (now) => now.getFullYear() + '-' + (now.getMonth() + 1) + '-'
 
 
 // 依照日期搜尋
-$('#search').click(function () {
+$('#search').click(function() {
     let t2 = document.getElementById('table2');
     let today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
     $.ajax({
-        beforeSend: function () {
+        beforeSend: function() {
             let startDate = dateSearch.startDate.value; //eslint-disable-line
             let endDate = dateSearch.endDate.value; //eslint-disable-line
             if (startDate > endDate) {
@@ -178,41 +176,45 @@ $('#search').click(function () {
             if (startDate < '2021-09-01') {
                 alert('最早的資料為2021-09-01，請重新搜尋');
                 return false;
-            } if (endDate > today || startDate > today) {
+            }
+            if (endDate > today || startDate > today) {
                 alert('日期不得超過今日，請重新搜尋');
                 return false;
             }
             // 搜尋click倒數兩秒
-            $('.demo').show();
+            $('.loading').show();
+            $('.word').show();
             setTimeout(() => {
-                $(document).ready(function () {
-                    $('.demo').fadeOut();
+                $(document).ready(function() {
+                    $('.loading').fadeOut(1000);
+                    $('.word').fadeOut(500);
                 });
-            }, 1500);
+            }, 1000);
             t2.innerHTML = '';
         },
         type: 'POST',
         url: '/toc',
         data: $('#form1').serialize(),
         async: true,
-        success: function (data) {
+        success: function(data) {
 
             var renderString = '';
             for (let index = 0; index < data.length; index++) {
                 renderString =
-                    ' <tr class="bg-gray-800 text-md 2xl:text-xl">'
-                    + '<th class="p-3 text-center">'
-                    + data[index].Date
-                    + '</th>'
-                    + '<th class="p-3  text-center">'
-                    + data[index].A25TOC
-                    + '</th>'
-                    + '</tr>';
+                    ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
+                    '<th class="p-3 text-center">' +
+                    data[index].Date +
+                    '</th>' +
+                    '<th class="p-3  text-center">' +
+                    data[index].A25TOC +
+                    '</th>' +
+                    '</tr>';
                 $('#table2').nextAll().remove();
                 t2.insertAdjacentHTML('beforeEnd', renderString);
             }
 
-        }, error: function (request) {
+        },
+        error: function(request) {
             alert('Connection error');
         },
     });
@@ -248,11 +250,12 @@ const exportTable = () => {
 
 
 // loading畫面倒數三秒消失
-setTimeout(() => {
-    $(document).ready(function () {
-        $('.demo').fadeOut(1000);
-    });
-}, 3000);
+
+$(document).ready(function() {
+    $('.loading').hide();
+    $('.word').hide();
+});
+
 
 
 
@@ -263,14 +266,14 @@ fetch('http://web.chciw.com.tw:8080/tocJson')
         let tableContent = '';
         for (let index = 0; index < res.length; index++) {
             tableContent +=
-                ' <tr class="bg-gray-800 text-md 2xl:text-xl">'
-                + '<th class="p-3 text-center">'
-                + res[index].Date
-                + '</th>'
-                + '<th class="p-3 text-center">'
-                + res[index].A25TOC
-                + '</th>'
-                + '</tr>';
+                ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
+                '<th class="p-3 text-center">' +
+                res[index].Date +
+                '</th>' +
+                '<th class="p-3 text-center">' +
+                res[index].A25TOC +
+                '</th>' +
+                '</tr>';
         }
         list.innerHTML = tableContent;
     });

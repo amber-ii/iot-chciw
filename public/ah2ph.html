@@ -2,105 +2,103 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <title>{{title}}</title> -->
-  <title>廢水池</title>
-  <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
-  <link rel="stylesheet" type="text/css" href="./css/pattern.css">
-  <link rel="stylesheet" href="./css/style.css">
-  <link rel="stylesheet" type="text/css" href="./css/ah2ph.css">
-  <link rel="stylesheet" type="text/css" href="./css/index.css">
-  <link rel="stylesheet" type="text/css" href="./css/progress.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <title>{{title}}</title> -->
+    <title>廢水池</title>
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/ah2ph.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/progress.css">
 
-  <link
-    href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-    rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
 
 
 </head>
 
 <body onload="subTopic='AH2PH';MQTTConnect();">
-  <section class="text-gray-100">
-    <div class="mb-5 mr-5 flex justify-end pt-2">
+    <section class="text-gray-100">
+        <!-- <div class="mb-5 mr-5 flex justify-end pt-2">
       <a href="/logout"><button
           class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出
           <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon>
         </button></a>
-    </div>
-    <div class="max-w-full mx-auto pb-20 ">
+    </div> -->
+        <div class="max-w-full mx-auto pb-20">
 
-      <!-- <div class="include" file="menu.html"></div> -->
+            <!-- <div class="include" file="menu.html"></div> -->
 
-      <div class="text-center">
+            <!-- <div class="text-center">
         <h1
           class="title-font mb-10 text-4xl font-extrabold leading-10 tracking-tight sm:text-4xl sm:leading-none md:text-5xl animate__animated animate__slideInDown">
           廢水池監控</h1>
       </div>
 
-      <div class="pageBar2 sticky top-1 -mt-14 mb-4 ml-12 2xl:ml-20">廢水池</div>
+      <div class="pageBar2 sticky top-1 -mt-14 mb-4 ml-12 2xl:ml-20">廢水池</div> -->
 
-      <div class="flex flex-wrap justify-center py-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
-        <!-- PH -->
-        <div class="container w-80 p-8">
-          <div class="pattern-dots-md gray-light">
-            <div class="h-full rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
-              <div class="flex space-x-2 md:space-x-3">
-                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+            <div class="flex flex-wrap justify-center py-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
+                <!-- PH -->
+                <div class="container w-80 p-8">
+                    <div class="pattern-dots-md gray-light">
+                        <div class="h-full rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+                            <div class="flex space-x-2 md:space-x-3">
+                                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
                           bg-red-100 text-red-500 mb-5 flex-shrink-0 font-bold">
-                  <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                                    <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                                </div>
+                                <span class="text-xl tracking-wide font-semibold text-white mt-1 font-sans">PH</span>
+                            </div>
+                            <h1 class="text-5xl text-center pb-4" id="ph"></h1>
+
+                        </div>
+                    </div>
                 </div>
-                <span class="text-xl tracking-wide font-semibold text-white mt-1 font-sans">PH</span>
-              </div>
-              <h1 class="text-5xl text-center pb-4" id="ph"></h1>
-
-            </div>
-          </div>
-        </div>
 
 
-        <div class="container w-80 p-8">
-          <div class="pattern-dots-md gray-light">
-            <div class="h-full rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
-              <div class="flex space-x-2 md:space-x-3">
-                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
+                <div class="container w-80 p-8">
+                    <div class="pattern-dots-md gray-light">
+                        <div class="h-full rounded bg-gray-800 p-4 transform translate-x-6 -translate-y-6">
+                            <div class="flex space-x-2 md:space-x-3">
+                                <div class="w-10 h-10 inline-flex items-center justify-center rounded-full 
                   bg-blue-100 text-blue-500 mb-5 flex-shrink-0 font-bold">
-                  <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                                    <ion-icon name="thermometer-outline" class="timer"></ion-icon>
+                                </div>
+                                <span class="text-xl tracking-wide font-semibold text-white mt-1 font-sans">Flow</span>
+                            </div>
+                            <h1 class="text-5xl text-center pb-4" id="Flow">00.0</h1>
+                            <iframe src="./ah2pherr-flow.html" scrolling="no" class="h-10"></iframe>
+                        </div>
+                    </div>
                 </div>
-                <span class="text-xl tracking-wide font-semibold text-white mt-1 font-sans">Flow</span>
-              </div>
-              <h1 class="text-5xl text-center pb-4" id="Flow">00.0</h1>
-              <iframe src="./ah2pherr-flow.html" scrolling="no" class="h-10"></iframe>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 </body>
 
 <script>
-  // MQTT
-  function onMessageArrived(r_message) {
-    var rcMsg = JSON.parse(r_message.payloadString);
-    console.log(rcMsg);
-    for (var key in rcMsg) {
-      var id = key;
-      var value = rcMsg[key];
-      if (document.getElementById(id) != null) {
-        if (id.includes('n')) {
-          if (value == 0) {
-            document.getElementById(`${id}timer`).style.animationPlayState = 'paused';
-            document.getElementById(id).innerHTML = value;
-          } else {
-            document.getElementById(`${id}timer`).style.animationPlayState = 'running';
-          }
+    // MQTT
+    function onMessageArrived(r_message) {
+        var rcMsg = JSON.parse(r_message.payloadString);
+        console.log(rcMsg);
+        for (var key in rcMsg) {
+            var id = key;
+            var value = rcMsg[key];
+            if (document.getElementById(id) != null) {
+                if (id.includes('n')) {
+                    if (value == 0) {
+                        document.getElementById(`${id}timer`).style.animationPlayState = 'paused';
+                        document.getElementById(id).innerHTML = value;
+                    } else {
+                        document.getElementById(`${id}timer`).style.animationPlayState = 'running';
+                    }
+                }
+                document.getElementById(id).innerHTML = value;
+            }
         }
-        document.getElementById(id).innerHTML = value;
-      }
     }
-  }
 </script>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

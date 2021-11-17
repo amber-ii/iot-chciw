@@ -2,202 +2,198 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A10螺旋式熱交換器</title>
-  <link rel="stylesheet" type="text/css" href="./css/a10heat.css">
-  <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
-  <link rel="stylesheet" type="text/css" href="./css/pattern.css">
-  <link rel="stylesheet" type="text/css" href="./css/progress.css">
-  <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
-  <link rel="stylesheet" href="./css/style.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A10螺旋式熱交換器</title>
+    <link rel="stylesheet" type="text/css" href="./css/a10heat.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
+    <link rel="stylesheet" type="text/css" href="./css/progress.css">
+    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 
 <body onload="subTopic='A10HeatX'; MQTTConnect();">
-  <div class="text-gray-100">
-    <div class="mb-5 mr-5 flex justify-end pt-2">
-      <a href="/logout"><button
+    <div class="text-gray-100">
+        <!-- <div class="mb-5 mr-5 flex justify-end pt-2">
+            <a href="/logout"><button
           class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600 ml-10">登出
           <ion-icon name="log-out-outline" class="transform translate-y-1"></ion-icon>
         </button></a>
-    </div>
-    <div class="max-w-full mx-auto pb-10 px-20">
-      <div class="text-center">
+        </div> -->
+        <div class="max-w-full mx-auto pt-4 pb-10 px-20">
+            <!-- <div class="text-center">
         <h1
           class="title-font mb-4 text-4xl font-extrabold leading-10 tracking-tight sm:text-4xl sm:leading-none md:text-5xl animate__animated animate__slideInDown">
           A10螺旋式熱交換器變頻控制</h1>
-      </div>
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-x-8 gap-y-8 gap-x-6 grid-flow-row justify-center pt-12 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
+      </div> -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-x-8 gap-y-8 gap-x-6 grid-flow-row justify-center pt-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
 
 
-        <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
-          <div class="flex w-full bg-yellow-300 rounded-t-xl rounded-b-sm flex justify-center">
-            <div class="py-2 font-semibold text-xl text-yellow-800">28%出酸</div>
-          </div>
-          <div class="flex justify-center">
-            <div class="showValue-parent">
-              <div class="showValue space-x-3">
+                <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
+                    <div class="flex w-full bg-yellow-300 rounded-t-xl rounded-b-sm flex justify-center">
+                        <div class="py-2 font-semibold text-xl text-yellow-800">28%出酸</div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="showValue-parent">
+                            <div class="showValue space-x-3">
 
 
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span id="Tch0" class="text-5xl">value</span>
-                <span class="text-gray-300 text-xl">°C</span>
-              </div>
-            </div>
-          </div>
-        </section>
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span id="Tch0" class="text-5xl">value</span>
+                                <span class="text-gray-300 text-xl">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
 
-        <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
-          <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
-            <div class="py-2 font-semibold text-xl text-blue-50">28%入酸A</div>
-          </div>
-          <div class="flex justify-center">
-            <div class="showValue-parent">
-              <div class="showValue space-x-3">
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span id="Tch1" class="text-5xl">00.00</span>
-                <span class="text-gray-300 text-xl">°C</span>
-              </div>
-            </div>
-          </div>
-        </section>
+                <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
+                    <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
+                        <div class="py-2 font-semibold text-xl text-blue-50">28%入酸A</div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="showValue-parent">
+                            <div class="showValue space-x-3">
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span id="Tch1" class="text-5xl">00.00</span>
+                                <span class="text-gray-300 text-xl">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
 
-        <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
-          <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
-            <div class="py-2 font-semibold text-xl text-blue-50">28%入酸B</div>
-          </div>
-          <div class="flex justify-center">
-            <div class="showValue-parent">
-              <div class="showValue space-x-3">
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span id="Tch2" class="text-5xl">00.00</span>
-                <span class="text-gray-300 text-xl">°C</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-
-        <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
-          <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
-            <div class="py-2 font-semibold text-xl text-blue-50">入水</div>
-          </div>
-          <div class="flex justify-center">
-            <div class="showValue-parent">
-              <div class="showValue space-x-3">
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span id="Tch3" class="text-5xl">00.00</span>
-                <span class="text-gray-300 text-xl">°C</span>
-              </div>
-            </div>
-          </div>
-        </section>
+                <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
+                    <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
+                        <div class="py-2 font-semibold text-xl text-blue-50">28%入酸B</div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="showValue-parent">
+                            <div class="showValue space-x-3">
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span id="Tch2" class="text-5xl">00.00</span>
+                                <span class="text-gray-300 text-xl">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
 
 
-
-        <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
-          <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
-            <div class="py-2 font-semibold text-xl text-blue-50">出水</div>
-          </div>
-          <div class="flex justify-center">
-            <div class="showValue-parent">
-              <div class="showValue space-x-3">
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span id="Tch4" class="text-5xl">00.00</span>
-                <span class="text-gray-300 text-xl">°C</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-        <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl" style="display:none">
-          <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
-            <div class="py-2 font-semibold text-xl text-blue-50">T6</div>
-          </div>
-          <div class="flex justify-center">
-            <div class="showValue-parent">
-              <div class="showValue space-x-1">
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span id="Tch5" class="text-5xl">00.00</span>
-                <span class="text-gray-300 text-xl">°C</span>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-        <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl ">
-          <div class="flex w-full bg-red-500 rounded-t-xl rounded-b-sm flex justify-center">
-            <div class="py-2 font-semibold text-xl text-red-100">設定值</div>
-          </div>
-          <div class="flex justify-center 2xl:py-4">
-            <div class="">
-              <div class="py-9">
-                <div class="flex border h-10 w-44 rounded-lg border-gray-400 relative">
-                  <input type="text" id="SVInput"
-                    class="text-center text-gray-800 font-semibold border-r border-gray-400 h-full w-28 flex rounded-l" />
-                  <button id="submitPressBtn" onclick="modPress()" title="提交修改"
-                    class="font-semibold border-l bg-red-500 h-full w-20 flex rounded-r focus:outline-none cursor-pointer ">
-                    <span class="m-auto text-white hover:text-black">Send</span>
-                  </button>
-                  <div
-                    class="absolute flex flex-col py-2 w-32 md:w-full mt-6 md:mt-8 mt-10 flex items-start justify-center transform -translate-x-5 hover:scale-110">
-                    <!-- <div class="absolute flex justify-center items-start hover:scale-110"> -->
-                    <svg width="10" height="10" class="fill-current mt-1 mb-0.5 md:mx-auto">
-                      <polygon points="0 10, 10 10, 5 0" />
-                    </svg>
-                    <span class="text-sm w-56 bg-black pl-3 h-auto rounded-lg text-gray-200">調整出酸，目前設定值:
-                      <span id="SV" class="pl-1 font-bold text-lg text-white"></span>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </section>
+                <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
+                    <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
+                        <div class="py-2 font-semibold text-xl text-blue-50">入水</div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="showValue-parent">
+                            <div class="showValue space-x-3">
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span id="Tch3" class="text-5xl">00.00</span>
+                                <span class="text-gray-300 text-xl">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
 
 
-        <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
-          <div class="flex w-full bg-green-500 rounded-t-xl rounded-b-sm flex justify-center">
-            <div class="py-2 font-semibold text-xl text-green-50">變頻器</div>
-          </div>
-          <div class="pl-8 pt-5 flex flex-nowrap space-x-14 2xl:space-x-24 flex items-center">
-            <div class="space-y-6">
-              <div class="flex items-center">
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span class="">開關</span>
-              </div>
 
-              <div class="flex items-center">
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span>速度</span>
-              </div>
-
-
-              <div class="flex items-center">
-                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                <span>狀態</span>
-              </div>
-            </div>
-            <div class="flex flex-col items-center space-y-2 2xl:py-4">
-              <span id="Isw" class="text-3xl">0</span>
-              <span id="Isp" class="text-3xl">0</span>
-              <span id="Ist" class="text-3xl">0</span>
-            </div>
-          </div>
-        </section>
+                <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
+                    <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
+                        <div class="py-2 font-semibold text-xl text-blue-50">出水</div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="showValue-parent">
+                            <div class="showValue space-x-3">
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span id="Tch4" class="text-5xl">00.00</span>
+                                <span class="text-gray-300 text-xl">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
 
 
-        <!-- <span style="font-family:serif;">這是範例文字 This is example font. Show serif font. 1234567890</span><br>
+                <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl" style="display:none">
+                    <div class="flex w-full bg-blue-500 rounded-t-xl rounded-b-sm flex justify-center">
+                        <div class="py-2 font-semibold text-xl text-blue-50">T6</div>
+                    </div>
+                    <div class="flex justify-center">
+                        <div class="showValue-parent">
+                            <div class="showValue space-x-1">
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span id="Tch5" class="text-5xl">00.00</span>
+                                <span class="text-gray-300 text-xl">°C</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl ">
+                    <div class="flex w-full bg-red-500 rounded-t-xl rounded-b-sm flex justify-center">
+                        <div class="py-2 font-semibold text-xl text-red-100">設定值</div>
+                    </div>
+                    <div class="flex justify-center 2xl:py-4">
+                        <div class="">
+                            <div class="py-9">
+                                <div class="flex border h-10 w-44 rounded-lg border-gray-400 relative">
+                                    <input type="text" id="SVInput" class="text-center text-gray-800 font-semibold border-r border-gray-400 h-full w-28 flex rounded-l" />
+                                    <button id="submitPressBtn" onclick="modPress()" title="提交修改" class="font-semibold border-l bg-red-500 h-full w-20 flex rounded-r focus:outline-none cursor-pointer ">
+                                        <span class="m-auto text-white hover:text-black">Send</span>
+                                    </button>
+                                    <div class="absolute flex flex-col py-2 w-32 md:w-full mt-6 md:mt-8 mt-10 flex items-start justify-center transform -translate-x-5 hover:scale-110">
+                                        <!-- <div class="absolute flex justify-center items-start hover:scale-110"> -->
+                                        <svg width="10" height="10" class="fill-current mt-1 mb-0.5 md:mx-auto">
+                                            <polygon points="0 10, 10 10, 5 0" />
+                                        </svg>
+                                        <span class="text-sm w-56 bg-black pl-3 h-auto rounded-lg text-gray-200">調整出酸，目前設定值:
+                                            <span id="SV" class="pl-1 font-bold text-lg text-white"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+
+
+                <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
+                    <div class="flex w-full bg-green-500 rounded-t-xl rounded-b-sm flex justify-center">
+                        <div class="py-2 font-semibold text-xl text-green-50">變頻器</div>
+                    </div>
+                    <div class="pl-8 pt-5 flex flex-nowrap space-x-14 2xl:space-x-24 flex items-center">
+                        <div class="space-y-6">
+                            <div class="flex items-center">
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span class="">開關</span>
+                            </div>
+
+                            <div class="flex items-center">
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span>速度</span>
+                            </div>
+
+
+                            <div class="flex items-center">
+                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
+                                <span>狀態</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center space-y-2 2xl:py-4">
+                            <span id="Isw" class="text-3xl">0</span>
+                            <span id="Isp" class="text-3xl">0</span>
+                            <span id="Ist" class="text-3xl">0</span>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- <span style="font-family:serif;">這是範例文字 This is example font. Show serif font. 1234567890</span><br>
         <span style="font-family:sans-serif;">這是範例文字 This is example font. Show sans-serif font. 1234567890</span><br>
         <span style="font-family:cursive;">這是範例文字 This is example font. Show cursive font. 1234567890</span><br>
         <span style="font-family:fantasy;">這是範例文字 This is example font. Show fantasy font. 1234567890</span><br>
@@ -208,64 +204,63 @@
         <span style="font-family:Microsoft JhengHei;">這是範例文字 This is example font. 顯示微軟正黑體字型 1234567890</span> -->
 
 
-      </div>
+            </div>
+        </div>
+
+
+
     </div>
-
-
-
-  </div>
 </body>
 
 
 <script>
-  function onMessageArrived(r_message) {
-    var rcMsg = JSON.parse(r_message.payloadString);
-    console.log(rcMsg);
-    for (var key in rcMsg) {
-      var id = key;
-      var value = rcMsg[key];
-      if (document.getElementById(id) != null) {
-        document.getElementById(id).innerHTML = value;
-      }
+    function onMessageArrived(r_message) {
+        var rcMsg = JSON.parse(r_message.payloadString);
+        console.log(rcMsg);
+        for (var key in rcMsg) {
+            var id = key;
+            var value = rcMsg[key];
+            if (document.getElementById(id) != null) {
+                document.getElementById(id).innerHTML = value;
+            }
+        }
     }
-  }
 
 
-  const modPress = () => {
-    if (connected_flag == 0) { //eslint-disable-line
-      let out_msg = 'Not Connected so cannot send';
-      return false;
-    }
-    let press_result = confirm('確定要修改?');
-    if (press_result) {
-      let value = document.getElementById('SVInput').value;
-      let msg = `{"sv":` + value + '}'; //eslint-disable-line
-      console.log(msg);
-      window.localStorage.setItem('a10heatX' + new Date(), value);
-      let message = new Paho.MQTT.Message(msg); //eslint-disable-line
-      message.destinationName = subTopic + 'conf';
-      mqtt.send(message); //eslint-disable-line
-      // location.reload();
-      document.getElementById('SVInput').value = ''; //清空輸入框
-    } else {
-      document.getElementById('SVInput').value = ''; //清空輸入框
-      return;
-    }
-    return false;
-  };
+    const modPress = () => {
+        if (connected_flag == 0) { //eslint-disable-line
+            let out_msg = 'Not Connected so cannot send';
+            return false;
+        }
+        let press_result = confirm('確定要修改?');
+        if (press_result) {
+            let value = document.getElementById('SVInput').value;
+            let msg = `{"sv":` + value + '}'; //eslint-disable-line
+            console.log(msg);
+            window.localStorage.setItem('a10heatX' + new Date(), value);
+            let message = new Paho.MQTT.Message(msg); //eslint-disable-line
+            message.destinationName = subTopic + 'conf';
+            mqtt.send(message); //eslint-disable-line
+            // location.reload();
+            document.getElementById('SVInput').value = ''; //清空輸入框
+        } else {
+            document.getElementById('SVInput').value = ''; //清空輸入框
+            return;
+        }
+        return false;
+    };
 
-  setTimeout(() => {
-    $(document).ready(function () {
-      $('.demo').fadeOut();
-    });
-  }, 3500);
+    setTimeout(() => {
+        $(document).ready(function() {
+            $('.demo').fadeOut();
+        });
+    }, 3500);
 </script>
 
 
 
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
 <!-- <script type="text/javascript" src="./index.js"></script> -->

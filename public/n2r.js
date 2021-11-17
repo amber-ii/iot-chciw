@@ -24,7 +24,7 @@ function onMessageArrived(r_message) {
 
 
 // 千分位轉換
-Number.prototype.comma_formatter = function () {
+Number.prototype.comma_formatter = function() {
     return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 };
 
@@ -32,7 +32,7 @@ Number.prototype.comma_formatter = function () {
 
 // 趨勢圖
 // eslint-disable-next-line
-let chartData = function () {
+let chartData = function() {
     return {
         date: '7days',
         options: [
@@ -56,13 +56,13 @@ let chartData = function () {
         ],
         showDropdown: false,
         selectedOption: 0,
-        selectOption: function (index) {
+        selectOption: function(index) {
             this.selectedOption = index;
             this.date = this.options[index].value;
             this.renderChart();
         },
         data: null,
-        fetch: function () {
+        fetch: function() {
             fetch('http://web.chciw.com.tw:8080/n2r/n2rJson')
                 .then(res => res.json())
                 .then(res => {
@@ -70,10 +70,10 @@ let chartData = function () {
                     this.renderChart();
                 });
         },
-        renderChart: function () {
+        renderChart: function() {
             let c = false;
             // eslint-disable-next-line
-            Chart.helpers.each(Chart.instances, function (instance) {
+            Chart.helpers.each(Chart.instances, function(instance) {
                 if (instance.chart.canvas.id == 'chart') {
                     c = instance;
                 }
@@ -89,8 +89,7 @@ let chartData = function () {
                 type: 'line',
                 data: {
                     labels: this.data[this.date].data.label,
-                    datasets: [
-                        {
+                    datasets: [{
                             label: 'a3t1',
                             borderColor: 'rgba(102, 126, 234, 1)',
                             pointBackgroundColor: 'rgba(102, 126, 234, 1)',
@@ -144,7 +143,7 @@ let chartData = function () {
                             ticks: {
                                 fontSize: 16,
                                 // eslint-disable-next-line
-                                callback: function (value, index, array) {
+                                callback: function(value, index, array) {
                                     return value > 1000 ? ((value < 1000000) ? value / 1000 + 'K' : value / 1000000 + 'M') : value;
                                 }
                             }
@@ -177,14 +176,14 @@ const formatDate = (now) => now.getFullYear() + '-' + (now.getMonth() + 1) + '-'
 
 
 // 依照日期搜尋
-$('#search').click(function () {
+$('#search').click(function() {
     let t2 = document.getElementById('table2');
     let yesterday = new Date((new Date() / 1000 - 86400) * 1000);
     yesterday = formatDate(yesterday).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
 
 
     $.ajax({
-        beforeSend: function () {
+        beforeSend: function() {
             // eslint-disable-next-line
             let startDate = dateSearch.startDate.value;
             // eslint-disable-next-line
@@ -205,15 +204,18 @@ $('#search').click(function () {
             if (startDate < '2021-03-05') {
                 alert('最早的資料為2021-03-05，請重新搜尋');
                 return false;
-            } if (endDate > yesterday || startDate > yesterday) {
+            }
+            if (endDate > yesterday || startDate > yesterday) {
                 alert('日期不得超過昨日，請重新搜尋');
                 return false;
             }
 
-            $('.demo').show();
+            $('.loading').show();
+            $('.word').show();
             setTimeout(() => {
-                $(document).ready(function () {
-                    $('.demo').fadeOut();
+                $(document).ready(function() {
+                    $('.loading').fadeOut();
+                    $('.word').fadeOut();
                 });
             }, 2000);
             t2.innerHTML = '';
@@ -222,35 +224,36 @@ $('#search').click(function () {
         url: '/n2r',
         data: $('#form1').serialize(),
         async: true,
-        success: function (data) {
+        success: function(data) {
             var renderString = '';
             for (var index = 0; index < data.length; index++) {
                 renderString =
-                    ' <tr class="bg-gray-800 text-md 2xl:text-xl">'
-                    + '<th class="p-3 text-center">'
-                    + data[index].Date
-                    + '</th>'
-                    + '<th class="p-3 text-center">'
-                    + data[index].a3t1
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].a3t2
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].a4t1
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].a8t1
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].a16t1
-                    + '</th>'
-                    + '</tr>';
+                    ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
+                    '<th class="p-3 text-center">' +
+                    data[index].Date +
+                    '</th>' +
+                    '<th class="p-3 text-center">' +
+                    data[index].a3t1 +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].a3t2 +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].a4t1 +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].a8t1 +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].a16t1 +
+                    '</th>' +
+                    '</tr>';
                 $('#table2').nextAll().remove();
                 t2.insertAdjacentHTML('beforeEnd', renderString);
             }
             // eslint-disable-next-line
-        }, error: function (request) {
+        },
+        error: function(request) {
             alert('Connection error');
         },
     });
@@ -280,8 +283,13 @@ const exportTable = () => {
 
 
 // loading畫面倒數3.5秒消失
-setTimeout(() => {
-    $(document).ready(function () {
-        $('.demo').fadeOut();
-    });
-}, 3500);
+// setTimeout(() => {
+//     $(document).ready(function() {
+//         $('.loading').fadeOut(1000);
+//         $('.word').fadeOut(500);
+//     });
+// }, 2500);
+
+
+$('.loading').hide();
+$('.word').hide();

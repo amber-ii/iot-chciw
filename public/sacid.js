@@ -21,14 +21,14 @@ function onMessageArrived(r_message) {
 
 
 // 千分位轉換
-Number.prototype.comma_formatter = function () {
+Number.prototype.comma_formatter = function() {
     return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 };
 
 
 
 // 趨勢圖
-let chartData = function () {
+let chartData = function() {
     return {
         date: '7days',
         options: [
@@ -52,25 +52,25 @@ let chartData = function () {
         ],
         showDropdown: false,
         selectedOption: 0,
-        selectOption: function (index) {
+        selectOption: function(index) {
             this.selectedOption = index;
             this.date = this.options[index].value;
             this.renderChart();
         },
         data: null,
-        fetch: function () {
+        fetch: function() {
             fetch('http://web.chciw.com.tw:8080/sacid/sacidJson')
-		
-                .then(res => res.json())
+
+            .then(res => res.json())
                 .then(res => {
                     this.data = res.dates;
                     this.renderChart();
                 });
         },
-        renderChart: function () {
+        renderChart: function() {
             let c = false;
             // eslint-disable-next-line
-            Chart.helpers.each(Chart.instances, function (instance) {
+            Chart.helpers.each(Chart.instances, function(instance) {
                 if (instance.chart.canvas.id == 'chart') {
                     c = instance;
                 }
@@ -86,8 +86,7 @@ let chartData = function () {
                 type: 'line',
                 data: {
                     labels: this.data[this.date].data.label,
-                    datasets: [
-                        {
+                    datasets: [{
                             label: 'A9每日產能-進6/7號坦克',
                             borderColor: 'rgba( 240,230,140, 1)',
                             pointBackgroundColor: 'rgba( 240,230,140, 1)',
@@ -153,7 +152,7 @@ let chartData = function () {
                             },
                             ticks: {
                                 fontSize: 16,
-                                callback: function (value, index, array) {
+                                callback: function(value, index, array) {
                                     return value > 1000 ? ((value < 1000000) ? value / 1000 + 'K' : value / 1000000 + 'M') : value;
                                 }
                             }
@@ -177,7 +176,7 @@ let chartData = function () {
 
 
 // 計算兩日期差異天數
-var DateDiff = function (a, b) { // sDate1 和 sDate2 是 2016-06-18 格式
+var DateDiff = function(a, b) { // sDate1 和 sDate2 是 2016-06-18 格式
     var oDate1 = new Date(a);
     var oDate2 = new Date(b);
     var iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24); // 把相差的毫秒數轉換為天數
@@ -191,16 +190,16 @@ function formatDate(now) {
 
 
 // 依照日期搜尋
-$('#search').click(function () {
+$('#search').click(function() {
 
     var t2 = document.getElementById('table2');
     var today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); // eslint-disable-line
 
 
     $.ajax({
-        beforeSend: function () {
-            var startDate = dateSearch.startDate.value;  // eslint-disable-line
-            var endDate = dateSearch.endDate.value;  // eslint-disable-line
+        beforeSend: function() {
+            var startDate = dateSearch.startDate.value; // eslint-disable-line
+            var endDate = dateSearch.endDate.value; // eslint-disable-line
 
             if (startDate > endDate) {
                 alert('無效日期，起始日不得大於結束日');
@@ -217,15 +216,19 @@ $('#search').click(function () {
             if (startDate < '2020-11-11') {
                 alert('最早的資料為2020-11-11，請重新搜尋');
                 return false;
-            } if (endDate > today || startDate > today) {
+            }
+            if (endDate > today || startDate > today) {
                 alert('日期不得超過今日，請重新搜尋');
                 return false;
             }
             // 搜尋click倒數兩秒
-            $('.demo').show();
+            $('.loading').show();
+            $('.word').show();
             setTimeout(() => {
-                $(document).ready(function () {
-                    $('.demo').fadeOut();
+                $(document).ready(function() {
+
+                    $('.loading').fadeOut();
+                    $('.word').fadeOut();
                 });
             }, 2000);
             t2.innerHTML = '';
@@ -234,44 +237,45 @@ $('#search').click(function () {
         url: '/sacid',
         data: $('#form1').serialize(), //序列化表單的值
         async: true,
-        success: function (data) {
+        success: function(data) {
 
             var renderString = '';
             for (let index = 0; index < data.length; index++) {
                 renderString =
-                    ' <tr class="bg-gray-800 text-md 2xl:text-xl">'
-                    + '<th class="p-3 text-center">'
-                    + data[index].preDate
-                    + '-'
-                    + data[index].Date
-                    + '</th>'
-                    + '<th class="p-3  text-center">'
-                    + data[index].A9Diff
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].A10Diff1
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].A10Diff4
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].total
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].A10Diff2
-                    + '</th>'
-                    + ' <th class="p-3  text-center">'
-                    + data[index].A10Diff3
-                    + '</th>'
-                    + ' <th class="p-3 text-center">'
-                    + data[index].diff32
-                    + '</th>'
-                    + '</tr>';
+                    ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
+                    '<th class="p-3 text-center">' +
+                    data[index].preDate +
+                    '-' +
+                    data[index].Date +
+                    '</th>' +
+                    '<th class="p-3  text-center">' +
+                    data[index].A9Diff +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].A10Diff1 +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].A10Diff4 +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].total +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].A10Diff2 +
+                    '</th>' +
+                    ' <th class="p-3  text-center">' +
+                    data[index].A10Diff3 +
+                    '</th>' +
+                    ' <th class="p-3 text-center">' +
+                    data[index].diff32 +
+                    '</th>' +
+                    '</tr>';
                 $('#table2').nextAll().remove();
                 t2.insertAdjacentHTML('beforeEnd', renderString);
             }
 
-        }, error: function (request) {
+        },
+        error: function(request) {
             alert('Connection error');
         },
     });
@@ -286,7 +290,7 @@ function exportTable() {
     var endDate = form1.endDate.value; // eslint-disable-line
     var today = new Date();
     var yesterday = new Date((today / 1000 - 86400) * 1000);
-  
+
     if (!startDate && !endDate) {
         if (today.getHours() > 7) {
             endDate = formatDate(today);
@@ -302,15 +306,8 @@ function exportTable() {
     });
 }
 
-
-
-// loading畫面倒數三秒消失
-setTimeout(() => {
-    $(document).ready(function () {
-        $('.demo').fadeOut(1000);
-    });
-}, 3000);
-
+$('.loading').hide();
+$('.word').hide();
 
 
 

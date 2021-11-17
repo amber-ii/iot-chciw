@@ -23,8 +23,7 @@ const acl = require('express-acl');
 
 
 mongoose.connect(
-    process.env.DB_CONNECTION
-    , {
+    process.env.DB_CONNECTION, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     }, () => {
@@ -46,6 +45,7 @@ app.use(session({
     cookie: {
         maxAge: 86400 * 1000
     },
+
 }));
 
 app.use(passport.initialize());
@@ -53,13 +53,13 @@ app.use(passport.session());
 
 
 // 只將用戶 id 序列化存到 session 中
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function(user, done) {
     done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser(function(id, done) {
     // 透過使用者 id 到 MongoDB 資料庫尋找用戶完整資訊
-    User.findById(id, function (err, user) {
+    User.findById(id, function(err, user) {
         done(err, user);
     });
 });
@@ -67,10 +67,10 @@ passport.deserializeUser(function (id, done) {
 
 
 passport.use(new LocalStrategy(
-    function (username, password, done) {
-        User.findOne({ username: username }, function (err, user) {
+    function(username, password, done) {
+        User.findOne({ username: username }, function(err, user) {
             var flag = new
-                RegExp("[`~!#$^&*()=|{}':;',\\[\\].<>《》/?~！#￥……&*（）——|{}【】‘；：”“'。，、？ ]"); //eslint-disable-line
+            RegExp("[`~!#$^&*()=|{}':;',\\[\\].<>《》/?~！#￥……&*（）——|{}【】‘；：”“'。，、？ ]"); //eslint-disable-line
 
             console.log(user);
             if (err || username.length > 11 || flag.test(username)) { return done(err); }
@@ -81,6 +81,7 @@ passport.use(new LocalStrategy(
                 if (!isMatch) {
                     return done(null, false, { message: 'Incorrect password.' });
                 }
+
                 return done(null, user);
             });
         });
@@ -119,7 +120,7 @@ app.get('/register', (req, res) => {
 });
 
 
-app.post('/register', async (req, res) => {
+app.post('/register', async(req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const username = req.body.username;
@@ -138,7 +139,7 @@ app.post('/register', async (req, res) => {
 });
 
 
-app.get('/logout', function (req, res) {
+app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
@@ -150,59 +151,64 @@ app.post(
     passport.authenticate('local', {
         failureRedirect: '/login?error=true'
     }), (req, res) => {
-        if (req.user.permission == 1) {
-            res.redirect('/');
-        }
-        if (req.user.permission == 2) {
-            res.redirect('/air');
-        }
-        if (req.user.permission == 3) {
-            res.redirect('/permission3');
-        }
+        res.redirect('/');
+        // if (req.user.permission == 1) {
+        //     res.redirect('/');
+        // }
+        // if (req.user.permission == 2) {
+        //     res.redirect('/air');
+        // }
+        // if (req.user.permission == 3) {
+        //     res.redirect('/permission3');
+        // }
 
-        if (req.user.permission == 5) {
-            res.redirect('/permission5');
-        }
-        if (req.user.permission == 8) {
-            res.redirect('/permission8');
-        }
-        if (req.user.permission == 9) {
-            res.redirect('/ah2ph');
-        }
+        // if (req.user.permission == 5) {
+        //     res.redirect('/permission5');
+        // }
+        // if (req.user.permission == 8) {
+        //     res.redirect('/permission8');
+        // }
+        // if (req.user.permission == 9) {
+        //     res.redirect('/ah2ph');
+        // }
     });
 
 
 // 管理員的首頁
 app.get('/', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1) {
-        res.render('index', { title: '首頁', name: req.user.name });
-    } else {
-        res.sendFile(`${__dirname}/public/404.html`);
-    }
+    res.render('index', { title: '首頁', name: req.user.name });
+    // res.sendFile(`${__dirname}/public/404.html`);
 });
-app.get('/permission3', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 3) {
-        res.render('permission3', { title: '首頁', name: req.user.name });
-    } else {
-        res.sendFile(`${__dirname}/public/404.html`);
-    }
-});
-app.get('/permission5', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 5) {
-        res.render('permission5', { title: '首頁', name: req.user.name });
-    } else {
-        res.sendFile(`${__dirname}/public/404.html`);
-    }
-});
+// app.get('/', users.isLoggedIn, (req, res) => {
+//     if (req.user.permission == 1) {
+//         res.render('permission8', { title: '首頁', name: req.user.name });
+//     } else {
+//         res.sendFile(`${__dirname}/public/404.html`);
+//     }
+// });
+// app.get('/permission3', users.isLoggedIn, (req, res) => {
+//     if (req.user.permission == 3) {
+//         res.render('permission8', { title: '首頁', name: req.user.name });
+//     } else {
+//         res.sendFile(`${__dirname}/public/404.html`);
+//     }
+// });
+// app.get('/permission5', users.isLoggedIn, (req, res) => {
+//     if (req.user.permission == 5) {
+//         res.render('permission8', { title: '首頁', name: req.user.name });
+//     } else {
+//         res.sendFile(`${__dirname}/public/404.html`);
+//     }
+// });
 
 
-app.get('/permission8', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 8) {
-        res.render('permission8', { title: '首頁', name: req.user.name });
-    } else {
-        res.sendFile(`${__dirname}/public/404.html`);
-    }
-});
+// app.get('/permission8', users.isLoggedIn, (req, res) => {
+//     if (req.user.permission == 8) {
+//         res.render('permission8', { title: '首頁', name: req.user.name });
+//     } else {
+//         res.sendFile(`${__dirname}/public/404.html`);
+//     }
+// });
 
 // 各單位的首頁
 // app.get('/home', users.isLoggedIn, (req, res) => {

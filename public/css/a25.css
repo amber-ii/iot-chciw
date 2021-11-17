@@ -1,166 +1,154 @@
 .checkbox {
-  width: 200px;
+    width: 200px;
 
 font-family: monospace;
-
-  }
+    }
 
 .inv {
-  display: none;
+    display: none;
 }
 
 .search {
-  color: Gold;
+    color: Gold;
 
 font-size: 16px;
-
-  /* position: absolute; */
+    /* position: absolute; */
 }
 
 .download {
-  position: absolute;
-
-left: 57rem;
-
-color: Mediumspringgreen;
-
-  }
-
-.search:hover {
-  cursor: pointer;
-
-transform: translate(-2px, 3px);
-
-  }
-.download:hover {
-  cursor: pointer;
-
-transform: translate(-2px, 3px);
-
-  }
-.c1 {
-  position: absolute;
+    color: Mediumspringgreen;
 }
 
+.search:hover {
+    cursor: pointer;
+
+transform: translate(-2px, 3px);
+    }
+
+.download:hover {
+    cursor: pointer;
+
+transform: translate(-2px, 3px);
+    }
+
 .clear {
-  color: Lightsteelblue;
+    color: Lightsteelblue;
 }
 
 .clear:hover {
-  cursor: pointer;
+    cursor: pointer;
 
 transform: translate(-2px, 3px);
-
-  }
+    }
 
 .table {
-  border-spacing: 0 10px;
+    border-spacing: 0 10px;
 
 font-family: Noto Mono;
+    }
 
-  }
 .dateOption {
-  font-family: Noto Mono;
+    font-family: Noto Mono;
 }
 
 @media (min-width: 1300px) {
-  .table {
-    border-spacing: 0 11px;
-  }
+    .table {
+        border-spacing: 0 11px;
+    }
 }
 
 @media only screen and (max-width: 1299px) {
-  .table {
-    border-spacing: 0 10px;
-  }
+    .table {
+        border-spacing: 0 10px;
+    }
 }
 
 .dateFormate {
-  padding-right: 20px;
+    padding-right: 20px;
 
 padding-left: 20px;
+    }
 
-  }
 table th {
-  padding-right: 10px;
+    padding-right: 10px;
 
 padding-left: 10px;
 
 height: 30px;
 
 font-size: 16px;
-
-  }
+    }
 
 table td {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 body {
-  background-color: rgb(17, 24, 39);
+    background-color: rgb(17, 24, 39);
 }
 
 .tableScreen {
-  margin-top: 10px;
+    margin-top: 10px;
 
 max-width: 1200px;
 
 max-height: 400px;
-
-  }
+    }
 
 @media (min-width: 1300px) {
-  .tableScreen {
-    max-width: 1750px;
+    .tableScreen {
+        max-width: 1750px;
 
 max-height: 750px;
-
-    }
+        }
 }
 
 input[type='checkbox'] {
-  width: 22px;
+    align-items: center;
 
-height: 22px;
+width: 18px;
 
-text-align: center;
+height: 28px;
 
 cursor: pointer;
 
-  }
+transform: translateY(-2px);
+    }
 
 label {
-  padding-bottom: 5px;
+    font-size: 16px;
 
-font-family: Verdana;
-
-cursor: pointer;
-
-  }
+font-family: monospace;
+    }
 
 #sel0 label {
-  margin-left: -5em;
+    margin-left: -80%;
 
 color: Lightseagreen;
 
-  }
+cursor: pointer;
+    }
+
 #sel1 label {
-  margin-left: -5em;
+    margin-left: -80%;
 
 color: Tan;
 
-  }
-#sel2 label {
-  margin-right: 2em;
+cursor: pointer;
+    }
 
-margin-left: -5em;
+#sel2 label {
+    margin-left: -80%;
 
 color: Lightsteelblue;
 
-  }
+cursor: pointer;
+    }
+
 #sel3 label {
-  margin-left: -5em;
+    margin-left: -80%;
 
 color: Papayawhip;
 
-  }
+cursor: pointer;
+    }
