@@ -25,6 +25,16 @@
 animation: logo-spin infinite 2s linear;
         }
     
+    .mqttvalue {
+        font-size: 43px;
+    }
+    
+    .fix span {
+        letter-spacing: 2px;
+
+font-size: 12px;
+        }
+    
     @keyframes logo-spin {
         from {
             transform: rotate(0deg);
@@ -39,16 +49,17 @@ animation: logo-spin infinite 2s linear;
 <body onload="subTopic='A10VPC';MQTTConnect();">
     <div class="max-w-full flex justify-center pt-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
         <!-- VP -->
-        <div class="flex">
+        <!--RWD換行置中 -->
+        <div class="flex justify-center flex-wrap">
             <div class="container w-80 p-8 text-gray-100">
                 <div class="pattern-dots-md gray-light">
                     <div class="h-full rounded bg-gray-800 p-4 pb-20 pt-8 transform translate-x-6 -translate-y-6">
                         <!-- 標題 -->
                         <div class="space-y-8">
                             <div class="flex justify-around">
-                                <div class="flex space-x-2">
-                                    <div class="flex items-center justify-center rounded-full bg-red-100 text-red-500 font-bold h-8 w-8">
-                                        <ion-icon name="logo-electron" class="logo"></ion-icon>
+                                <div class="flex space-x-3">
+                                    <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color:crimson">
+                                        <ion-icon name="logo-ionic" class="logo"></ion-icon>
                                     </div>
                                     <span class="text-xl tracking-wide font-semibold text-white">VP</span>
                                 </div>
@@ -59,14 +70,14 @@ animation: logo-spin infinite 2s linear;
 
                             <!-- VP值 -->
 
-                            <h1 class="text-5xl text-center transform translate-x-3" id="VP"></h1>
+                            <h1 class="text-center mqttvalue" id="VP"></h1>
 
                             <!-- 修改框 -->
                             <div class="flex justify-center">
-                                <div class="flex border h-8 w-40 rounded-lg border-gray-400 relative">
+                                <div class="flex border h-8 w-40 rounded-lg border-gray-400 relative fix">
                                     <input type="text" id="modSV" class="text-center text-gray-800 font-semibold border-r border-gray-400 w-28 flex rounded-l" />
-                                    <button id="submitPressBtn" onclick="modSV()" title="提交修改" class="font-semibold border-l  border-gray-400 w-full transform hover:scale-110 rounded-r focus:outline-none cursor-pointer bg-red-500">
-                                        <span class="text-center text-sm">修改</span>
+                                    <button id="submitPressBtn" onclick="modSV()" title="提交修改" class="font-semibold border-l  border-gray-400 w-full transform hover:scale-110 rounded-r focus:outline-none cursor-pointer" style="background-color: crimson;">
+                                        <span class="text-center">修改</span>
                                     </button>
                                 </div>
 
@@ -91,19 +102,13 @@ animation: logo-spin infinite 2s linear;
                     <div class="h-full rounded bg-gray-800 px-8 pb-8 pt-8 transform translate-x-6 -translate-y-6">
                         <!-- 標題 -->
                         <div class="space-y-8">
-                            <div class="flex space-x-2">
-                                <div class="flex items-center justify-center rounded-full bg-blue-100 text-blue-500 font-bold h-8 w-8">
-                                    <ion-icon name="logo-electron" class="logo"></ion-icon>
+                            <div class="flex space-x-3">
+                                <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color:navy">
+                                    <ion-icon name="logo-ionic" class="logo"></ion-icon>
                                 </div>
                                 <span class="text-xl tracking-wide font-semibold text-white">CV</span>
                             </div>
-
-
-                            <!-- VP值 -->
-
-                            <h1 class="text-5xl text-center transform translate-x-3" id="CV"></h1>
-
-
+                            <h1 class="mqttvalue text-center" id="CV"></h1>
                         </div>
                     </div>
                 </div>
