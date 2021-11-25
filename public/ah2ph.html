@@ -2,41 +2,38 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>廢水池</title>
-    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css" />
+    <link rel="stylesheet" href="./css/style.css" />
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
-        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet" />
 </head>
 
 <style>
     body {
         background-color: rgb(17, 24, 39);
     }
-
+    
     .logo {
         font-size: 20px;
-
         animation: logo-spin infinite 2.5s linear;
     }
-
+    
     @keyframes logo-spin {
         from {
             transform: rotate(0deg);
         }
-
         to {
             transform: rotate(360deg);
         }
     }
-
+    
     .mqttvalue {
         font-size: 43px;
     }
@@ -52,24 +49,19 @@
                         <!-- 標題 -->
                         <div class="space-y-8">
                             <div class="flex space-x-3">
-                                <div class="flex items-center justify-center rounded-full font-bold h-8 w-8"
-                                    style="background-color:navy">
+                                <div class="flex items-center justify-center rounded-full font-bold h-8 w-8" style="background-color: navy">
                                     <ion-icon name="settings-outline" class="logo"></ion-icon>
                                 </div>
                                 <span class="text-xl tracking-wide font-semibold text-white">PH</span>
                             </div>
 
-
                             <!-- VP值 -->
 
                             <h1 class="mqttvalue text-center" id="ph"></h1>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
 
             <div class="container w-80 p-8 text-gray-100">
                 <div class="pattern-dots-md gray-light">
@@ -78,8 +70,7 @@
                         <div class="space-y-8">
                             <div class="flex justify-around">
                                 <div class="flex space-x-3">
-                                    <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8"
-                                        style="background-color: tomato;">
+                                    <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color: tomato">
                                         <ion-icon name="settings-outline" class="logo"></ion-icon>
                                     </div>
                                     <span class="text-xl tracking-wide font-semibold text-white">Flow</span>
@@ -102,13 +93,13 @@
 <script>
     // MQTT
     function onMessageArrived(r_message) {
-        var rcMsg = JSON.parse(r_message.payloadString);
-        console.log(rcMsg);
+        var rcMsg = JSON.parse(r_message.payloadString)
+        console.log(rcMsg)
         for (var key in rcMsg) {
-            var id = key;
-            var value = rcMsg[key];
+            var id = key
+            var value = rcMsg[key]
             if (document.getElementById(id)) {
-                document.getElementById(id).innerHTML = value;
+                document.getElementById(id).innerHTML = value
             }
         }
     }

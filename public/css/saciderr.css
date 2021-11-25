@@ -1,26 +1,28 @@
-.showError{
-    /* height: 30px; */
-    /* width: 30px; */
-    /* border-radius: 50%; */
-    /* background-color: rgb(255, 0, 0); */
-    color: red;
-    animation-iteration-count:infinite;
-    animation-duration: 1.5s;
-    animation-name: flash;
-    font-size: 30px;
-    display: none;
-}
-.showOk{
-    /* 流量的樣式 */
-    color: green;
-    font-size: 30px;
+.break {
     display: flex;
+    align-items: center;
+    color: #d62828;
+    font-size: 25px;
+    animation-name: flash;
+    animation-duration: 1.8s;
+    animation-iteration-count: infinite;
+}
 
+.connected {
+    display: none;
+    color: #2a9d8f;
+    font-size: 25px;
 }
-.errorfont{
-    font-size:15px;
+
+.breakLyric {
+    padding-left: 2px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fca311;
 }
-.showOkfont{
-    font-size: 7px;
-   
-  }
+
+.connectedLyric {
+    padding-left: 2px;
+    font-size: 12px;
+    color: #2a9d8f;
+}

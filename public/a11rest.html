@@ -81,13 +81,10 @@
     }
 </style>
 
-<body onload="subTopic='A11Tmp';MQTTConnect();">
+<body>
     <div class="max-w-full mx-auto px-20">
         <div class="flex flex-wrap grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-cols-4  md:gap-x-8 2xl:gap-x-12 gap-y-10 gap-x-6 grid-flow-row justify-center pt-12 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
-
             <!-- 第一個 -->
-
-
 
             <section class="flex justify-center border-b-2 border-r-2 border-gray-400 bg-gray-800 rounded-xl px-6 2xl:px-8 pt-4">
                 <div class="w-full">
@@ -100,7 +97,7 @@
                         <img class="logo" src="https://img.icons8.com/color/48/000000/temperature--v1.png" />
                         <div class="box">
                             <div class="content">
-                                <div id="pt1003" class="mqttvalue">00.00</div>
+                                <div id="ABPLC-A9PLC.A9PLC.PT100_3" class="mqttvalue">00.00</div>
                             </div>
                         </div>
                         <div class="unit">°C</div>
@@ -120,7 +117,7 @@
                         <img class="logo" src="https://img.icons8.com/color/48/000000/temperature--v1.png" />
                         <div class="box">
                             <div class="content">
-                                <div id="pt1002" class="mqttvalue">00.00</div>
+                                <div id="ABPLC-A9PLC.A9PLC.PT100_2" class="mqttvalue">00.00</div>
                             </div>
                         </div>
                         <div class="unit">°C</div>
@@ -141,7 +138,7 @@
                         <img class="logo" src="https://img.icons8.com/color/48/000000/temperature--v1.png" />
                         <div class="box">
                             <div class="content">
-                                <div id="pt1001" class="mqttvalue">00.00</div>
+                                <div id="ABPLC-A9PLC.A9PLC.PT100_1" class="mqttvalue">00.00</div>
                             </div>
                         </div>
                         <div class="unit">°C</div>
@@ -159,7 +156,7 @@
                         <img class="logo" src="https://img.icons8.com/color/48/000000/acid-flask.png" />
                         <div class="box">
                             <div class="content">
-                                <div id="aci36p" class="mqttvalue">00.00</div>
+                                <div id="ABPLC-A9PLC.A9PLC.36%煙酸濃度計" class="mqttvalue">00.00</div>
                             </div>
                         </div>
                         <div class="unit">%</div>
@@ -178,7 +175,7 @@
                         <img class="logo-press" src="https://img.icons8.com/color/48/000000/water-steam.png" />
                         <div class="box">
                             <div class="content">
-                                <div id="EVA" class="mqttvalue">00.00</div>
+                                <div id="ABPLC-A9PLC.A9PLC.A11蒸發器壓力" class="mqttvalue">00.00</div>
                             </div>
                         </div>
                         <div class="kgf"><sup>kgf</sup><sub>/cm</sub>
@@ -201,7 +198,7 @@
                         <img class="logo-press" src="https://img.icons8.com/color/48/000000/water-steam.png" />
                         <div class="box">
                             <div class="content">
-                                <div id="DP1" class="mqttvalue">00.00</div>
+                                <div id="ABPLC-A9PLC.A9PLC.A11除霧器1壓力" class="mqttvalue">00.00</div>
                             </div>
                         </div>
                         <div class="kgf"><sup>kgf</sup><sub>/cm</sub>
@@ -223,7 +220,7 @@
                         <img class="logo-press" src="https://img.icons8.com/color/48/000000/water-steam.png" />
                         <div class="box">
                             <div class="content">
-                                <div id="DP2" class="mqttvalue">00.00</div>
+                                <div id="ABPLC-A9PLC.A9PLC.A11除霧器2壓力" class="mqttvalue">00.00</div>
                             </div>
                         </div>
                         <div class="kgf"><sup>kgf</sup><sub>/cm</sub>
@@ -239,17 +236,35 @@
 </body>
 
 <script>
-    function onMessageArrived(r_message) {
-        var rcMsg = JSON.parse(r_message.payloadString);
-        console.log(rcMsg);
-        for (var key in rcMsg) {
-            var id = key;
-            var value = rcMsg[key];
-            if (document.getElementById(id)) {
-                document.getElementById(id).innerHTML = value;
-            }
-        }
-    }
+    fetch('http://192.168.1.159:39320/iotgateway/read?ids=ABPLC-A9PLC.A9PLC.PT100_1')
+        .then((res) => res.json())
+        .then((res) => {
+            console.log("🚀 ~ file: a11rest.html ~ line 242 ~ .then ~ res", res)
+            document.querySelector('#ABPLC-A9PLC.A9PLC.PT100_1').innerHTML = res.browseResults.id
+        })
+
+
+    // fetch('http://192.168.1.159:39320/iotgateway/read?ids=ABPLC-A9PLC.A9PLC.PT100_1')
+    //     .then(res => {
+    //         console.log(res);
+    //         return res.json();
+    //     }).then(result => {
+    //         // let id = result.cwbopendata.location[14].parameter[0].parameterValue;
+    //         // let value = result.cwbopendata.location[14].weatherElement[3].elementValue.value;
+    //         console.log(result); // 得到 高雄市的氣溫為 29.30 度 C
+    //     }).catch((err) => {
+    //         console.log("沒有");
+    //     });
+
+
+    // fetch('https://192.168.1.159:39320/iotgateway/read?ids=ABPLC-A9PLC.A9PLC.36%煙酸濃度計')
+    //     .then(res => {
+    //         return res.json();
+    //     }).then(result => {
+    //         let id = result.cwbopendata.location[14].parameter[0].parameterValue;
+    //         let value = result.cwbopendata.location[14].weatherElement[3].elementValue.value;
+    //         console.log(`${city}的氣溫為 ${temp} 度 C`); // 得到 高雄市的氣溫為 29.30 度 C
+    //     });
 </script>
 
 

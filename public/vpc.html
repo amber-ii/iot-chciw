@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A10VPC蒸氣壓閥</title>
     <!-- <link rel="stylesheet" type="text/css" href="./css/vpc.css"> -->
-    <link rel="stylesheet" type="text/css" href="./css/index.css">
-    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
-    <link rel="stylesheet" type="text/css" href="./css/progress.css">
-    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css" />
+    <link rel="stylesheet" type="text/css" href="./css/progress.css" />
+    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
 </head>
 <style>
     body {
@@ -21,9 +21,8 @@
     
     .logo {
         font-size: 20px;
-
-animation: logo-spin infinite 2s linear;
-        }
+        animation: logo-spin infinite 2s linear;
+    }
     
     .mqttvalue {
         font-size: 43px;
@@ -31,9 +30,8 @@ animation: logo-spin infinite 2s linear;
     
     .fix span {
         letter-spacing: 2px;
-
-font-size: 12px;
-        }
+        font-size: 12px;
+    }
     
     @keyframes logo-spin {
         from {
@@ -43,7 +41,6 @@ font-size: 12px;
             transform: rotate(360deg);
         }
     }
-
 </style>
 
 <body onload="subTopic='A10VPC';MQTTConnect();">
@@ -58,7 +55,7 @@ font-size: 12px;
                         <div class="space-y-8">
                             <div class="flex justify-around">
                                 <div class="flex space-x-3">
-                                    <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color:crimson">
+                                    <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color: crimson">
                                         <ion-icon name="logo-ionic" class="logo"></ion-icon>
                                     </div>
                                     <span class="text-xl tracking-wide font-semibold text-white">VP</span>
@@ -70,27 +67,27 @@ font-size: 12px;
 
                             <!-- VP值 -->
 
-                            <h1 class="text-center mqttvalue" id="VP"></h1>
+                            <div class="text-center mqttvalue" id="VP"></div>
 
                             <!-- 修改框 -->
                             <div class="flex justify-center">
                                 <div class="flex border h-8 w-40 rounded-lg border-gray-400 relative fix">
                                     <input type="text" id="modSV" class="text-center text-gray-800 font-semibold border-r border-gray-400 w-28 flex rounded-l" />
-                                    <button id="submitPressBtn" onclick="modSV()" title="提交修改" class="font-semibold border-l  border-gray-400 w-full transform hover:scale-110 rounded-r focus:outline-none cursor-pointer" style="background-color: crimson;">
-                                        <span class="text-center">修改</span>
-                                    </button>
+                                    <button id="submitPressBtn" onclick="modSV()" title="提交修改" class="font-semibold border-l border-gray-400 w-full transform hover:scale-110 rounded-r focus:outline-none cursor-pointer" style="background-color: crimson">
+                      <span class="text-center">修改</span>
+                    </button>
                                 </div>
-
-
 
                                 <div class="absolute flex flex-col w-32 md:w-full mt-6 md:mt-8 mt-10 items-center justify-center transform hover:scale-110">
                                     <div class="py-1">
                                         <svg width="10" height="10" class="fill-current ml-5 md:mx-auto">
-                                            <polygon points="0 10, 10 10, 5 0" />
-                                        </svg>
+                        <polygon points="0 10, 10 10, 5 0" />
+                      </svg>
                                     </div>
                                     <div class="text-sm w-52 flex flex-wrap justify-center bg-black p-1 h-auto rounded-lg text-gray-100">
-                                        調整壓力，目前設定值:<span id="SV" class="pl-2 font-bold text-md text-white"></span></div>
+                                        調整壓力，目前設定值:
+                                        <span id="SV" class="pl-2 font-bold text-md text-white"></span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +100,7 @@ font-size: 12px;
                         <!-- 標題 -->
                         <div class="space-y-8">
                             <div class="flex space-x-3">
-                                <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color:navy">
+                                <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color: navy">
                                     <ion-icon name="logo-ionic" class="logo"></ion-icon>
                                 </div>
                                 <span class="text-xl tracking-wide font-semibold text-white">CV</span>
@@ -116,58 +113,48 @@ font-size: 12px;
         </div>
     </div>
 
-
     <script>
         function onMessageArrived(r_message) {
-
             // 聽全部的訊息
-            var rcMsg = JSON.parse(r_message.payloadString);
-            console.log(rcMsg);
+            var rcMsg = JSON.parse(r_message.payloadString)
+            console.log(rcMsg)
 
             for (var key in rcMsg) {
-                var vpcId = key;
-                var vpcValue = rcMsg[key];
+                var vpcId = key
+                var vpcValue = rcMsg[key]
                 if (document.getElementById(vpcId)) {
-                    document.getElementById(vpcId).innerHTML = vpcValue;
+                    document.getElementById(vpcId).innerHTML = vpcValue
                 }
             }
         }
 
-
         const modSV = () => {
-            if (connected_flag == 0) { //eslint-disable-line
-                let out_msg = '斷線中無法修改';
-                console.log(out_msg);
-                alert(out_msg);
-                return false;
+            if (connected_flag == 0) {
+                //eslint-disable-line
+                let out_msg = '斷線中無法修改'
+                console.log(out_msg)
+                alert(out_msg)
+                return false
             }
-            let SV_result = confirm('確定要修改SV?');
+            let SV_result = confirm('確定要修改SV?')
             if (SV_result) {
-                let value = document.getElementById('modSV').value;
-                let msg = `{"sv":` + value + '}'; //eslint-disable-line
-                console.log(msg);
-                window.localStorage.setItem('vpc' + new Date(), value);
-                let message = new Paho.MQTT.Message(msg); //eslint-disable-line
-                message.destinationName = 'A10VPCconf';
-                mqtt.send(message); //eslint-disable-line
+                let value = document.getElementById('modSV').value
+                let msg = `{"sv":` + value + '}' //eslint-disable-line
+                console.log(msg)
+                window.localStorage.setItem('vpc' + new Date(), value)
+                let message = new Paho.MQTT.Message(msg) //eslint-disable-line
+                message.destinationName = 'A10VPCconf'
+                mqtt.send(message) //eslint-disable-line
 
-                document.getElementById('modSV').value = ''; //清空輸入框
+                document.getElementById('modSV').value = '' //清空輸入框
             } else {
-                document.getElementById('modSV').value = ''; //清空輸入框
-                return;
+                document.getElementById('modSV').value = '' //清空輸入框
+                return
             }
-            return false;
-        };
+            return false
+        }
     </script>
 </body>
-
-
-
-
-
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 

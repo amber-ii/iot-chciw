@@ -2,17 +2,15 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>變電站溫度監測</title>
-    <link rel="stylesheet" type="text/css" href="./css/elctair.css">
-    <link rel="stylesheet" type="text/css" href="./css/index.css">
-    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
-    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
-    <link rel="stylesheet" type="text/css" href="./css/progress.css">
-    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css" />
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css" />
+    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/style.css" />
 </head>
 <style>
     body {
@@ -21,9 +19,8 @@
     
     .logo {
         font-size: 20px;
-
-animation: logo-spin infinite 1s alternate;
-        }
+        animation: logo-spin infinite 1s alternate;
+    }
     
     @keyframes logo-spin {
         from {
@@ -37,11 +34,9 @@ animation: logo-spin infinite 1s alternate;
     .mqttvalue {
         font-size: 43px;
     }
-
 </style>
 
 <body onload="subTopic='ElctAir';MQTTConnect();">
-
     <div class="max-w-full flex justify-center pt-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
         <!-- PH -->
         <div class="flex justify-center flex-wrap">
@@ -51,7 +46,7 @@ animation: logo-spin infinite 1s alternate;
                         <!-- 標題 -->
                         <div class="space-y-8">
                             <div class="flex space-x-3">
-                                <div class="flex items-center justify-center rounded-full font-bold h-8 w-8" style="background-color:teal">
+                                <div class="flex items-center justify-center rounded-full font-bold h-8 w-8" style="background-color: teal">
                                     <ion-icon name="thermometer-outline" class="logo"></ion-icon>
                                 </div>
                                 <span class="text-xl tracking-wide font-semibold text-white">A22</span>
@@ -62,13 +57,12 @@ animation: logo-spin infinite 1s alternate;
                 </div>
             </div>
 
-
             <div class="container w-80 p-8 text-gray-100">
                 <div class="pattern-dots-md gray-light">
                     <div class="h-full rounded bg-gray-800 p-8 transform translate-x-6 -translate-y-6">
                         <div class="space-y-8">
                             <div class="flex space-x-3">
-                                <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color:orangered;">
+                                <div class="flex items-center justify-center rounded-full text-white font-bold h-8 w-8" style="background-color: orangered">
                                     <ion-icon name="thermometer-outline" class="logo"></ion-icon>
                                 </div>
                                 <span class="text-xl tracking-wide font-semibold text-white">A23</span>
@@ -81,11 +75,6 @@ animation: logo-spin infinite 1s alternate;
         </div>
     </div>
 </body>
-
-
-
-
-
 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 

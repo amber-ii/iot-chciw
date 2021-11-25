@@ -1,67 +1,48 @@
 body {
-  /* background-image:url('https://upload.cc/i1/2021/08/03/nxh9e0.png') ; */
-  background-color: rgb(17, 24, 39);
-
-  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    background-color: rgb(17, 24, 39);
 }
+
 span {
-  font-family: monospace;
+    font-family: monospace;
 }
+
 div {
-  font-family: 'Courier New';
+    font-family: 'Courier New';
 }
+
 .pic {
-  color: Lightgoldenrodyellow;
-
-font-size: 32px;
-
-animation: timer-spin infinite 1s;
-
-animation-iteration-count: infinite;
-
-animation-direction: alternate;
-
-  }
+    color: Lightgoldenrodyellow;
+    font-size: 32px;
+    animation: timer-spin infinite 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
 
 @keyframes timer-spin {
-  from {
-    transform: rotate(-10deg);
-  }
-  to {
-    transform: rotate(10deg);
-  }
+    from {
+        transform: rotate(-10deg);
+    }
+    to {
+        transform: rotate(10deg);
+    }
 }
+
 .showValue-parent {
-  position: relative;
-
-width: 200px;
-
-height: 160px;
-
-  /* border: 1px solid rgb(8, 165, 29); */
+    position: relative;
+    width: 200px;
+    height: 160px;
 }
+
 .showValue {
-  position: absolute;
-
-top: 0;
-
-right: 0;
-
-bottom: 0;
-
-left: 0;
-
-display: inline-flex;
-
-align-items: end;
-
-justify-content: center;
-
-margin: auto;
-
-width: 200px;
-
-height: 50px;
-
-  /* background: paleviored; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: inline-flex;
+    align-items: end;
+    justify-content: center;
+    margin: auto;
+    width: 200px;
+    height: 50px;
 }

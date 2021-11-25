@@ -5,10 +5,18 @@ function onMessageArrived(r_message) {
     for (var key in rcMsg) {
         var id = key;
         var value = rcMsg[key];
-        if (document.getElementById(id) != null) {
+        if (document.getElementById(id)) {
             document.getElementById(id).innerHTML = value;
         }
     }
+}
+
+
+if (document.querySelector('#A25TOC').innerHTML == '') {
+    document.querySelector('.timer').classList.add('unblock');
+    document.querySelector('.timer').classList.remove('timer');
+} else {
+    document.querySelector('.timer').classList.remove('unblock');
 }
 
 // 趨勢圖
