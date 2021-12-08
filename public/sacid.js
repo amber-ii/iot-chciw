@@ -1,7 +1,9 @@
-// MQTT
+$('.loading').hide()
+$('.word').hide()
+    // MQTT
 function onMessageArrived(r_message) {
     var rcMsg = JSON.parse(r_message.payloadString)
-    console.log(rcMsg)
+        // console.log(rcMsg)
     for (var key in rcMsg) {
         var id = key
         var value = rcMsg[key]
@@ -213,12 +215,6 @@ $('#search').click(function() {
             // 搜尋click倒數兩秒
             $('.loading').show()
             $('.word').show()
-            setTimeout(() => {
-                $(document).ready(function() {
-                    $('.loading').fadeOut()
-                    $('.word').fadeOut()
-                })
-            }, 2000)
             t2.innerHTML = ''
         },
         type: 'POST',
@@ -260,9 +256,11 @@ $('#search').click(function() {
                 $('#table2').nextAll().remove()
                 t2.insertAdjacentHTML('beforeEnd', renderString)
             }
+            $('.loading').fadeOut(500)
+            $('.word').fadeOut(500)
         },
         error: function(request) {
-            alert('Connection error')
+            alert('資料庫連線失敗，請洽電控組')
         },
     })
 })
@@ -289,9 +287,6 @@ function exportTable() {
         filename: `A9A10硫酸累計報表[${startDate}]-[${endDate}].xls`,
     })
 }
-
-$('.loading').hide()
-$('.word').hide()
 
 // todo del
 // JS寫法，導出報表
