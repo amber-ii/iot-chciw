@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./css/water.css">
     <link rel="stylesheet" type="text/css" href="./css/index.css">
     <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./css/progress.css"> -->
     <link rel="stylesheet" type="text/css" href="./css/pattern.css">
 
     <link rel="stylesheet" href="./css/style.css">
@@ -19,6 +20,10 @@
 <!-- 自來水 -->
 
 <body onload="subTopic='WaterProj';MQTTConnect();">
+    <div class="loading unblock">
+        <div class="flex items-center justify-center sticky top-0 w-full h-6 bg-red-400 text-gray-100">提交中...</div>
+    </div>
+
     <section class="text-gray-200">
         <div class=" max-w-full mx-auto pb-10 px-14">
             <div class="flex flex-wrap justify-center pt-10 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
@@ -159,7 +164,7 @@
 
         // 聽全部的訊息
         var rcMsg = JSON.parse(r_message.payloadString);
-        console.log(rcMsg);
+        // console.log(rcMsg);
 
         for (var key in rcMsg) {
             var waterId = key;
@@ -185,6 +190,9 @@
         }
         var press_result = confirm('確定要修改壓力?');
         if (press_result) {
+            // document.querySelector('.loading').classList.remove('unblock')
+            $('.loading').show();
+
             let value = document.getElementById('modPress').value;
             let msg = `{"sv":` + value + '}'; //eslint-disable-line
             console.log(msg);
@@ -194,6 +202,9 @@
             mqtt.send(message); //eslint-disable-line
             // location.reload();
             document.getElementById('modPress').value = ''; //清空輸入框
+            setTimeout(() => {
+                $('.loading').fadeOut(500);
+            }, 1000)
         } else {
             document.getElementById('modPress').value = ''; //清空輸入框
             return;
