@@ -22,11 +22,25 @@
 
 
 <body onload="subTopic='CH1ACI';MQTTConnect();">
-     <div class="ab">
+     {{!-- <div class="ab">
         <div class="loading">
         </div>
         <div class="word">loading</div>
+    </div> --}}
+
+    <div class="loading flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
+        <div class="relative">
+           <div class="load-circle"></div>
+           <div class="word absolute top-0">loading</div>
+        </div>
     </div>
+
+
+
+
+
+
+
 <div class="text-gray-100 bg-gray-900">
     <div class="max-w-full mx-auto pb-5 px-8">
        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 2xl:gap-x-1 gap-y-12  my-14 animate__animated animate__fadeIn">

@@ -57,11 +57,11 @@
       
 </style>
 <body>
-       <div class="ab">
+       {{!-- <div class="ab">
         <div class="loading">
         </div>
         <div class="word">loading</div>
-    </div>
+    </div> --}}
     <div class="bg-gray-100 pt-6 px-10 bg-gray-900">
         <div class="flex justify-end">
             <div class="pt-1 mr-4 text-blue-400">
@@ -87,10 +87,11 @@
                     <li class="unblock">A10蒸氣</li>
                     <li class="unblock">變電站溫度監測</li>
                     <li class="unblock">廢水池監控</li>
-                    <li class="unblock">A2-3號水池監控(尚未完成)</li>
                     <li class="unblock">A11儀表</li>
                     <li class="unblock">A25 DATA</li>
-                    <li class="unblock" title="A10螺旋式熱交換器變頻控制">A10螺旋式熱交換器變頻控制</li>
+                    <li class="unblock w-10" title="A10螺旋式熱交換器變頻控制">A10螺旋式熱交換器變頻</li>
+                    <li class="unblock">使用者登入紀錄</li>
+
                    
                 </ul>
             </div>
@@ -107,7 +108,7 @@
                <iframe src="./air" class="h-screen w-full"></iframe></ul>
                            <ul class="unblock">
                <iframe src="./sacid" class="h-screen w-full"></iframe></ul>
-                           <ul class="unblock">
+                <ul class="unblock">
                <iframe src="./water" class="h-screen w-full"></iframe></ul>
                            <ul class="unblock">
                <iframe src="./n2r" class="h-screen w-full"></iframe></ul>
@@ -117,16 +118,18 @@
                <iframe src="./vpc" class="h-screen w-full"></iframe></ul>
                            <ul class="unblock">
                <iframe src="./elctair" class="h-screen w-full"></iframe></ul>
+                          
                            <ul class="unblock">
                <iframe src="./ah2ph" class="h-screen w-full"></iframe></ul>
                <ul class="unblock">
-              <iframe src="./a2a3water" class="h-screen w-full"></iframe></ul>
-               <ul class="unblock">
+              
               <iframe src="./a11" class="h-screen w-full"></iframe></ul>
                <ul class="unblock">
               <iframe src="./a25datas" class="h-screen w-full"></iframe></ul>
                <ul class="unblock">
               <iframe src="./a10heat" class="h-screen w-full"></iframe></ul>
+                    <ul class="unblock">
+              <iframe src="./loginrecord" class="h-screen w-full"></iframe></ul>
             </div>
     </div>
 </body>
@@ -146,19 +149,18 @@
             navs[2].classList.remove('unblock')
             navs[4].classList.remove('unblock')
             navs[5].classList.remove('unblock')
+            navs[8].classList.remove('unblock')
             navs[9].classList.remove('unblock')
             navs[10].classList.remove('unblock')
-            navs[11].classList.remove('unblock')
             bodys[1].classList.remove('unblock')
             bodys[0].classList.add('unblock')
     }else if(pernames.includes('特化')){
             navs[3].classList.remove('unblock')
-            navs[8].classList.remove('unblock')
             navs[0].classList.remove('active')
             navs[3].classList.add('active')
             bodys[3].classList.remove('unblock')
             bodys[0].classList.add('unblock')
-    }else if(pernames.includes('您好')){
+    }else if(pernames.includes('總機')){
             navs[0].classList.remove('unblock')
     }else if(pernames.includes('環安')){
             navs[7].classList.remove('unblock')

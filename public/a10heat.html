@@ -15,14 +15,14 @@
 </head>
 
 
-<body onload="subTopic='A10HeatX'; MQTTConnect();">
+<body onload="subTopic='A10HeatX'; MQTTConnect();">【
+    <div class="loading z-40 unblock">
+        <div class="flex items-center justify-center sticky bottom-100 w-full h-8 bg-red-400 text-gray-100">提交中...</div>
+    </div>
+
     <div class="text-gray-100">
-
         <div class="max-w-full mx-auto pt-4 pb-10 px-20">
-
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 md:gap-x-8 gap-y-8 gap-x-6 grid-flow-row justify-center pt-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
-
-
                 <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
                     <div class="flex w-full bg-yellow-300 rounded-t-xl rounded-b-sm flex justify-center">
                         <div class="py-2 font-semibold text-xl text-yellow-800">28%出酸</div>
@@ -183,23 +183,8 @@
                     </div>
                 </section>
 
-
-                <!-- <span style="font-family:serif;">這是範例文字 This is example font. Show serif font. 1234567890</span><br>
-        <span style="font-family:sans-serif;">這是範例文字 This is example font. Show sans-serif font. 1234567890</span><br>
-        <span style="font-family:cursive;">這是範例文字 This is example font. Show cursive font. 1234567890</span><br>
-        <span style="font-family:fantasy;">這是範例文字 This is example font. Show fantasy font. 1234567890</span><br>
-        <span style="font-family:monospace;">這是範例文字 This is example font. Show monospace font. 1234567890</span><br>
-        <span style="font-family:MingLiU;">這是範例文字 This is example font. 顯示細明體字型 1234567890</span><br>
-        <span style="font-family:PMingLiU;">這是範例文字 This is example font. 顯示新細明體字型 1234567890</span><br>
-        <span style="font-family:DFKai-sb;">這是範例文字 This is example font. 顯示標楷體字型 1234567890</span><br>
-        <span style="font-family:Microsoft JhengHei;">這是範例文字 This is example font. 顯示微軟正黑體字型 1234567890</span> -->
-
-
             </div>
         </div>
-
-
-
     </div>
 </body>
 
@@ -225,6 +210,7 @@
         }
         let press_result = confirm('確定要修改?');
         if (press_result) {
+            $('.loading').show();
             let value = document.getElementById('SVInput').value;
             let msg = `{"sv":` + value + '}'; //eslint-disable-line
             console.log(msg);
@@ -233,9 +219,12 @@
             message.destinationName = subTopic + 'conf';
             mqtt.send(message); //eslint-disable-line
             // location.reload();
-            document.getElementById('SVInput').value = ''; //清空輸入框
+            document.getElementById('SVInput').value = '';
+            setTimeout(() => {
+                $('.loading').fadeOut(500);
+            }, 1000)
         } else {
-            document.getElementById('SVInput').value = ''; //清空輸入框
+            document.getElementById('SVInput').value = '';
             return;
         }
         return false;

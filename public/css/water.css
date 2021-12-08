@@ -14,7 +14,7 @@ body {
     position: relative;
     width: 160px;
     height: 160px;
-    background: #178BC9;
+    background: #178bc9;
     border-radius: 50%;
 }
 
@@ -24,7 +24,7 @@ body {
     left: 15px;
     width: 140px;
     height: 140px;
-    background: #178BC9;
+    background: #178bc9;
     border: 7px solid #111827;
     box-sizing: border-box;
     border-radius: 50%;
@@ -236,8 +236,8 @@ body {
     font-weight: bold;
     padding-top: 4px;
     padding-left: 10px;
-    background: #178BC9;
-    background: linear-gradient(135deg, transparent 0px, #178BC9 0) top left, linear-gradient(-135deg, transparent 15px, #178BC9 0) top right, linear-gradient(-45deg, transparent 15px, #178BC9 0) bottom right, linear-gradient(45deg, transparent 0px, #178BC9 0) bottom left;
+    background: #178bc9;
+    background: linear-gradient(135deg, transparent 0px, #178bc9 0) top left, linear-gradient(-135deg, transparent 15px, #178bc9 0) top right, linear-gradient(-45deg, transparent 15px, #178bc9 0) bottom right, linear-gradient(45deg, transparent 0px, #178bc9 0) bottom left;
     background-size: 50% 50%;
     background-repeat: no-repeat;
     transform: translateY(35px);
@@ -263,4 +263,8 @@ th {
 th span {
     padding-right: 4px;
     color: blue;
+}
+
+.unblock {
+    display: none;
 }

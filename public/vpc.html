@@ -33,6 +33,10 @@
         font-size: 12px;
     }
     
+    .unblock {
+        display: none;
+    }
+    
     @keyframes logo-spin {
         from {
             transform: rotate(0deg);
@@ -44,6 +48,9 @@
 </style>
 
 <body onload="subTopic='A10VPC';MQTTConnect();">
+    <div class="loading unblock">
+        <div class="flex items-center justify-center sticky top-0 w-full h-6 bg-red-400 text-gray-100">提交中...</div>
+    </div>
     <div class="max-w-full flex justify-center pt-8 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
         <!-- VP -->
         <!--RWD換行置中 -->
@@ -138,6 +145,7 @@
             }
             let SV_result = confirm('確定要修改SV?')
             if (SV_result) {
+                $('.loading').show()
                 let value = document.getElementById('modSV').value
                 let msg = `{"sv":` + value + '}' //eslint-disable-line
                 console.log(msg)
@@ -145,8 +153,10 @@
                 let message = new Paho.MQTT.Message(msg) //eslint-disable-line
                 message.destinationName = 'A10VPCconf'
                 mqtt.send(message) //eslint-disable-line
-
                 document.getElementById('modSV').value = '' //清空輸入框
+                setTimeout(() => {
+                    $('.loading').fadeOut(500)
+                }, 1000)
             } else {
                 document.getElementById('modSV').value = '' //清空輸入框
                 return
