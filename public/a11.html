@@ -251,7 +251,7 @@
             .then((res) => {
                 for (let i = 0; i < res.readResults.length; i++) {
                     if (res.readResults[i].id) {
-                        document.getElementById(res.readResults[i].id).innerHTML = roundDecimal(res.readResults[i].v, 2)
+                        document.getElementById(res.readResults[i].id).innerHTML = roundDecimal(res.readResults[i].v, 3)
                     }
                 }
             })
