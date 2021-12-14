@@ -14,7 +14,7 @@ let six_month = new Date(today.addDays(90))
 const getAllRecord = async(req, res, next) => {
     if (req.user.permission == 1) {
         try {
-            const posts = await User.find()
+            const posts = await User.find().sort({ loginDate: -1 })
             res.json(posts)
         } catch (err) {
             res.json({ message: err })
@@ -27,7 +27,7 @@ const getAllRecord = async(req, res, next) => {
 const getThisMonth = async(req, res, next) => {
     if (req.user.permission == 1) {
         try {
-            const posts = await User.find({ loginDate: { $gte: new Date(`${year}-${month}-01`) } })
+            const posts = await User.find({ loginDate: { $gte: new Date(`${year}-${month}-01`) } }).sort({ loginDate: -1 })
             res.json(posts)
         } catch (err) {
             res.json({ message: err })
@@ -42,7 +42,7 @@ const getThreeMonth = async(req, res, next) => {
         try {
             const posts = await User.find({
                 loginDate: { $gte: three_month },
-            })
+            }).sort({ loginDate: -1 })
             res.json(posts)
         } catch (err) {
             res.json({ message: err })
@@ -57,7 +57,7 @@ const getSixMonth = async(req, res, next) => {
         try {
             const posts = await User.find({
                 loginDate: { $gte: six_month },
-            })
+            }).sort({ loginDate: -1 })
             res.json(posts)
         } catch (err) {
             res.json({ message: err })

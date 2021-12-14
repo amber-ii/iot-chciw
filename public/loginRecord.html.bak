@@ -181,10 +181,10 @@
 
     let dateSelect = Array.from(document.querySelectorAll('.dateSelect button'))
     let fetchUrl = [
-        'http://web.chciw.com.tw:8080/loginrecord/get/this_month',
-        'http://web.chciw.com.tw:8080/loginrecord/get/three_month',
-        'http://web.chciw.com.tw:8080/loginrecord/get/six_month',
-        'http://web.chciw.com.tw:8080/loginrecord/get/all',
+        'http://localhost:8888/loginrecord/get/this_month',
+        'http://localhost:8888/loginrecord/get/three_month',
+        'http://localhost:8888/loginrecord/get/six_month',
+        'http://localhost:8888/loginrecord/get/all',
     ]
     fetchData(fetchUrl[0])
 
