@@ -1,7 +1,7 @@
 function onMessageArrived(r_message) {
     // 聽全部的訊息
     var rcmsg = JSON.parse(r_message.payloadString)
-    console.log(rcmsg)
+    // console.log(rcmsg)
     for (var key in rcmsg) {
         var Id = key
         var value = rcmsg[key]
