@@ -9,36 +9,59 @@
     <link rel="stylesheet" type="text/css" href="./css/water.css">
     <link rel="stylesheet" type="text/css" href="./css/index.css">
     <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="./css/progress.css"> -->
+    <link rel="stylesheet" type="text/css" href="./css/progress.css">
     <link rel="stylesheet" type="text/css" href="./css/pattern.css">
 
     <link rel="stylesheet" href="./css/style.css">
     <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
-
-
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    
 </head>
-<!-- 自來水 -->
 
 <body onload="subTopic='WaterProj';MQTTConnect();">
-    <div class="loading unblock">
+    <!-- 修改SV的提示ok -->
+    <div class="loadingSv unblock">
         <div class="flex items-center justify-center sticky top-0 w-full h-6 bg-red-400 text-gray-100">提交中...</div>
     </div>
 
+    <!-- 這裡要放查詢報表的提示，再來的loading  ok -->
+    <section>
+        <div class="loading flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
+            <div class="relative">
+                <div class="load-circle"></div>
+                <div class="word absolute top-0">loading</div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- 即時資訊 -->
     <section class="text-gray-200">
         <div class=" max-w-full mx-auto pb-10 px-14">
             <div class="flex flex-wrap justify-center pt-10 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
                 <div class="flex justify-center mb-20">
                     <div class="flex items-center pl-20 mt-10">
+                        <div class="image">
+                            <!-- <img class="image__img" src="https://img.icons8.com/color/48/000000/pumphouse.png" /> -->
+                            <img class="image__img mb-4" src="https://img.icons8.com/fluency/96/000000/pumphouse.png" />
+                            <div class="image__overlay image__overlay--primary">
+                                <p class="image__description">
+                                    點我切換機台
+                                </p>
+                            </div>
+                        </div>
                         <div class="line1"></div>
-                        <div class="startdot "></div>
-                        <div class="line2 "></div>
+                        <div class="line2"></div>
                         <div class="flex flex-col">
                             <div class="inv1">
                                 <div class="grid grid-cols-3 fqCard">
                                     <div class="space-y-3 flex  items-center flex-col">
                                         <div class="flex space-x-2 items-center">
                                             <ion-icon name="barcode-outline" class="icon-item"></ion-icon>
-                                            <span class="text-xl ">ST1</span>
+                                            <span class="text-xl">ST1</span>
                                         </div>
                                         <span id="St1" class="fqvalue">0</span>
                                     </div>
@@ -54,8 +77,8 @@
 
                                     <div class="space-y-3 flex items-center flex-col">
                                         <div class="flex space-x-2 items-center">
-                                            <ion-icon name="timer-outline" id="timer1" class="icon-item"></ion-icon>
-                                            <span class="text-xl ">FQ1</span>
+                                            <ion-icon name="timer-outline" class="icon-item"></ion-icon>
+                                            <span class="text-xl">FQ1</span>
                                         </div>
                                         <span id="Fq1" class="fqvalue">0</span>
                                     </div>
@@ -85,7 +108,7 @@
 
                             <div class="inv2">
                                 <div class="grid grid-cols-3 fqCard">
-                                    <div class="space-y-3 flex  items-center flex-col">
+                                    <div class="space-y-3 flex items-center flex-col">
                                         <div class="flex space-x-2 items-center">
                                             <ion-icon name="barcode-outline" class="icon-item"></ion-icon>
                                             <span class="text-xl ">ST2</span>
@@ -147,7 +170,8 @@
 
                                 </div>
                             </div>
-                            <div class="line7">
+                            <div class="">
+                                <img src="https://img.icons8.com/external-itim2101-blue-itim2101/50/000000/external-pipeline-plumber-tools-itim2101-blue-itim2101-5.png" />
                             </div>
                         </div>
                         <div class="line8"></div>
@@ -158,30 +182,159 @@
 
         </div>
     </section>
+
+    <!--趨勢圖 ok -->
+    <div class="bg-gray-900 flex items-center justify-center mb-6">
+        <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 w-full lg:w-11/12" x-data="{chartData:chartData()}" x-init="chartData.fetch()">
+            <div class="flex flex-wrap items-end">
+                <div class="flex-1 mb-5 flex inline-block">
+                    <h3 class="text-lg font-semibold leading-tight">自來水節電量</h3>
+                    <span class="text-sm leading-tight text-gray-400 ml-2 pt-1">單位:度</span>
+                </div>
+                <div class="relative mb-5 " @click.away="chartData.showDropdown=false">
+                    <button class="text-md hover:text-gray-300 h-6 focus:outline-none" @click="chartData.showDropdown=!chartData.showDropdown">
+                <span x-text="chartData.options[chartData.selectedOption].label"></span><i
+                  class="ml-1 mdi mdi-chevron-down"></i><ion-icon name="chevron-down-outline"></ion-icon>
+              </button>
+                    <div class="bg-gray-700  shadow-lg rounded text-sm absolute top-auto right-0 min-w-full w-32 z-30 mt-1 -mr-3" x-show="chartData.showDropdown" style="display: none;" x-transition:enter="transition ease duration-300 transform" x-transition:enter-start="opacity-0 translate-y-2"
+                        x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease duration-300 transform" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 translate-y-4">
+                        <span class="absolute top-0 right-0 w-3 h-3 bg-gray-700 transform rotate-45 -mt-1 mr-3"></span>
+                        <div class="bg-gray-700 rounded w-full relative z-10 py-1 ">
+                            <ul class="list-reset text-xs ">
+
+                                <template x-for="(item,index) in chartData.options">
+                      <li
+                        class="px-4 py-2 hover:bg-gray-600 hover:text-white transition-colors duration-100 cursor-pointer "
+                        :class="{'text-white':index==chartData.selectedOption}"
+                        @click="chartData.selectOption(index);chartData.showDropdown=false">
+                        <span x-text="item.label"></span>
+                      </li>
+                    </template>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <canvas id="chart" class="w-full"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- 搜尋欄 -->
+    <div class="bg-gray-900 flex justify-center text-gray-200 mt-10">
+        <div class="flex w-full lg:w-11/12">
+            <form id="form1" name="dateSearch">
+                <div class="flex space-x-6">
+                    <div class="flex items-center space-x-2 border-r-2 border-gray-300 pr-6">
+                        <label for="startDate">起始日</label>
+                        <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center rounded-lg">
+                    </div>
+                    <div class="flex items-center space-x-2 border-r-2 border-gray-400 pr-6">
+                        <label for="end Date">結束日</label>
+                        <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center rounded-lg">
+                    </div>
+                    <div class="flex items-center space-x-2 border-r-2 border-gray-700 pr-6">
+                        <div title="查詢" id="search" class="">
+                            <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-search-essentials-prettycons-flat-prettycons-3.png" />
+                        </div>
+                    </div>
+                    <div title="導出報表" class="flex items-center space-x-2 border-r-2 border-gray-700 pr-6">
+                        <button id="btnExport" class="download" onclick="exportTable();return false">
+                         <img src="https://img.icons8.com/doodle/48/000000/microsoft-excel-2019.png"/>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="flex items-center border-l-2 border-green-700 pl-4 space-x-2 ml-auto mr-1" style="font-family: 'cwTeXYen';">
+                此次搜尋的總節電量：<span id="saveresult" class="mx-3"></span>
+                <div class="ml-auto" style="font-family: 'cwTeXYen';">度</div>
+            </div>
+        </div>
+    </div>
+    <!-- 表格 -->
+    <section class="tables lg:w-11/12">
+        <table class="w-full" id="headerTable">
+            <thead class="sticky top-0">
+                <tr class="">
+                    <th>日期</th>
+                    <th>Press</th>
+                    <th>Sp1</th>
+                    <th>Sp2</th>
+                    <th>節電量</th>
+                </tr>
+            </thead>
+            <tbody class="" id="table2">
+
+            </tbody>
+        </table>
+    </section>
+
 </body>
 <script>
+    $('.loading').hide()
+    $('.word').hide()
+  
+    var roundDecimal = function(val, precision) {
+        return Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) / Math.pow(10, (precision || 0));
+    }
+
     function onMessageArrived(r_message) {
-
-        // 聽全部的訊息
         var rcMsg = JSON.parse(r_message.payloadString);
-        // console.log(rcMsg);
-
         for (var key in rcMsg) {
             var waterId = key;
             var waterValue = rcMsg[key];
-            if (document.getElementById(waterId) != null) {
+            if (document.getElementById(waterId)) {
                 document.getElementById(waterId).innerHTML = waterValue;
 
                 if (document.getElementById('Sw1').innerHTML == 1) {
-                    document.getElementById('motor1').setAttribute('class', 'motor-run');
+                    document.querySelector('#motor1').classList.add('motor-run')
+                    document.querySelector('#motor1').classList.remove('motor-none')
+                }
+                if (document.getElementById('Sw1').innerHTML == 0) {
+                    document.querySelector('#motor1').classList.remove('motor-run')
+                    document.querySelector('#motor1').classList.add('motor-none')
                 }
                 if (document.getElementById('Sw2').innerHTML == 1) {
-                    document.getElementById('motor2').setAttribute('class', 'motor-run');
+                    document.querySelector('#motor2').classList.add('motor-run')
+                    document.querySelector('#motor2').classList.remove('motor-none')
+                }
+                if (document.getElementById('Sw2').innerHTML == 0) {
+                    document.querySelector('#motor2').classList.remove('motor-run')
+                    document.querySelector('#motor2').classList.add('motor-none')
                 }
             }
         }
     }
 
+    // 修改SV
+
+    document.querySelector('.image').addEventListener('click', function() {
+        if (connected_flag == 0) { //eslint-disable-line
+            let out_msg = 'Not Connected so cannot send';
+            return false;
+        }
+        var cm_result = confirm('切換機台?');
+        if (cm_result) {
+            $('.loadingSv').show();
+
+            let value = 1
+            let msg = `{"cm":` + value + '}'; //eslint-disable-line
+            // let msg = `{"cm":` + value + '}'; //eslint-disable-line
+            console.log(msg);
+            let message = new Paho.MQTT.Message(msg); //eslint-disable-line
+            message.destinationName = 'WPconf';
+            mqtt.send(message); //eslint-disable-line
+
+            setTimeout(() => {
+                $('.loadingSv').fadeOut(500);
+            }, 1000)
+        } else {
+            // document.getElementById('modPress').value = ''; //清空輸入框
+            return;
+        }
+        return false;
+    })
 
     const modPress = () => {
         if (connected_flag == 0) { //eslint-disable-line
@@ -191,7 +344,7 @@
         var press_result = confirm('確定要修改壓力?');
         if (press_result) {
             // document.querySelector('.loading').classList.remove('unblock')
-            $('.loading').show();
+            $('.loadingSv').show();
 
             let value = document.getElementById('modPress').value;
             let msg = `{"sv":` + value + '}'; //eslint-disable-line
@@ -203,7 +356,7 @@
             // location.reload();
             document.getElementById('modPress').value = ''; //清空輸入框
             setTimeout(() => {
-                $('.loading').fadeOut(500);
+                $('.loadingSv').fadeOut(500);
             }, 1000)
         } else {
             document.getElementById('modPress').value = ''; //清空輸入框
@@ -212,19 +365,229 @@
         return false;
     };
 
-    setTimeout(() => {
-        $(document).ready(function() {
-            $('.demo').fadeOut();
-        });
-    }, 3500);
-</script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
-<script type="text/javascript" src="./index.js"></script>
-<script type="text/javascript" src="./mqtt.js"></script>
+
+    // 趨勢圖
+    let chartData = function() {
+        return {
+            date: '7days',
+            options: [{
+                    label: 'Last 7 Days',
+                    value: '7days',
+                }, {
+                    label: 'Last 30 Days',
+                    value: '30days',
+                },{
+                    label: 'Last 6 Months',
+                    value: '6months',
+                }, {
+                    label: 'Last 12 Months',
+                    value: '12months',
+                },
+
+            ],
+            showDropdown: false,
+            selectedOption: 0,
+            selectOption: function(index) {
+                this.selectedOption = index
+                this.date = this.options[index].value
+                this.renderChart()
+            },
+            data: null,
+            fetch: function() {
+                fetch('http://web.chciw.com.tw:8080/waters/chart')
+                    .then((res) => res.json())
+                    .then((res) => {
+                        this.data = res.dates
+                        this.renderChart()
+                    })
+            },
+            renderChart: function() {
+                let c = false
+                    // eslint-disable-next-line
+                Chart.helpers.each(Chart.instances, function(instance) {
+                    if (instance.chart.canvas.id == 'chart') {
+                        c = instance
+                    }
+                })
+
+                if (c) {
+                    c.destroy()
+                }
+
+                let ctx = document.getElementById('chart').getContext('2d')
+                    // eslint-disable-next-line
+                let chart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: this.data[this.date].data.label,
+                        datasets: [{
+                            label: '節電量',
+                            borderColor: 'rgba(30,144,225, 1)',
+                            pointBackgroundColor: 'rgba(30,144,225, 1)',
+                            data: this.data[this.date].data.SaveAmount,
+                        }],
+                    },
+                    layout: {
+                        padding: {
+                            right: 10,
+                        },
+                    },
+                    options: {
+                        legend: {
+                            display: true,
+                            labels: {
+                                // 點選的標題大小
+                                fontSize: 17,
+                            },
+                        },
+
+                        scales: {
+                            yAxes: [{
+                                gridLines: {
+                                    display: false,
+                                },
+                                ticks: {
+                                    fontSize: 16,
+                                    // eslint-disable-next-line
+                                    callback: function(value, index, array) {
+                                        return value > 1000 ? (value < 1000000 ? value / 1000 + 'K' : value / 1000000 + 'M') : value
+                                    },
+                                },
+                            }, ],
+                            xAxes: [{
+                                gridLines: {
+                                    display: false,
+                                },
+                                ticks: {
+                                    fontSize: 16,
+                                },
+                            }, ],
+                        },
+                    },
+                })
+            },
+        }
+    }
+
+    var DateDiff = function(a, b) {
+        var oDate1 = new Date(a)
+        var oDate2 = new Date(b)
+        var iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24) // 把相差的毫秒數轉換為天數
+        return iDays
+    }
+
+    function formatDate(now) {
+        let date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+        return date
+    }
+
+
+
+
+    // 依照日期搜尋
+    $('#search').click(function() {
+        var t2 = document.getElementById('table2')
+        var today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2') // eslint-disable-line
+
+        $.ajax({
+            beforeSend: function() {
+                var startDate = dateSearch.startDate.value // eslint-disable-line
+                var endDate = dateSearch.endDate.value // eslint-disable-line
+
+                if (startDate > endDate) {
+                    alert('無效日期，起始日不得大於結束日')
+                    return false
+                }
+                if (!startDate || !endDate) {
+                    alert('請輸入起始&結束日')
+                    return false
+                }
+                // if (DateDiff(startDate, endDate) >= 360) {
+                //     alert('搜尋日期區間360天')
+                //     return false
+                // } 
+                if (startDate < '2020-07-09') {
+                    alert('最早的資料為2020-07-09，請重新搜尋')
+                    return false
+                }
+                if (endDate > today || startDate > today) {
+                    alert('日期不得超過今日，請重新搜尋')
+                    return false
+                }
+                $('.loading').show()
+                $('.word').show()
+                t2.innerHTML = ''
+            },
+            type: 'POST',
+            url: '/waters',
+            data: $('#form1').serialize(), //序列化表單的值
+            async: true,
+            success: function(data) {
+                var renderString = ''
+                let saveTotal = 0
+                for (let index = 0; index < data.length; index++) {
+                    renderString =
+                        ' <tr>' +
+                        '<th>' +
+                        data[index].Date +
+                        '</th>' +
+                        '<th>' +
+                        data[index].Press +
+                        '</th>' +
+                        ' <th>' +
+                        data[index].I1sp +
+                        '</th>' +
+                        ' <th>' +
+                        data[index].I2sp +
+                        '</th>' +
+                        ' <th>' +
+                        data[index].SaveAmount +
+                        '</th>' +
+                        '</tr>'
+                    $('#table2').nextAll().remove()
+                    t2.insertAdjacentHTML('beforeEnd', renderString)
+                    saveTotal += data[index].SaveAmount
+                }
+                document.querySelector('#saveresult').innerHTML = roundDecimal(saveTotal, 2)
+                $('.loading').fadeOut(500)
+                $('.word').fadeOut(500)
+            },
+            error: function(request) {
+                alert('資料庫連線失敗，請洽電控組')
+            },
+        })
+    })
+
+    // 導出報表
+    function exportTable() {
+        // eslint
+        var startDate = form1.startDate.value // eslint-disable-line
+        var endDate = form1.endDate.value // eslint-disable-line
+        var today = new Date()
+        var yesterday = new Date((today / 1000 - 86400) * 1000)
+
+        if (!startDate && !endDate) {
+            endDate = formatDate(today)
+            startDate = formatDate(new Date((today / 1000 - 518400) * 1000))
+        }
+        $('#headerTable').table2excel({
+            name: 'Excel Document Name',
+            filename: `自來水節電量[${startDate}]-[${endDate}].xls`,
+        })
+    }
+</script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="./index.js"></script>
+<script type="text/javascript" src="./mqtt.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
 
 
 

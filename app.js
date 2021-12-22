@@ -17,6 +17,7 @@ const n2rRoutes = require('./routes/n2rRoutes')
 const tocRoutes = require('./routes/tocRoutes')
 const users = require('./controllers/userController')
 const a25Routes = require('./routes/a25Routes')
+const waterRoutes = require('./routes/waterRoutes')
 const loginRecordRoutes = require('./routes/loginRecordRoutes')
 const moment = require('moment-timezone')
 
@@ -105,6 +106,8 @@ app.use('/iot-chciw/views', router) //指定根路徑
 // 硫酸per3
 app.use('/sacid', users.isLoggedIn, sacidRoutes.routes)
 
+app.use('/waters', users.isLoggedIn, waterRoutes.routes)
+
 // 氮氣per5
 app.use('/n2r', users.isLoggedIn, n2rRoutes.routes)
 
@@ -180,6 +183,15 @@ app.get('/air', users.isLoggedIn, (req, res) => {
 app.get('/water', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 3) {
         res.sendFile(`${__dirname}/public/water.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+
+app.get('/waterss', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 3) {
+        // res.sendFile(`${__dirname}/public/water.html`)
+        res.render('water')
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
     }
