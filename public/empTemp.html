@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>體溫紀錄</title>
+    <link rel="stylesheet" type="text/css" href="./css/water.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/progress.css">
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
+
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+</head>
+
+<body onload="subTopic='TCM';MQTTConnect();">
+    <!-- 修改SV的提示ok -->
+    <div class="loadingSv unblock">
+        <div class="flex items-center justify-center sticky top-0 w-full h-6 bg-red-400 text-gray-100">提交中...</div>
+    </div>
+
+    <!-- 這裡要放查詢報表的提示，再來的loading  ok -->
+    <section>
+        <div class="loading flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
+            <div class="relative">
+                <div class="load-circle"></div>
+                <div class="word absolute top-0">loading</div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- 即時資訊 -->
+    <section class="text-gray-200">
+        <div class="max-w-full mx-auto pb-10 px-14">
+            <div class="flex flex-wrap justify-center pt-10 sm:-m-4 -mx-4 -mb-10 -mt-4 animate__animated animate__fadeIn">
+                <div class="flex justify-center mb-20">
+                    今日發燒名單
+                    <form id="hot">
+                        <input type="text" name="CardNo" id="CardNo">
+                        <!-- <input type="text" name="temp" id="temp"> -->
+                        <button type="submit" class="cardNo-btn h-8 w-8 bg-blue-400"></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 搜尋欄 -->
+    <div class="bg-gray-900 flex justify-center text-gray-200 mt-10">
+        <div class="flex w-full lg:w-11/12">
+            <form id="form1" name="dateSearch">
+                <div class="flex space-x-6">
+                    <div class="flex items-center space-x-2 border-r-2 border-gray-300 pr-6">
+                        <label for="startDate">起始日</label>
+                        <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center rounded-lg">
+                    </div>
+                    <div class="flex items-center space-x-2 border-r-2 border-gray-400 pr-6">
+                        <label for="endDate">結束日</label>
+                        <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center rounded-lg">
+                    </div>
+                    <div class="flex items-center space-x-2 border-r-2 border-gray-700 pr-6">
+                        <div title="查詢" id="search" class="">
+                            <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-search-essentials-prettycons-flat-prettycons-3.png" />
+                        </div>
+                    </div>
+                    <div title="導出報表" class="flex items-center space-x-2 border-r-2 border-gray-700 pr-6">
+                        <button id="btnExport" class="download" onclick="exportTable();return false">
+                         <img src="https://img.icons8.com/doodle/48/000000/microsoft-excel-2019.png"/>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <!-- 表格 -->
+    <section class="tables lg:w-11/12">
+        <table class="w-full" id="headerTable">
+            <thead class="sticky top-0">
+                <tr class="">
+                    <th>日期</th>
+                    <th>CardNo</th>
+                    <th>工號</th>
+                    <th>姓名</th>
+                    <th>部門</th>
+                    <th>體溫</th>
+                    <th>過去七天均溫</th>
+                </tr>
+            </thead>
+            <tbody class="" id="table2">
+            </tbody>
+        </table>
+    </section>
+
+</body>
+<script>
+    $('.loading').hide()
+    $('.word').hide()
+
+
+    var roundDecimal = function(val, precision) {
+        return Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) / Math.pow(10, (precision || 0));
+    }
+    Number.prototype.comma_formatter = function() {
+        return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+    }
+
+    function onMessageArrived(r_message) {
+        var rcMsg = JSON.parse(r_message.payloadString);
+        console.log("🚀 ~ file: empTemp.html ~ line 115 ~ onMessageArrived ~ rcMsg", rcMsg)
+        for (var key in rcMsg) {
+            var cardID = key.substring(3, 13)
+            var temp = rcMsg[key];
+            if (temp >= 37) {
+                document.querySelector('#CardNo').value = cardID
+                    // document.querySelector('#temp').value = temp
+
+                // var t2 = document.getElementById('table2')
+                // var today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2') // eslint-disable-line
+                // $('.cardNo-btn').click(function() {
+                $.ajax({
+                        // beforeSend: function() {},
+                        type: 'POST',
+                        url: '/line/cardno',
+                        data: $('#hot').serialize(), //序列化表單的值
+                        async: true,
+                        success: function(data) {
+                            console.log("fetch成功")
+                        },
+                        error: function(request) {
+                            alert('資料庫連線失敗，請洽電控組')
+                        },
+                    })
+                    // })
+            }
+        }
+    }
+
+    // 修改SV
+
+
+
+
+
+
+    var DateDiff = function(a, b) {
+        var oDate1 = new Date(a)
+        var oDate2 = new Date(b)
+        var iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24) // 把相差的毫秒數轉換為天數
+        return iDays
+    }
+
+    function formatDate(now) {
+        let date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+        return date
+    }
+
+
+
+
+    // 依照日期搜尋
+    $('#search').click(function() {
+        var t2 = document.getElementById('table2')
+        var today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2') // eslint-disable-line
+
+        $.ajax({
+            beforeSend: function() {
+                var startDate = dateSearch.startDate.value // eslint-disable-line
+                var endDate = dateSearch.endDate.value // eslint-disable-line
+
+                if (startDate > endDate) {
+                    alert('無效日期，起始日不得大於結束日')
+                    return false
+                }
+                if (!startDate || !endDate) {
+                    alert('請輸入起始&結束日')
+                    return false
+                }
+                // if (DateDiff(startDate, endDate) >= 360) {
+                //     alert('搜尋日期區間360天')
+                //     return false
+                // } 
+                if (startDate < '2020-07-09') {
+                    alert('最早的資料為2020-07-09，請重新搜尋')
+                    return false
+                }
+                if (endDate > today || startDate > today) {
+                    alert('日期不得超過今日，請重新搜尋')
+                    return false
+                }
+                $('.loading').show()
+                $('.word').show()
+                t2.innerHTML = ''
+            },
+            type: 'POST',
+            url: '/waters',
+            data: $('#form1').serialize(), //序列化表單的值
+            async: true,
+            success: function(data) {
+                var renderString = ''
+                let saveTotal = 0
+                for (let index = 0; index < data.length; index++) {
+                    renderString =
+                        ' <tr>' +
+                        '<th>' +
+                        data[index].Date +
+                        '</th>' +
+                        '<th>' +
+                        data[index].Press +
+                        '</th>' +
+                        ' <th>' +
+                        data[index].I1sp +
+                        '</th>' +
+                        ' <th>' +
+                        data[index].I2sp +
+                        '</th>' +
+                        ' <th>' +
+                        data[index].SaveAmount +
+                        '</th>' +
+                        '</tr>'
+                    $('#table2').nextAll().remove()
+                    t2.insertAdjacentHTML('beforeEnd', renderString)
+                    saveTotal += data[index].SaveAmount
+                }
+                document.querySelector('#saveresult').innerHTML = roundDecimal(saveTotal, 2)
+                $('.loading').fadeOut(500)
+                $('.word').fadeOut(500)
+            },
+            error: function(request) {
+                alert('資料庫連線失敗，請洽電控組')
+            },
+        })
+    })
+
+    // 導出報表
+    function exportTable() {
+        // eslint
+        var startDate = form1.startDate.value // eslint-disable-line
+        var endDate = form1.endDate.value // eslint-disable-line
+        var today = new Date()
+        var yesterday = new Date((today / 1000 - 86400) * 1000)
+
+        if (!startDate && !endDate) {
+            endDate = formatDate(today)
+            startDate = formatDate(new Date((today / 1000 - 518400) * 1000))
+        }
+        $('#headerTable').table2excel({
+            name: 'Excel Document Name',
+            filename: `自來水節電量[${startDate}]-[${endDate}].xls`,
+        })
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+
+<script type="text/javascript" src="./index.js"></script>
+<script type="text/javascript" src="./mqtt.js"></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+
+
+
+</html>
