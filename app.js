@@ -17,6 +17,8 @@ const n2rRoutes = require('./routes/n2rRoutes')
 const tocRoutes = require('./routes/tocRoutes')
 const users = require('./controllers/userController')
 const a25Routes = require('./routes/a25Routes')
+const particalRoutes = require('./routes/particleRoutes')
+const empTempRoutes = require('./routes/empTempRoutes')
 const waterRoutes = require('./routes/waterRoutes')
 const loginRecordRoutes = require('./routes/loginRecordRoutes')
 const moment = require('moment-timezone')
@@ -116,6 +118,8 @@ app.use('/toc', users.isLoggedIn, tocRoutes.routes)
 
 // A25-DATA per3
 app.use('/a25data', users.isLoggedIn, a25Routes.routes)
+app.use('/particles', users.isLoggedIn, particalRoutes.routes)
+app.use('/line', users.isLoggedIn, empTempRoutes.routes)
 
 app.use('/loginrecord', users.isLoggedIn, loginRecordRoutes.routes)
 
@@ -167,7 +171,7 @@ app.post(
 
 //
 app.get('/', users.isLoggedIn, (req, res) => {
-    res.render('index', { title: '首頁', name: req.user.name })
+    res.render('index', { title: 'CHCIW IOT', name: req.user.name })
 })
 
 // 冷氣per2
@@ -268,6 +272,23 @@ app.get('/loginrecord', users.isLoggedIn, (req, res) => {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
+
+app.get('/particle', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 3) {
+        res.sendFile(`${__dirname}/public/particle.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+app.get('/empTemp', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1) {
+        res.sendFile(`${__dirname}/public/empTemp.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+
+
 
 // PORT
 app.listen(8080)
