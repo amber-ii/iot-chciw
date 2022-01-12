@@ -112,6 +112,12 @@ let chartData = function() {
                             pointBackgroundColor: 'rgba(147, 112, 219, 1)',
                             data: this.data[this.date].data.a16t1,
                         },
+						 {
+                            label: 'a2t1',
+                            borderColor: 'rgba(255,140,0, 1)',
+                            pointBackgroundColor: 'rgba(255,140,0, 1)',
+                            data: this.data[this.date].data.a2t1,
+                        },
                     ],
                 },
                 layout: {
@@ -226,6 +232,9 @@ $('#search').click(function() {
                     '</th>' +
                     ' <th class="p-3  text-center">' +
                     data[index].a16t1 +
+                    '</th>' +
+					 ' <th class="p-3  text-center">' +
+                    data[index].a2t1 +
                     '</th>' +
                     '</tr>'
                 $('#table2').nextAll().remove()
