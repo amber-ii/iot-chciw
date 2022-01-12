@@ -21,7 +21,7 @@
 <!-- N2R監測 -->
 
 
-<body onload="subTopic='N2R';MQTTConnect();">
+<body>
 
     <div class="loading flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
         <div class="relative">
@@ -210,6 +210,41 @@
                     </div>
                 </div>
             </div>
+
+                 <div class="font-sans py-5 container mx-auto max-w-md">
+                <div class="relative">
+                    <div class="card color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
+                    <div class="card color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
+                    <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md">
+                        <div class="grid grid-cols-2">
+                            <div class="flex items-center flex-col text-center space-y-2">
+                                <div class="flex space-x-1 items-center">
+                                    <ion-icon name="timer-outline" id="A2F1timer" class="timer"></ion-icon>
+
+                                    <span class="ft">A2F1</span>
+                                </div>
+
+                                <div class="fvalue text-center" id="A2F1"></div>
+                                <div class="">
+                                    <iframe src="n2rerr-A2F1.html" scrolling="no" class="w-14 h-6"></iframe>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center flex-col text-center space-y-2">
+                                <div class="flex space-x-1 items-center">
+                                    <ion-icon name="trending-up-outline" class="trending"></ion-icon>
+
+                                    <span class="ft1">A2T1</span>
+                                </div>
+                                <div class="tvalue text-center" id="A2T1"></div>
+                                <div class="">
+                                    <iframe src="n2rerr-A2T1.html" scrolling="no" class="w-14 h-6"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -332,6 +367,7 @@
                                         <th class="text-center">A4t1</th>
                                         <th class="text-center">A8t1</th>
                                         <th class="text-center">A16t1</th>
+                                        <th class="text-center">A2t1</th>
                                     </tr>
                                 </thead>
                                 {{#each rows}}
@@ -345,6 +381,7 @@
                                         <th class="py-3 text-center">{{this.a4t1}}</th>
                                         <th class="py-3 text-center">{{this.a8t1}}</th>
                                         <th class="py-3 text-center">{{this.a16t1}}</th>
+                                        <th class="py-3 text-center">{{this.a2t1}}</th>
 
                                     </tr>
                                 </tbody>
@@ -387,3 +424,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
 
 </html>
+
+<script>
+    subTopic = 'N2R'
+    MQTTConnect();
+</script>
