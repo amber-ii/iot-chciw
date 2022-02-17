@@ -76,6 +76,7 @@
         </div>
         <h1 class="title-font mb-10 text-4xl font-extrabold leading-10 tracking-tight sm:text-4xl sm:leading-none md:text-5xl animate__animated animate__slideInLeft text-center text-white">
             CHCIW ELECTRICAL CONTROL</h1>
+             <p class="text-red-700 text-center text-xl font-bold mb-2">由於Server服務更新，今日(2/17) 12:30-14:00 網站暫停使用</p>
               {{!-- 選單 --}}
             <div class="head">
                 <ul>
@@ -89,7 +90,13 @@
                     <li class="unblock">廢水池監控</li>
                     <li class="unblock">A11儀表</li>
                     <li class="unblock">A25 DATA</li>
-                    <li class="unblock w-10" title="A10螺旋式熱交換器變頻控制">A10螺旋式熱交換器變頻</li>
+                    <li class="unblock w-10" title="A10螺旋式熱交換器變頻控制">A10螺旋式熱交換器變頻控制</li>
+                    <li class="unblock">Particle</li>
+                    <li class="unblock">A2監控</li>
+                    <li class="unblock">自來水</li>
+                    <li class="unblock">A10蒸氣</li>
+                    <li class="unblock">A10螺旋式熱交換器變頻控制</li>
+                    <li class="unblock">Modbus斷線</li>
                     <li class="unblock">使用者登入紀錄</li>
 
                    
@@ -128,7 +135,19 @@
               <iframe src="./a25datas" class="h-screen w-full"></iframe></ul>
                <ul class="unblock">
               <iframe src="./a10heat" class="h-screen w-full"></iframe></ul>
-                    <ul class="unblock">
+             <ul class="unblock">
+              <iframe src="./particle" class="h-screen w-full"></iframe></ul>
+               <ul class="unblock">
+              <iframe src="./a2" class="h-screen w-full"></iframe></ul>
+              <ul class="unblock">
+              <iframe src="./water_per4" class="h-screen w-full"></iframe></ul>
+                <ul class="unblock">
+              <iframe src="./vpc_per4" class="h-screen w-full"></iframe></ul>
+                <ul class="unblock">
+              <iframe src="./a10heat_per4" class="h-screen w-full"></iframe></ul>
+                <ul class="unblock">
+              <iframe src="./modbus" class="h-screen w-full"></iframe></ul>
+                <ul class="unblock">
               <iframe src="./loginrecord" class="h-screen w-full"></iframe></ul>
             </div>
     </div>
@@ -142,7 +161,7 @@
     if(pernames.includes('工務課')){
             navs[0].classList.remove('unblock')
             navs[6].classList.remove('unblock')
-    }else if(pernames.includes('酸鹼')){
+    }else if(pernames.includes('酸鹼') || pernames.includes('彥廷')){
             navs[1].classList.remove('unblock')
             navs[0].classList.remove('active')
             navs[1].classList.add('active')
@@ -152,21 +171,46 @@
             navs[8].classList.remove('unblock')
             navs[9].classList.remove('unblock')
             navs[10].classList.remove('unblock')
+            navs[11].classList.remove('unblock')
             bodys[1].classList.remove('unblock')
             bodys[0].classList.add('unblock')
     }else if(pernames.includes('特化')){
             navs[3].classList.remove('unblock')
             navs[0].classList.remove('active')
             navs[3].classList.add('active')
+            navs[12].classList.remove('unblock')
             bodys[3].classList.remove('unblock')
             bodys[0].classList.add('unblock')
     }else if(pernames.includes('總機')){
             navs[0].classList.remove('unblock')
+    }
+    else if(pernames.includes('世宏')){
+            navs[3].classList.remove('unblock')
+            navs[0].classList.remove('active')
+            navs[3].classList.add('active')
+            bodys[3].classList.remove('unblock')
+            bodys[0].classList.add('unblock')
     }else if(pernames.includes('環安')){
             navs[7].classList.remove('unblock')
             navs[7].classList.add('active')
             bodys[0].classList.add('unblock')
             bodys[7].classList.remove('unblock')
+    }
+    else if(pernames.includes('凱恩')){
+        navs[0].classList.remove('unblock')
+        navs[1].classList.remove('unblock')
+        navs[3].classList.remove('unblock')
+        navs[4].classList.remove('unblock')
+        navs[6].classList.remove('unblock')
+        navs[7].classList.remove('unblock')
+        navs[8].classList.remove('unblock')
+        navs[9].classList.remove('unblock')
+        navs[11].classList.remove('unblock')
+        navs[12].classList.remove('unblock')
+        navs[13].classList.remove('unblock')
+        navs[14].classList.remove('unblock')
+        navs[15].classList.remove('unblock')
+        navs[17].classList.remove('unblock')
     }else{
         navs[0].classList.remove('unblock')
         navs[1].classList.remove('unblock')
@@ -180,6 +224,12 @@
         navs[9].classList.remove('unblock')
         navs[10].classList.remove('unblock')
         navs[11].classList.remove('unblock')
+        navs[12].classList.remove('unblock')
+        {{!-- navs[13].classList.remove('unblock') --}}
+        {{!-- navs[14].classList.remove('unblock') --}}
+        {{!-- navs[15].classList.remove('unblock') --}}
+        navs[16].classList.remove('unblock')
+        navs[17].classList.remove('unblock')
     }
 
     navs.forEach((nav) => {
