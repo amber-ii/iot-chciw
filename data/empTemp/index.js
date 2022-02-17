@@ -57,10 +57,20 @@ const getEvent = async() => {
         pool = await sql.connect(config.sql)
         let sqlQueries = await utils.loadSqlQueries('empTemp')
         let list = await pool.request().query(sqlQueries.empTempUnion)
-        let result = JSON.stringify(list.recordset).replace(/[{]/g, '【').replace(/[}]/g, '】').replace(/["\\]/g, '')
+        let result = JSON.stringify(list.recordset)
+        .replace(/[{]/g, '')
+        .replace(/[}]/g, '\n\n🔸🔸🔸🔸🔸🔸\n')
+            .replace(/["\\]/g, '')
+            .replace(/[[]/g, '')
+            .replace(/[\]]/g, '')
+            .replace(/[:]/g, '：')
+            .replace(/[,]/g, '\n')
+        let length = list.recordset.length
         if (!result) {
             result = '此時段無資料'
+            length = 0
         }
+       
         var options = {
             method: 'POST',
             uri: 'https://notify-api.line.me/api/notify',
@@ -68,7 +78,7 @@ const getEvent = async() => {
                 bearer: '7rw4YPoeIx5dgJg5mAduZSeuhXfzkzyRbd64yVgHGWE',
             },
             form: {
-                message: `${formatDate(new Date())}` + result,
+                message: `${formatDate(new Date())}` + `\n\n共 ${length} 位\n\n` + `${result}`,
             },
             json: true,
         }
@@ -89,9 +99,75 @@ const getEvent = async() => {
 }
 
 
-schedule.scheduleJob({ hour: 09, minute: 00 }, getEvent)
-schedule.scheduleJob({ hour: 16, minute: 30 }, getEvent)
-schedule.scheduleJob({ hour: 20, minute: 30 }, getEvent)
+// 沒量體溫
+const getEventNotTemp = async() => {
+    try {
+        pool = await sql.connect(config.sql)
+        let sqlQueries = await utils.loadSqlQueries('empTemp')
+        let list = await pool.request().query(sqlQueries.empTempNot)
+        let result = JSON.stringify(list.recordset)
+            .replace(/[{]/g, '🔹')
+            .replace(/[}]/g, '\n\n')
+            .replace(/["\\]/g, '')
+            .replace(/[[]/g, '')
+            .replace(/[\]]/g, '')
+            .replace(/[,]/g, '')
+            .replace(/[Dep:]/g, '')
+            .replace(/['Name:']/g, ' ')
+         
+
+        let length = list.recordset.length
+        if (!result) {
+            result = '此時段無資料'
+            length = 0
+        }
+
+        var options = {
+            method: 'POST',
+            uri: 'https://notify-api.line.me/api/notify',
+            auth: {
+                bearer: '7rw4YPoeIx5dgJg5mAduZSeuhXfzkzyRbd64yVgHGWE',
+            },
+           
+            form: {
+                message: `${formatDate(new Date())}` + `\n\n🕘九點前尚未量體溫` + `\n\n共 ${length} 位\n\n` + `${result}`,
+            },
+            json: true,
+        }
+        rp(options)
+            .then(function(parsedBody) {
+                console.log('發送成功')
+            })
+            .catch(function(err) {
+                console.log(err)
+            })
+        res.send(options.form)
+            // return list.recordset
+    } catch (error) {
+        console.log(error.message)
+    } finally {
+        pool.close()
+    }
+}
+
+
+
+// schedule.scheduleJob({ hour: 09, minute: 01, dayOfWeek: new schedule.Range(1, 6) }, async() => {
+//     await getEvent()
+//     await getEventNotTemp()
+// })
+
+
+schedule.scheduleJob({ hour: 09, minute: 01 }, async() => {
+    await getEvent()
+})
+schedule.scheduleJob({ hour: 16, minute: 31 }, async() => {
+    await getEvent()
+})
+schedule.scheduleJob({ hour: 20, minute: 31 }, async() => {
+    await getEvent()
+})
+
 
 
 
@@ -103,6 +179,11 @@ const getEventByID = async(CardNo, temp) => {
         const sqlQueries = await utils.loadSqlQueries('empTemp')
         let list = await pool.request().input('CardNo', sql.VarChar(100), CardNo).query(sqlQueries.empTempByID)
         let rows = JSON.stringify(list.recordset).replace(/[{]/g, '').replace(/[}]/g, '').replace(/[]]/g, '').replace(/["\\]/g, '')
+        
+        if (!rows) {
+            rows = '非chciw員工'
+           
+        }
         var options = {
             method: 'POST',
             uri: 'https://notify-api.line.me/api/notify',
@@ -110,7 +191,7 @@ const getEventByID = async(CardNo, temp) => {
                 bearer: 'CPFL6Ga34AonzhEflKkTrSHTJscHgj423gRG1kbmB1l',
             },
             form: {
-                message: rows + ` ,體溫:${temp}`,
+                message: rows + ` ,🌡體溫:${temp}`,
             },
             json: true,
         }
@@ -147,4 +228,5 @@ module.exports = {
     // getEvent1,
     getEventByDate,
     getEventByID,
+    getEventNotTemp,
 }
