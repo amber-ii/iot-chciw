@@ -4,7 +4,7 @@
         "node": true,
         "commonjs": true,
         "es2021": true,
-        "amd": true,
+       
         "es6": true,
         "jquery": true
     },
@@ -26,13 +26,7 @@
             "error",
             "windows"
         ],
-        "quotes": [
-            "error",
-            "single"
-        ],
-        "semi": [
-            "error",
-            "always"
-        ]
+        
+        
     }
 }
