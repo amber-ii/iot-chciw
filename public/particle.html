@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A25 DATA</title>
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/particle.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/progress.css">
+    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+
+<body class="bg-gray-900">
+    <div class="text-gray-100 max-w-full mx-auto pt-4 px-8 animate__animated animate__fadeIn">
+        <div class="loading unblock z-50 absolute">
+            <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
+                <div class="relative">
+                    <div class="load-circle"></div>
+                    <div class="word absolute top-0 z-50">loading</div>
+                </div>
+            </div>
+        </div>
+        <div class="bg-gray-900 flex justify-center text-gray-200 mt-10">
+            <div class="flex w-full lg:w-11/12">
+                <form id="form1" name="particalForm">
+                    <div class="flex space-x-6">
+                        <div class="factory_date flex items-center space-x-3 px-6 py-1">
+                            <div class="flex items-center space-x-2">
+                                <label for="factory">廠別</label>
+                                <select name="factory" id="factory" class="factory text-gray-700 text-left rounded-lg pl-2">
+                                <option value="" class="text-center"></option>
+                                <option value="A25-1">A25-1</option>
+                                <option value="A25-2">A25-2</option>
+                                <option value="A25-3">A25-3</option>
+                                <option value="A11">A11</option>
+                            </select>
+
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="startDate">起始</label>
+                                <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center rounded-lg">
+                            </div>
+                            <div class="flex items-center space-x-2">
+                                <label for="endDate">結束</label>
+                                <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center rounded-lg">
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <label for="LEVEL8">批號</label>
+                            <input type="text" name="LEVEL8" id="LEVEL8" class="text-gray-700 text-center rounded-lg">
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <label for="LorS">警告</label>
+                            <select name="LorS" id="LorS" class="LorS text-gray-700 text-left rounded-lg pl-2">
+                                <option value="">全部</option>
+                                <option value="1">1-異常</option>
+                            </select>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <div title="查詢" id="search" class="">
+                                <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-search-essentials-prettycons-flat-prettycons-3.png" />
+                            </div>
+                        </div>
+                        <div title="導出報表" class="flex items-center space-x-2">
+                            <button id="btnExport" class="download" onclick="exportTable();return false">
+                         <img src="https://img.icons8.com/doodle/48/000000/microsoft-excel-2019.png"/>
+                        </button>
+                        </div>
+                        <button title="清除選單" class="hover:text-gray-100 clear" id="clear" type="reset">
+                   <img src="https://img.icons8.com/external-bearicons-outline-color-bearicons/64/000000/external-Reset-miscellany-texts-and-badges-bearicons-outline-color-bearicons.png"/>
+                 </button>
+                    </div>
+                </form>
+                <div class="flex items-center border-l-2 border-green-700 pl-4 space-x-2 ml-auto mr-1" style="font-family: 'cwTeXYen';">
+                    共：<span id="saveresult" class="mx-3"></span>
+                    <div class="ml-auto" style="font-family: 'cwTeXYen';">項</div>
+                </div>
+            </div>
+        </div>
+        <!-- 表格 -->
+        <section class="tables lg:w-11/12">
+            <table class="w-full table-sortable" id="headerTable">
+                <thead class="sticky top-0">
+                    <tr>
+                        <th>廠別</th>
+                        <th>日期 時間</th>
+                        <th>Lot No.</th>
+                        <th>Particles>0.5㎛</th>
+                        <th>>0.3㎛</th>
+                        <th>>0.2㎛</th>
+                        <th>>0.1㎛</th>
+                        <th>>0.06㎛</th>
+                        <th>>0.04㎛</th>
+                        <th>警告值</th>
+                        <th>檢驗者</th>
+                        <th>取樣者</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </section>
+    </div>
+</body>
+
+<script>
+    $('.loading').hide()
+    $('.word').hide()
+
+
+    let roundDecimal = function(val, precision) {
+        return Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) / Math.pow(10, (precision || 0));
+    }
+    Number.prototype.comma_formatter = function() {
+        return this.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',')
+    }
+    let DateDiff = function(a, b) {
+        var oDate1 = new Date(a)
+        var oDate2 = new Date(b)
+        var iDays = parseInt(Math.abs(oDate1 - oDate2) / 1000 / 60 / 60 / 24) // 把相差的毫秒數轉換為天數
+        return iDays
+    }
+
+    function formatDate(now) {
+        let date = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+        return date
+    }
+
+    $('#search').click(function() {
+        let t2 = document.getElementById('table2')
+        let today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2') // eslint-disable-line
+
+        $.ajax({
+            beforeSend: function() {
+                let startDate = particalForm.startDate.value // eslint-disable-line
+                let endDate = particalForm.endDate.value // eslint-disable-line
+                let factory = particalForm.factory.value // eslint-disable-line
+                let lot = particalForm.LEVEL8.value // eslint-disable-line
+                let lors = particalForm.LorS.value // eslint-disable-line
+
+                if (lot && (startDate || endDate || factory || lors)) {
+                    alert('批號僅可單一搜尋，不得加入其他條件')
+                    return false
+                }
+
+                if (lors && (startDate || endDate || factory || lot)) {
+                    alert('警告值1僅可單一搜尋，不得加入其他條件')
+                    return false
+                }
+                if ((!startDate && endDate && factory) || (!startDate && !endDate && factory) ||
+                    (startDate && !endDate && factory) || (!factory && !startDate && endDate)) {
+                    alert('日期沒選完唷📅')
+                    return false
+                }
+
+                if (!startDate && !endDate && !factory && !lors && !lot) {
+                    alert('請選擇廠別、日期')
+                    return false
+                }
+
+                if (startDate > endDate) {
+                    alert('無效日期，起始日不得大於結束日')
+                    return false
+                }
+
+                if (startDate && endDate && !factory) {
+                    alert('請選廠別🏚')
+                    return false
+                }
+
+                if (DateDiff(startDate, endDate) >= 93) {
+                    alert('每次搜尋不要超過三個月')
+                    return false
+                }
+                // if (startDate < '2020-07-09') {
+                //     alert('最早的資料為2020-07-09，請重新搜尋')
+                //     return false
+                // }
+                // if (endDate > today || startDate > today) {
+                //     alert('日期不得超過今日，請重新搜尋')
+                //     return false
+                // }
+                $('.loading').show()
+                $('.word').show()
+                document.querySelector('tbody').innerHTML = ''
+            },
+            type: 'POST',
+            url: '/particles',
+            data: $('#form1').serialize(), //序列化表單的值
+            async: true,
+            success: function(data) {
+                var renderString = ''
+                for (let index = 0; index < data.length; index++) {
+                    if (data[index].p5 == -9999) {
+                        data[index].p5 = '--'
+                    }
+                    if (data[index].p3 == -9999) {
+                        data[index].p3 = '--'
+                    }
+                    if (data[index].p2 == -9999) {
+                        data[index].p2 = '--'
+                    }
+                    if (data[index].p1 == -9999) {
+                        data[index].p1 = '--'
+                    }
+                    if (data[index].p6 == -9999 || data[index].p6 == null) {
+                        data[index].p6 = '--'
+                    }
+                    if (data[index].p4 == -9999 || data[index].p4 == null) {
+                        data[index].p4 = '--'
+                    }
+                    renderString =
+                        '<tr>' +
+                        '<td>' +
+                        data[index].factory +
+                        '</td>' +
+                        '<td>' +
+                        data[index].date +
+                        '</td>' +
+                        '<td>' +
+                        data[index].lot +
+                        '</td>' +
+                        '<td>' +
+                        data[index].p5 +
+                        '</td>' +
+                        '<td>' +
+                        data[index].p3 +
+                        '</td>' +
+                        '<td>' +
+                        data[index].p2 +
+                        '</td>' +
+                        '<td>' +
+                        data[index].p1 +
+                        '</td>' +
+                        '<td>' +
+                        (data[index].p6 ? data[index].p6 : data[index].A) +
+                        '</td>' +
+                        '<td>' +
+                        (data[index].p4 ? data[index].p4 : data[index].B) +
+                        '</td>' +
+                        '<td>' +
+                        data[index].LorS +
+                        '</td>' +
+                        '<td>' +
+                        data[index].LEVEL6 +
+                        '</td>' +
+                        '<td>' +
+                        data[index].LEVEL7 +
+                        '</td>' +
+                        '</tr>';
+
+                    $('tbody').nextAll().remove()
+                    document.querySelector('tbody').insertAdjacentHTML('beforeEnd', renderString)
+                }
+                document.querySelector('#saveresult').innerHTML = data.length
+
+                $('.loading').fadeOut(500)
+                $('.word').fadeOut(500)
+            },
+            error: function(request) {
+                alert('資料庫連線失敗，請洽電控組')
+            },
+        })
+    })
+
+    // 導出報表
+    function exportTable() {
+        // eslint
+        var startDate = form1.startDate.value // eslint-disable-line
+        var endDate = form1.endDate.value // eslint-disable-line
+        var today = new Date()
+        var yesterday = new Date((today / 1000 - 86400) * 1000)
+        let factoryName = document.querySelector('.factory').value
+            // if (!startDate && !endDate) {
+            //     endDate = formatDate(today)
+            //     startDate = formatDate(new Date((today / 1000 - 518400) * 1000))
+            // }
+        $('#headerTable').table2excel({
+            name: 'Excel Document Name',
+            filename: `Particles-${factoryName}[${startDate}]-[${endDate}].xls`,
+        })
+    }
+
+
+    function sortTableByColumn(table, column, asc = true) {
+        const dirModifier = asc ? 1 : -1
+        const tBody = table.tBodies[0]
+        const rows = Array.from(tBody.querySelectorAll('tr'))
+
+        // Sort each row
+        const sortedRows = rows.sort((a, b) => {
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim()
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim()
+
+            return aColText > bColText ? 1 * dirModifier : -1 * dirModifier
+        })
+
+        // Remove all existing TRs from the table
+        while (tBody.firstChild) {
+            tBody.removeChild(tBody.firstChild)
+        }
+
+        // Re-add the newly sorted rows
+        tBody.append(...sortedRows)
+
+        // Remember how the column is currently sorted
+        table.querySelectorAll('th').forEach((th) => th.classList.remove('th-sort-asc', 'th-sort-desc'))
+        table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-asc', asc)
+        table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-desc', !asc)
+    }
+
+    document.querySelectorAll('.table-sortable th').forEach((headerCell) => {
+        headerCell.addEventListener('click', () => {
+            const tableElement = headerCell.parentElement.parentElement.parentElement
+            const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell)
+            const currentIsAscending = headerCell.classList.contains('th-sort-asc')
+
+            sortTableByColumn(tableElement, headerIndex, !currentIsAscending)
+        })
+    })
+
+
+    document.querySelector('#clear').addEventListener('click', function() {
+        document.querySelector('tbody').innerHTML = ''
+        document.querySelector('#saveresult').innerHTML = ''
+    })
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="module" src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+
+</html>
