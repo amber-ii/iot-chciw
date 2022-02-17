@@ -3,7 +3,7 @@ const a25Data = require('../data/a25data')
 
 // 搜尋A25-2DCS
 const getA25Dcs = async(req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const startDate = req.body.startDate
             const endDate = req.body.endDate
@@ -27,7 +27,7 @@ const getA25Dcs = async(req, res, next) => {
 
 // 搜尋A25-3DCS
 const getA25Dcs03 = async(req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const startDate = req.body.startDate
             const endDate = req.body.endDate
@@ -50,7 +50,7 @@ const getA25Dcs03 = async(req, res, next) => {
 
 // 搜尋A25-3Filter
 const getA25Dcs03Filter = async(req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const startDate = req.body.startDate
             const endDate = req.body.endDate
@@ -74,7 +74,7 @@ const getA25Dcs03Filter = async(req, res, next) => {
 
 // 搜尋A25-1PLC
 const getA25Plc = async(req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const startDate = req.body.startDate
             const endDate = req.body.endDate
@@ -96,7 +96,7 @@ const getA25Plc = async(req, res, next) => {
 }
 
 const getA25Auto = async(req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const startDate = req.body.startDate
             const endDate = req.body.endDate

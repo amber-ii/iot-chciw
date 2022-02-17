@@ -2,24 +2,31 @@
 const sacidData = require('../data/sacid');
 
 // 報表預設七天
-const getAllSacid = async (req, res, next) => {
+const getAllSacid = async(req, res, next) => {
 
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
-            const rows = await sacidData.getSacid();
-            res.render('sacid', { rows, title: '硫酸' });
-            // console.log('The data from CH1ACI table: \n', rows);
+            const rows = await sacidData.getSacid()
+            res.render('sacid', { rows, title: '硫酸' })
+                // console.log('The data from CH1ACI table: \n', rows);
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400).send(error.message)
         }
     } else {
-        res.sendFile(`${process.cwd()}/public/404.html`);
+        res.sendFile(`${process.cwd()}/public/404.html`)
     }
 };
 
 
 const getTrendLoop = (rows) => {
-    let newData = [], newA9Diff = [], newA10Diff1 = [], newA10Diff4 = [], newTotal = [], newA10Diff2 = [], newA10Diff3 = [], newDiff32 = [];
+    let newData = [],
+        newA9Diff = [],
+        newA10Diff1 = [],
+        newA10Diff4 = [],
+        newTotal = [],
+        newA10Diff2 = [],
+        newA10Diff3 = [],
+        newDiff32 = [];
     for (let i = 0; i < rows.length; i++) {
         newData.push(`${rows[i].preDate}-${rows[i].Date}`);
         newA9Diff.push(rows[i].A9Diff);
@@ -44,7 +51,7 @@ const getTrendLoop = (rows) => {
 };
 
 
-const getAllSacidJSON = async (req, res, next) => {
+const getAllSacidJSON = async(req, res, next) => {
     try {
         // 7天
         let rows0 = await sacidData.getSacidJSONSeven();
@@ -53,12 +60,9 @@ const getAllSacidJSON = async (req, res, next) => {
         let date7 = getTrendLoop(rows0);
         let date30 = getTrendLoop(rows1);
         res.send({
-            'dates':
-            {
-                '7days':
-                    { 'data': date7 },
-                '30days':
-                    { 'data': date30 }
+            'dates': {
+                '7days': { 'data': date7 },
+                '30days': { 'data': date30 }
             }
         });
     } catch (error) {
@@ -71,7 +75,7 @@ const getAllSacidJSON = async (req, res, next) => {
 
 
 // 依日期查詢
-const getSacidByDate = async (req, res, next) => {
+const getSacidByDate = async(req, res, next) => {
     try {
         const sacidStartDate = req.body.startDate;
         console.log(sacidStartDate + new Date());

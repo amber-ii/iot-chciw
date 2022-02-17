@@ -12,7 +12,7 @@ let three_month = new Date(today.addDays(90))
 let six_month = new Date(today.addDays(90))
 
 const getAllRecord = async(req, res, next) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1 || req.user.permission == 4) {
         try {
             const posts = await User.find().sort({ loginDate: -1 })
             res.json(posts)
@@ -25,7 +25,7 @@ const getAllRecord = async(req, res, next) => {
 }
 
 const getThisMonth = async(req, res, next) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1 || req.user.permission == 4) {
         try {
             const posts = await User.find({ loginDate: { $gte: new Date(`${year}-${month}-01`) } }).sort({ loginDate: -1 })
             res.json(posts)
@@ -38,7 +38,7 @@ const getThisMonth = async(req, res, next) => {
 }
 
 const getThreeMonth = async(req, res, next) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1 || req.user.permission == 4) {
         try {
             const posts = await User.find({
                 loginDate: { $gte: three_month },
@@ -53,7 +53,7 @@ const getThreeMonth = async(req, res, next) => {
 }
 
 const getSixMonth = async(req, res, next) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1 || req.user.permission == 4) {
         try {
             const posts = await User.find({
                 loginDate: { $gte: six_month },

@@ -3,7 +3,7 @@ const Data = require('../data/particle')
 
 // 報表預設七天
 const getAll = async(req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const rows = await Data.getEvent()
                 // res.set({
@@ -72,24 +72,30 @@ const getChart = async(req, res, next) => {
 // 依日期查詢
 const getByDate = async(req, res, next) => {
     try {
-        let startDate = req.body.startDate
+        let startDate = await req.body.startDate
         if (!startDate) {
             startDate = null
         }
-        let endDate = req.body.endDate
+        let endDate = await req.body.endDate
         if (!endDate) {
             endDate = null
         }
-        let LorS = req.body.LorS
+        let LorS = await req.body.LorS
         if (!LorS) {
             LorS = null
         }
-        let LEVEL8 = req.body.LEVEL8
+        let LEVEL8 = await req.body.LEVEL8
         if (!LEVEL8) {
             LEVEL8 = null
         }
-        const rows = await Data.getEventByDate(startDate, endDate, LorS, LEVEL8)
-        console.log("🚀 ~ file: particalController.js ~ line 92 ~ getByDate ~ rows", rows)
+        let factory = await req.body.factory
+        console.log("🚀 ~ file: particleController.js ~ line 92 ~ getByDate ~ factory", factory)
+        if (!factory) {
+            factory = null
+        }
+        const rows = await Data.getEventByDate(startDate, endDate, LorS, LEVEL8, factory)
+        console.log("🚀 ~ file: particleController.js ~ line 97 ~ getByDate ~ rows", rows)
+
 
         res.send(rows)
     } catch (error) {

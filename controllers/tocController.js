@@ -2,16 +2,16 @@
 const tocData = require('../data/toc');
 
 
-const getAllToc = async (req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+const getAllToc = async(req, res, next) => {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
-            const rows = await tocData.getToc();
-            res.render('toc', { rows, title: 'A25水質' });
+            const rows = await tocData.getToc()
+            res.render('toc', { rows, title: 'A25水質' })
         } catch (error) {
-            res.status(400).send(error.message);
+            res.status(400).send(error.message)
         }
     } else {
-        res.sendFile(`${process.cwd()}/public/404.html`);
+        res.sendFile(`${process.cwd()}/public/404.html`)
     }
 };
 
@@ -19,7 +19,8 @@ const getAllToc = async (req, res, next) => {
 
 
 function getTrendLoop(rows) {
-    let newData = [], newA25TOC = [];
+    let newData = [],
+        newA25TOC = [];
     for (var i = 0; i < rows.length; i++) {
         newData.push(rows[i].Date);
         newA25TOC.push(rows[i].A25TOC);
@@ -36,7 +37,7 @@ function getTrendLoop(rows) {
 
 
 
-const getAllTocJSON = async (req, res, next) => {
+const getAllTocJSON = async(req, res, next) => {
     try {
         // 7天
         let rows = await tocData.getTocJSONSeven();
@@ -70,7 +71,7 @@ const getAllTocJSON = async (req, res, next) => {
 
 
 
-const getTocByDate = async (req, res, next) => {
+const getTocByDate = async(req, res, next) => {
     try {
         let TocStartDate = req.body.startDate;
         console.log(TocStartDate);

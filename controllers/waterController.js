@@ -3,7 +3,7 @@ const Data = require('../data/water')
 
 // 報表預設七天
 const getAll = async(req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const rows = await Data.getEvent()
             res.set({

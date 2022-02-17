@@ -1,9 +1,13 @@
 'use strict'
 const n2rData = require('../data/n2r')
+const mqtt = require('mqtt')
+const { set } = require('mongoose')
+const client = mqtt.connect('mqtt:web.chciw.com.tw')
+const lineNotify = require('line-notify-nodejs')('uLpuCfK2wZUKcy69M4AiQKrwk0SMqwhCMG07nAG1f8x')
 
 // 預設查詢七天
 const getAllN2R = async(req, res, next) => {
-    if (req.user.permission == 1 || req.user.permission == 5) {
+    if (req.user.permission == 1 || req.user.permission == 5 || req.user.permission == 4) {
         try {
             const rows = await n2rData.getN2R()
             res.render('n2r', { rows, title: '氮氣' })
@@ -72,29 +76,56 @@ const getN2RByDate = async(req, res, next) => {
     }
 }
 
-// 報表印出功能
 
-// const exportSacid = async (req, res, next) => {
-//     try {
-//         const sacidStartDate = req.body.startDate;
-//         console.log("印出報表:" + sacidStartDate + new Date());
-//         const sacidEndDate = req.body.endDate;
-//         console.log("印出報表:" + sacidEndDate);
-//         let fileName = `A9A10硫酸報表`;
-//         let data = await sacidData.getByDateReport(sacidStartDate, sacidEndDate);
-//         data = JSON.stringify(data)
-//         fs.writeFile(__dirname+'/test.xlsx', data, err => {
-//           if (err) {
-//             console.error(err)
-//             return
-//           }
-//           //file written successfully
+client.on('connect', function() {
+    client.subscribe('N2Rerr', function(err) {
+        if (!err) {
+            // console.log('連線到broker. Topic: TCM')
+        }
+    })
+})
+
+client.on('message', function(topic, message) {
+    // message is Buffer
+    let n2r = `A3F1, A3T1, A3F2, A3T2, A4F1, A4T1, A8F1, A8T1, A16F1, A16T1, A2F1,A2T1`
+    let arr1 = new Set()
+    let arr2 = new Set()
+    let arr3 = new Set()
+    let arr4 = new Set()
+    var msg = JSON.parse(message)
+    for (var key in msg) {
+        if (key == 'A3F1') {
+            arr1.add(key)
+        }
+        if (key == 'A3F2') {
+            arr1.add(key)
+        }
+        if (key == 'A4F1') {
+            arr1.add(key)
+        }
+        if (key == 'A8F1') {
+            arr2.add(key)
+        }
+        if (key == 'A16F1') {
+            arr3.add(key)
+        }
+        if (key == 'A2F1') {
+            arr4.add(key)
+        }
+    }
+
+})
+
+// function callLine(key) {
+//     lineNotify
+//         .notify({
+//             message: `氮氣${key}斷線`,
 //         })
-
-//     } catch (error) {
-//         res.status(400).send(error.message);
-//     }
+//         .then(() => {
+//             console.log('n2r send completed!')
+//         })
 // }
+
 
 module.exports = {
     getAllN2R,
