@@ -154,32 +154,20 @@
 
 
                 <section class="border-b-2 border-gray-400 bg-gray-800 rounded-xl">
-                    <div class="flex w-full bg-green-500 rounded-t-xl rounded-b-sm flex justify-center">
-                        <div class="py-2 font-semibold text-xl text-green-50">變頻器</div>
+                    <div class="flex py-2 w-full bg-green-500 rounded-t-xl rounded-b-sm flex justify-center items-center">
+                        <div class="font-semibold text-xl text-green-50">變頻器</div>
                     </div>
-                    <div class="pl-8 pt-5 flex flex-nowrap space-x-14 2xl:space-x-24 flex items-center">
-                        <div class="space-y-6">
-                            <div class="flex items-center">
-                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                                <span class="">開關</span>
-                            </div>
-
-                            <div class="flex items-center">
-                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                                <span>速度</span>
-                            </div>
-
-
-                            <div class="flex items-center">
-                                <!-- <ion-icon name="thermometer-outline" class="pic"></ion-icon> -->
-                                <span>狀態</span>
-                            </div>
-                        </div>
-                        <div class="flex flex-col items-center space-y-2 2xl:py-4">
-                            <span id="Isw" class="text-3xl">0</span>
-                            <span id="Isp" class="text-3xl">0</span>
-                            <span id="Ist" class="text-3xl">0</span>
-                        </div>
+                    <div class="py-4 px-6">
+                        <span class="space-y-4 float-left pt-2">
+                        <div>開關</div>
+                        <div>速度</div>
+                        <div>狀態</div>
+                    </span>
+                        <span class="space-y-1 text-center">
+                        <div id="Isw" class="text-3xl" style="font-family:monospace;"></div>
+                        <div id="Isp" class="text-3xl" style="font-family:monospace;"></div>
+                        <div id="Ist" class="text-3xl" style="font-family:monospace;"></div>
+                    </span>
                     </div>
                 </section>
 
