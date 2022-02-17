@@ -107,6 +107,10 @@
     let iot8 = 'https://pbs.twimg.com/profile_images/1247184388539863040/U31UIfKR.jpg' //工務 我不知道 他是誰的水之呼吸
     let iot9 = 'https://yt3.ggpht.com/a/AATXAJyiRlQngAiOMRYk7PmnWr6H-JHm3DSGcPHcvg=s900-c-k-c0xffffffff-no-rj-mo' //環安 我不知道他是誰
     let A0983 = 'https://img.myvideo.net.tw/images/MUS030/0000/8813/201908271501567613_2016.jpg' //彥廷 豬豬
+        // let A0845 = 'https://64.media.tumblr.com/4ee31280fe598e78409d6df7a825a2ce/ad2e32780f84853f-6c/s1280x1920/db71d9cfdbdc10a2b15be01caae56cd92163dacd.jpg' //音柱
+        // let A0845 = 'https://mensuno.hk/wp-content/uploads/2021/07/ScreenShot-VideoID-ReuCPrKYWY8-TimeS-47-1024x576.png' //音柱
+    let A0845 = 'https://img.quizur.com/f/img611fb5d8d6fb30.60111823.jpg?lastEdited=1629468132' //音柱
+        // let A0845 = 'https://th.bing.com/th/id/R.170f0a34e7242d3e817ffe355a460565?rik=4QTbn8GK9I3iXQ&riu=http%3a%2f%2fb-ssl.duitang.com%2fuploads%2fitem%2f201508%2f23%2f20150823203726_HyM5E.thumb.700_0.jpeg&ehk=z9o7DjIi6aFfVYuXb1xuQUTWAxzCKtTgeQDAkrqKIgQ%3d&risl=&pid=ImgRaw&r=0' //音柱
 
     const fetchData = (url) => {
         fetch(url)
@@ -126,6 +130,9 @@
                         case '特化':
                             photo = iot5
                             break
+                            case '世宏':
+                            photo = iot5
+                            break
                         case '總機':
                             photo = iot2
                             break
@@ -143,6 +150,9 @@
                             break
                         case '彥廷':
                             photo = A0983
+                            break
+                        case '凱恩':
+                            photo = A0845
                             break
                     }
                     element =
