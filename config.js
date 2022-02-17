@@ -15,6 +15,8 @@ const {
     SQL_SERVER,
     SQL_DATABASE_LIMS,
     SQL_SERVER_LIMS,
+    SQL_USER_LIMS,
+    SQL_PASSWORD_LIMS,
     SQL_USER_HRM,
     SQL_PASSWORD_HRM,
     SQL_DATABASE_HRM,
@@ -42,11 +44,17 @@ module.exports = {
     sql2: {
         server: SQL_SERVER_LIMS,
         database: SQL_DATABASE_LIMS,
-        user: SQL_USER,
-        password: SQL_PASSWORD,
+        user: SQL_USER_LIMS,
+        password: SQL_PASSWORD_LIMS,
+        connectionTimeout: 300000,
+        requestTimeout: 300000,
         options: {
             encrypt: sqlEncrypt,
             enableArithAbort: true,
+        },
+        pool: {
+            idleTimeoutMillis: 300000,
+            max: 100,
         },
     },
     sql_HRM: {
