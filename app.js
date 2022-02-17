@@ -1,4 +1,5 @@
 const { config } = require('dotenv')
+require('./break')
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
@@ -21,11 +22,10 @@ const particalRoutes = require('./routes/particleRoutes')
 const empTempRoutes = require('./routes/empTempRoutes')
 const waterRoutes = require('./routes/waterRoutes')
 const loginRecordRoutes = require('./routes/loginRecordRoutes')
+const modbusRoutes = require('./routes/modbusRoutes')
 const moment = require('moment-timezone')
-
 const bcrypt = require('bcryptjs')
 const acl = require('express-acl')
-
 mongoose.connect(
     process.env.DB_CONNECTION, {
         useNewUrlParser: true,
@@ -40,6 +40,8 @@ mongoose.connect(
 app.engine('hbs', hbs({ extname: '.hbs' }))
 app.set('view engine', 'hbs')
 app.use(express.static(__dirname + '/public'))
+
+
 app.use(cors())
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
@@ -54,6 +56,7 @@ app.use(
         },
     })
 )
+
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -122,6 +125,7 @@ app.use('/particles', users.isLoggedIn, particalRoutes.routes)
 app.use('/line', users.isLoggedIn, empTempRoutes.routes)
 
 app.use('/loginrecord', users.isLoggedIn, loginRecordRoutes.routes)
+app.use('/modbus', users.isLoggedIn, modbusRoutes.routes)
 
 app.get('/login', users.isLoggedOut, (req, res) => {
     const response = {
@@ -140,18 +144,21 @@ app.post('/register', async(req, res) => {
         const hashedPassword = await bcrypt.hash(req.body.password, 10)
         const username = req.body.username
         const permission = req.body.permission
+        const name = req.body.name
         console.log(req.body)
         const postUser = new User({
             username: username,
             password: hashedPassword,
             permission: permission,
+            name: name,
         })
         const saveUser = await postUser.save()
-        res.json(saveUser)
+        res.render('login')
     } catch {
         res.render('register')
     }
 })
+
 
 app.get('/logout', function(req, res) {
     req.logout()
@@ -170,38 +177,42 @@ app.post(
 )
 
 //
-app.get('/', users.isLoggedIn, (req, res) => {
-    res.render('index', { title: 'CHCIW IOT', name: req.user.name })
+app.get('/', users.isLoggedIn, async(req, res) => {
+    await res.render('index', { title: 'CHCIW IOT', name: req.user.name })
+        // await res.sendFile(`${__dirname}/public/water.html`, { name: req.user.name })
+        // await res.sendFile(`${__dirname}/public/vpc.html`, { name: req.user.name })
 })
 
 // 冷氣per2
 app.get('/air', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 2 || req.user.permission == 8) {
+    if (req.user.permission == 1 || req.user.permission == 2 || req.user.permission == 4 || req.user.permission == 8) {
         res.sendFile(`${__dirname}/public/air.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
 
-// 自來水per4
+// 自來水
 app.get('/water', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 3) {
-        res.sendFile(`${__dirname}/public/water.html`)
+        res.sendFile(`${__dirname}/public/water.html`, { name: req.user.name })
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
 
-app.get('/waterss', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
-        // res.sendFile(`${__dirname}/public/water.html`)
-        res.render('water')
+// 自來水 凱恩per4
+app.get('/water_per4', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 4) {
+        res.sendFile(`${__dirname}/public/water_per4.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
 
-// A10蒸氣per7
+
+
+// A10蒸氣
 app.get('/vpc', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 3) {
         res.sendFile(`${__dirname}/public/vpc.html`)
@@ -210,9 +221,19 @@ app.get('/vpc', users.isLoggedIn, (req, res) => {
     }
 })
 
-// A22A23溫度 per8
+
+// A10蒸氣 凱恩per4
+app.get('/vpc_per4', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 4) {
+        res.sendFile(`${__dirname}/public/vpc_per4.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+
+// 變電箱(A22A23)溫度 per8
 app.get('/elctair', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 8) {
+    if (req.user.permission == 1 || req.user.permission == 8 || req.user.permission == 4) {
         res.sendFile(`${__dirname}/public/elctair.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
@@ -221,25 +242,18 @@ app.get('/elctair', users.isLoggedIn, (req, res) => {
 
 // 廢水池per9
 app.get('/ah2ph', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 9) {
+    if (req.user.permission == 1 || req.user.permission == 9 || req.user.permission == 4) {
         res.sendFile(`${__dirname}/public/ah2ph.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
 
-// a2a3water per10
-app.get('/a2a3water', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 5) {
-        res.sendFile(`${__dirname}/public/a2a3water.html`)
-    } else {
-        res.sendFile(`${__dirname}/public/404.html`)
-    }
-})
+
 
 // A11數據per11
 app.get('/a11', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         res.sendFile(`${__dirname}/public/a11.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
@@ -248,14 +262,14 @@ app.get('/a11', users.isLoggedIn, (req, res) => {
 
 // A25DATA per12
 app.get('/a25datas', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         res.sendFile(`${__dirname}/public/a25.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
 
-// A10加熱器 per13
+// A10加熱器
 
 app.get('/a10heat', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 3) {
@@ -265,8 +279,17 @@ app.get('/a10heat', users.isLoggedIn, (req, res) => {
     }
 })
 
+// A10加熱器 凱恩per4
+app.get('/a10heat_per4', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 4) {
+        res.sendFile(`${__dirname}/public/a10heat_per4.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+
 app.get('/loginrecord', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1 || req.user.permission == 4) {
         res.sendFile(`${__dirname}/public/loginRecord.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
@@ -274,7 +297,7 @@ app.get('/loginrecord', users.isLoggedIn, (req, res) => {
 })
 
 app.get('/particle', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 3) {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         res.sendFile(`${__dirname}/public/particle.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
@@ -287,7 +310,21 @@ app.get('/empTemp', users.isLoggedIn, (req, res) => {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
+app.get('/a2', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 5 || req.user.permission == 4) {
+        res.sendFile(`${__dirname}/public/a2.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
 
+app.get('/modbus', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1) {
+        res.sendFile(`${__dirname}/public/modbus.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
 
 
 // PORT
