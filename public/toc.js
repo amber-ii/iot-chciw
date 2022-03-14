@@ -6,25 +6,23 @@ function onMessageArrived(r_message) {
         var id = key;
         var value = rcMsg[key];
         if (document.getElementById(id)) {
-            document.getElementById(id).innerHTML = value;
+            document.getElementById(id).innerHTML = value + '<span class ="ml-2 text-gray-400 text-sm">' + 'ppb' + '</span>';
         }
     }
 }
 
-
-if (document.querySelector('#A25TOC').innerHTML == '') {
-    document.querySelector('.timer').classList.add('unblock');
-    document.querySelector('.timer').classList.remove('timer');
-} else {
-    document.querySelector('.timer').classList.remove('unblock');
+Date.prototype.addDays = function(days) {
+    this.setDate(this.getDate() - days)
+    return this
 }
+
 
 // 趨勢圖
 let chartData = function() {
     return {
         date: 'perMins',
         options: [{
-                label: 'Last 40 Mins',
+                label: 'Last 3 hours',
                 value: 'perMins',
             },
             {
@@ -60,12 +58,12 @@ let chartData = function() {
         data: null,
         fetch: function() {
             fetch('http://web.chciw.com.tw:8080/toc/tocJson')
-                .then(res => res.json())
-                .then(res => {
-                    this.data = res.dates;
-                    this.renderChart();
-                    this.refresh();
-                });
+                .then((res) => res.json())
+                .then((res) => {
+                    this.data = res.dates
+                    this.renderChart()
+                    this.refresh()
+                })
         },
 
         refresh: function() {
@@ -94,23 +92,24 @@ let chartData = function() {
 
             let ctx = document.getElementById('chart').getContext('2d');
 
-            let chart = new Chart(ctx, { //eslint-disable-line
+            let chart = new Chart(ctx, {
+                //eslint-disable-line
                 type: 'line',
                 data: {
                     labels: this.data[this.date].data.label,
                     datasets: [{
-                            label: 'A25TOC',
-                            borderColor: 'rgba( 240,230,140, 1)',
-                            pointBackgroundColor: 'rgba( 240,230,140, 1)',
-                            data: this.data[this.date].data.A25TOC,
-                        },
-
-                    ],
+                        label: 'A25TOC',
+                        borderColor: 'rgba( 30,144,255, 1)',
+                        pointBackgroundColor: 'rgba( 255,215,0, 1)',
+                        data: this.data[this.date].data.A25TOC,
+                        borderWidth: 2,
+                        radius: 1,
+                    }, ],
                 },
                 layout: {
                     padding: {
-                        right: 10
-                    }
+                        right: 10,
+                    },
                 },
                 options: {
                     legend: {
@@ -124,27 +123,26 @@ let chartData = function() {
                     scales: {
                         yAxes: [{
                             gridLines: {
-                                display: false
+                                display: false,
                             },
                             ticks: {
                                 fontSize: 16,
                                 callback: function(value, index, array) {
-                                    return value > 1000 ? ((value < 1000000) ? value / 1000 + 'K' : value / 1000000 + 'M') : value;
-                                }
-                            }
-                        }],
+                                    return value > 1000 ? (value < 1000000 ? value / 1000 + 'K' : value / 1000000 + 'M') : value
+                                },
+                            },
+                        }, ],
                         xAxes: [{
                             gridLines: {
-                                display: false
+                                display: false,
                             },
                             ticks: {
                                 fontSize: 16,
-
-                            }
-                        }]
-                    }
-                }
-            });
+                            },
+                        }, ],
+                    },
+                },
+            })
         }
     };
 };
@@ -162,64 +160,79 @@ const formatDate = (now) => now.getFullYear() + '-' + (now.getMonth() + 1) + '-'
 
 
 // 依照日期搜尋
-$('#search').click(function() {
+$('#search').click(async function() {
+    $('html, body').animate({ scrollTop: $('#loadingSv').offset().top }, 0)
+    $('html, body').animate({ scrollTop: $('#form1').offset().top }, 1000)
     let t2 = document.getElementById('table2');
     let today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
+    let startDate = dateSearch.startDate.value; //eslint-disable-line
+    let endDate = dateSearch.endDate.value; //eslint-disable-line
+    let _endDate = new Date(endDate)
+    if (!startDate && !endDate) {
+        document.querySelector('.loadingSv div').innerHTML = "Searching today's data"
+        document.getElementById('startDate').value = today
+        document.getElementById('endDate').value = today
+    }
+    if (startDate && endDate && dateDiff(startDate, endDate) < 3) {
+        document.querySelector('.loadingSv div').innerHTML = 'Searching🟢🟢🟢...'
+    }
+
+    if (startDate < '2021-09-01' && endDate) {
+        document.querySelector('.loadingSv div').innerHTML = '資料最早起始日為2021-09-01'
+        document.getElementById('startDate').value = '2021-09-01'
+        document.getElementById('endDate').value = '2021-09-03'
+    }
+
+    if (startDate > endDate) {
+        //  alert('無效日期，起始日不得大於結束日')
+        document.getElementById('startDate').value = ''
+        document.getElementById('endDate').value = ''
+        return false
+    }
+    if (startDate > today || endDate > today) {
+        document.querySelector('.loadingSv div').innerHTML = "Searching today's data"
+        document.getElementById('startDate').value = today
+        document.getElementById('endDate').value = today
+    }
+
+    if (dateDiff(startDate, endDate) > 3) {
+        document.getElementById('startDate').value = formatDate(_endDate.addDays(2)).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2')
+        document.querySelector('.loadingSv div').innerHTML = '查詢區間>3，自動幫您調成3天...'
+        if (startDate < '2021-09-01' || endDate < '2021-09-01') {
+            document.getElementById('startDate').value = '2021-09-01'
+            document.getElementById('endDate').value = '2021-09-03'
+            document.querySelector('.loadingSv div').innerHTML = '資料最早起始日為2021-09-01'
+        }
+    }
+
     $.ajax({
         beforeSend: function() {
-            let startDate = dateSearch.startDate.value; //eslint-disable-line
-            let endDate = dateSearch.endDate.value; //eslint-disable-line
-            if (startDate > endDate) {
-                alert('無效日期，起始日不得大於結束日');
-                return false;
-            }
-            if (!startDate || !endDate) {
-                alert('請輸入起始&結束日');
-                return false;
-            }
-            if (dateDiff(startDate, endDate) > 1) {
-                alert('一天一天的查，避免數據過大');
-                return false;
-            }
-            if (startDate < '2021-09-01') {
-                alert('最早的資料為2021-09-01，請重新搜尋');
-                return false;
-            }
-            if (endDate > today || startDate > today) {
-                alert('日期不得超過今日，請重新搜尋');
-                return false;
-            }
-            // 搜尋click倒數兩秒
-            $('.loading').show();
-            $('.word').show();
-            setTimeout(() => {
-                $(document).ready(function() {
-                    $('.loading').fadeOut(1000);
-                    $('.word').fadeOut(500);
-                });
-            }, 1000);
-            t2.innerHTML = '';
+
+            t2.innerHTML = ''
+            $('.loadingSv').show()
+
         },
         type: 'POST',
         url: '/toc',
+
         data: $('#form1').serialize(),
         async: true,
         success: function(data) {
-
             var renderString = '';
             for (let index = 0; index < data.length; index++) {
                 renderString =
-                    ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
-                    '<th class="p-3 text-center">' +
+                    ' <tr class="bg-gray-800 text-md">' +
+                    '<th class="p-3 w-full">' +
                     data[index].Date +
                     '</th>' +
-                    '<th class="p-3  text-center">' +
+                    '<th class="py-3 px-4">' +
                     data[index].A25TOC +
                     '</th>' +
-                    '</tr>';
+                    '</tr>'
                 $('#table2').nextAll().remove();
                 t2.insertAdjacentHTML('beforeEnd', renderString);
             }
+            $('.loadingSv').fadeOut(500)
 
         },
         error: function(request) {
@@ -228,12 +241,14 @@ $('#search').click(function() {
     });
 });
 
-
+document.querySelector('#clear').addEventListener('click', function() {
+    document.querySelector('tbody').innerHTML = ''
+})
 
 
 
 // 導出報表
-const exportTable = () => {
+function exportTable() {
     // eslint
     let startDate = form1.startDate.value; // eslint-disable-line
     let endDate = form1.endDate.value; // eslint-disable-line
@@ -267,21 +282,21 @@ $(document).ready(function() {
 
 
 
-let list = document.getElementById('table2');
-fetch('http://web.chciw.com.tw:8080/tocJson')
-    .then(res => res.json())
-    .then(res => {
-        let tableContent = '';
-        for (let index = 0; index < res.length; index++) {
-            tableContent +=
-                ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
-                '<th class="p-3 text-center">' +
-                res[index].Date +
-                '</th>' +
-                '<th class="p-3 text-center">' +
-                res[index].A25TOC +
-                '</th>' +
-                '</tr>';
-        }
-        list.innerHTML = tableContent;
-    });
+// let list = document.getElementById('table2');
+// fetch('http://web.chciw.com.tw:8080/tocJson')
+//     .then(res => res.json())
+//     .then(res => {
+//         let tableContent = '';
+//         for (let index = 0; index < res.length; index++) {
+//             tableContent +=
+//                 ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
+//                 '<th class="p-3 text-center">' +
+//                 res[index].Date +
+//                 '</th>' +
+//                 '<th class="p-3 text-center">' +
+//                 res[index].A25TOC +
+//                 '</th>' +
+//                 '</tr>';
+//         }
+//         list.innerHTML = tableContent;
+//     });
