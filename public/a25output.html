@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A25 DATA</title>
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="./css/a25output.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/progress.css">
+    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+
+<style>
+    .blue {
+        color: blue;
+    }
+    
+    .red {
+        color: red;
+    }
+</style>
+
+<body>
+    <div class="loading unblock z-50 absolute">
+        <div class="flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
+            <div class="relative">
+                <div class="load-circle"></div>
+                <div class="word absolute top-0 z-50">loading</div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="bg-gray-800 p-1 flex justify-center text-gray-200 mt-8">
+        <div class="flex w-full lg:w-11/12">
+            <form id="form1" name="formSearch">
+                <div class="flex space-x-6">
+                    <div class="factory_date flex items-center space-x-6">
+                        <!-- <div class="flex items-center space-x-2"> -->
+                        <!-- <label for="target">報表</label>
+                            <select id="target" class="text-gray-600 font-bold h-auto text-sm rounded-lg pl-2 w-32" style="background-color: #d8f3dc;">
+                                <option value="">選報表</option>
+                                <option value="A25-2DCS">A25-2DCS</option>
+                                <option value="A25-3DCS">A25-3DCS</option>
+                            </select> -->
+                        <!-- </div> -->
+                        <div class="flex items-center space-x-2">
+                            <label for="startDate" class="text-sm">起始</label>
+                            <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center rounded-md">
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <label for="endDate" class="text-sm">結束</label>
+                            <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center rounded-md">
+                        </div>
+                        <div title="查詢&導報表" id="search" class="">
+                            <img src="https://img.icons8.com/external-nawicon-flat-nawicon/48/000000/external-search-delivery-nawicon-flat-nawicon.png" />
+
+                            <!-- <img src="https://img.icons8.com/doodle/48/000000/microsoft-excel-2019.png" /> -->
+                        </div>
+                        <button title="導出報表" id="btnExport" class="download" onclick="exportTable(); return false;">
+                            <img src="https://img.icons8.com/doodle/48/000000/microsoft-excel-2019.png" />
+                        </button>
+                        <button title="清除選單" class="hover:text-gray-100 clear" id="clear" type="reset">
+                        <img src="https://img.icons8.com/external-bearicons-outline-color-bearicons/64/000000/external-Reset-miscellany-texts-and-badges-bearicons-outline-color-bearicons.png"/>
+                    </button>
+                    </div>
+
+                </div>
+
+
+                <!-- <div class="">
+                    <div id="A25-2DCS" class="inv">
+                        <div class="dcs grid grid-cols-8 p-3" id="sel0">
+                            <input type="checkbox" name="location" id="LI4501_PV__VALUE" value="LI4501_PV__VALUE"><label for="LI4501_PV__VALUE">LI4501_PV</label>
+                            <input type="checkbox" name="location" id="LI4502_PV__VALUE" value="LI4502_PV__VALUE"><label for="LI4502_PV__VALUE">LI4502_PV</label>
+                            <input type="checkbox" name="location" id="LI4503_PV__VALUE" value="LI4503_PV__VALUE"><label for="LI4503_PV__VALUE">LI4503_PV</label>
+                            <input type="checkbox" name="location" id="LI4504_PV__VALUE" value="LI4504_PV__VALUE"><label for="LI4504_PV__VALUE">LI4504_PV</label>
+                            <input type="checkbox" name="location" id="LI4505_PV__VALUE" value="LI4505_PV__VALUE"><label for="LI4505_PV__VALUE">LI4505_PV</label>
+                            <input type="checkbox" name="location" id="LI4506_PV__VALUE" value="LI4506_PV__VALUE"><label for="LI4506_PV__VALUE">LI4506_PV</label>
+                            <input type="checkbox" name="location" id="LI4507_PV__VALUE" value="LI4507_PV__VALUE"><label for="LI4507_PV__VALUE">LI4507_PV</label>
+                            <input type="checkbox" name="location" id="LI4508_PV__VALUE" value="LI4508_PV__VALUE"><label for="LI4508_PV__VALUE">LI4508_PV</label>
+                        </div>
+                    </div>
+
+                    <div id="A25-3DCS" class="inv">
+                        <div class="grid grid-cols-8 p-3" id="sel1">
+                            <input type="checkbox" name="location" id="OPCUA_A25DCS_25_3_A25_3_3LI201_PV__VALUE" value="OPCUA_A25DCS_25_3_A25_3_3LI201_PV__VALUE"><label for="OPCUA_A25DCS_25_3_A25_3_3LI201_PV__VALUE">3LIC201_PV</label>
+                            <input type="checkbox" name="location" id="OPCUA_A25DCS_25_3_A25_3_3LI202_PV__VALUE" value="OPCUA_A25DCS_25_3_A25_3_3LI202_PV__VALUE"><label for="OPCUA_A25DCS_25_3_A25_3_3LI202_PV__VALUE">3LIC202_PV</label>
+                            <input type="checkbox" name="location" id="OPCUA_A25DCS_25_3_A25_3_3LI203_PV__VALUE" value="OPCUA_A25DCS_25_3_A25_3_3LI203_PV__VALUE"><label for="OPCUA_A25DCS_25_3_A25_3_3LI203_PV__VALUE">3LIC203_PV</label>
+                            <input type="checkbox" name="location" id="OPCUA_A25DCS_25_3_A25_3_3LI204_PV__VALUE" value="OPCUA_A25DCS_25_3_A25_3_3LI204_PV__VALUE"><label for="OPCUA_A25DCS_25_3_A25_3_3LI204_PV__VALUE">3LIC204_PV</label>
+                        </div>
+                    </div>
+                </div> -->
+
+            </form>
+            <div class="flex items-center space-x-2 space-x-2 ml-auto" style="font-family: 'cwTeXYen';">
+                共：<span id="saveresult" class="mx-3"></span>
+                <div class="ml-auto" style="font-family: 'cwTeXYen';">項</div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    <section class="tables lg:w-11/12">
+        <table class="w-full table-sortable" id="headerTable">
+            <thead class="sticky top-0">
+                <tr>
+                    <th>DATE</th>
+                    <th>TK-6</th>
+                    <th>TK-7</th>
+                    <th>TK-8</th>
+                    <th>TK-9</th>
+                    <th>TK-A</th>
+                    <th>TK-B</th>
+                    <th>TK-C</th>
+                    <th>TK-D</th>
+                    <th>TK-E</th>
+                    <th>TK-F</th>
+                    <th>TK-G</th>
+                    <th>TK-H</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </section>
+
+</body>
+
+<script>
+    // 兩個日期的間距
+    const dateDiff = (a, b) => parseInt(Math.abs(new Date(a) - new Date(b)) / 1000 / 60 / 60 / 24);
+
+    // 格式化日期
+    const formatDate = (now) => now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate();
+    let roundDecimal = function(val, precision) {
+        return Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) / Math.pow(10, (precision || 0));
+    }
+    $('#search').click(function() {
+        let today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2') // eslint-disable-line
+
+        $.ajax({
+            beforeSend: function() {
+                let startDate = formSearch.startDate.value // eslint-disable-line
+                let endDate = formSearch.endDate.value // eslint-disable-line
+
+                if (startDate > endDate) {
+                    alert('無效日期，起始日不得大於結束日')
+                    return false
+                }
+
+
+                // if (startDate < '2022-02-19') {
+                //     alert('2022-02-19以前無資料')
+                //     return false
+                // }
+
+                if ((!startDate && endDate) || (startDate && !endDate) || (!startDate && !endDate)) {
+                    alert('要填日期唷')
+                    return false
+                }
+
+
+
+                $('.loading').show()
+                $('.word').show()
+                document.querySelector('tbody').innerHTML = ''
+            },
+            type: 'POST',
+            url: '/a25outputs',
+            data: $('#form1').serialize(), //序列化表單的值
+            async: true,
+            success: function(data) {
+                var renderString = ''
+                let IOE = ''
+                for (let index = 0; index < data.length; index++) {
+
+
+
+                    renderString =
+                        '<tr>' +
+                        '<td>' +
+                        data[index].preDate +
+                        '～' +
+                        data[index].Date +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].LI4501_PV, 2) +
+
+                        '<div class="ioe text-xs">' + (data[index].LI4501_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].LI4502_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].LI4502_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].LI4503_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].LI4503_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].LI4504_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].LI4504_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].LI4505_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].LI4505_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].LI4506_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].LI4506_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].LI4507_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].LI4507_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].LI4508_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].LI4508_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].OPCUA_3LI201_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].OPCUA_3LI201_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].OPCUA_3LI202_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].OPCUA_3LI202_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].OPCUA_3LI203_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].OPCUA_3LI203_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '<td>' +
+                        roundDecimal(data[index].OPCUA_3LI204_PV, 2) +
+                        '<div class="ioe text-xs">' + (data[index].OPCUA_3LI204_PV > 0 ? IOE = '產量(噸)' : IOE = '出產量(噸)') +
+                        '</div>' +
+                        '</td>' +
+                        '</tr>';
+
+
+                    $('tbody').nextAll().remove()
+                    document.querySelector('tbody').insertAdjacentHTML('beforeEnd', renderString)
+                    document.querySelectorAll('.ioe').forEach(item => {
+                        item.innerHTML == '產量(噸)' ? item.classList.add('blue') : item.classList.add('red')
+                    })
+                }
+                exportTable()
+                document.querySelector('#saveresult').innerHTML = data.length
+
+                $('.loading').fadeOut(500)
+                $('.word').fadeOut(500)
+            },
+            error: function(request) {
+                alert('資料庫連線失敗，請洽電控組')
+            },
+        })
+    })
+
+
+    function exportTable() {
+        // eslint
+        let startDate = form1.startDate.value; // eslint-disable-line
+        let endDate = form1.endDate.value; // eslint-disable-line
+
+
+        if (document.querySelector('tbody').innerHTML == '') {
+            alert('沒有內容可導出😏');
+            $('.loading').fadeOut(500);
+            $('.word').fadeOut(500);
+            return;
+        }
+        $('#headerTable').table2excel({
+            name: 'Excel Document Name',
+            filename: `[${startDate}]-[${endDate}].xls`,
+        });
+        $('.loading').fadeOut(500);
+        $('.word').fadeOut(500);
+    }
+
+    // 清空欄位
+    document.getElementById('clear').addEventListener('click', function() {
+        document.querySelector('tbody').innerHTML = '';
+        document.querySelector('#saveresult').innerHTML = ''
+        // let vis = document.querySelector('.vis'),
+        //     target = document.getElementById(this.value);
+        // if (vis) {
+        //     vis.className = 'inv';
+        // }
+        // if (target) {
+        //     target.className = 'vis';
+        // }
+    })
+
+
+
+    // 下拉式選單切換
+    // document.getElementById('target').addEventListener('change', function() {
+    //     let vis = document.querySelector('.vis'),
+    //         target = document.getElementById(this.value);
+    //     if (vis) {
+    //         vis.className = 'inv';
+    //     }
+    //     if (target) {
+    //         target.className = 'vis';
+    //     }
+    //     document.querySelector('tbody').innerHTML = '';
+    //     document.getElementById('colname').innerHTML = '';
+    //     document.getElementById('count').innerHTML = '0';
+    //     let colname = document.getElementById("colname");
+    //     let checks = document.querySelectorAll("input[type=checkbox]");
+    //     for (let i = 0; i < checks.length; i++) {
+    //         if (checks[i].checked == true) {
+    //             checks[i].checked = false;
+    //         }
+    //     }
+    // })
+
+    // 計算選擇數量
+    // const count = (checks) => {
+    //     let arr = [];
+    //     for (let i = 0; i < checks.length; i++) {
+    //         if (checks[i].checked == true) {
+    //             arr.push(checks[i].checked.value);
+    //         }
+    //     }
+    //     if (arr.length > 30) {
+    //         window.alert('一次搜尋30個為上限，分批搜吧😁');
+    //     }
+    //     document.getElementById('count').innerHTML = arr.length;
+    // }
+    // document.getElementById('sel0').addEventListener('change', function() {
+    //     let checks = document.querySelectorAll('#sel0 > input[type=checkbox]');
+    //     count(checks);
+    // });
+    // document.getElementById('sel1').addEventListener('change', function() {
+    //     let checks = document.querySelectorAll('#sel1 > input[type=checkbox]');
+    //     count(checks);
+    // });
+    // document.getElementById('sel2').addEventListener('change', function() {
+    //     let checks = document.querySelectorAll('#sel2 > input[type=checkbox]');
+    //     count(checks);
+    // });
+    // document.getElementById('sel3').addEventListener('change', function() {
+    //     let checks = document.querySelectorAll('#sel3 > input[type=checkbox]');
+    //     count(checks);
+    // });
+    // document.getElementById('sel4').addEventListener('change', function() {
+    //     let checks = document.querySelectorAll('#sel4 > input[type=checkbox]');
+    //     count(checks);
+    // });
+</script>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="//cdn.rawgit.com/rainabba/jquery-table2excel/1.1.0/dist/jquery.table2excel.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="module" src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+
+</html>

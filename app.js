@@ -1,5 +1,6 @@
 const { config } = require('dotenv')
 require('./break')
+
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
@@ -18,10 +19,13 @@ const n2rRoutes = require('./routes/n2rRoutes')
 const tocRoutes = require('./routes/tocRoutes')
 const users = require('./controllers/userController')
 const a25Routes = require('./routes/a25Routes')
+const a14Routes = require('./routes/a14Routes')
+// const manageMongoDB = require('./routes/manageMongoDB')
 const particalRoutes = require('./routes/particleRoutes')
 const empTempRoutes = require('./routes/empTempRoutes')
 const waterRoutes = require('./routes/waterRoutes')
 const loginRecordRoutes = require('./routes/loginRecordRoutes')
+const a25OutputRoutes = require('./routes/a25OutputRoutes')
 const modbusRoutes = require('./routes/modbusRoutes')
 const moment = require('moment-timezone')
 const bcrypt = require('bcryptjs')
@@ -51,9 +55,9 @@ app.use(
         saveUninitialized: true,
         resave: false,
         rolling: true,
-        cookie: {
-            maxAge: 86400 * 1000,
-        },
+        // cookie: {
+        //     maxAge: 86400 * 1000,
+        // },
     })
 )
 
@@ -115,18 +119,20 @@ app.use('/waters', users.isLoggedIn, waterRoutes.routes)
 
 // 氮氣per5
 app.use('/n2r', users.isLoggedIn, n2rRoutes.routes)
+// app.use('/mongo', manageMongoDB.routes)
 
 // 水質檢測per3
 app.use('/toc', users.isLoggedIn, tocRoutes.routes)
 
 // A25-DATA per3
 app.use('/a25data', users.isLoggedIn, a25Routes.routes)
+app.use('/a14data', users.isLoggedIn, a14Routes.routes)
 app.use('/particles', users.isLoggedIn, particalRoutes.routes)
 app.use('/line', users.isLoggedIn, empTempRoutes.routes)
 
 app.use('/loginrecord', users.isLoggedIn, loginRecordRoutes.routes)
+app.use('/a25outputs', users.isLoggedIn, a25OutputRoutes.routes)
 app.use('/modbus', users.isLoggedIn, modbusRoutes.routes)
-
 app.get('/login', users.isLoggedOut, (req, res) => {
     const response = {
         title: 'CHCIW_IOT',
@@ -158,7 +164,6 @@ app.post('/register', async(req, res) => {
         res.render('register')
     }
 })
-
 
 app.get('/logout', function(req, res) {
     req.logout()
@@ -269,7 +274,15 @@ app.get('/a25datas', users.isLoggedIn, (req, res) => {
     }
 })
 
-// A10加熱器
+
+app.get('/a14datas', users.isLoggedIn, (req, res) => {
+        if (req.user.permission == 1 || req.user.permission == 5 || req.user.permission == 4) {
+            res.sendFile(`${__dirname}/public/a14.html`)
+        } else {
+            res.sendFile(`${__dirname}/public/404.html`)
+        }
+    })
+    // A10加熱器
 
 app.get('/a10heat', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 3) {
@@ -325,6 +338,23 @@ app.get('/modbus', users.isLoggedIn, (req, res) => {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
+
+
+app.get('/stm', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 4 || req.user.permission == 3) {
+        res.sendFile(`${__dirname}/public/stm.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+app.get('/a25output', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 4 || req.user.permission == 3) {
+        res.sendFile(`${__dirname}/public/a25output.html`)
+    } else {
+        res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+
 
 
 // PORT
