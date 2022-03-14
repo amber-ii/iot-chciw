@@ -22,12 +22,6 @@
 
 
 <body onload="subTopic='CH1ACI';MQTTConnect();">
-     {{!-- <div class="ab">
-        <div class="loading">
-        </div>
-        <div class="word">loading</div>
-    </div> --}}
-
     <div class="loading flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
         <div class="relative">
            <div class="load-circle"></div>
@@ -35,202 +29,223 @@
         </div>
     </div>
 
-
-
-
-
-
-
-<div class="text-gray-100 bg-gray-900">
-    <div class="max-w-full mx-auto pb-5 px-8">
-       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-5 2xl:gap-x-1 gap-y-12  my-14 animate__animated animate__fadeIn">
-
-            <section class="px-8 2xl:px-6">
-                <div class="pattern-dots-md gray-light">
-                    <div class="transform translate-x-6 -translate-y-6 rounded bg-gray-800">
-                        <div class="">
-                            <div class="px-10 2xl:px-6 py-4">
-                                <div class="flex items-center justify-center">
-                                    <img class="logo" src="https://img.icons8.com/color/48/000000/acid-flask.png" />
-                                    <div class="title">A9F1</div>
+    <div class="max-w-full mx-auto py-6 px-12 animate__animated animate__fadeIn">
+        <div class="grid grid-cols-1
+          md:grid-cols-2
+          lg:grid-cols-3 
+          
+          2xl:grid-cols-5
+          gap-y-4 gap-x-8  
+          " style="color:#f4f1de">
+             <div class="wrapper p-6">
+                <div class="pattern-vertical-stripes-xl p-2">
+                    <div class="rounded-lg p-6 pb-8 bg-gray-800" style="color:#f4f1de">
+                        <!-- 標題 -->
+                        <div class="space-y-4">
+                            <div class="">
+                                <div class="flex space-x-3 items-center justify-start">
+                                    <div class="flex items-center justify-center rounded-lg  font-bold p-1" 
+                                    style="background-color: #f4f1de;color:#3d405b">
+                                        {{!-- <img class="logo" src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/32/000000/external-blood-drop-with-ph-testing-facility-isolated-on-a-white-background-labs-shadow-tal-revivo.png" /> --}}
+                                    <div class="text-md tracking-widest font-semibold">A9F1</div>
+                                    </div>
                                 </div>
-                                <div class="divide"></div>
-                                <div class="flex justify-between pt-3 pb-4">
-                                    <div class="space-y-6 w-8 h-24 pt-2 mr-2">
-                                        <div class="n-icon">
+                                   
+                            </div>
+
+                            <!-- 值 -->
+                        
+                            <div class="flex justify-start">
+                                
+                            <div class="text-xl text-center mqttValue space-y-5 w-full"> 
+                                <div class="flex items-center justify-between">
+                                     <div class="n-icon">
                                             <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
                                         </div>
-
-                                        <div class="p-icon">
+                                <div id="A9F1n" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                                 <div class="flex items-center justify-between">
+                                      <div class="p-icon">
                                             <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
                                         </div>
-                                    </div>
-                                    <div class="space-y-4 h-24">
-                                        <div class="value" id="A9F1n"></div>
-                                        <div class="value" id="A9F1p"></div>
-                                    </div>
-                                    <div class="">
-                                        <iframe src="./saciderr-A9F1.html" scrolling="no"></iframe>
-                                    </div>
-                                </div>
+                                <div id="A9F1p" class="text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                            </div>
+                               <iframe src="./saciderr-A9F1.html" scrolling="no" class="h-16 w-4"></iframe>
                             </div>
                         </div>
                     </div>
-            </section>
-
-
-            <section class="px-8 2xl:px-6">
-                <div class="pattern-dots-md gray-light">
-                    <div class="transform translate-x-6 -translate-y-6 rounded bg-gray-800">
-                        <div class="">
-                            <div class="px-10 2xl:px-6 py-4">
-                                <div class="flex items-center justify-center">
-                                    <img class="logo" src="https://img.icons8.com/color/48/000000/acid-flask.png" />
-                                    <div class="title">A10F1</div>
-                                </div>
-                                <div class="divide"></div>
-                                <div class="flex justify-between pt-3 pb-4">
-                                    <div class="space-y-6 h-24 pt-2 mr-2">
-                                        <div class="n-icon">
-                                            <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
-                                        </div>
-
-                                        <div class="p-icon">
-                                            <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
-                                        </div>
-                                    </div>
-                                    <div class="space-y-4 h-24">
-                                        <div class="value" id="A10F1n"></div>
-                                        <div class="value" id="A10F1p"></div>
-                                    </div>
-                                    <div class="">
-                                        <iframe src="./saciderr-A10F1.html" scrolling="no"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </section>
-
-            <section class="px-8 2xl:px-6">
-                <div class="pattern-dots-md gray-light">
-                    <div class="transform translate-x-6 -translate-y-6 rounded bg-gray-800">
-                        <div class="">
-                            <div class="px-10 2xl:px-6 py-4">
-                                <div class="flex items-center justify-center">
-                                    <img class="logo" src="https://img.icons8.com/color/48/000000/acid-flask.png" />
-                                    <div class="title">A10F2</div>
-                                </div>
-                                <div class="divide"></div>
-                                <div class="flex justify-between pt-3 pb-4">
-                                    <div class="space-y-6 w-8 h-24 pt-2 mr-2">
-                                        <div class="n-icon">
-                                            <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
-                                        </div>
-
-                                        <div class="p-icon">
-                                            <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
-                                        </div>
-                                    </div>
-                                    <div class="space-y-4 h-24">
-                                        <div class="value" id="A10F2n"></div>
-                                        <div class="value" id="A10F2p"></div>
-                                    </div>
-                                    <div class="">
-                                        <iframe src="./saciderr-A10F2.html" scrolling="no"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </section>
-
-
-            <section class="px-8 2xl:px-6">
-                <div class="pattern-dots-md gray-light">
-                    <div class="transform translate-x-6 -translate-y-6 rounded bg-gray-800">
-                        <div class="">
-                            <div class="px-10 2xl:px-6 py-4">
-                                <div class="flex items-center justify-center">
-                                    <img class="logo" src="https://img.icons8.com/color/48/000000/acid-flask.png" />
-                                    <div class="title">A10F3</div>
-                                </div>
-                                <div class="divide"></div>
-                                <div class="flex justify-between pt-3 pb-4">
-                                    <div class="space-y-6 w-8 h-24 pt-2 mr-2">
-                                        <div class="n-icon">
-                                            <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
-                                        </div>
-
-                                        <div class="p-icon">
-                                            <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
-                                        </div>
-                                    </div>
-                                    <div class="space-y-4 h-24">
-                                        <div class="value" id="A10F3n"></div>
-                                        <div class="value" id="A10F3p"></div>
-                                    </div>
-                                    <div class="">
-                                        <iframe src="./saciderr-A10F3.html" scrolling="no"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </section>
-
-
-
-            <section class="px-8 2xl:px-6">
-                <div class="pattern-dots-md gray-light">
-                    <div class="transform translate-x-6 -translate-y-6 rounded bg-gray-800">
-                        <div class="">
-                            <div class="px-10 2xl:px-6 py-4">
-                                <div class="flex items-center justify-center">
-                                    <img class="logo" src="https://img.icons8.com/color/48/000000/acid-flask.png" />
-                                    <div class="title">A10F4</div>
-                                </div>
-                                <div class="divide"></div>
-                                <div class="flex justify-between pt-3 pb-4">
-                                    <div class="space-y-6 w-8 h-24 pt-2 mr-2">
-                                        <div class="n-icon">
-                                            <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
-                                        </div>
-
-                                        <div class="p-icon">
-                                            <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
-                                        </div>
-                                    </div>
-                                    <div class="space-y-4 h-24">
-                                        <div class="value" id="A10F4n"></div>
-                                        <div class="value" id="A10F4p"></div>
-                                    </div>
-                                    <div class="">
-                                        <iframe src="./saciderr-A10F4.html" scrolling="no"></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </section>
-
-
-
+                </div>
             </div>
- </div>
+
+             <div class="wrapper p-6 ">
+                <div class="pattern-vertical-stripes-xl p-2">
+                    <div class="rounded-lg bg-gray-800 p-6 pb-8" style="color:#f4f1de">
+                        <!-- 標題 -->
+                        <div class="space-y-4 ">
+                            <div class="">
+                                <div class="flex space-x-3 items-center justify-start">
+                                    <div class="flex items-center justify-center rounded-lg  font-bold p-1" 
+                                    style="background-color: #f4f1de;color:#3d405b">
+                                        {{!-- <img class="logo" src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/32/000000/external-blood-drop-with-ph-testing-facility-isolated-on-a-white-background-labs-shadow-tal-revivo.png" /> --}}
+                                    <div class="text-md tracking-widest font-semibold ">A10F1</div>
+                                    </div>
+                                </div>
+                                   
+                            </div>
+
+                            <!-- 值 -->
+                        
+                            <div class="flex justify-center">
+                                
+                            <div class="text-xl text-center mqttValue space-y-5 w-full"> 
+                                <div class="flex items-center justify-between">
+                                     <div class="n-icon">
+                                            <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
+                                        </div>
+                                <div id="A10F1n" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                                 <div class="flex items-center justify-between">
+                                      <div class="p-icon">
+                                            <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
+                                        </div>
+                                <div id="A10F1p" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                            </div>
+                               <iframe src="./saciderr-A10F1.html" scrolling="no" class="h-16 w-4"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+             <div class="wrapper p-6 ">
+                <div class="pattern-vertical-stripes-xl p-2">
+                    <div class="rounded-lg bg-gray-800 p-6 pb-8"  style="color:#f4f1de">
+                        <!-- 標題 -->
+                        <div class="space-y-4 ">
+                            <div class="">
+                                <div class="flex space-x-3 items-center justify-start">
+                                    <div class="flex items-center justify-center rounded-lg font-bold p-1"  
+                                   style="background-color: #f4f1de;color:#3d405b">
+                                        {{!-- <img class="logo" src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/32/000000/external-blood-drop-with-ph-testing-facility-isolated-on-a-white-background-labs-shadow-tal-revivo.png" /> --}}
+                                    <div class="text-md tracking-widest font-semibold">A10F2</div>
+                                    </div>
+                                </div>
+                                   
+                            </div>
+
+                            <!-- 值 -->
+                        
+                            <div class="flex justify-center">
+                                 
+                            <div class="text-xl text-end mqttValue space-y-5 w-full"> 
+                                <div class="flex items-center justify-between">
+                                     <div class="n-icon">
+                                            <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
+                                        </div>
+                                <div id="A10F2n" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                                 <div class="flex items-center justify-between">
+                                      <div class="p-icon">
+                                            <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
+                                        </div>
+                                <div id="A10F2p" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                            </div>
+                              <iframe src="./saciderr-A10F2.html" scrolling="no" class="h-16 w-4"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+              <div class="wrapper p-6 ">
+                <div class="pattern-vertical-stripes-xl p-2">
+                    <div class="rounded-lg bg-gray-800 p-6 pb-8"  style="color:#f4f1de">
+                        <!-- 標題 -->
+                        <div class="space-y-4 ">
+                            <div class="">
+                                <div class="flex space-x-3 items-center justify-start">
+                                    <div class="flex items-center justify-center rounded-lg font-bold p-1" 
+                                    style="background-color: #f4f1de;color:#3d405b">
+                                        {{!-- <img class="logo" src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/32/000000/external-blood-drop-with-ph-testing-facility-isolated-on-a-white-background-labs-shadow-tal-revivo.png" /> --}}
+                                    <div class="text-md tracking-widest font-semibold">A10F3</div>
+                                    </div>
+                                </div>
+                                   
+                            </div>
+
+                            <!-- 值 -->
+                        
+                            <div class="flex justify-center">
+                                
+                            <div class="text-xl text-center mqttValue space-y-5 w-full"> 
+                                <div class="flex items-center justify-between">
+                                     <div class="n-icon">
+                                            <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
+                                        </div>
+                                <div id="A10F3n" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                                 <div class="flex items-center justify-between">
+                                      <div class="p-icon">
+                                            <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
+                                        </div>
+                                <div id="A10F3p" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                            </div>
+                               <iframe src="./saciderr-A10F3.html" scrolling="no" class="h-16 w-4"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+              <div class="wrapper p-6 ">
+                <div class="pattern-vertical-stripes-xl p-2">
+                    <div class="rounded-lg bg-gray-800 p-6 pb-8"  style="color:#f4f1de">
+                        <!-- 標題 -->
+                        <div class="space-y-4">
+                            <div class="">
+                                <div class="flex space-x-3 items-center justify-start">
+                                    <div class="flex items-center justify-center rounded-lg font-bold p-1" 
+                                    style="background-color: #f4f1de;color:#3d405b">
+                                        {{!-- <img class="logo" src="https://img.icons8.com/external-tal-revivo-shadow-tal-revivo/32/000000/external-blood-drop-with-ph-testing-facility-isolated-on-a-white-background-labs-shadow-tal-revivo.png" /> --}}
+                                    <div class="text-md tracking-widest font-semibold">A10F4</div>
+                                    </div>
+                                </div>
+                                   
+                            </div>
+
+                            <!-- 值 -->
+                        
+                            <div class="flex justify-center">
+                                 
+                            <div class="text-xl text-center mqttValue space-y-5 w-full"> 
+                                <div class="flex items-center justify-between">
+                                     <div class="n-icon">
+                                            <img src="https://img.icons8.com/dotty/80/000000/circled-n.png" />
+                                        </div>
+                                <div id="A10F4n" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                                 <div class="flex items-center justify-between">
+                                      <div class="p-icon">
+                                            <img src="https://img.icons8.com/dotty/80/000000/circled-p.png" />
+                                        </div>
+                                <div id="A10F4p" class=" text-4xl"></div><span class="text-gray-400 text-sm">m<sup>3</sup></span></div>
+                            </div>
+                              <iframe src="./saciderr-A10F4.html" scrolling="no" class="h-16 w-4"></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 
       <!-- 趨勢圖 -->
-      <div class="bg-gray-900 flex items-center justify-center mb-6">
-        <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 w-full lg:w-11/12"
+      <div class="bg-gray-900 flex items-center justify-center mb-6 text-white">
+        <div class="bg-gray-800  rounded shadow-xl py-5 px-5 w-full lg:w-11/12"
           x-data="{chartData:chartData()}" x-init="chartData.fetch()">
           <div class="flex flex-wrap items-end">
             <div class="flex-1 mb-5 flex inline-block">
               <h3 class="text-lg font-semibold leading-tight">A9A10硫酸報表</h3>
               <span class="text-sm leading-tight text-gray-400 ml-2 pt-1">單位:公噸</span>
             </div>
-            <div class="relative mb-5 " @click.away="chartData.showDropdown=false">
+            <div class="relative mb-5" @click.away="chartData.showDropdown=false">
               <button class="text-md hover:text-gray-300 h-6 focus:outline-none"
                 @click="chartData.showDropdown=!chartData.showDropdown">
                 <span x-text="chartData.options[chartData.selectedOption].label"></span><i
@@ -274,62 +289,40 @@
           <div class="col-span-12">
             <div class="overflow-auto lg:overflow-visible ">
 
-              {{!-- download button --}}
-              <div class="flex items-center">
-                <span class="inline-block  border-2 rounded-md border-gray-600 px-3 pb-2 -mb-1">
-                  {{!-- <form id="Form1" action="/sacid" method="post"> --}}
-                    <div class="flex inline-block">
+        <div class="border-2 rounded-md border-gray-600 p-3 w-auto">
                       <form id="form1" name="dateSearch">
-                        <div class="flex flex-nowrap">
-                          <span class="space-x-1 mr-6 pl-2 inline-block pt-3 ">
-                            <label for="startDate">起始日</label>
-                            <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center"
-                              min="2020-07-01" required>
-                          </span>
-                          <span class="space-x-1 mr-6 pt-3 ">
-                            <label for="startDate">結束日</label>
-                            <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center" required>
-                          </span>
-                          <div title="查詢">
-                            <type class="pt-3 hover:text-gray-100 search" id="search" type="button">
-                              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
-                                class="bi bi-search" viewBox="0 0 16 16">
-                                <path
-                                  d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                              </svg>
-                            </type>
+                        <div class="flex space-x-4 items-center">
+                          <div class="flex items-center space-x-2">
+                            <label for="startDate" class="text-gray-200">起始日</label>
+                            <input type="date" name="startDate" id="startDate" class="text-gray-700 text-center">
                           </div>
+                          <div class="flex items-center space-x-2">
+                            <label for="endDate" class="text-gray-200">結束日</label>
+                            <input type="date" name="endDate" id="endDate" class="text-gray-700 text-center">
+                          </div>
+                          <div class="flex items-center space-x-2">
+                            <div title="查詢" id="search" class="">
+                                <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-search-essentials-prettycons-flat-prettycons-3.png" />
+                            </div>
+                        </div>
+                        <div title="導出報表" class="flex items-center space-x-2">
+                            <button id="btnExport" class="download" onclick="exportTable();return false">
+                         <img src="https://img.icons8.com/doodle/48/000000/microsoft-excel-2019.png"/>
+                        </button>
+                        </div>
+                      
                         </div>
                       </form>
-
-
-                      {{!-- Download Report --}}
-                      <span title="導出報表">
-                        <button id="btnExport" class="download pt-3 pr-2 ml-6 hover:text-gray-100"
-                          onclick="exportTable()">
-                          <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor"
-                            class="bi bi-download" viewBox="0 0 16 16">
-                            <path
-                              d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                            <path
-                              d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                          </svg>
-                        </button>
-                      </span>
-                    </div>
-
-
-
-              </div>
+                        </div>
 
               {{!-- download button --}}
 
               <table class="table text-gray-200 border-separate space-y-5" id="headerTable">
-                <thead class="text-gray-100 text-sm sticky top-0" style="background-color:Mediumblue">
-                  <tr>
-                    <th class=" text-center py-4">日期</th>
-                    <th class="text-center py-4">A9每日產能-進6/7號坦克</th>
-                    <th class=" text-center">A10每日產能-進6/7號坦克</th>
+                <thead class=" text-sm sticky top-0" style="background-color:#81b29a;color:#3d405b">
+                   <tr>
+                   <th class=" text-center py-4">日期</th>
+                    <th class="text-center py-4">每日產能-進6/7號坦克</th>
+                    <th class="text-center py-4">A10每日產能-進6/7號坦克</th>
                     <th class=" text-center">A9A10每日產能-進5/9號坦克</th>
                     <th class=" text-center">A9+A10總量(進5679號坦克加總)</th>
                     <th class=" text-center">配酸出口流量計</th>

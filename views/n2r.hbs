@@ -23,237 +23,180 @@
 
 <body>
 
-    <div class="loading flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
+    {{!-- <div class="loading flex items-center justify-center fixed left-0 bottom-0 w-full h-full">
         <div class="relative">
            <div class="load-circle"></div>
            <div class="word absolute top-0">loading</div>
         </div>
-    </div>
+    </div> --}}
 
 
     <div class="text-gray-200 bg-gray-900">
-            <div class="max-w-full mx-auto pb-5 px-20">
+                   <div class="max-w-full mx-auto py-6 px-16">
         <div class="
           grid grid-cols-1
           md:grid-cols-2
-          lg:grid-cols-3
-          2xl:grid-cols-5
-          md:gap-x-8
-          xl-grid-cols-4
-          gap-y-4 gap-x-8
-          pt-6
+          lg:grid-cols-3 
+          gap-y-14 gap-x-8
+          2xl:gap-x-20
           animate__animated animate__fadeIn
         ">
-            <div class="font-sans py-5 container mx-auto max-w-md">
-                <div class="relative">
-                    <div class="card color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
-                    <div class="card color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
-                    <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md">
-                        <div class="grid grid-cols-2">
-                            <div class="flex items-center flex-col space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="timer-outline" id="A3F1timer" class="timer"></ion-icon>
-                                    <span class="ft">A3F1</span>
-                                </div>
-                                <div class="fvalue text-center" id="A3F1"></div>
-                                <div class="">
-                                    <iframe src="./n2rerr-A3F1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-                            <div class="flex justify-center items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="trending-up-outline" class="trending"></ion-icon>
-                                    <span class="ft1">A3T1</span>
-                                </div>
-                                <div class="tvalue text-center" id="A3T1"></div>
-                                <div class="">
-                                    <iframe src="./n2rerr-A3T1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
+ <div class="container flex flex-col gap-5">
+            <label class="text-gray-100 font-semibold tracking-wider text-lg">A3-1</label>
+            <div class="relative">
+                <div class="color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-3"></div>
+                <div class="color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-3"></div>
+                <div class="relative bg-gray-100 rounded-3xl w-full h-auto py-4 flex flex-row justify-between divide-x divide-solid divide-gray-400">
+                    <div class="relative flex flex-1 flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">F</label>
+                        <label class="text-blue-800 text-4xl font-bold" id="A3F1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A3F1.html" scrolling="no" class="h-6 w-6"></iframe>
                         </div>
+
                     </div>
-                </div>
-            </div>
-            <div class="font-sans py-5 container mx-auto max-w-md">
-                <div class="relative">
-                    <div class="card color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
-                    <div class="card color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
-                    <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md">
-                        <div class="grid grid-cols-2">
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="timer-outline" id="A3F2timer" class="timer"></ion-icon>
-                                    <span class="ft">A3F2</span>
-                                </div>
-
-                                <div class="fvalue text-center" id="A3F2"></div>
-                                <div class="">
-                                    <iframe src="./n2rerr-A3F2.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="trending-up-outline" class="trending"></ion-icon>
-
-                                    <span class="ft1">A3T2</span>
-                                </div>
-                                <div class="tvalue text-center" id="A3T2"></div>
-                                <div class="">
-                                    <iframe src="./n2rerr-A3T2.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="font-sans py-5 container mx-auto max-w-md">
-                <div class="relative">
-                    <div class="card color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
-                    <div class="card color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
-                    <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md">
-                        <div class="grid grid-cols-2">
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="timer-outline" id="A4F1timer" class="timer"></ion-icon>
-
-                                    <span class="ft">A4F1</span>
-                                </div>
-
-                                <div class="fvalue text-center" id="A4F1"></div>
-                                <div class="">
-                                    <iframe src="./n2rerr-A4F1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="trending-up-outline" class="trending"></ion-icon>
-
-                                    <span class="ft1">A4T1</span>
-                                </div>
-                                <div class="tvalue text-center" id="A4T1"></div>
-                                <div class="">
-                                    <iframe src="./n2rerr-A4T1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="font-sans py-5 container mx-auto max-w-md">
-                <div class="relative">
-                    <div class="card color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
-                    <div class="card color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
-                    <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md">
-                        <div class="grid grid-cols-2">
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="timer-outline" id="A8F1timer" class="timer"></ion-icon>
-
-                                    <span class="ft">A8F1</span>
-                                </div>
-
-                                <div class="fvalue text-center" id="A8F1"></div>
-                                <div class="">
-                                    <iframe src="./n2rerr-A4F1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="trending-up-outline" class="trending"></ion-icon>
-
-                                    <span class="ft1">A8T1</span>
-                                </div>
-                                <div class="tvalue text-center" id="A8T1"></div>
-                                <div class="">
-                                    <iframe src="./n2rerr-A8T1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="font-sans py-5 container mx-auto max-w-md">
-                <div class="relative">
-                    <div class="card color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
-                    <div class="card color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
-                    <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md">
-                        <div class="grid grid-cols-2">
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="timer-outline" id="A16F1timer" class="timer"></ion-icon>
-
-                                    <span class="ft">A16F1</span>
-                                </div>
-
-                                <div class="fvalue text-center" id="A16F1"></div>
-                                <div class="">
-                                    <iframe src="n2rerr-A16F1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="trending-up-outline" class="trending"></ion-icon>
-
-                                    <span class="ft1">A16T1</span>
-                                </div>
-                                <div class="tvalue text-center" id="A16T1"></div>
-                                <div class="">
-                                    <iframe src="n2rerr-A16T1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-                 <div class="font-sans py-5 container mx-auto max-w-md">
-                <div class="relative">
-                    <div class="card color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
-                    <div class="card color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
-                    <div class="relative w-full h-40 rounded-3xl px-4 pt-5 bg-gray-100 shadow-md">
-                        <div class="grid grid-cols-2">
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="timer-outline" id="A2F1timer" class="timer"></ion-icon>
-
-                                    <span class="ft">A2F1</span>
-                                </div>
-
-                                <div class="fvalue text-center" id="A2F1"></div>
-                                <div class="">
-                                    <iframe src="n2rerr-A2F1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
-
-                            <div class="flex items-center flex-col text-center space-y-2">
-                                <div class="flex space-x-1 items-center">
-                                    <ion-icon name="trending-up-outline" class="trending"></ion-icon>
-
-                                    <span class="ft1">A2T1</span>
-                                </div>
-                                <div class="tvalue text-center" id="A2T1"></div>
-                                <div class="">
-                                    <iframe src="n2rerr-A2T1.html" scrolling="no" class="w-14 h-6"></iframe>
-                                </div>
-                            </div>
+                    <div class="relative flex flex-1 flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">T</label>
+                        <label class="text-green-800 text-4xl font-bold" id="A3T1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A3T1.html" scrolling="no" class="h-6 w-6"></iframe>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="container flex flex-col gap-5">
+            <label class="text-gray-100 font-semibold tracking-wider text-lg">A3-2</label>
+            <div class="relative">
+                <div class="color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-3"></div>
+                <div class="color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-3"></div>
+                <div class="relative bg-gray-100 rounded-3xl w-full h-auto py-4 flex flex-row justify-between divide-x divide-solid divide-gray-400">
+                    <div class="relative flex flex-1 flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">F</label>
+                        <label class="text-blue-800 text-4xl font-bold" id="A3F2"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A3F2.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+
+                    </div>
+                    <div class="relative flex-1 flex flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">T</label>
+                        <label class="text-green-800 text-4xl font-bold" id="A3T2"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A3T2.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container flex flex-col gap-5">
+            <label class="text-gray-100 font-semibold tracking-wider text-lg">A4-1</label>
+            <div class="relative">
+                <div class="color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-3"></div>
+                <div class="color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-3"></div>
+                <div class="relative bg-gray-100 rounded-3xl w-full h-auto py-4 flex flex-row justify-between divide-x divide-solid divide-gray-400">
+                    <div class="relative flex flex-1 flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">F</label>
+                        <label class="text-blue-800 text-4xl font-bold" id="A4F1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A4F1.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+
+                    </div>
+                    <div class="relative flex-1 flex flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">T</label>
+                        <label class="text-green-800 text-4xl font-bold" id="A4T1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A4T1.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container flex flex-col gap-5">
+            <label class="text-gray-100 font-semibold tracking-wider text-lg">A8-1</label>
+            <div class="relative">
+                <div class="color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-3"></div>
+                <div class="color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-3"></div>
+                <div class="relative bg-gray-100 rounded-3xl w-full h-auto py-4 flex flex-row justify-between divide-x divide-solid divide-gray-400">
+                    <div class="relative flex flex-1 flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">F</label>
+                        <label class="text-blue-800 text-4xl font-bold" id="A8F1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A8F1.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+
+                    </div>
+                    <div class="relative flex-1 flex flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">T</label>
+                        <label class="text-green-800 text-4xl font-bold" id="A8T1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A8T1.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container flex flex-col gap-5">
+            <label class="text-gray-100 font-semibold tracking-wider text-lg">A16-1</label>
+            <div class="relative">
+                <div class="color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-3"></div>
+                <div class="color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-3"></div>
+                <div class="relative bg-gray-100 rounded-3xl w-full h-auto py-4 flex flex-row justify-between divide-x divide-solid divide-gray-400">
+                    <div class="relative flex-1 flex flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">F</label>
+                        <label class="text-blue-800 text-4xl font-bold" id="A16F1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A16F1.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+
+                    </div>
+                    <div class="relative flex-1 flex flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">T</label>
+                        <label class="text-green-800 text-4xl font-bold" id="A16T1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A16T1.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container flex flex-col gap-5">
+            <label class="text-gray-100 font-semibold tracking-wider text-lg">A2-1</label>
+            <div class="relative">
+                <div class="color1 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-3"></div>
+                <div class="color2 shadow-lg w-full h-full rounded-3xl absolute transform rotate-3"></div>
+                <div class="relative bg-gray-100 rounded-3xl w-full h-auto py-4 flex flex-row justify-between divide-x divide-solid divide-gray-400">
+                    <div class="relative flex-1 flex flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">F</label>
+                        <label class="text-blue-800 text-4xl font-bold" id="A2F1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A2F1.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+
+                    </div>
+                    <div class="relative flex-1 flex flex-col gap-2 px-4">
+                        <label class="text-gray-800 text-base font-semibold tracking-wider">T</label>
+                        <label class="text-green-800 text-4xl font-bold" id="A2T1"></label>
+                        <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                            <iframe src="./n2rerr-A2T1.html" scrolling="no" class="h-6 w-6"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
     </div>
 
 
-            {{!-- 趨勢圖 --}}
-            <div class="bg-gray-900 flex items-center justify-center mb-6 mt-10">
-                <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 w-full lg:w-11/12"
+
+         
+
+                       {{!-- 趨勢圖--}}
+            <div class="bg-gray-900 flex items-center justify-center mb-6 mt-10" >
+                <div class="bg-gray-800 text-gray-100 rounded shadow-xl py-5 px-5 overflow-auto lg:w-11/12"
                     x-data="{chartData:chartData()}" x-init="chartData.fetch()">
-                    <div class="flex flex-wrap items-end">
+                    <div class="flex flex-nowrap items-end">
                         <div class="flex-1 mb-5 flex inline-block">
                             <h3 class="text-lg font-semibold leading-tight">氮氣報表</h3>
                             <span class="text-sm leading-tight text-gray-400 ml-2 pt-1">單位: m^3</span>
@@ -298,62 +241,60 @@
 
 
 
+
+
             {{!-- 報表 --}}
+            <div class="loadingSv unblock" id="loadingSv">
+        <div class="flex items-center justify-center sticky top-0 w-full h-6 bg-red-400 text-gray-100 text-sm">Searching🟢🟢🟢...</div>
+    </div>
             <div class="bg-gray-900 flex items-center justify-center mb-6">
                 <div class="flex items-center w-full lg:w-11/12">
                     <div class="col-span-12">
-                        <div class="overflow-auto lg:overflow-visible ">
+                        <div class="overflow-auto lg:overflow-visible">
 
                             {{!-- download button --}}
                             <div class="flex items-center">
                                 <span
-                                    class="inline-block  border-2 rounded-md border-gray-600 px-3 pb-2 -mb-1">
+                                    class="border-2 rounded-md border-gray-600 px-3 py-2">
                                     {{!-- <form id="Form1" action="/sacid" method="post"> --}}
-                                        <div class="flex inline-block">
+                                        <div class="flex">
                                             <form id="form1" name="dateSearch">
-                                                <div class="flex flex-nowrap">
-                                                    <span class="space-x-1 mr-6 pl-2 inline-block pt-3 ">
+                                                <div class="flex items-center space-x-6">
+                                                    <div class="space-x-1">
                                                         <label for="startDate">起始日</label>
                                                         <input type="date" name="startDate" id="startDate"
-                                                            class="text-gray-700 text-center">
-                                                    </span>
-                                                    <span class="space-x-1 mr-6 pt-3 ">
-                                                        <label for="startDate">結束日</label>
-                                                        <input type="date" name="endDate" id="endDate"
-                                                            class="text-gray-700 text-center">
-                                                    </span>
-                                                    <div title="查詢">
-                                                        <type class="pt-3 hover:text-gray-100 search" id="search"
-                                                            type="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="26"
-                                                                height="26" fill="currentColor" class="bi bi-search"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                                                            </svg>
-                                                        </type>
+                                                            class="text-gray-700 text-center rounded-md">
                                                     </div>
+                                                    <div class="space-x-1">
+                                                        <label for="endDate">結束日</label>
+                                                        <input type="date" name="endDate" id="endDate"
+                                                            class="text-gray-700 text-center rounded-md">
+                                                    </div>
+                                                     <div class="space-x-1">
+                                                        {{!-- <label for="FT">即時/累積</label> --}}
+                                                        <select class="text-gray-700 px-2 rounded-sm" name="FT" id="FT">
+                                                            <option value="T">累積</option>
+                                                            <option value="F">即時</option>
+                                                        </select>
+                                                    </div>
+                                                        <div title="查詢" id="search" class="">
+                                                            <img src="https://img.icons8.com/doodle/48/000000/microsoft-excel-2019.png"/>
+                                                            {{!-- <img src="https://img.icons8.com/external-prettycons-flat-prettycons/47/000000/external-search-essentials-prettycons-flat-prettycons-3.png" /> --}}
+                                                        </div>
+                        
+                                                        {{!-- <div title="導出報表"> --}}
+                                                            {{!-- <button id="btnExport" class="download"> --}}
+                                                                {{!-- <img src="https://img.icons8.com/doodle/48/000000/microsoft-excel-2019.png"/> --}}
+                                                            {{!-- </button> --}}
+                                                            {{!--  onclick="exportTable();return false" --}}
+                                                        {{!-- </div> --}}
+                                                            <button title="清除選單" class="clear" id="clear" type="reset">
+                                                    <img src="https://img.icons8.com/external-bearicons-outline-color-bearicons/64/000000/external-Reset-miscellany-texts-and-badges-bearicons-outline-color-bearicons.png"/>
+                                                    </button>
+                                              </div>
                                                 </div>
                                             </form>
-
-
-                                            {{!-- Download Report --}}
-                                            <span title="導出報表">
-                                                <button id="btnExport" onclick="exportTable()"
-                                                    class="download pt-3 pr-2 ml-6 hover:text-gray-100">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27"
-                                                        fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-                                                        <path
-                                                            d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-                                                    </svg>
-                                                </button>
-                                            </span>
                                         </div>
-
-
-
                             </div>
 
                             {{!-- download button --}}
@@ -362,12 +303,12 @@
                                 <thead class="text-gray-100 text-xl  sticky top-0" style="background-color:Mediumblue">
                                     <tr>
                                         <th class="text-center py-4">日期</th>
-                                        <th class="text-center py-4">A3t1</th>
-                                        <th class="text-center">A3t2</th>
-                                        <th class="text-center">A4t1</th>
-                                        <th class="text-center">A8t1</th>
-                                        <th class="text-center">A16t1</th>
-                                        <th class="text-center">A2t1</th>
+                                        <th class="text-center py-4">A3-1</th>
+                                        <th class="text-center">A3-2</th>
+                                        <th class="text-center">A4-1</th>
+                                        <th class="text-center">A8-1</th>
+                                        <th class="text-center">A16-1</th>
+                                        <th class="text-center">A2-1</th>
                                     </tr>
                                 </thead>
                                 {{#each rows}}
@@ -392,8 +333,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
 
 </body>
 
@@ -422,10 +361,11 @@
 <script type="text/javascript" src="./mqtt.js"></script>
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
-
+<script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 </html>
 
 <script>
     subTopic = 'N2R'
     MQTTConnect();
+
 </script>
