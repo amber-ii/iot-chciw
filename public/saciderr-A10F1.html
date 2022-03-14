@@ -5,47 +5,59 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>氮氣</title>
-    <link rel="stylesheet" type="text/css" href="./css/air.css" />
-    <link rel="stylesheet" type="text/css" href="./css/saciderr.css" />
+    <title></title>
     <link rel="stylesheet" type="text/css" href="./css/animate.min.css" />
     <link rel="stylesheet" type="text/css" href="./css/pattern.css" />
     <link rel="stylesheet" href="./css/style.css" />
 </head>
+<style>
+    .break {
+        animation-name: flash;
+        animation-duration: 1.5s;
+        animation-iteration-count: infinite;
+    }
+    
+    .unblock {
+        display: none;
+    }
+</style>
 
 <body onload="subTopic='CH1ACIerr';MQTTConnect();">
-    <div class="space-y-8 pt-2">
-        <div class="flex justify-end">
-            <div id="A10F1n" class="break">
-                <ion-icon name="warning-outline"></ion-icon>
-                <span class="breakLyric">斷線</span>
-            </div>
-            <div id="A10F1nok" class="connected">
-                <div class="flex items-center">
-                    <ion-icon name="checkmark-circle-outline"></ion-icon>
-                    <span class="connectedLyric">連線</span>
-                </div>
+    <div class="space-y-8">
+        <div id="A10F1n" class=" flex justify-center">
+            <div class="break">
+                <img class="conn" src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/25/000000/external-wifi-enabled-laundry-machine-to-handle-remotely-laundry-duo-tal-revivo.png" />
             </div>
         </div>
-        <div class="flex justify-end">
-            <div id="A10F1p" class="break">
-                <ion-icon name="warning-outline"></ion-icon>
-                <span class="breakLyric">斷線</span>
-            </div>
-            <div id="A10F1pok" class="connected">
-                <div class="flex items-center">
-                    <ion-icon name="checkmark-circle-outline"></ion-icon>
-                    <span class="connectedLyric">連線</span>
-                </div>
+        <div id="A10F1p" class=" flex justify-center">
+            <div class="break">
+                <img class="conn" src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/25/000000/external-wifi-enabled-laundry-machine-to-handle-remotely-laundry-duo-tal-revivo.png" />
             </div>
         </div>
     </div>
 </body>
 
+<script>
+    function onMessageArrived(r_message) {
+        var rcMsg = JSON.parse(r_message.payloadString)
+        for (var key in rcMsg) {
+            var Id = key
+            var value = rcMsg[Id]
+            if (document.getElementById(Id)) {
+                if (value == 0) {
+                    document.querySelector(`#${Id} > .break`).classList.remove('unblock')
+                }
+                if (value == 1) {
+                    document.querySelector(`#${Id} > .break`).classList.add('unblock')
+                }
+            }
+        }
+    }
+</script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
-<script type="text/javascript" src="./sacidBreaking.js"></script>
 <script type="text/javascript" src="./mqtt.js"></script>
 <script type="text/javascript" src="./index.js"></script>
 

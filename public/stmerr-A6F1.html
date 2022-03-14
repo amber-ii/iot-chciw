@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>stmerr</title>
     <link rel="stylesheet" type="text/css" href="./css/animate.min.css" />
     <link rel="stylesheet" type="text/css" href="./css/pattern.css" />
     <link rel="stylesheet" href="./css/style.css" />
@@ -22,18 +22,15 @@
     }
 </style>
 
-<body onload="subTopic='N2Rerr';MQTTConnect();">
-    <div class="flex space-x-8">
-        <div id="A3T1" class=" flex justify-center">
-            <div class="break">
-                <img class="conn" src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/25/000000/external-wifi-enabled-laundry-machine-to-handle-remotely-laundry-duo-tal-revivo.png" />
-            </div>
+<body onload="subTopic='STMerr';MQTTConnect();">
+
+    <div id="A6F1" class=" flex justify-center">
+        <div class="conn unblock">
+            <img class="conn" src="https://img.icons8.com/color/28/000000/wi-fi-connected.png" />
         </div>
-        <!-- <div id="A3T1" class=" flex justify-center">
-            <div class="break">
-                <img class="conn" src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/25/000000/external-wifi-enabled-laundry-machine-to-handle-remotely-laundry-duo-tal-revivo.png" />
-            </div>
-        </div> -->
+        <div class="break">
+            <img class="conn" src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/25/000000/external-wifi-enabled-laundry-machine-to-handle-remotely-laundry-duo-tal-revivo.png" />
+        </div>
     </div>
 </body>
 
@@ -45,12 +42,12 @@
             var value = rcMsg[Id]
             if (document.getElementById(Id)) {
                 if (value == 0) {
-                    document.querySelector(`#${Id} > .break`).classList.remove('unblock')
-                        // document.querySelector(`#${Id} > .conn`).classList.add('unblock')
+                    document.querySelector('.break').classList.remove('unblock')
+                        // document.querySelector('.conn').classList.add('unblock')
                 }
                 if (value == 1) {
-                    document.querySelector(`#${Id} > .break`).classList.add('unblock')
-                        // document.querySelector(`#${Id} > .conn`).classList.remove('unblock')
+                    document.querySelector('.break').classList.add('unblock')
+                        // document.querySelector('.conn').classList.remove('unblock')
                 }
             }
         }

@@ -5,16 +5,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title></title>
+    <title>氮氣</title>
     <link rel="stylesheet" type="text/css" href="./css/animate.min.css" />
     <link rel="stylesheet" type="text/css" href="./css/pattern.css" />
     <link rel="stylesheet" href="./css/style.css" />
 </head>
 <style>
     .break {
+        color: red;
+        font-size: 30px;
         animation-name: flash;
         animation-duration: 1.5s;
         animation-iteration-count: infinite;
+    }
+    
+    .breakLyric {
+        color: red;
+        font-weight: bold;
+        font-size: 15px;
     }
     
     .unblock {
@@ -22,35 +30,31 @@
     }
 </style>
 
-<body onload="subTopic='N2Rerr';MQTTConnect();">
-    <div class="flex space-x-8">
-        <div id="A3T1" class=" flex justify-center">
-            <div class="break">
-                <img class="conn" src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/25/000000/external-wifi-enabled-laundry-machine-to-handle-remotely-laundry-duo-tal-revivo.png" />
-            </div>
+<body onload="subTopic='A25TOCerr';MQTTConnect();">
+    <div class="A25TOC flex items-center">
+        <div id="A25TOC" class="break flex items-center px-2">
+            <ion-icon name="warning-outline"></ion-icon>
         </div>
-        <!-- <div id="A3T1" class=" flex justify-center">
-            <div class="break">
-                <img class="conn" src="https://img.icons8.com/external-tal-revivo-duo-tal-revivo/25/000000/external-wifi-enabled-laundry-machine-to-handle-remotely-laundry-duo-tal-revivo.png" />
-            </div>
-        </div> -->
+        <div class="breakLyric">斷線</div>
     </div>
+
 </body>
 
 <script>
     function onMessageArrived(r_message) {
+        // 聽全部的訊息
         var rcMsg = JSON.parse(r_message.payloadString)
+            // console.log(rcMsg)
+
         for (var key in rcMsg) {
             var Id = key
             var value = rcMsg[Id]
             if (document.getElementById(Id)) {
-                if (value == 0) {
-                    document.querySelector(`#${Id} > .break`).classList.remove('unblock')
-                        // document.querySelector(`#${Id} > .conn`).classList.add('unblock')
-                }
                 if (value == 1) {
-                    document.querySelector(`#${Id} > .break`).classList.add('unblock')
-                        // document.querySelector(`#${Id} > .conn`).classList.remove('unblock')
+                    document.querySelector(`.${Id}`).classList.add('unblock')
+                }
+                if (value == 0) {
+                    document.querySelector(`.${Id}`).classList.remove('unblock')
                 }
             }
         }
