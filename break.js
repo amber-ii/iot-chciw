@@ -64,6 +64,12 @@ client.on('connect', async function() {
     await client.subscribe('A10HeatX', function(err) {
         if (!err) {}
     })
+    await client.subscribe('A25TOCerr', function(err) {
+        if (!err) {}
+    })
+    await client.subscribe('STMerr', function(err) {
+        if (!err) {}
+    })
 
 
 
@@ -111,96 +117,105 @@ schedule.scheduleJob({ hour: 11, minute: 00, second: 01 }, async() => {
 client.on('message', function(topic, message) {
     var msg = JSON.parse(message)
     for (var key in msg) {
-        if (msg[key] == 0) {
-            if (topic == 'A2Recorderr') {
-                const postModbus = new Modbus({
-                    topic: topic,
-                    tag: message,
-                    breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss')
-                })
-                postModbus.save()
-                hasCall1++
 
-                if (hasCall1 == 10) {
-                    callLine('A2監控' + '\n\n' + message)
-                    hasCall1++
-                }
-            }
-            if (topic == 'WPerr') {
-                const postModbus = new Modbus({
-                    topic: topic,
-                    tag: message,
-                    breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
-                })
-                postModbus.save()
-                hasCall2++
-
-                if (hasCall2 == 10) {
-                    callLine('自來水' + '\n\n' + message)
-                    hasCall2++
-                }
-            }
-
-            if (topic == 'AH2PHerr') {
-                const postModbus = new Modbus({
-                    topic: topic,
-                    tag: message,
-                    breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
-                })
-                postModbus.save()
-                hasCall3++
-
-                if (hasCall3 == 10) {
-                    callLine('廢水池' + '\n\n' + message)
-                    hasCall3++
-                }
-            }
-
-            if (topic == 'CH1ACIerr') {
-
-                const postModbus = new Modbus({
-                    topic: topic,
-                    tag: message,
-                    breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
-                })
-                postModbus.save()
-
-                hasCall4++
-                if (hasCall4 == 10) {
-                    callLine('硫酸' + '\n\n' + message)
-                    hasCall4++
-                }
-
-            }
-
-            if (topic == 'A10VPCerr') {
-                const postModbus = new Modbus({
-                    topic: topic,
-                    tag: message,
-                    breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
-                })
-                postModbus.save()
-                hasCall5++
-                if (hasCall5 == 10) {
-                    callLine('A10VPC蒸氣壓閥' + '\n\n' + message)
-                    hasCall5++
-                }
-            }
-
-            if (topic == 'N2Rerr') {
-                const postModbus = new Modbus({
-                    topic: topic,
-                    tag: message,
-                    breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
-                })
-                postModbus.save()
-                hasCall6++
-                if (hasCall6 == 10) {
-                    callLine('氮氣' + '\n\n' + message)
-                    hasCall6++
-                }
-            }
+        if (topic.includes('err') && msg[key] == 0) {
+            const postModbus = new Modbus({
+                topic: topic,
+                tag: message,
+                breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
+            })
+            postModbus.save()
         }
+        // if (msg[key] == 0) {
+        //     if (topic == 'A2Recorderr') {
+        //         const postModbus = new Modbus({
+        //             topic: topic,
+        //             tag: message,
+        //             breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss')
+        //         })
+        //         postModbus.save()
+        //         hasCall1++
+
+        //         if (hasCall1 == 10) {
+        //             callLine('A2監控' + '\n\n' + message)
+        //             hasCall1++
+        //         }
+        //     }
+        //     if (topic == 'WPerr') {
+        //         const postModbus = new Modbus({
+        //             topic: topic,
+        //             tag: message,
+        //             breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
+        //         })
+        //         postModbus.save()
+        //         hasCall2++
+
+        //         if (hasCall2 == 10) {
+        //             callLine('自來水' + '\n\n' + message)
+        //             hasCall2++
+        //         }
+        //     }
+
+        //     if (topic == 'AH2PHerr') {
+        //         const postModbus = new Modbus({
+        //             topic: topic,
+        //             tag: message,
+        //             breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
+        //         })
+        //         postModbus.save()
+        //         hasCall3++
+
+        //         if (hasCall3 == 10) {
+        //             callLine('廢水池' + '\n\n' + message)
+        //             hasCall3++
+        //         }
+        //     }
+
+        //     if (topic == 'CH1ACIerr') {
+
+        //         const postModbus = new Modbus({
+        //             topic: topic,
+        //             tag: message,
+        //             breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
+        //         })
+        //         postModbus.save()
+
+        //         hasCall4++
+        //         if (hasCall4 == 10) {
+        //             callLine('硫酸' + '\n\n' + message)
+        //             hasCall4++
+        //         }
+
+        //     }
+
+        //     if (topic == 'A10VPCerr') {
+        //         const postModbus = new Modbus({
+        //             topic: topic,
+        //             tag: message,
+        //             breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
+        //         })
+        //         postModbus.save()
+        //         hasCall5++
+        //         if (hasCall5 == 10) {
+        //             callLine('A10VPC蒸氣壓閥' + '\n\n' + message)
+        //             hasCall5++
+        //         }
+        //     }
+
+        //     if (topic == 'N2Rerr') {
+        //         const postModbus = new Modbus({
+        //             topic: topic,
+        //             tag: message,
+        //             breakDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
+        //         })
+        //         postModbus.save()
+        //         hasCall6++
+        //         if (hasCall6 == 10) {
+        //             callLine('氮氣' + '\n\n' + message)
+        //             hasCall6++
+        //         }
+        //     }
+        // }
 
         // 數值
 
