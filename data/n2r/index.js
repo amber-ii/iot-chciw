@@ -2,10 +2,10 @@
 const utils = require('../utils');
 const config = require('../../config');
 const sql = require('mssql');
-
+const rp = require('request-promise')
 
 let pool;
-const getN2R = async () => {
+const getN2R = async() => {
     try {
         pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('n2r');
@@ -19,7 +19,7 @@ const getN2R = async () => {
 };
 
 
-const getN2RJSONSeven = async () => {
+const getN2RJSONSeven = async() => {
     try {
         pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('n2r');
@@ -32,7 +32,7 @@ const getN2RJSONSeven = async () => {
     }
 };
 
-const getN2RJSONThirty = async () => {
+const getN2RJSONThirty = async() => {
     try {
         pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('n2r');
@@ -46,12 +46,38 @@ const getN2RJSONThirty = async () => {
 };
 
 
+const getN2RJSON90 = async() => {
+    try {
+        pool = await sql.connect(config.sql)
+        const sqlQueries = await utils.loadSqlQueries('n2r')
+        var list = await pool.request().query(sqlQueries.n2rChart90)
+        return list.recordset
+    } catch (error) {
+        console.log(error.message)
+    } finally {
+        pool.close()
+    }
+}
+const getN2RNow = async() => {
+    try {
+        pool = await sql.connect(config.sql)
+        const sqlQueries = await utils.loadSqlQueries('n2r')
+        var list = await pool.request().query(sqlQueries.n2rNow)
+        return list.recordset
+    } catch (error) {
+        console.log(error.message)
+    } finally {
+        pool.close()
+    }
+}
 
-const getById = async (BID) => {
+
+
+const getById = async(BID) => {
     try {
         pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('n2r');
-        const list = await pool.request().input('BID',sql.Int, BID).query(sqlQueries.n2rbyId);
+        const list = await pool.request().input('BID', sql.Int, BID).query(sqlQueries.n2rbyId);
         return list.recordset;
     } catch (error) {
         return error.message;
@@ -63,14 +89,16 @@ const getById = async (BID) => {
 
 
 
-const getByDate = async (startDate, endDate) => {
+const getByDate = async(startDate, endDate, ft) => {
     try {
         pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('n2r');
-        const event = await pool.request()
+        const event = await pool
+            .request()
             .input('startDate', sql.Date, startDate)
             .input('endDate', sql.Date, endDate)
-            .query(sqlQueries.n2rbyDate);
+            .input('ft', sql.VarChar, ft)
+            .query(sqlQueries.n2rbyDate)
         return event.recordset;
     } catch (error) {
         return error.message;
@@ -80,7 +108,7 @@ const getByDate = async (startDate, endDate) => {
 };
 
 
-const getByDateReport = async (startDate, endDate) => {
+const getByDateReport = async(startDate, endDate) => {
     try {
         pool = await sql.connect(config.sql);
         const sqlQueries = await utils.loadSqlQueries('n2r');
@@ -107,5 +135,6 @@ module.exports = {
     getByDate,
     getByDateReport,
     getById,
-
-};
+    getN2RJSON90,
+    getN2RNow,
+}
