@@ -1,0 +1,174 @@
+ @import url('https://fonts.googleapis.com/earlyaccess/cwtexyen.css');
+ body {
+     background-color: rgb(17, 24, 39);
+ }
+ 
+ .image {
+     position: relative;
+     width: 100px;
+ }
+ 
+ .image_img {
+     display: block;
+     width: 100%;
+ }
+ 
+ .image__overlay {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background: rgba(0, 0, 0, 0.6);
+     color: #ffffff;
+     font-family: 'Quicksand', sans-serif;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     opacity: 0;
+     transition: opacity 0.25s;
+ }
+ 
+ .image__overlay--blur {
+     backdrop-filter: blur(5px);
+ }
+ /* .image__overlay--primary {
+    background: #009578;
+} */
+ 
+ .image__overlay>* {
+     transform: translateY(20px);
+     transition: transform 0.25s;
+ }
+ 
+ .image__overlay:hover {
+     opacity: 1;
+     cursor: pointer;
+ }
+ 
+ .image__overlay:hover>* {
+     transform: translateY(0);
+ }
+ 
+ .image__description {
+     font-size: 16px;
+     margin-top: 0.25em;
+     font-family: 'cwTeXYen';
+ }
+ 
+ .unblock {
+     display: none;
+ }
+ 
+ #search,
+ .download,
+ .clear {
+     width: 30px;
+     cursor: pointer;
+ }
+ 
+ #search:hover,
+ .download:hover,
+ .clear:hover {
+     transform: translate(-2px, 3px);
+ }
+ 
+ #form1 label {
+     font-family: 'cwTeXYen';
+     font-size: 16px;
+ }
+ 
+ #form1 div {
+     font-family: 'cwTeXYen';
+     font-size: 16px;
+ }
+ 
+ #form1 span {
+     font-family: 'cwTeXYen';
+     font-size: 16px;
+ }
+ 
+ .tables {
+     border-collapse: collapse;
+     border-radius: 5px 5px 0 0;
+     display: flex;
+     justify-content: center;
+     margin-left: auto;
+     margin-right: auto;
+     margin-top: 20px;
+     margin-bottom: 30px;
+     font-size: 0.9em;
+     min-width: 400px;
+     overflow: hidden;
+     box-shadow: 0 0 20px rgb(0, 0, 0, 0.15);
+ }
+ 
+ .tables thead tr th {
+     background-color: #009879;
+     border-radius: 5px 5px 0 0;
+     color: #ffffff;
+     text-align: left;
+     font-weight: bold;
+     /* font-family: 'cwTeXYen'; */
+ }
+ 
+ .tables th,
+ .tables td {
+     padding: 12px 15px;
+ }
+ 
+ .tables tbody tr {
+     border-bottom: 1px solid #dddddd;
+     background-color: snow;
+     text-align: left;
+     font-family: 'Verdana';
+     color: Slategray;
+ }
+ 
+ .tables tbody tr:nth-of-type(even) {
+     background-color: #f3f3f3;
+ }
+ 
+ .tables tbody tr:last-of-type {
+     border-bottom: 2px solid #009879;
+ }
+ 
+ #saveresult {
+     font-size: 24px;
+     font-weight: bold;
+ }
+ 
+ input,
+ select {
+     height: 1.7rem;
+ }
+ 
+ .factory_date {
+     border-right: 2px solid #009879;
+     border-left: 2px solid #009879;
+     /* border-radius: 1rem; */
+     display: flex;
+ }
+ 
+ .table-sortable th {
+     cursor: pointer;
+ }
+ 
+ .table-sortable .th-sort-asc::after {
+     content: '\25b4';
+ }
+ 
+ .table-sortable .th-sort-desc::after {
+     content: '\25be';
+ }
+ 
+ .table-sortable .th-sort-asc::after,
+ .table-sortable .th-sort-desc::after {
+     margin-left: 5px;
+ }
+ 
+ .table-sortable .th-sort-asc,
+ .table-sortable .th-sort-desc {
+     background: #025746;
+ }

@@ -25,29 +25,31 @@
         }
         .head>ul>li {
             flex:1 1 auto;
-            width: 150px;
-            background-color:#f1faee;
+            width: auto;
+            min-width: 90px;
+            padding: 0 .8rem;
+            background-color:white;
             font-size: 13px;
             line-height: 26px;
             height: 26px;
-            border: 1px solid #1d3557;
-            border-radius: 10px 10px 0 0;
+            
+            border-radius: 4px 4px 1px 1px;
             text-align: center;
-            letter-spacing: 0.025em;
+ 
+            color: #696969;
+            margin-right: 2px;
+            margin-top: 2px;
+            cursor: pointer;
         }
         
         .head>ul>li.active {
             color: white;
             font-weight: bold;
-            background-color: #e63946;
+            background-color: Crimson;
             transform: scale(1.1);
             transform: translateY(-2.5px);
         }
-        
-        .head>ul>li {
-            color: #457b9d;
-            cursor: pointer;
-        }
+    
         
        
         .unblock {
@@ -62,11 +64,12 @@
         </div>
         <div class="word">loading</div>
     </div> --}}
-    <div class="bg-gray-100 pt-6 px-10 bg-gray-900">
+    <div class="bg-gray-100 pt-6 px-10 bg-gray-800">
         <div class="flex justify-end">
-            <div class="pt-1 mr-4 text-blue-400">
+            <div class="pt-1 mr-4 text-blue-400 animate__animated animate__heartBeat">
                 Hello <span id="permission">{{name}}</span>
             </div>
+           
             <a href="/logout">
                 <button class="text-lg font-light outline-none focus:outline-none transform transition-all hover:scale-110 text-yellow-500 hover:text-yellow-600"><span
                         class="text-yellow-400">登出</span>
@@ -74,30 +77,35 @@
                 </button>
             </a>
         </div>
-        <h1 class="title-font mb-10 text-4xl font-extrabold leading-10 tracking-tight sm:text-4xl sm:leading-none md:text-5xl animate__animated animate__slideInLeft text-center text-white">
+        <h1 class="title-font mb-8 text-4xl font-extrabold leading-10 tracking-tight sm:text-4xl sm:leading-none md:text-5xl animate__animated animate__slideInLeft text-center text-white">
             CHCIW ELECTRICAL CONTROL</h1>
-             <p class="text-red-700 text-center text-xl font-bold mb-2">由於Server服務更新，今日(2/17) 12:30-14:00 網站暫停使用</p>
+             <p class="text-red-700 text-center text-md font-bold mb-2 animate__animated animate__heartBeat ">近期頻繁更新網站，故若遇異常，刷新網站或重新登入即可，仍無法請聯繫分機12519😊</p>
               {{!-- 選單 --}}
-            <div class="head">
+            <div class="head animate__animated animate__flipInX">
                 <ul>
-                    <li class="active unblock">冷氣控制(2廠)</li>
-                    <li class="unblock">硫酸</li>
-                    <li class="unblock">自來水</li>
-                    <li class="unblock">氮氣</li>
-                    <li class="unblock">A25水質檢測</li>
-                    <li class="unblock">A10蒸氣</li>
-                    <li class="unblock">變電站溫度監測</li>
-                    <li class="unblock">廢水池監控</li>
-                    <li class="unblock">A11儀表</li>
-                    <li class="unblock">A25 DATA</li>
-                    <li class="unblock w-10" title="A10螺旋式熱交換器變頻控制">A10螺旋式熱交換器變頻控制</li>
-                    <li class="unblock">Particle</li>
-                    <li class="unblock">A2監控</li>
-                    <li class="unblock">自來水</li>
-                    <li class="unblock">A10蒸氣</li>
-                    <li class="unblock">A10螺旋式熱交換器變頻控制</li>
-                    <li class="unblock">Modbus斷線</li>
-                    <li class="unblock">使用者登入紀錄</li>
+                   
+                    <li class="active unblock bg-gray-700" data-key="0">冷氣控制(2廠)</li>
+                    <li class="unblock" data-key="1">硫酸</li>
+                    <li class="unblock" data-key="2">自來水</li>
+                    <li class="unblock" data-key="3">氮氣</li>
+                    <li class="unblock" data-key="4">A25水質檢測</li>
+                    <li class="unblock" data-key="5">A10蒸氣</li>
+                    <li class="unblock" data-key="6">變電站溫度監測</li>
+                    <li class="unblock" data-key="7">廢水池監控</li>
+                    <li class="unblock" data-key="8">A11儀表</li>
+                    <li class="unblock" data-key="9">A25 DATA</li>
+                    <li class="unblock" data-key="10">A10螺旋式熱交換器變頻控制</li>
+                    <li class="unblock" data-key="11">Particle</li>
+                    <li class="unblock" data-key="12">A2監控</li>
+                    <li class="unblock" data-key="13-per4">自來水</li>
+                    <li class="unblock" data-key="14-per4">A10蒸氣</li>
+                    <li class="unblock" data-key="15-per4">A10螺旋式熱交換器變頻控制器</li>
+                    <li class="unblock" data-key="16">Modbus斷線</li>
+                    <li class="unblock" data-key="17">A14 DATA</li>
+                    <li class="unblock" data-key="18">蒸氣專案</li>
+                    <li class="unblock" data-key="19">A25產量報表</li>
+
+                    <li class="unblock" data-key="20">使用者登入紀錄</li>
 
                    
                 </ul>
@@ -145,8 +153,15 @@
               <iframe src="./vpc_per4" class="h-screen w-full"></iframe></ul>
                 <ul class="unblock">
               <iframe src="./a10heat_per4" class="h-screen w-full"></iframe></ul>
+             
                 <ul class="unblock">
               <iframe src="./modbus" class="h-screen w-full"></iframe></ul>
+               <ul class="unblock">
+              <iframe src="./a14datas" class="h-screen w-full"></iframe></ul>
+               <ul class="unblock">
+              <iframe src="./stm" class="h-screen w-full"></iframe></ul>
+               <ul class="unblock">
+              <iframe src="./a25output" class="h-screen w-full"></iframe></ul>
                 <ul class="unblock">
               <iframe src="./loginrecord" class="h-screen w-full"></iframe></ul>
             </div>
@@ -172,6 +187,8 @@
             navs[9].classList.remove('unblock')
             navs[10].classList.remove('unblock')
             navs[11].classList.remove('unblock')
+            navs[18].classList.remove('unblock')
+            navs[19].classList.remove('unblock')
             bodys[1].classList.remove('unblock')
             bodys[0].classList.add('unblock')
     }else if(pernames.includes('特化')){
@@ -179,18 +196,19 @@
             navs[0].classList.remove('active')
             navs[3].classList.add('active')
             navs[12].classList.remove('unblock')
+            navs[17].classList.remove('unblock')
             bodys[3].classList.remove('unblock')
             bodys[0].classList.add('unblock')
     }else if(pernames.includes('總機')){
             navs[0].classList.remove('unblock')
-    }
-    else if(pernames.includes('世宏')){
+    }else if(pernames.includes('世宏')){
             navs[3].classList.remove('unblock')
             navs[0].classList.remove('active')
             navs[3].classList.add('active')
             bodys[3].classList.remove('unblock')
             bodys[0].classList.add('unblock')
-    }else if(pernames.includes('環安')){
+    }
+    else if(pernames.includes('環安')){
             navs[7].classList.remove('unblock')
             navs[7].classList.add('active')
             bodys[0].classList.add('unblock')
@@ -211,6 +229,9 @@
         navs[14].classList.remove('unblock')
         navs[15].classList.remove('unblock')
         navs[17].classList.remove('unblock')
+        navs[18].classList.remove('unblock')
+        navs[19].classList.remove('unblock')
+        navs[20].classList.remove('unblock')
     }else{
         navs[0].classList.remove('unblock')
         navs[1].classList.remove('unblock')
@@ -230,6 +251,9 @@
         {{!-- navs[15].classList.remove('unblock') --}}
         navs[16].classList.remove('unblock')
         navs[17].classList.remove('unblock')
+        navs[18].classList.remove('unblock')
+        navs[19].classList.remove('unblock')
+        navs[20].classList.remove('unblock')
     }
 
     navs.forEach((nav) => {
