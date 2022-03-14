@@ -140,8 +140,11 @@
                         <div class="line6"></div>
                         <div class="pand7 flex flex-col justify-center items-center">
                             <div>
-                                <div class="name pb-1">
+                                <div class="flex items-center name pb-1">
                                     <h5>Press</h5>
+                                    <div class="text-xs">---<sup>kgf</sup><sub>/cm</sub>
+                                        <sup>2</sup>
+                                    </div>
                                 </div>
                                 <div class="press-dot1">
                                     <div class="press-dot2 text-center">
@@ -153,7 +156,7 @@
 
                                             <button id="submitPressBtn" onclick="modPress()" title="提交修改" class="font-semibold border-l hover:bg-red-500  border-gray-400 h-full w-20 flex rounded-r focus:outline-none cursor-pointer">
                                                 <span
-                                                    class="m-auto font-light  text-green-500 hover:text-white">提交</span>
+                                                    class="m-auto font-light text-green-500 hover:text-white">提交</span>
                                             </button>
 
 
@@ -161,20 +164,24 @@
                                                 <svg width="10" height="10" class="fill-current ml-5 md:mx-auto">
                                                     <polygon points="0 10, 10 10, 5 0" />
                                                 </svg>
-                                                <span class="text-sm block w-56 flex flex-wrap justify-center bg-black p-1 h-auto rounded-lg text-gray-100">調整壓力，目前設定值:<span
-                                                        id="SV" class="pl-2 font-bold text-md text-white"></span>
+                                                <div class="text-sm block w-64 flex flex-wrap justify-center bg-black p-1 h-auto rounded-lg text-gray-100">調整壓力，目前設定值:<span id="SV" class="pl-2 font-bold text-md text-white mr-3"></span>
+                                                    <div class="text-xs text-gray-400"><sup>kgf</sup><sub>/cm</sub>
+                                                        <sup class="-ml-1">2</sup>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-
-
                                 </div>
+                                <!-- <div class="">
+                                    <img src="https://img.icons8.com/external-itim2101-blue-itim2101/50/000000/external-pipeline-plumber-tools-itim2101-blue-itim2101-5.png" />
+                                </div> -->
                             </div>
-                            <div class="">
+                            <!-- <div class="">
                                 <img src="https://img.icons8.com/external-itim2101-blue-itim2101/50/000000/external-pipeline-plumber-tools-itim2101-blue-itim2101-5.png" />
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="line8"></div>
+                        <!-- <div class="line8"></div> -->
                     </div>
                 </div>
             </div>
