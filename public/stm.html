@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2監控</title>
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+    <link rel="stylesheet" type="text/css" href="./css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/pattern.css">
+    <link rel="icon" href="http://web.chciw.com.tw/iot-chciw/favicon.ico" width="32px" type="image/x-icon">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="text/javascript" src="./mqtt.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
+
+
+</head>
+
+<style>
+    body {
+        background-color: rgb(17, 24, 39);
+    }
+</style>
+
+<body onload="subTopic='STM';MQTTConnect();">
+    <div class="w-full h-screen bg-gray-800 flex justify-center pt-4 animate__animated animate__fadeIn">
+        <div class="container flex flex-col gap-4 mx-8">
+            <label class="text-gray-100 font-semibold tracking-wider text-lg">A6</label>
+            <div class="bg-gray-100 rounded-lg w-full h-auto py-4 flex flex-row justify-between divide-x divide-solid divide-gray-400">
+                <div class="relative flex-1 flex flex-col gap-2 px-4">
+                    <label class="text-gray-800 text-base font-semibold tracking-wider">A6F1</label>
+                    <label class="text-green-800 text-4xl font-bold" id="A6F1"></label>
+                    <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                        <iframe src="./stmerr-A6F1.html" scrolling="no" class="h-6 w-6"></iframe>
+                    </div>
+                    <div class="absolute bg-green-500 w-10 text-center rounded-md p-1 font-semibold 
+                    text-lg text-white right-4 bottom-0">
+                        <sup>kg</sup><sub>/h</sub>
+                    </div>
+                </div>
+                <div class="relative flex-1 flex flex-col gap-2 px-4">
+                    <label class="text-gray-800 text-base font-semibold tracking-wider">A6T1</label>
+                    <label class="text-green-800 text-4xl font-bold" id="A6T1"></label>
+                    <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                        <iframe src="./stmerr-A6T1.html" scrolling="no" class="h-6 w-6"></iframe>
+                    </div>
+                    <div class="absolute bg-green-500 w-10 text-center rounded-md p-1 font-semibold 
+                    text-lg text-white right-4 bottom-0">
+                        <sub>kg</sub>
+                    </div>
+                </div>
+                <div class="relative flex-1 flex flex-col gap-2 px-4">
+                    <label class="text-gray-800 text-base font-semibold tracking-wider">A6P1</label>
+                    <label class="text-green-800 text-4xl font-bold" id="A6P1"></label>
+                    <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                        <iframe src="./stmerr-A6P1.html" scrolling="no" class="h-6 w-6"></iframe>
+                    </div>
+                    <div class="absolute bg-green-500 w-10 text-center rounded-md p-1 font-semibold 
+                    text-lg text-white right-4 bottom-0">
+                        <sub>kpa</sub>
+                    </div>
+                </div>
+                <div class="relative flex-1 flex flex-col gap-2 px-4">
+                    <label class="text-gray-800 text-base font-semibold tracking-wider">A6t1</label>
+                    <label class="text-green-800 text-4xl font-bold" id="A6t1"></label>
+                    <div class="absolute rounded-md font-semibold text-xs text-gray-100 right-4 -top-1">
+                        <iframe src="./stmerr-A6Ts.html" scrolling="no" class="h-6 w-6"></iframe>
+                    </div>
+                    <div class="absolute bg-green-500  w-10 text-center rounded-md p-1 font-semibold 
+                    text-lg text-white right-4 bottom-0">
+                        <sub>°C</sub>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function onMessageArrived(r_message) {
+            var rcMsg = JSON.parse(r_message.payloadString)
+                // console.log(rcMsg)
+            for (var key in rcMsg) {
+                var value = rcMsg[key]
+                if (document.getElementById(key)) {
+                    document.getElementById(key).innerHTML = value
+                }
+            }
+        }
+    </script>
+</body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="module" src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://u2xl:px-10kg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script type="text/javascript" src="./index.js"></script>
+
+</html>
