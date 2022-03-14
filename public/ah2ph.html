@@ -94,11 +94,13 @@
     // MQTT
     function onMessageArrived(r_message) {
         var rcMsg = JSON.parse(r_message.payloadString)
-        console.log(rcMsg)
+            // console.log(rcMsg)
         for (var key in rcMsg) {
             var id = key
             var value = rcMsg[key]
-            if (document.getElementById(id)) {
+            if (document.getElementById(id) && id.includes('Flow')) {
+                document.getElementById(id).innerHTML = value + '<span class ="ml-2 text-gray-400 text-sm">' + 'm' + '<sup>' + '3' + '</sup>' + '</span>'
+            } else {
                 document.getElementById(id).innerHTML = value
             }
         }

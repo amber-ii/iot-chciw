@@ -3,7 +3,7 @@ $('.word').hide()
     // MQTT
 function onMessageArrived(r_message) {
     var rcMsg = JSON.parse(r_message.payloadString)
-        console.log(rcMsg)
+        // console.log(rcMsg)
     for (var key in rcMsg) {
         var id = key
         var value = rcMsg[key]
