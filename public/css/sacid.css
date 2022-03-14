@@ -26,50 +26,21 @@ body {
     background-color: black;
 }
 
-.divide {
-    height: 1px;
-    background-color: #e5e5e5;
-    box-shadow: 0px 0px 1px;
-    opacity: 50%;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-
-.search {
-    color: Gold;
-    font-size: 45px;
-}
-
-.download {
-    color: Gold;
-    font-size: 45px;
-}
-
-.search:hover {
-    cursor: pointer;
-    transform: translate(-2px, 3px);
-}
-
-.download:hover {
-    cursor: pointer;
-    transform: translate(-2px, 3px);
-}
-
-iframe {
-    width: 58px;
-    height: 96px;
+.wrapper {
+    width: 24rem;
+    height: 16rem;
 }
 
 .n-icon {
-    background-color: #ffafcc;
+    background-color: #e07a5f;
     border-radius: 50%;
-    width: 32px;
+    width: 25px;
 }
 
 .p-icon {
-    background-color: #bc6c25;
+    background-color: #81b29a;
     border-radius: 50%;
-    width: 32px;
+    width: 25px;
 }
 
 .table {
@@ -114,4 +85,22 @@ tr th:nth-child(n + 8) {
 tr td:nth-child(1),
 tr th:nth-child(1) {
     border-radius: 0.625rem 0 0 0.625rem;
+}
+
+#search,
+.download,
+.clear {
+    width: 30px;
+    cursor: pointer;
+}
+
+#search:hover,
+.download:hover,
+.clear:hover {
+    transform: translate(-2px, 3px);
+}
+
+.mqttValue {
+    font-size: 32px;
+    letter-spacing: 1.5px;
 }

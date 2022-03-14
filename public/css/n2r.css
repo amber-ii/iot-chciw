@@ -44,103 +44,40 @@ tr th:nth-child(1) {
     border-radius: 0.625rem 0 0 0.625rem;
 }
 
-
-/* .cardSize{
-    padding:6px;
-    width:10rem;
-    border: 1px solid #01A8B5;
-}
-@media (min-width: 1536px) {
-    .cardSize {
-        padding:12px;
-        width:20rem;
- 
-   }
-}
-.dot {
-    height: 80px;
-    width: 80px;
-    opacity:0.7;
-    background-color: #8DA9C4;
-    border-radius: 50%;
-    display: inline-block;
-    padding-top:22px;
-    background-size:80px 80px;
-}
-.dot span{
-    font-size:25px;
-    color:#134074;
-}
-.dot-value{
-    height: 130px;
-    width: 130px;
-    background-color: #134074;
-   /* background-color:#4682B4;
-    */
-
-
-/* border-radius: 50%;
-    display: inline-block;
-    padding-top:40px;
-    opacity:0.8; */
-
-
-/* } */
-
-
-/* .value{
-    font-size:35px;
-    color:#eef4ed;
-}
-ion-icon{
-    color: #EEF4ED;
-}  */
-
-
-/* 以下為新的 */
-
-.pageBar3 {
-    text-align: left;
-    width: 5rem;
-    height: 2rem;
-    font-weight: bold;
-    padding-top: 4px;
-    padding-left: 15px;
-    background: Mediumblue;
-    background: linear-gradient(135deg, transparent 0px, Mediumblue 0) top left, linear-gradient(-135deg, transparent 15px, Mediumblue 0) top right, linear-gradient(-45deg, transparent 15px, Mediumblue 0) bottom right, linear-gradient(45deg, transparent 0px, Mediumblue 0) bottom left;
-    background-size: 50% 50%;
-    background-repeat: no-repeat;
-    transform: translateY(40px);
-}
-
 .fvalue,
 .tvalue {
     font-size: 27px;
     border-radius: 0.3rem;
     min-width: 120px;
+    width: auto;
     height: 50px;
-    padding-top: 4px;
+    padding: .8rem;
     box-shadow: 0px 0px 1px;
-    border: black double;
+    border-bottom: black double;
     color: #134074;
+    /* background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); */
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+    border-radius: 0.7rem;
 }
 
 .ft,
 .ft1,
 .ft2 {
     font-size: 22px;
-    padding-left: 8px;
-    padding-right: 8px;
-    background-image: linear-gradient(120deg, Navy, Royalblue);
-    border-radius: 0.7rem;
+    padding-left: 4px;
+    padding-right: 4px;
+    /* background-image: linear-gradient(120deg, Navy, Royalblue); */
+    /* background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%); */
+    /* border-radius: 0.7rem; */
     text-align: center;
-    color: white;
-    opacity: 90%;
-    width: 80px;
+    color: black;
+    text-decoration: underline;
+    /* opacity: 90%; */
+    /* width: 80px; */
 }
 
 .ft1 {
-    background-image: linear-gradient(45deg, Black, Dimgrey);
+    /* background-image: linear-gradient(60deg, #29323c 0%, #485563 100%); */
 }
 
 .ft2 {
@@ -171,7 +108,6 @@ body {
 }
 
 .timer {
-    font-size: 21px;
     animation: timer-spin 1s;
     animation-iteration-count: infinite;
     animation-direction: alternate;
@@ -201,26 +137,26 @@ body {
 }
 
 .color1 {
-    background-color: rgb(72, 76, 72);
+    /* background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.25) 200%);
+    background-blend-mode: multiply; */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 0%, rgba(0, 0, 0, 0.15) 100%), radial-gradient(at top center, rgba(255, 255, 255, 0.40) 0%, rgba(0, 0, 0, 0.40) 120%) #989898;
+    background-blend-mode: multiply, multiply;
 }
 
 .color2 {
     background-color: Navy;
+    background-image: linear-gradient(-225deg, Navy 48%, #4801FF 100%);
 }
 
-.cardMain {
-    width: 20rem;
-    height: 10rem;
-}
-
-.search,
-.download {
-    font-size: 45px;
-    color: Gold;
-}
-
-.search:hover,
-.download:hover {
-    transform: translate(-2px, 3px);
+#search,
+.download,
+.clear {
+    width: 30px;
     cursor: pointer;
+}
+
+#search:hover,
+.download:hover,
+.clear:hover {
+    transform: translate(-2px, 3px);
 }
