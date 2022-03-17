@@ -26,6 +26,6 @@
 - MongoDB(使用者資訊 && 設備斷線紀錄) (5.13.7)
 
 ### 使用流程
-download->npm install
-帳號:client
-密碼:111
+- download->npm install
+- 帳號:client
+- 密碼:111
