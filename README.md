@@ -26,8 +26,8 @@
 - MongoDB(使用者資訊 && 設備斷線紀錄) (5.13.7)
 
 ### 使用流程
-- download->npm install
+- Download ZIP->npm install
 - 帳號:client
 - 密碼:111
-- 因公司機密資料，故無法提供報表/曲線圖的資料庫查詢
+- 因公司機密資料，故無法提供報表/曲線圖的資料庫查詢(MSSQL)，但可以查詢Modbus斷線以及使用者登入紀錄(MongoDB)
 - MQTT連線配置在公司內網，故無法讀取動態數據
