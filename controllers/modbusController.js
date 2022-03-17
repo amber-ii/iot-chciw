@@ -25,7 +25,7 @@ const getThisWeek = async(req, res, next) => {
     if (req.user.permission == 1) {
         try {
             // const posts = await Modbus.find().sort({ breakDate: -1 })
-            const posts = await Modbus.find({ breakDate: { $gte: week } }).sort({ breakDate: -1 })
+            const posts = await Modbus.find({ breakDate: { $gte: week } })
             res.json(posts)
         } catch (err) {
             res.json({ message: err })
@@ -38,7 +38,7 @@ const getThisWeek = async(req, res, next) => {
 const getThisMonth = async(req, res, next) => {
     if (req.user.permission == 1) {
         try {
-            const posts = await Modbus.find({ breakDate: { $lte: months } }).sort({ breakDate: -1 })
+            const posts = await Modbus.find({ breakDate: { $lte: months } })
             res.json(posts)
         } catch (err) {
             res.json({ message: err })
@@ -53,7 +53,7 @@ const getByTopicName = async(req, res, next) => {
         try {
             // let posts = await Modbus.find({ topic: { $regex: req.params.topics } })
             // let posts = await Modbus.find({ topic: req.params.topics }).find({ breakDate: { $gte: week } })
-            let posts = await Modbus.find({ topic: req.params.topics, breakDate: { $gte: week } }).sort({ breakDate: -1 })
+            let posts = await Modbus.find({ topic: req.params.topics, breakDate: { $gte: week } })
 
             console.log('我是資料庫回傳結果' + posts)
             res.json(posts)
