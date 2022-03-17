@@ -1038,7 +1038,7 @@
 
     const fetchData = (url) => {
         let secondNum
-        url == 'http://web.chciw.com.tw:8080/modbus/get/week' ? secondNum = 518400 : secondNum = 2592000;
+        url == 'http://localhost:8080/modbus/get/week' ? secondNum = 518400 : secondNum = 2592000;
         fetch(url)
             .then((res) => res.json())
             .then((item) => {
@@ -1107,7 +1107,7 @@
             })
     }
     let fetchUrl = [
-        'http://web.chciw.com.tw:8080/modbus/get/week',
+        'http://localhost:8080/modbus/get/week',
         // 'http://web.chciw.com.tw:8080/modbus/get/month',
     ]
     fetchData(fetchUrl[0])
