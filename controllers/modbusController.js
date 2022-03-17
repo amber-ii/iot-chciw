@@ -9,7 +9,7 @@ let today = new Date()
 let week = new Date(today.addDays(7))
 
 const getAllRecord = async(req, res, next) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1 || req.user.permission == 4) {
         try {
             const posts = await Modbus.find().sort({ breakDate: -1 })
             res.json(posts)
@@ -22,7 +22,7 @@ const getAllRecord = async(req, res, next) => {
 }
 
 const getThisWeek = async(req, res, next) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1  || req.user.permission == 4) {
         try {
             // const posts = await Modbus.find().sort({ breakDate: -1 })
             const posts = await Modbus.find({ breakDate: { $gte: week } })
@@ -36,7 +36,7 @@ const getThisWeek = async(req, res, next) => {
 }
 
 const getThisMonth = async(req, res, next) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1  || req.user.permission == 4) {
         try {
             const posts = await Modbus.find({ breakDate: { $lte: months } })
             res.json(posts)
@@ -49,7 +49,7 @@ const getThisMonth = async(req, res, next) => {
 }
 
 const getByTopicName = async(req, res, next) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1  || req.user.permission == 4) {
         try {
             // let posts = await Modbus.find({ topic: { $regex: req.params.topics } })
             // let posts = await Modbus.find({ topic: req.params.topics }).find({ breakDate: { $gte: week } })
