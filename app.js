@@ -332,7 +332,7 @@ app.get('/a2', users.isLoggedIn, (req, res) => {
 })
 
 app.get('/modbus', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1 || req.user.permission == 4) {
         res.sendFile(`${__dirname}/public/modbus.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
