@@ -344,7 +344,7 @@
             },
             data: null,
             fetch: function() {
-                fetch("http://localhost:8888/waters/chart")
+                fetch("http://localhost:8080/waters/chart")
                     .then((res) => res.json())
                     .then((res) => {
                         this.data = res.dates
