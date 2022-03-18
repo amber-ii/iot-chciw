@@ -131,7 +131,7 @@ app.use('/waters', users.isLoggedIn, waterRoutes.routes)
 
 // 氮氣per5
 app.use('/n2r', users.isLoggedIn, n2rRoutes.routes)
-    // app.use('/mongo', manageMongoDB.routes)
+
 
 // 水質檢測per3
 app.use('/toc', users.isLoggedIn, tocRoutes.routes)
