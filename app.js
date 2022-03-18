@@ -1,35 +1,38 @@
-const { config } = require('dotenv')
-require('./break')
-
 const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const cors = require('cors')
+const router = express.Router()
 const session = require('express-session')
 const hbs = require('express-handlebars')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-require('dotenv/config')
-const configs = require('./config')
+const moment = require('moment-timezone')
+const bcrypt = require('bcryptjs')
+const acl = require('express-acl')
+    // const cookieParser = require('cookie-session')
+
+require('./config')
+require('./break')
+
 const User = require('./models/Post')
 const Login = require('./models/Login')
-var router = express.Router()
+
 const sacidRoutes = require('./routes/sacidRoutes')
 const n2rRoutes = require('./routes/n2rRoutes')
 const tocRoutes = require('./routes/tocRoutes')
 const users = require('./controllers/userController')
 const a25Routes = require('./routes/a25Routes')
 const a14Routes = require('./routes/a14Routes')
-// const manageMongoDB = require('./routes/manageMongoDB')
+const manageMongoDB = require('./routes/manageMongoDBRoutes')
 const particalRoutes = require('./routes/particleRoutes')
 const empTempRoutes = require('./routes/empTempRoutes')
 const waterRoutes = require('./routes/waterRoutes')
 const loginRecordRoutes = require('./routes/loginRecordRoutes')
 const a25OutputRoutes = require('./routes/a25OutputRoutes')
 const modbusRoutes = require('./routes/modbusRoutes')
-const moment = require('moment-timezone')
-const bcrypt = require('bcryptjs')
-const acl = require('express-acl')
+
+
 mongoose.connect(
     process.env.DB_CONNECTION, {
         useNewUrlParser: true,
@@ -43,7 +46,7 @@ mongoose.connect(
 // MiddleWares
 app.engine('hbs', hbs({ extname: '.hbs' }))
 app.set('view engine', 'hbs')
-app.use(express.static(__dirname + '/public'))
+app.use(express.static('public'))
 
 
 app.use(cors())
@@ -56,10 +59,19 @@ app.use(
         resave: false,
         rolling: true,
         // cookie: {
+        // 若關掉網頁超過一天要重新登入
         //     maxAge: 86400 * 1000,
         // },
     })
 )
+
+// 強制退出
+// app.use(cookieParser({
+//     name: 'session',
+//     secret: 'secret',
+//     maxAge: 86400 * 1000
+// }))
+
 
 
 app.use(passport.initialize())
@@ -119,7 +131,7 @@ app.use('/waters', users.isLoggedIn, waterRoutes.routes)
 
 // 氮氣per5
 app.use('/n2r', users.isLoggedIn, n2rRoutes.routes)
-// app.use('/mongo', manageMongoDB.routes)
+    // app.use('/mongo', manageMongoDB.routes)
 
 // 水質檢測per3
 app.use('/toc', users.isLoggedIn, tocRoutes.routes)
@@ -129,7 +141,7 @@ app.use('/a25data', users.isLoggedIn, a25Routes.routes)
 app.use('/a14data', users.isLoggedIn, a14Routes.routes)
 app.use('/particles', users.isLoggedIn, particalRoutes.routes)
 app.use('/line', users.isLoggedIn, empTempRoutes.routes)
-
+app.use('/mongo', manageMongoDB.routes)
 app.use('/loginrecord', users.isLoggedIn, loginRecordRoutes.routes)
 app.use('/a25outputs', users.isLoggedIn, a25OutputRoutes.routes)
 app.use('/modbus', users.isLoggedIn, modbusRoutes.routes)
@@ -184,8 +196,6 @@ app.post(
 //
 app.get('/', users.isLoggedIn, async(req, res) => {
     await res.render('index', { title: 'CHCIW IOT', name: req.user.name })
-        // await res.sendFile(`${__dirname}/public/water.html`, { name: req.user.name })
-        // await res.sendFile(`${__dirname}/public/vpc.html`, { name: req.user.name })
 })
 
 // 冷氣per2
@@ -332,7 +342,7 @@ app.get('/a2', users.isLoggedIn, (req, res) => {
 })
 
 app.get('/modbus', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1) {
+    if (req.user.permission == 1 || req.user.permission == 4) {
         res.sendFile(`${__dirname}/public/modbus.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
