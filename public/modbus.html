@@ -778,7 +778,7 @@
     document.querySelector('#search').addEventListener('click', function() {
         let topicName = document.querySelector('#topicName').value
         console.log(topicName)
-        fetch(`http://web.chciw.com.tw:8080/modbus/topic/${topicName}`)
+        fetch(`http://localhost:8080/modbus/topic/${topicName}`)
             .then((res) => res.json()).then((item) => {
                     // let ansNum = 0;
                     let parseItem;
