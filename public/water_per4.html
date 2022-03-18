@@ -344,7 +344,7 @@
             },
             data: null,
             fetch: function() {
-                fetch("http://localhost:8888/waters/chart")
+                fetch("http://web.chciw.com.tw:8080/waters/chart")
                     .then((res) => res.json())
                     .then((res) => {
                         this.data = res.dates
@@ -539,6 +539,5 @@
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
 
-
-
 </html>
+
