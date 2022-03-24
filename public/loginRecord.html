@@ -20,41 +20,41 @@
     table th {
         border-radius: 3px;
     }
-    
+
     .dateSelect button {
         /* background-color: navy; */
         font-size: 12px;
         font-weight: bold;
         color: whitesmoke;
     }
-    
+
     .dateSelect button:hover {
         transform: translate(0px, -3px);
     }
-    
+
     .active {
         background-color: Crimson;
         transform: translate(0px, -3px);
         box-shadow: 1px 2px rgb(148, 90, 90);
     }
-    
+
     .table-sortable th {
         cursor: pointer;
     }
-    
+
     .table-sortable .th-sort-asc::after {
         content: '\25b4';
     }
-    
+
     .table-sortable .th-sort-desc::after {
         content: '\25be';
     }
-    
+
     .table-sortable .th-sort-asc::after,
     .table-sortable .th-sort-desc::after {
         margin-left: 5px;
     }
-    
+
     .table-sortable .th-sort-asc,
     .table-sortable .th-sort-desc {
         background: rgba(0, 0, 0, 0.1);
@@ -66,8 +66,10 @@
         <div class="flex">
             <div class="dateSelect w-full shadow-lg flex space-x-3">
                 <!-- <div class="relative w-14 h-7"> -->
-                <button id="this_month" class="object-cover w-14 h-7 rounded-lg active" style="border: 1.5px solid blue">本月</button>
-                <button id="three_month" class="object-cover w-14 h-7 rounded-lg" style="border: 1.5px solid burlywood">三個月</button>
+                <button id="this_month" class="object-cover w-14 h-7 rounded-lg active"
+                    style="border: 1.5px solid blue">本月</button>
+                <button id="three_month" class="object-cover w-14 h-7 rounded-lg"
+                    style="border: 1.5px solid burlywood">三個月</button>
                 <!-- <button id="six_month" class="object-cover w-14 h-7 rounded-lg" style="border: 1.5px solid lightslategrey">六個月</button> -->
                 <!-- <button id="all_month" class="object-cover w-14 h-7 rounded-lg" style="border: 1.5px solid rgb(76, 117, 83)">全部</button> -->
             </div>
@@ -84,7 +86,8 @@
             <div class="w-full">
                 <table class="table-sortable w-full">
                     <thead>
-                        <tr class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 border-b border-gray-600 uppercase">
+                        <tr
+                            class="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 border-b border-gray-600 uppercase">
                             <th class="px-4 py-3">Name</th>
                             <th class="px-4 py-3">accountID</th>
                             <th class="px-4 py-3">Login_Date</th>
@@ -98,20 +101,15 @@
 </body>
 
 <script>
-    let boss = 'https://p2.bahamut.com.tw/HOME/creationCover/16/0005002916_B.PNG' //老闆 大哥
+    let boss = 'https://p2.bahamut.com.tw/HOME/creationCover/16/0005002916_B.PNG' //老闆 炎柱
     let amber = 'https://i.pinimg.com/originals/cb/fc/0e/cbfc0e0ffdbb4774988f79ed84d50412.jpg' //amber 瀰豆子
     let A0868 = 'https://img.ibxk.com.br/2020/12/30/30131232150102.jpg?w=328' //賜恩 男主角
     let iot5 = 'https://img.myvideo.net.tw/images/MUS030/0000/8813/201908271501567613_2016.jpg' //特化
     let iot3 = 'https://i.pinimg.com/originals/f6/fb/f7/f6fbf7bc57cf9a913f7454420b7fe03f.jpg' //酸鹼
-    let iot2 = 'https://i.pinimg.com/236x/29/95/37/2995373dc32116ff653e999113f48244.jpg?nii=t'
-    let iot8 = 'https://pbs.twimg.com/profile_images/1247184388539863040/U31UIfKR.jpg' //工務 我不知道 他是誰的水之呼吸
-    let iot9 = 'https://yt3.ggpht.com/a/AATXAJyiRlQngAiOMRYk7PmnWr6H-JHm3DSGcPHcvg=s900-c-k-c0xffffffff-no-rj-mo' //環安 我不知道他是誰
-    let A0983 = 'https://img.myvideo.net.tw/images/MUS030/0000/8813/201908271501567613_2016.jpg' //彥廷 豬豬
-        // let A0845 = 'https://64.media.tumblr.com/4ee31280fe598e78409d6df7a825a2ce/ad2e32780f84853f-6c/s1280x1920/db71d9cfdbdc10a2b15be01caae56cd92163dacd.jpg' //音柱
-        // let A0845 = 'https://mensuno.hk/wp-content/uploads/2021/07/ScreenShot-VideoID-ReuCPrKYWY8-TimeS-47-1024x576.png' //音柱
-    let A0845 = 'https://img.quizur.com/f/img611fb5d8d6fb30.60111823.jpg?lastEdited=1629468132' //音柱
-        // let A0845 = 'https://th.bing.com/th/id/R.170f0a34e7242d3e817ffe355a460565?rik=4QTbn8GK9I3iXQ&riu=http%3a%2f%2fb-ssl.duitang.com%2fuploads%2fitem%2f201508%2f23%2f20150823203726_HyM5E.thumb.700_0.jpeg&ehk=z9o7DjIi6aFfVYuXb1xuQUTWAxzCKtTgeQDAkrqKIgQ%3d&risl=&pid=ImgRaw&r=0' //音柱
-
+    let other = 'https://pbs.twimg.com/profile_images/1247184388539863040/U31UIfKR.jpg' //other
+    let A0845 = 'https://img.quizur.com/f/img611fb5d8d6fb30.60111823.jpg?lastEdited=1629468132' //凱恩 音柱
+    let A1128 = './img/A1128.jpg'
+    let A0792 = 'https://www.gamecity.com.tw/shingeki2/finalbattle/img/top/story-img1.png'
     const fetchData = (url) => {
         fetch(url)
             .then((res) => res.json())
@@ -122,7 +120,7 @@
                 for (let i = 0; i < item.length; i++) {
                     switch (item[i].name) {
                         case 'Amber':
-                            photo = amber
+                            photo = A0792
                             break
                         case '酸鹼':
                             photo = iot3
@@ -130,32 +128,25 @@
                         case '特化':
                             photo = iot5
                             break
-                            case '世宏':
-                            photo = iot5
-                            break
-                        case '總機':
-                            photo = iot2
-                            break
-                        case '工務課':
-                            photo = iot8
-                            break
-                        case '環安':
-                            photo = iot9
-                            break
-                        case '嘉泓':
+                        case '吳嘉泓':
                             photo = boss
                             break
                         case '賜恩':
                             photo = A0868
                             break
-                        case '彥廷':
-                            photo = A0983
-                            break
+
                         case '凱恩':
                             photo = A0845
                             break
-                            case '客戶':
-                            photo = A0845
+                        case '柏瑋':
+                            photo = A1128
+                            break
+                        case '楨渠':
+                            photo = A0792
+                            break
+
+                        default:
+                            photo = other
                             break
                     }
                     element =
@@ -202,7 +193,7 @@
     fetchData(fetchUrl[0])
 
     dateSelect.forEach((item) => {
-        item.addEventListener('click', function() {
+        item.addEventListener('click', function () {
             document.querySelector('.dateSelect button.active').classList.remove('active')
             this.classList.add('active')
             let index = dateSelect.indexOf(this)
@@ -251,7 +242,8 @@
         })
     })
 </script>
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js" type="text/javascript"></script>
 <script type="text/javascript" src="./index.js"></script>
 <script type="text/javascript" src="./mqtt.js"></script>
