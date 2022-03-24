@@ -6,7 +6,8 @@ function onMessageArrived(r_message) {
         var id = key;
         var value = rcMsg[key];
         if (document.getElementById(id)) {
-            document.getElementById(id).innerHTML = value + '<span class ="ml-2 text-gray-400 text-sm">' + 'ppb' + '</span>';
+            document.getElementById(id).innerHTML = value + '<span class ="ml-2 text-gray-400 text-sm">' + 'ppb' + '</span>'
+                // '<span class ="text-gray-400 bg-red-400 text-sm">' + "ppb" + '</span>'
         }
     }
 }
@@ -57,18 +58,18 @@ let chartData = function() {
         },
         data: null,
         fetch: function() {
-            fetch('http://web.chciw.com.tw:8080/toc/tocJson')
-                .then((res) => res.json())
-                .then((res) => {
-                    this.data = res.dates
-                    this.renderChart()
-                    this.refresh()
-                })
+            fetch('http://web.chciw.com.tw:8080/tocs/chart')
+              .then((res) => res.json())
+              .then((res) => {
+                this.data = res.dates
+                this.renderChart()
+                this.refresh()
+              })
         },
 
         refresh: function() {
             setInterval(() => {
-                fetch('http://web.chciw.com.tw:8080/toc/tocJson')
+                fetch('http://web.chciw.com.tw:8080/tocs/chart')
                     .then(res => res.json())
                     .then(res => {
                         this.data = res.dates;
@@ -163,10 +164,10 @@ const formatDate = (now) => now.getFullYear() + '-' + (now.getMonth() + 1) + '-'
 $('#search').click(async function() {
     $('html, body').animate({ scrollTop: $('#loadingSv').offset().top }, 0)
     $('html, body').animate({ scrollTop: $('#form1').offset().top }, 1000)
-    let t2 = document.getElementById('table2');
     let today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2'); //eslint-disable-line
     let startDate = dateSearch.startDate.value; //eslint-disable-line
-    let endDate = dateSearch.endDate.value; //eslint-disable-line
+    let endDate = dateSearch.endDate.value;
+    let tocValue = dateSearch.tocValue.value; //eslint-disable-line
     let _endDate = new Date(endDate)
     if (!startDate && !endDate) {
         document.querySelector('.loadingSv div').innerHTML = "Searching today's data"
@@ -195,7 +196,7 @@ $('#search').click(async function() {
         document.getElementById('endDate').value = today
     }
 
-    if (dateDiff(startDate, endDate) > 3) {
+    if (dateDiff(startDate, endDate) > 3 && !tocValue) {
         document.getElementById('startDate').value = formatDate(_endDate.addDays(2)).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2')
         document.querySelector('.loadingSv div').innerHTML = '查詢區間>3，自動幫您調成3天...'
         if (startDate < '2021-09-01' || endDate < '2021-09-01') {
@@ -208,12 +209,12 @@ $('#search').click(async function() {
     $.ajax({
         beforeSend: function() {
 
-            t2.innerHTML = ''
+            document.querySelector('tbody').innerHTML = ''
             $('.loadingSv').show()
 
         },
         type: 'POST',
-        url: '/toc',
+        url: '/tocs',
 
         data: $('#form1').serialize(),
         async: true,
@@ -222,15 +223,15 @@ $('#search').click(async function() {
             for (let index = 0; index < data.length; index++) {
                 renderString =
                     ' <tr class="bg-gray-800 text-md">' +
-                    '<th class="p-3 w-full">' +
+                    '<th class="p-3">' +
                     data[index].Date +
                     '</th>' +
                     '<th class="py-3 px-4">' +
                     data[index].A25TOC +
                     '</th>' +
                     '</tr>'
-                $('#table2').nextAll().remove();
-                t2.insertAdjacentHTML('beforeEnd', renderString);
+                $('tbody').nextAll().remove();
+                document.querySelector('tbody').insertAdjacentHTML('beforeEnd', renderString)
             }
             $('.loadingSv').fadeOut(500)
 
@@ -240,6 +241,30 @@ $('#search').click(async function() {
         },
     });
 });
+
+
+function getAll() {
+    fetch('http://web.chciw.com.tw:8080/tocs')
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (res) {
+         for (let index = 0; index < res.length; index++) {
+           renderString =
+             '<tr class="bg-gray-800 text-md">' +
+             '<th class="p-3">' +
+             res[index].Date +
+             '</th>' +
+             '<th class="py-3 px-4">' +
+             res[index].A25TOC +
+             '</th>' +
+             '</tr>'
+           $('tbody').nextAll().remove()
+           document.querySelector('tbody').insertAdjacentHTML('beforeEnd', renderString)
+         }
+      })
+}
+
 
 document.querySelector('#clear').addEventListener('click', function() {
     document.querySelector('tbody').innerHTML = ''
@@ -270,33 +295,3 @@ function exportTable() {
     });
 };
 
-
-
-// loading畫面倒數三秒消失
-
-$(document).ready(function() {
-    $('.loading').hide();
-    $('.word').hide();
-});
-
-
-
-
-// let list = document.getElementById('table2');
-// fetch('http://web.chciw.com.tw:8080/tocJson')
-//     .then(res => res.json())
-//     .then(res => {
-//         let tableContent = '';
-//         for (let index = 0; index < res.length; index++) {
-//             tableContent +=
-//                 ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
-//                 '<th class="p-3 text-center">' +
-//                 res[index].Date +
-//                 '</th>' +
-//                 '<th class="p-3 text-center">' +
-//                 res[index].A25TOC +
-//                 '</th>' +
-//                 '</tr>';
-//         }
-//         list.innerHTML = tableContent;
-//     });

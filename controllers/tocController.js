@@ -6,7 +6,7 @@ const getAllToc = async(req, res, next) => {
     if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const rows = await tocData.getToc()
-            res.render('toc', { rows, title: 'A25水質' })
+            res.send(rows)
         } catch (error) {
             res.status(400).send(error.message)
         }
@@ -37,7 +37,7 @@ function getTrendLoop(rows) {
 
 
 
-const getAllTocJSON = async(req, res, next) => {
+const getTocChart = async(req, res, next) => {
     try {
         // 7天
         let rows = await tocData.getTocJSONSeven();
@@ -74,10 +74,12 @@ const getAllTocJSON = async(req, res, next) => {
 const getTocByDate = async(req, res, next) => {
     try {
         let TocStartDate = req.body.startDate;
-        console.log(TocStartDate);
         let TocEndDate = req.body.endDate;
-        console.log(TocEndDate);
-        const rows = await tocData.getByDate(TocStartDate, TocEndDate);
+        let tocValue = req.body.tocValue
+        if (!tocValue) {
+            tocValue = null
+        }
+        const rows = await tocData.getByDate(TocStartDate, TocEndDate, tocValue)
         res.send(rows);
     } catch (error) {
         res.status(400).send(error.message);
@@ -85,7 +87,7 @@ const getTocByDate = async(req, res, next) => {
 };
 
 module.exports = {
-    getAllToc,
-    getAllTocJSON,
-    getTocByDate,
-};
+  getAllToc,
+  getTocChart,
+  getTocByDate,
+}

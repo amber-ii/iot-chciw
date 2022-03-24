@@ -1,3 +1,7 @@
+// MQTT
+// eslint-disable-next-line
+$('.loading').hide()
+$('.word').hide()
 function onMessageArrived(r_message) {
     var rcMsg = JSON.parse(r_message.payloadString)
         // console.log(rcMsg);
@@ -62,11 +66,10 @@ let chartData = function() {
             this.selectedOption = index
             this.date = this.options[index].value
             this.renderChart()
-
         },
         data: null,
         fetch: function() {
-            fetch('http://web.chciw.com.tw:8080/n2r/n2rJson')
+            fetch('http://web.chciw.com.tw:8080/n2rs/chart')
                 .then((res) => res.json())
                 .then((res) => {
                     this.data = res.dates
@@ -76,7 +79,7 @@ let chartData = function() {
         },
         refresh: function() {
             setInterval(() => {
-                fetch('http://web.chciw.com.tw:8080/n2r/n2rJson')
+                fetch('http://web.chciw.com.tw:8080/n2rs/chart')
                     .then((res) => res.json())
                     .then((res) => {
                         this.data = res.dates
@@ -215,7 +218,7 @@ const formatDate = (now) => now.getFullYear() + '-' + (now.getMonth() + 1) + '-'
 $('#search').click(function() {
     $('html, body').animate({ scrollTop: $('#loadingSv').offset().top }, 0)
     $('html, body').animate({ scrollTop: $('#form1').offset().top }, 1000)
-    let t2 = document.getElementById('table2')
+    let tbody = document.querySelector('tbody')
     let startDate = dateSearch.startDate.value
     let endDate = dateSearch.endDate.value
     let ft = dateSearch.FT.value
@@ -251,50 +254,28 @@ $('#search').click(function() {
         document.getElementById('endDate').value = today
     }
 
-    // if (dateDiff(startDate, endDate) > 7) {
-    //     document.getElementById('startDate').value = formatDate(_endDate.addDays(6)).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2')
-    //     document.querySelector('.loadingSv div').innerHTML = '查詢區間自動幫您調成7天...'
-    //     if (startDate < '2021-03-05' || endDate < '2021-03-05') {
-    //         document.getElementById('startDate').value = '2021-03-05'
-    //         document.getElementById('endDate').value = '2021-03-11'
-    //         document.querySelector('.loadingSv div').innerHTML = '資料最早起始日為2021-03-05'
-    //     }
-    // }
+    if (dateDiff(startDate, endDate) > 7) {
+        document.getElementById('startDate').value = formatDate(_endDate.addDays(6)).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2')
+        document.querySelector('.loadingSv div').innerHTML = '查詢區間自動幫您調成7天...'
+        if (startDate < '2021-03-05' || endDate < '2021-03-05') {
+            document.getElementById('startDate').value = '2021-03-05'
+            document.getElementById('endDate').value = '2021-03-11'
+            document.querySelector('.loadingSv div').innerHTML = '資料最早起始日為2021-03-05'
+        }
+    }
 
     $.ajax({
         beforeSend: function() {
-
-
-            // if (startDate > endDate) {
-            //     alert('無效日期，起始日不得大於結束日')
-            //     return false
-            // }
-            // if (!startDate || !endDate) {
-            //     alert('請輸入起始&結束日')
-            //     return false
-            // }
-            // if (dateDiff(startDate, endDate) >= 7) {
-            //     alert('搜尋日期區間不要大於7天')
-            //     return false
-            // }
-            // if (startDate < '2021-03-05') {
-            //     alert('最早的資料為2021-03-05，請重新搜尋')
-            //     return false
-            // }
             $('.loadingSv').show()
-            t2.innerHTML = ''
+            tbody.innerHTML = ''
             if ((endDate > yesterday && ft == 'T') || (startDate > yesterday && ft == 'T')) {
                 alert('日期不得超過昨日，請重新搜尋')
                 $('.loadingSv').fadeOut(500)
                 return false
             }
-
-            // $('.loading').show()
-            // $('.word').show()
-
         },
         type: 'POST',
-        url: '/n2r',
+        url: '/n2rs',
         data: $('#form1').serialize(),
         async: true,
         success: function(data) {
@@ -324,13 +305,12 @@ $('#search').click(function() {
                     data[index].a2t1 +
                     '</th>' +
                     '</tr>'
-                $('#table2').nextAll().remove()
-                t2.insertAdjacentHTML('beforeEnd', renderString)
+                $('tbody').nextAll().remove()
+                tbody.insertAdjacentHTML('beforeEnd', renderString)
             }
 
             $('.loadingSv').fadeOut(500)
             exportTable()
-                // exportTable()
         },
         error: function(request) {
             alert('資料庫連線失敗，請洽電控組')
@@ -371,3 +351,41 @@ document.querySelector('.clear').addEventListener('click', function() {
     })
     // $('.loading').hide()
     // $('.word').hide()
+
+    
+        
+    function getAll() {
+      fetch('http://web.chciw.com.tw:8080/n2rs')
+        .then((res) => res.json())
+        .then((data) => {
+          for (let index = 0; index < data.length; index++) {
+            renderString =
+              '<tr class="bg-gray-800">' +
+              '<th class="p-3">' +
+              data[index].Date +
+              '</th>' +
+              '<th>' +
+              data[index].a3t1 +
+              '</th>' +
+              ' <th>' +
+              data[index].a3t2 +
+              '</th>' +
+              ' <th>' +
+              data[index].a4t1 +
+              '</th>' +
+              ' <th>' +
+              data[index].a8t1 +
+              '</th>' +
+              ' <th>' +
+              data[index].a16t1 +
+              '</th>' +
+              ' <th>' +
+              data[index].a2t1 +
+              '</th>' +
+              '</tr>'
+           
+            $('tbody').nextAll().remove()
+            document.querySelector('tbody').insertAdjacentHTML('beforeEnd', renderString)
+          }
+        })
+    }

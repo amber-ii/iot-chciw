@@ -7,7 +7,7 @@ const getAllN2R = async(req, res, next) => {
     if (req.user.permission == 1 || req.user.permission == 5 || req.user.permission == 4) {
         try {
             const rows = await n2rData.getN2R()
-            res.render('n2r', { rows, title: '氮氣' })
+            res.send(rows)
         } catch (error) {
             res.status(400).send(error.message)
         }
@@ -45,46 +45,28 @@ const getTrendLoop = (rows) => {
     return date
 }
 
-const getAllN2RJSON = async(req, res, next) => {
-    try {
-        // 7天
-        let rows0 = await n2rData.getN2RJSONSeven()
-            // 30天
-        let rows1 = await n2rData.getN2RJSONThirty()
-        let rows3 = await n2rData.getN2RNow()
-        let date7 = await getTrendLoop(rows0)
-        let date30 = await getTrendLoop(rows1)
-        let datemins = await getTrendLoop(rows3)
-        res.send({
-            dates: {
-                '7days': { data: date7 },
-                '30days': { data: date30 },
-                'flow': { data: datemins },
-            },
-        })
-    } catch (error) {
-        res.status(400).send(error.message)
-    }
+const getN2RChart = async (req, res, next) => {
+  try {
+    // 7天
+    let rows0 = await n2rData.getN2RJSONSeven()
+    // 30天
+    let rows1 = await n2rData.getN2RJSONThirty()
+    let rows3 = await n2rData.getN2RNow()
+    let date7 = await getTrendLoop(rows0)
+    let date30 = await getTrendLoop(rows1)
+    let datemins = await getTrendLoop(rows3)
+    res.send({
+      dates: {
+        '7days': { data: date7 },
+        '30days': { data: date30 },
+        flow: { data: datemins },
+      },
+    })
+  } catch (error) {
+    res.status(400).send(error.message)
+  }
 }
 
-const getN2RChartNow = async(req, res, next) => {
-    try {
-        // 7天
-        let rows1 = await n2rData.getN2RNow()
-            // 30天
-            // let rows1 = await n2rData.getN2RJSONThirty()
-        let date1 = getTrendLoop(rows1)
-            // let date30 = getTrendLoop(rows1)
-        res.send({
-            dates: {
-                '1days': { data: date1 },
-                // '30days': { data: date30 },
-            },
-        })
-    } catch (error) {
-        res.status(400).send(error.message)
-    }
-}
 
 // 報表依日期查詢
 const getN2RByDate = async(req, res, next) => {
@@ -99,12 +81,8 @@ const getN2RByDate = async(req, res, next) => {
     }
 }
 
-
-
-
 module.exports = {
-    getAllN2R,
-    getAllN2RJSON,
-    getN2RByDate,
-    getN2RChartNow,
+  getAllN2R,
+  getN2RChart,
+  getN2RByDate,
 }

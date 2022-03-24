@@ -7,8 +7,7 @@ const getAllSacid = async(req, res, next) => {
     if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
         try {
             const rows = await sacidData.getSacid()
-            res.render('sacid', { rows, title: '硫酸' })
-                // console.log('The data from CH1ACI table: \n', rows);
+            res.send(rows)
         } catch (error) {
             res.status(400).send(error.message)
         }
@@ -51,7 +50,7 @@ const getTrendLoop = (rows) => {
 };
 
 
-const getAllSacidJSON = async(req, res, next) => {
+const getSacidChart = async(req, res, next) => {
     try {
         // 7天
         let rows0 = await sacidData.getSacidJSONSeven();
@@ -93,7 +92,7 @@ const getSacidByDate = async(req, res, next) => {
 
 
 module.exports = {
-    getAllSacid,
-    getAllSacidJSON,
-    getSacidByDate,
-};
+  getAllSacid,
+  getSacidChart,
+  getSacidByDate,
+}

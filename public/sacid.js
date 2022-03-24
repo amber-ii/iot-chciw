@@ -8,14 +8,7 @@ function onMessageArrived(r_message) {
         var id = key
         var value = rcMsg[key]
         if (document.getElementById(id) != null) {
-            // if (id.includes('n')) {
-            //     if (value == 0) {
-            //         document.getElementById(`${id}timer`).style.animationPlayState = 'paused'
-            //         document.getElementById(id).innerHTML = value
-            //     } else {
-            //         document.getElementById(`${id}timer`).style.animationPlayState = 'running'
-            //     }
-            // }
+
             document.getElementById(id).innerHTML = value
         }
     }
@@ -56,7 +49,7 @@ let chartData = function() {
         },
         data: null,
         fetch: function() {
-            fetch('http://web.chciw.com.tw:8080/sacid/sacidJson')
+            fetch('http://web.chciw.com.tw:8080/sacids/chart')
                 .then((res) => res.json())
                 .then((res) => {
                     this.data = res.dates
@@ -184,7 +177,7 @@ function formatDate(now) {
 
 // 依照日期搜尋
 $('#search').click(function() {
-    var t2 = document.getElementById('table2')
+    var tbody = document.querySelector('tbody')
     var today = formatDate(new Date()).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2') // eslint-disable-line
 
     $.ajax({
@@ -215,17 +208,17 @@ $('#search').click(function() {
             // 搜尋click倒數兩秒
             $('.loading').show()
             $('.word').show()
-            t2.innerHTML = ''
+            tbody.innerHTML = ''
         },
         type: 'POST',
-        url: '/sacid',
+        url: '/sacids',
         data: $('#form1').serialize(), //序列化表單的值
         async: true,
         success: function(data) {
             var renderString = ''
             for (let index = 0; index < data.length; index++) {
                 renderString =
-                    ' <tr class="bg-gray-800 text-md 2xl:text-xl">' +
+                    '<tr class="bg-gray-800 text-md 2xl:text-xl">' +
                     '<th class="p-3 text-center">' +
                     data[index].preDate +
                     '-' +
@@ -253,8 +246,8 @@ $('#search').click(function() {
                     data[index].diff32 +
                     '</th>' +
                     '</tr>'
-                $('#table2').nextAll().remove()
-                t2.insertAdjacentHTML('beforeEnd', renderString)
+                $('tbody').nextAll().remove()
+                tbody.insertAdjacentHTML('beforeEnd', renderString)
             }
             $('.loading').fadeOut(500)
             $('.word').fadeOut(500)
@@ -285,6 +278,47 @@ function exportTable() {
     $('#headerTable').table2excel({
         name: 'Excel Document Name',
         filename: `A9A10硫酸累計報表[${startDate}]-[${endDate}].xls`,
+    })
+}
+
+
+function getAll() {
+  fetch('http://web.chciw.com.tw:8080/sacids')
+    .then(res =>res.json())
+      .then(data => {
+      for (let index = 0; index < data.length; index++) {
+        renderString =
+          '<tr class="bg-gray-800 text-md 2xl:text-xl">' +
+          '<th class="p-3 text-center">' +
+          data[index].preDate +
+          '-' +
+          data[index].Date +
+          '</th>' +
+          '<th class="p-3  text-center">' +
+          data[index].A9Diff +
+          '</th>' +
+          ' <th class="p-3  text-center">' +
+          data[index].A10Diff1 +
+          '</th>' +
+          ' <th class="p-3  text-center">' +
+          data[index].A10Diff4 +
+          '</th>' +
+          ' <th class="p-3  text-center">' +
+          data[index].total +
+          '</th>' +
+          ' <th class="p-3  text-center">' +
+          data[index].A10Diff2 +
+          '</th>' +
+          ' <th class="p-3  text-center">' +
+          data[index].A10Diff3 +
+          '</th>' +
+          ' <th class="p-3 text-center">' +
+          data[index].diff32 +
+          '</th>' +
+          '</tr>'
+        $('tbody').nextAll().remove()
+        document.querySelector('tbody').insertAdjacentHTML('beforeEnd', renderString)
+      }
     })
 }
 

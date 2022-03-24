@@ -1,10 +1,9 @@
-
 const express = require('express');
 const n2rController = require('../controllers/n2rController');
 const router = express.Router();
 
 router.get('/', n2rController.getAllN2R);
-router.get('/n2rJson', n2rController.getAllN2RJSON);
+router.get('/chart', n2rController.getN2RChart);
 router.post('/', n2rController.getN2RByDate);
 
 

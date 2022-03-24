@@ -1,23 +1,19 @@
+// const { config } = require('dotenv')
+// require('dotenv/config')
+require('./break')
+
 const express = require('express')
 const app = express()
+const configs = require('./config')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const router = express.Router()
 const session = require('express-session')
 const hbs = require('express-handlebars')
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
-const moment = require('moment-timezone')
-const bcrypt = require('bcryptjs')
-const acl = require('express-acl')
-    // const cookieParser = require('cookie-session')
-
-require('./config')
-require('./break')
-
 const User = require('./models/Post')
 const Login = require('./models/Login')
-
+var router = express.Router()
 const sacidRoutes = require('./routes/sacidRoutes')
 const n2rRoutes = require('./routes/n2rRoutes')
 const tocRoutes = require('./routes/tocRoutes')
@@ -31,8 +27,10 @@ const waterRoutes = require('./routes/waterRoutes')
 const loginRecordRoutes = require('./routes/loginRecordRoutes')
 const a25OutputRoutes = require('./routes/a25OutputRoutes')
 const modbusRoutes = require('./routes/modbusRoutes')
-
-
+const moment = require('moment-timezone')
+const bcrypt = require('bcryptjs')
+const acl = require('express-acl')
+// const cookieParser = require('cookie-session')
 mongoose.connect(
     process.env.DB_CONNECTION, {
         useNewUrlParser: true,
@@ -46,7 +44,9 @@ mongoose.connect(
 // MiddleWares
 app.engine('hbs', hbs({ extname: '.hbs' }))
 app.set('view engine', 'hbs')
+    // app.use(express.static(__dirname + '/public'))
 app.use(express.static('public'))
+
 
 
 app.use(cors())
@@ -58,10 +58,11 @@ app.use(
         saveUninitialized: true,
         resave: false,
         rolling: true,
-        // cookie: {
-        // 若關掉網頁超過一天要重新登入
-        //     maxAge: 86400 * 1000,
-        // },
+        cookie: {
+            //   maxAge: 86400 * 1000,
+            // 若關掉網頁超過一天要重新登入
+            maxAge: 86400 * 1000,
+        },
     })
 )
 
@@ -69,9 +70,8 @@ app.use(
 // app.use(cookieParser({
 //     name: 'session',
 //     secret: 'secret',
-//     maxAge: 86400 * 1000
+//     maxAge: 20 * 1000
 // }))
-
 
 
 app.use(passport.initialize())
@@ -107,14 +107,14 @@ passport.use(
                 }
 
                 // 將登入資訊存入DB
-                const post = new Login({
-                    username: user.username,
-                    permission: user.permission,
-                    name: user.name,
-                    loginDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
-                })
-                console.log(post.loginDate)
-                const saveUser = post.save()
+                 const post = new Login({
+                     username: user.username,
+                     permission: user.permission,
+                     name: user.name,
+                     loginDate: moment().utcOffset('+16:00').format('YYYY/MM/DD HH:mm:ss'),
+                 })
+                 console.log(post.loginDate)
+                 const saveUser = post.save()
                 return done(null, user)
             })
         })
@@ -125,26 +125,27 @@ passport.use(
 app.use('/iot-chciw/views', router) //指定根路徑
 
 // 硫酸per3
-app.use('/sacid', users.isLoggedIn, sacidRoutes.routes)
+app.use('/sacids', users.isLoggedIn, sacidRoutes.routes)
 
 app.use('/waters', users.isLoggedIn, waterRoutes.routes)
 
 // 氮氣per5
-app.use('/n2r', users.isLoggedIn, n2rRoutes.routes)
-
+app.use('/n2rs', users.isLoggedIn, n2rRoutes.routes)
+app.use('/mongo', manageMongoDB.routes)
 
 // 水質檢測per3
-app.use('/toc', users.isLoggedIn, tocRoutes.routes)
+app.use('/tocs', users.isLoggedIn, tocRoutes.routes)
 
 // A25-DATA per3
 app.use('/a25data', users.isLoggedIn, a25Routes.routes)
 app.use('/a14data', users.isLoggedIn, a14Routes.routes)
 app.use('/particles', users.isLoggedIn, particalRoutes.routes)
 app.use('/line', users.isLoggedIn, empTempRoutes.routes)
-app.use('/mongo', manageMongoDB.routes)
+
 app.use('/loginrecord', users.isLoggedIn, loginRecordRoutes.routes)
 app.use('/a25outputs', users.isLoggedIn, a25OutputRoutes.routes)
-app.use('/modbus', users.isLoggedIn, modbusRoutes.routes)
+    // app.use('/modbus', users.isLoggedIn, modbusRoutes.routes)
+app.use('/modbus', modbusRoutes.routes)
 app.get('/login', users.isLoggedOut, (req, res) => {
     const response = {
         title: 'CHCIW_IOT',
@@ -207,14 +208,26 @@ app.get('/air', users.isLoggedIn, (req, res) => {
     }
 })
 
+// 硫酸
+app.get('/sacid', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
+      res.sendFile(`${__dirname}/public/sacid.html`)
+    } else {
+      res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+
+
 // 自來水
 app.get('/water', users.isLoggedIn, (req, res) => {
     if (req.user.permission == 1 || req.user.permission == 3) {
-        res.sendFile(`${__dirname}/public/water.html`, { name: req.user.name })
+        res.sendFile(`${__dirname}/public/water.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
+
+
 
 // 自來水 凱恩per4
 app.get('/water_per4', users.isLoggedIn, (req, res) => {
@@ -222,6 +235,16 @@ app.get('/water_per4', users.isLoggedIn, (req, res) => {
         res.sendFile(`${__dirname}/public/water_per4.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
+    }
+})
+
+
+// 氮氣
+app.get('/n2r', users.isLoggedIn, (req, res) => {
+    if (req.user.permission == 1 || req.user.permission == 4 || req.user.permission == 5) {
+      res.sendFile(`${__dirname}/public/n2r.html`)
+    } else {
+      res.sendFile(`${__dirname}/public/404.html`)
     }
 })
 
@@ -254,6 +277,15 @@ app.get('/elctair', users.isLoggedIn, (req, res) => {
         res.sendFile(`${__dirname}/public/404.html`)
     }
 })
+
+app.get('/toc', users.isLoggedIn, (req, res) => {
+  if (req.user.permission == 1 || req.user.permission == 3 || req.user.permission == 4) {
+    res.sendFile(`${__dirname}/public/toc.html`)
+  } else {
+    res.sendFile(`${__dirname}/public/404.html`)
+  }
+})
+
 
 // 廢水池per9
 app.get('/ah2ph', users.isLoggedIn, (req, res) => {
@@ -342,7 +374,7 @@ app.get('/a2', users.isLoggedIn, (req, res) => {
 })
 
 app.get('/modbus', users.isLoggedIn, (req, res) => {
-    if (req.user.permission == 1 || req.user.permission == 4) {
+    if (req.user.permission == 1) {
         res.sendFile(`${__dirname}/public/modbus.html`)
     } else {
         res.sendFile(`${__dirname}/public/404.html`)
