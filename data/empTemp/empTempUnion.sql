@@ -41,6 +41,11 @@ on Em.DepartmentId = De.DepartmentId
 where 
  Ca.RevokeTypeId = '-1' and Ca.UseTypeId = 'UseType_001')as T2
 on T1.[CardID] = T2.CardNo)
+
+
+
+
+
 IF datepart(Hour,getdate()) = 16
 (select T2.No '工號',T2.Dep '部門' ,
 T2.Name'姓名'
@@ -84,6 +89,9 @@ on Em.DepartmentId = De.DepartmentId
 where 
  Ca.RevokeTypeId = '-1' and Ca.UseTypeId = 'UseType_001')as T2
 on T1.[CardID] = T2.CardNo)
+
+
+
 
 IF datepart(Hour,getdate()) = 20
 (select T2.No '工號',T2.Dep '部門' ,
