@@ -4,7 +4,6 @@ const router = express.Router()
 
 
 router.get('/notify', controller.getAll) //警告
-router.post('/', controller.getByDate) //報表查詢
 // router.post('/cardno', controller.getByID) //發燒
 router.get('/', function(req, res, next) {
     const state = '200'
