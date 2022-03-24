@@ -95,21 +95,23 @@ const getTocJSONperMinute = async () => {
 
 
 
-const getByDate = async (startDate, endDate) => {
-    try {
-        pool = await sql.connect(config.sql);
-        const sqlQueries = await utils.loadSqlQueries('toc');
-        const event = await pool.request()
-            .input('startDate', sql.Date, startDate)
-            .input('endDate', sql.Date, endDate)
-            .query(sqlQueries.tocbyDate);
-        return event.recordset;
-    } catch (error) {
-        return error.message;
-    } finally {
-        pool.close();
-    }
-};
+const getByDate = async (startDate, endDate, tocValue) => {
+  try {
+    pool = await sql.connect(config.sql)
+    const sqlQueries = await utils.loadSqlQueries('toc')
+    const event = await pool
+      .request()
+      .input('startDate', sql.Date, startDate)
+      .input('endDate', sql.Date, endDate)
+      .input('tocValue', sql.Float, tocValue)
+      .query(sqlQueries.tocbyDate)
+    return event.recordset
+  } catch (error) {
+    return error.message
+  } finally {
+    pool.close()
+  }
+}
 
 
 const getByDateReport = async (startDate, endDate) => {
