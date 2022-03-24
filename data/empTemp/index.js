@@ -75,7 +75,7 @@ const getEvent = async() => {
             method: 'POST',
             uri: 'https://notify-api.line.me/api/notify',
             auth: {
-                bearer: '7rw4YPoeIx5dgJg5mAduZSeuhXfzkzyRbd64yVgHGWE',
+                bearer: 'vTT1MU02cormVgA2k7oba10L5gN2zAFtGbjtGoGtHcc',
             },
             form: {
                 message: `${formatDate(new Date())}` + `\n\n共 ${length} 位\n\n` + `${result}`,
@@ -188,7 +188,8 @@ const getEventByID = async(CardNo, temp) => {
             method: 'POST',
             uri: 'https://notify-api.line.me/api/notify',
             auth: {
-                bearer: 'CPFL6Ga34AonzhEflKkTrSHTJscHgj423gRG1kbmB1l',
+                // bearer: 'CPFL6Ga34AonzhEflKkTrSHTJscHgj423gRG1kbmB1l',
+                bearer: 'eClYI6hwf9Yes9cYS8TxbsC1MR4gu0D5ucyDIBvvEPb',
             },
             form: {
                 message: rows + ` ,🌡體溫:${temp}`,

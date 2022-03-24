@@ -51,7 +51,8 @@ const getAll = async(req, res, next) => {
                 method: 'POST',
                 uri: 'https://notify-api.line.me/api/notify',
                 auth: {
-                    bearer: '7rw4YPoeIx5dgJg5mAduZSeuhXfzkzyRbd64yVgHGWE',
+                    // bearer: '7rw4YPoeIx5dgJg5mAduZSeuhXfzkzyRbd64yVgHGWE',
+                    bearer: 'vTT1MU02cormVgA2k7oba10L5gN2zAFtGbjtGoGtHcc',
                 },
                 form: {
                     message: `${formatDate(new Date())} ` + rows,
@@ -74,59 +75,9 @@ const getAll = async(req, res, next) => {
     }
 }
 
-const getByDate = async(req, res, next) => {
-    if (req.user.permission == 1) {
-        try {
-            let rows = await Data.getEventByDate()
-
-        } catch (error) {
-            res.status(400).send(error.message)
-        }
-    } else {
-        res.sendFile(`${process.cwd()}/public/404.html`)
-    }
-}
-
-
-// const getByID = async(req, res, next) => {
-//     if (req.user.permission == 1) {
-//         try {
-//             const CardNo = req.body.CardNo
-//                 // const temp = req.body.temp
-//             let rows = await Data.getEventByID(CardNo)
-//             rows = await JSON.stringify(rows)
-//             rows = await rows.replace('[', '').replace(']', '').replaceAll('"', '').replaceAll('{', '【').replaceAll('}', '】')
-//             console.log('🚀 ~ file: empTempController.js ~ line 61 ~ getAll ~ rows', rows)
-//             var options = {
-//                 method: 'POST',
-//                 uri: 'https://notify-api.line.me/api/notify',
-//                 auth: {
-//                     bearer: 'CPFL6Ga34AonzhEflKkTrSHTJscHgj423gRG1kbmB1l',
-//                 },
-//                 form: {
-//                     message: rows,
-//                 },
-//                 json: true,
-//             }
-//             rp(options)
-//                 .then(function(parsedBody) {
-//                     console.log('發送成功')
-//                 })
-//                 .catch(function(err) {
-//                     console.log(err)
-//                 })
-//             res.send(options.form)
-//         } catch (error) {
-//             res.status(400).send(error.message)
-//         }
-//     } else {
-//         res.sendFile(`${process.cwd()}/public/404.html`)
-//     }
-// }
 
 
 module.exports = {
     getAll,
-    getByDate,
     // getByID,
 }
