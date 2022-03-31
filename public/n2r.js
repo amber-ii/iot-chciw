@@ -254,15 +254,7 @@ $('#search').click(function() {
         document.getElementById('endDate').value = today
     }
 
-    if (dateDiff(startDate, endDate) > 7) {
-        document.getElementById('startDate').value = formatDate(_endDate.addDays(6)).replace(/(\:|-|\s)(\d)(?=\D|$)/g, '$10$2')
-        document.querySelector('.loadingSv div').innerHTML = '查詢區間自動幫您調成7天...'
-        if (startDate < '2021-03-05' || endDate < '2021-03-05') {
-            document.getElementById('startDate').value = '2021-03-05'
-            document.getElementById('endDate').value = '2021-03-11'
-            document.querySelector('.loadingSv div').innerHTML = '資料最早起始日為2021-03-05'
-        }
-    }
+   
 
     $.ajax({
         beforeSend: function() {
