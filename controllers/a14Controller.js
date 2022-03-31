@@ -7,7 +7,6 @@ const getA14R3 = async(req, res, next) => {
         try {
             const startDate = req.body.startDate
             const endDate = req.body.endDate
-                // let location = req.body.location
             let locationValue = req.body.locationValue
             const rows = await a14Data.getA14R3(startDate, endDate, locationValue)
             res.send(rows)
