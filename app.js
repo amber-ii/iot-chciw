@@ -27,6 +27,7 @@ const waterRoutes = require('./routes/waterRoutes')
 const loginRecordRoutes = require('./routes/loginRecordRoutes')
 const a25OutputRoutes = require('./routes/a25OutputRoutes')
 const modbusRoutes = require('./routes/modbusRoutes')
+const a4LineController = require('./controllers/a4LineController')
 const moment = require('moment-timezone')
 const bcrypt = require('bcryptjs')
 const acl = require('express-acl')
@@ -120,7 +121,7 @@ passport.use(
         })
     })
 )
-
+app.use('/a4line',a4LineController.getEvent)
 // Routes
 app.use('/iot-chciw/views', router) //指定根路徑
 
