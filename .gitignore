@@ -1,5 +1,4 @@
 /node_modules
 web.config
 package-lock.json
-.gitignore
 .env
