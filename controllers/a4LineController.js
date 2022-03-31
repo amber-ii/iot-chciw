@@ -1,6 +1,6 @@
 'use strict'
 const data = require('../data/a4Line')
-const lineNotify = require('line-notify-nodejs')('TNL91MqDslu9PPIsVVIipviRC4K1o7w3znWsXQ4f9ZQ')
+const lineNotify = require('line-notify-nodejs')('cIRccWXWsoEbHOVqjd0ss3mNnlphVPx273kSJMlF79g')
 
 const getEvent = async (req, res, next) => {
   try {
